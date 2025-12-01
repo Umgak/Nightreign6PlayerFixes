@@ -406,10 +406,15 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075266, 19010826, 0);
     }
     if (IsMapVariation(12)) {
+        // ED Gnoster balls
+        // why did they do it like this, this is terrible
         if (IsPlayerNo(1)) {
             $InitializeCommonEvent(0, 90075230, 19010822, 10002, 1);
             $InitializeCommonEvent(0, 90075230, 19010823, 10003, 0);
             $InitializeCommonEvent(0, 90075230, 19010824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19010832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19010833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19010834, 10007, 0);
             $InitializeCommonEvent(0, 90075231, 19010822);
             $InitializeCommonEvent(0, 90075232, 19010822);
             $InitializeCommonEvent(0, 90075233, 19010822);
@@ -419,6 +424,9 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90075230, 19010822, 10002, 0);
             $InitializeCommonEvent(0, 90075230, 19010823, 10003, 1);
             $InitializeCommonEvent(0, 90075230, 19010824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19010832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19010833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19010834, 10007, 0);
             $InitializeCommonEvent(0, 90075231, 19010823);
             $InitializeCommonEvent(0, 90075232, 19010823);
             $InitializeCommonEvent(0, 90075233, 19010823);
@@ -428,10 +436,49 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90075230, 19010822, 10002, 0);
             $InitializeCommonEvent(0, 90075230, 19010823, 10003, 0);
             $InitializeCommonEvent(0, 90075230, 19010824, 10004, 1);
+            $InitializeCommonEvent(0, 90075230, 19010832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19010833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19010834, 10007, 0);
             $InitializeCommonEvent(0, 90075231, 19010824);
             $InitializeCommonEvent(0, 90075232, 19010824);
             $InitializeCommonEvent(0, 90075233, 19010824);
             $InitializeCommonEvent(0, 90075234, 19010824);
+        }
+        if (IsPlayerNo(4)) {
+            $InitializeCommonEvent(0, 90075230, 19010822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19010823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19010824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19010832, 10005, 1);
+            $InitializeCommonEvent(0, 90075230, 19010833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19010834, 10007, 0);
+            $InitializeCommonEvent(0, 90075231, 19010832);
+            $InitializeCommonEvent(0, 90075232, 19010832);
+            $InitializeCommonEvent(0, 90075233, 19010832);
+            $InitializeCommonEvent(0, 90075234, 19010832);
+        }
+        if (IsPlayerNo(5)) {
+            $InitializeCommonEvent(0, 90075230, 19010822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19010823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19010824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19010832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19010833, 10006, 1);
+            $InitializeCommonEvent(0, 90075230, 19010834, 10007, 0);
+            $InitializeCommonEvent(0, 90075231, 19010833);
+            $InitializeCommonEvent(0, 90075232, 19010833);
+            $InitializeCommonEvent(0, 90075233, 19010833);
+            $InitializeCommonEvent(0, 90075234, 19010833);
+        }
+        if (IsPlayerNo(6)) {
+            $InitializeCommonEvent(0, 90075230, 19010822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19010823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19010824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19010832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19010833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19010834, 10007, 1);
+            $InitializeCommonEvent(0, 90075231, 19010834);
+            $InitializeCommonEvent(0, 90075232, 19010834);
+            $InitializeCommonEvent(0, 90075233, 19010834);
+            $InitializeCommonEvent(0, 90075234, 19010834);
         }
     }
     if (IsMapVariation(12)) {
