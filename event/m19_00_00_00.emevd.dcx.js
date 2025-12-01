@@ -235,6 +235,15 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075302, 19000830, 19000246);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000247);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000248);
+        // Maris
+        // Initialize with the new flags as well
+        $InitializeCommonEvent(0, 90075302, 19000830, 19000343);
+        $InitializeCommonEvent(0, 90075302, 19000830, 19000344);
+        $InitializeCommonEvent(0, 90075302, 19000830, 19000345);
+        $InitializeCommonEvent(0, 90075302, 19000830, 19000346);
+        $InitializeCommonEvent(0, 90075302, 19000830, 19000347);
+        $InitializeCommonEvent(0, 90075302, 19000830, 19000348);
+        // End of new flags
         $InitializeCommonEvent(0, 90075302, 19000830, 19000249);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000250);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000251);
@@ -277,6 +286,17 @@ $Event(0, Default, function() {
         }
         if (IsPlayerNo(3)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000245, 19004744, 19000248);
+        }
+        // Maris
+        // Added flags with +100 for other players
+        if (IsPlayerNo(4)) {
+            $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000343, 19004744, 19000346);
+        }
+        if (IsPlayerNo(5)) {
+            $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000344, 19004744, 19000347);
+        }
+        if (IsPlayerNo(6)) {
+            $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000345, 19004744, 19000348);
         }
         $InitializeCommonEvent(0, 90075405, 19000240, 19000241, 19000246, 19000247, 19000248);
         $InitializeCommonEvent(0, 99075406, 19000849, 19000240, 19000701, 19000241);
