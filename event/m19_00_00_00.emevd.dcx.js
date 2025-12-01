@@ -88,6 +88,80 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90075233, 19000824);
             $InitializeCommonEvent(0, 90075234, 19000824);
         }
+        // why did they do it like this, this is terrible
+        // Gnoster balls
+        if (IsPlayerNo(1)) {
+            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 1);
+            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
+            $InitializeCommonEvent(0, 90075231, 19000822);
+            $InitializeCommonEvent(0, 90075232, 19000822);
+            $InitializeCommonEvent(0, 90075233, 19000822);
+            $InitializeCommonEvent(0, 90075234, 19000822);
+        }
+        if (IsPlayerNo(2)) {
+            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 1);
+            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
+            $InitializeCommonEvent(0, 90075231, 19000823);
+            $InitializeCommonEvent(0, 90075232, 19000823);
+            $InitializeCommonEvent(0, 90075233, 19000823);
+            $InitializeCommonEvent(0, 90075234, 19000823);
+        }
+        if (IsPlayerNo(3)) {
+            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 1);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
+            $InitializeCommonEvent(0, 90075231, 19000824);
+            $InitializeCommonEvent(0, 90075232, 19000824);
+            $InitializeCommonEvent(0, 90075233, 19000824);
+            $InitializeCommonEvent(0, 90075234, 19000824);
+        }
+        if (IsPlayerNo(4)) {
+            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 1);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
+            $InitializeCommonEvent(0, 90075231, 19000832);
+            $InitializeCommonEvent(0, 90075232, 19000832);
+            $InitializeCommonEvent(0, 90075233, 19000832);
+            $InitializeCommonEvent(0, 90075234, 19000832);
+        }
+        if (IsPlayerNo(5)) {
+            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 1);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
+            $InitializeCommonEvent(0, 90075231, 19000833);
+            $InitializeCommonEvent(0, 90075232, 19000833);
+            $InitializeCommonEvent(0, 90075233, 19000833);
+            $InitializeCommonEvent(0, 90075234, 19000833);
+        }
+        if (IsPlayerNo(6)) {
+            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
+            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
+            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 1);
+            $InitializeCommonEvent(0, 90075231, 19000834);
+            $InitializeCommonEvent(0, 90075232, 19000834);
+            $InitializeCommonEvent(0, 90075233, 19000834);
+            $InitializeCommonEvent(0, 90075234, 19000834);
+        }
         $InitializeCommonEvent(0, 90015008, 7511, 7512, 752000, 19005821, 5105, 0);
         $InitializeCommonEvent(0, 90075910, 7511, 7512, 19006821, 19005821, 5108, 0);
         $InitializeCommonEvent(0, 90075910, 7511, 7512, 19006822, 19005821, 5108, 0);
