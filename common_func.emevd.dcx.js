@@ -1384,6 +1384,7 @@ S2:
 });
 
 $Event(90015401, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, areaEntityId, eventFlagId5) {
+    // Something to do with Mountaintop shifting earth
     if (eventFlagId5 != 0) {
         EndIf(EventFlag(eventFlagId5));
     }
@@ -1409,7 +1410,11 @@ L0:
         chrArea = CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
             && (!InArea(10002, areaEntityId)
                 && !InArea(10003, areaEntityId)
-                && !InArea(10004, areaEntityId));
+                && !InArea(10004, areaEntityId)
+                // NR6PF: Fix... whatever this is, I didn't look. Used in several places.
+                && !InArea(10005, areaEntityId)
+                && !InArea(10006, areaEntityId)
+                && !InArea(10007, areaEntityId));
         hp2 = CharacterHPValue(chrEntityId) == 0;
         WaitFor(
             (chrArea || !EventFlag(eventFlagId) || hp2) && CharacterBackreadStatus(chrEntityId));
@@ -2408,22 +2413,38 @@ $Event(90035081, Default, function(eventFlagId) {
     SetNetworkconnectedEventFlagID(8071, ON);
 });
 
-$Event(90035082, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3) {
+$Event(90035082, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6) {
+    // Frenzied Flame invasion
     if (!((EventFlag(7707) || EventFlag(7727)) && EventFlag(eventFlagId) && !EventFlag(8027))) {
         SetCharacterBackreadState(chrEntityId, true);
         SetCharacterBackreadState(chrEntityId2, true);
         SetCharacterBackreadState(chrEntityId3, true);
+        // Set state for new entities which interact with extra players
+        SetCharacterBackreadState(chrEntityId4, true);
+        SetCharacterBackreadState(chrEntityId5, true);
+        SetCharacterBackreadState(chrEntityId6, true);
         EndEvent();
     }
     SetCharacterBackreadState(chrEntityId, false);
     SetCharacterBackreadState(chrEntityId2, false);
     SetCharacterBackreadState(chrEntityId3, false);
+    // Ditto
+    SetCharacterBackreadState(chrEntityId4, false);
+    SetCharacterBackreadState(chrEntityId5, false);
+    SetCharacterBackreadState(chrEntityId6, false);
     SetCharacterEventTarget(chrEntityId, 10002);
     CreateBulletOwner(chrEntityId);
     SetCharacterEventTarget(chrEntityId2, 10003);
     CreateBulletOwner(chrEntityId2);
     SetCharacterEventTarget(chrEntityId3, 10004);
     CreateBulletOwner(chrEntityId3);
+    // Ditto
+    SetCharacterEventTarget(chrEntityId4, 10005);
+    CreateBulletOwner(chrEntityId4);
+    SetCharacterEventTarget(chrEntityId5, 10006);
+    CreateBulletOwner(chrEntityId5);
+    SetCharacterEventTarget(chrEntityId6, 10007);
+    CreateBulletOwner(chrEntityId6);
 });
 
 $Event(90035083, Default, function(eventFlagId, playerNo) {
@@ -3668,6 +3689,7 @@ $Event(90035212, Default, function(chrEntityId, assetEntityId, eventFlagId) {
 });
 
 $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, assetEntityId2, assetEntityId3, assetEntityId4, assetEntityId5, assetEntityId6, assetEntityId7, areaEntityId, eventFlagId) {
+    // Maris invasion
     if (!EventFlag(8076)) {
         DisableCharacter(chrEntityId);
         DisableAsset(assetEntityId);
@@ -4012,6 +4034,7 @@ $Event(90035219, Default, function(eventFlagId, eventFlagId2, chrEntityId, nameI
 });
 
 $Event(90035230, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
+    // Gnoster invasion
     DisableNetworkSync();
     EndIf(!EventFlag(8078));
     EndIf(EventFlag(8061));
@@ -4075,7 +4098,7 @@ $Event(90035231, Default, function(entityId, eventFlagId, eventFlagId2) {
     RecordUserDispLog(11140, entityId, LogObjectType.None, -1);
 });
 
-$Event(90035232, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, eventFlagId) {
+$Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, eventFlagId) {
     if (!EventFlag(8078)) {
         DisableCharacter(chrEntityId);
         DisableCharacter(chrEntityId2);
