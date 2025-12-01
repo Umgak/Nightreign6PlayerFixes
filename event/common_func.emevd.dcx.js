@@ -4474,6 +4474,7 @@ $Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEn
 });
 
 $Event(90035240, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
+    // "Baphomet" (Libra invasion) initial checks for player distance
     DisableNetworkSync();
     EndIf(!EventFlag(8079));
     EndIf(EventFlag(8061));
@@ -4486,6 +4487,16 @@ $Event(90035240, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     if (!EventFlag(9999)) {
         time &= PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59);
@@ -4500,10 +4511,18 @@ $Event(90035240, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     EndIf(
         !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
-            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1))
+            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
+            // NR6PF: Check if extra players are not too close
+            && !EntityInRadiusOfEntity(entityId, 10005, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10006, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1))
             && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
-                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1))));
+                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1)
+                // NR6PF: But still close enough to trigger the event
+                || EntityInRadiusOfEntity(entityId, 10005, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10006, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10007, targetDistance2, 1))));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
     SetWorldMapPointFlag(0, ON);
@@ -4556,7 +4575,8 @@ L0:
     RestartEvent();
 });
 
-$Event(90035242, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5) {
+$Event(90035242, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
+    // Libra 
     DisableNetworkSync();
     EndIf(!EventFlag(8079));
     EndIf(EventFlag(8106));
@@ -4574,17 +4594,28 @@ $Event(90035242, Default, function(eventFlagId, eventFlagId2, eventFlagId3, even
         if (IsPlayerNo(3)) {
             SetNetworkconnectedEventFlagID(eventFlagId5, ON);
         }
+        // NR6PF: track extra player events
+        if (IsPlayerNo(4)) {
+            SetNetworkconnectedEventFlagID(eventFlagId6, ON);
+        }
+        if (IsPlayerNo(5)) {
+            SetNetworkconnectedEventFlagID(eventFlagId6, ON);
+        }
+        if (IsPlayerNo(6)) {
+            SetNetworkconnectedEventFlagID(eventFlagId7, ON);
+        }
         RecordUserDispLog(11131, eventFlagId, LogObjectType.None, -1);
     }
 });
 
-$Event(90035243, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+$Event(90035243, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7) {
+    // Libra cleanse curses
     EndIf(!EventFlag(8079));
     EndIf(EventFlag(8106));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     WaitFor(EventFlag(8061));
     EndIf(!EventFlag(eventFlagId));
-    flag = EventFlag(eventFlagId2) || EventFlag(eventFlagId3) || EventFlag(eventFlagId4);
+    flag = EventFlag(eventFlagId2) || EventFlag(eventFlagId3) || EventFlag(eventFlagId4) || EventFlag(eventFlagId5) || EventFlag(eventFlagId6) || EventFlag(eventFlagId7); // NR6PF: Check extra player flag IDs which were added
     WaitFor(flag || EventFlag(8106) || EventFlag(8062));
     if (flag.Passed) {
         SetNetworkconnectedEventFlagID(8106, ON);
@@ -4891,6 +4922,7 @@ $Event(90035251, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90035252, Default, function(entityId, eventFlagId) {
+    // Libra ("Baphomet") intereference
     DisableNetworkSync();
     WaitFor(EventFlag(8109) || EventFlag(8061));
     WaitFor(ElapsedFrames(1));
@@ -4902,6 +4934,16 @@ $Event(90035252, Default, function(entityId, eventFlagId) {
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {

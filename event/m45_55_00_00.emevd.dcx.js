@@ -15,8 +15,8 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035240, 45550801, 45550200, 8108, 25, 600);
     $InitializeCommonEvent(0, 90035252, 45550801, 45550200);
     $InitializeCommonEvent(0, 90035241, 45550200, 19004748);
-    $InitializeCommonEvent(0, 90035242, 45550200, 19004748, 45550205, 45550206, 45550207);
-    $InitializeCommonEvent(0, 90035243, 45550200, 45550205, 45550206, 45550207);
+    $InitializeCommonEvent(0, 90035242, 45550200, 19004748, 45550205, 45550206, 45550207, 45550215, 45550216, 45550217); // NR6PF: Extra events for extra players. Flag IDs are +10 because 45550210 is already used.
+    $InitializeCommonEvent(0, 90035243, 45550200, 45550205, 45550206, 45550207, 45550215, 45550216, 45550217); // NR6PF: Extra events for extra players. Flag IDs are +10 because 45550210 is already used.
     $InitializeCommonEvent(0, 90035244, 45550801, 45550200, 45550210);
     $InitializeCommonEvent(0, 90035245, 45550801, 45550200);
     $InitializeCommonEvent(0, 90035246, 45550801, 45550200, 45550210);
