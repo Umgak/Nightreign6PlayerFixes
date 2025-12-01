@@ -1,0 +1,81 @@
+// ==EMEVD==
+// @docs    nr-common.emedf.json
+// @compress    DCX_KRAK
+// @game    Sekiro
+// @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
+// @linked    [0,82]
+// @version    3.6.1
+// ==/EMEVD==
+
+$Event(0, Default, function() {
+    if (IsMapVariation(0)) {
+        if (EventFlag(48800000)) {
+            $InitializeCommonEvent(0, 90055000, 48805200, 1, 48802200, 48800201);
+            $InitializeCommonEvent(0, 90055001, 48805200, 1, 48800201, 48800200);
+        }
+        if (EventFlag(48800001)) {
+            $InitializeCommonEvent(0, 90055000, 48805200, 2, 48802200, 48800201);
+            $InitializeCommonEvent(0, 90055001, 48805200, 2, 48800201, 48800200);
+        }
+    }
+    if (IsMapVariation(1)) {
+        $InitializeCommonEvent(0, 90035000, 48800200);
+    }
+    $InitializeCommonEvent(0, 90065131, 48800200, 48800205, 48800800, 356000, 690047, 48805210, 48800800, 903570000, 48800810, 903560000, 0, 0);
+    $InitializeCommonEvent(0, 90065911, 48800200, 48800800, 356000, 48805210, 48800800, 903570000, 48800810, 903560000, 0, 0, 0);
+    $InitializeCommonEvent(0, 90065900, 48800800, 2, 0, 0, 1050, 356000, 903570000, 48800800);
+    $InitializeCommonEvent(0, 90015012, 48805210, 48800200);
+    $InitializeCommonEvent(1, 90015012, 0, 48800200);
+    $InitializeCommonEvent(0, 90015020, 48800200, 48800800);
+    $InitializeCommonEvent(0, 90015008, 48800205, 48800800, 356000, 48805210, 15501, 0.5);
+    $InitializeCommonEvent(0, 90065130, 48800800, 48800810, 48800200, 48800800, 903560000);
+    $InitializeCommonEvent(0, 90035001, 48800800);
+});
+
+$Event(48802800, Default, function(chrEntityId, assetEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3) {
+    EndIf(EventFlag(eventFlagId));
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(HPRatio(chrEntityId) <= 0);
+    WaitFixedTimeSeconds(4);
+    WaitFor(CharacterDead(chrEntityId));
+    DisplayBossHealthBar(Disabled, chrEntityId, 0, 0);
+    if (assetEntityId != 0) {
+        EnableAsset(assetEntityId);
+    }
+    if (chrEntityId2 != 0) {
+        EnableCharacter(chrEntityId2);
+    }
+    if (!EventFlag(eventFlagId3)) {
+        SetEventFlagID(eventFlagId, ON);
+        EndEvent();
+    }
+    SetEventFlagID(eventFlagId2, ON);
+    WaitFor(ElapsedSeconds(3));
+    DisableCharacter(chrEntityId);
+});
+
+$Event(48802810, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, nameId, eventFlagId4, eventFlagId5) {
+    if (EventFlag(eventFlagId4) || EventFlag(eventFlagId5)) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterCollision(chrEntityId);
+        ForceCharacterDeath(chrEntityId, false);
+        EndEvent();
+    }
+L0:
+    DisableCharacter(chrEntityId);
+    DisableCharacterCollision(chrEntityId);
+    DisableCharacterAI(chrEntityId);
+    flag = EventFlag(7515) && (EventFlag(eventFlagId) || EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId3));
+    WaitFixedTimeSeconds(1);
+    EnableCharacter(chrEntityId);
+    EnableCharacterCollision(chrEntityId);
+    EnableCharacterAI(chrEntityId);
+    DisableCharacterHPBarDisplay(chrEntityId);
+    DisableCharacterHPBarDisplay(48800801);
+    EnableCharacterAI(chrEntityId);
+    SetNetworkUpdateRate(48800800, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
+});
+
+

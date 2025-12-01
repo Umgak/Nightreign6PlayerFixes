@@ -1,0 +1,24 @@
+// ==EMEVD==
+// @docs    nr-common.emedf.json
+// @compress    DCX_KRAK
+// @game    Sekiro
+// @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
+// @linked    [0,82]
+// @version    3.6.1
+// ==/EMEVD==
+
+$Event(0, Default, function() {
+    $InitializeCommonEvent(0, 90035040, 46010200, 46012290, 46012200, 46012201, 46012202, 46012203, 46012204, 10002);
+    $InitializeCommonEvent(0, 90035040, 46010200, 46012290, 46012200, 46012201, 46012202, 46012203, 46012204, 10003);
+    $InitializeCommonEvent(0, 90035040, 46010200, 46012290, 46012200, 46012201, 46012202, 46012203, 46012204, 10004);
+    $InitializeCommonEvent(0, 90035041, 46010200, 46012200, 46012201, 46012202, 46012203, 46012204);
+    $InitializeCommonEvent(0, 90035042, 46010200, 46012205, 46012206, 46012207, 46012208, 46012209, 0, 46015200);
+    $InitializeCommonEvent(0, 90035043, 46010200, 0, 46015200, 46012200);
+    $InitializeCommonEvent(0, 90035044, 46010200, 0, 46012205, 46012206, 46012207, 46012208, 46012209, 46012210);
+    $InitializeCommonEvent(0, 90035047, 46010200, 46015200);
+    $InitializeCommonEvent(0, 90035045, 46010100, 46010200);
+    $InitializeCommonEvent(0, 90035046, 46010100, 46010101, 46010200);
+    $InitializeCommonEvent(0, 90035048, 46010100, 46010200, 46012290);
+});
+
+
