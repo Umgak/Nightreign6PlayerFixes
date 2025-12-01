@@ -2705,6 +2705,7 @@ L0:
 });
 
 $Event(90035202, Default, function(chrEntityId, eventFlagId) {
+    // Yet another Margit event
     if (!EventFlag(8075)) {
         DisableCharacter(chrEntityId);
         EndEvent();
@@ -2928,6 +2929,7 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
 });
 
 $Event(90035203, Default, function(eventFlagId) {
+    // Margit player victory
     EndIf(!EventFlag(8075));
     if (EventFlag(8062)) {
         SetSpEffect(10000, 99156);
@@ -4071,10 +4073,18 @@ $Event(90035230, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     EndIf(
         !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
-            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1))
+            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
+            // NR6PF: check extra players
+            && !EntityInRadiusOfEntity(entityId, 10005, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10006, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1))
             && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
-                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1))));
+                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1)
+                // NR6PF: check extra players
+                || EntityInRadiusOfEntity(entityId, 10005, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10006, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10007, targetDistance2, 1))));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
     RecordUserDispLog(11140, entityId, LogObjectType.None, -1);
@@ -4092,6 +4102,16 @@ $Event(90035231, Default, function(entityId, eventFlagId, eventFlagId2) {
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
     }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
+    }
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {
         EndIf(
@@ -4108,7 +4128,9 @@ $Event(90035231, Default, function(entityId, eventFlagId, eventFlagId2) {
     RecordUserDispLog(11140, entityId, LogObjectType.None, -1);
 });
 
-$Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, eventFlagId) {
+$Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, eventFlagId) {
+    // Appears to be an unused portion of Gnoster's invasion script - there's no initialization for it and it has the wrong map prefix of 4678 which is Margit's
+    // Edited for consistency - this is supposed to be 90035232, but Fromsoft screwed up again LOL
     if (!EventFlag(8078)) {
         DisableCharacter(chrEntityId);
         DisableCharacter(chrEntityId2);
@@ -4157,6 +4179,28 @@ $Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
             SetNetworkUpdateAuthority(chrEntityId5, AuthorityLevel.Forced);
             DisableCharacterFadeOnEnable(chrEntityId5);
         }
+        // NR6PF: Edits for consistency, despite this being seemingly unused
+        if (IsPlayerNo(4)) {
+            EnableCharacterDefaultBackread(chrEntityId6);
+            SetCharacterEnableDistance(chrEntityId6, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId6);
+            SetNetworkUpdateAuthority(chrEntityId6, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(chrEntityId6);
+        }
+        if (IsPlayerNo(5)) {
+            EnableCharacterDefaultBackread(chrEntityId7);
+            SetCharacterEnableDistance(chrEntityId7, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId7);
+            SetNetworkUpdateAuthority(chrEntityId7, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(chrEntityId7);
+        }
+        if (IsPlayerNo(6)) {
+            EnableCharacterDefaultBackread(chrEntityId8);
+            SetCharacterEnableDistance(chrEntityId8, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId8);
+            SetNetworkUpdateAuthority(chrEntityId8, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(chrEntityId8);
+        }
         ForceAnimationPlayback(chrEntityId, 30005, true, false, false);
         EndEvent();
     }
@@ -4198,11 +4242,34 @@ L10:
         SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
         DisableCharacterFadeOnEnable(chrEntityId5);
     }
+    // NR6PF: Edits for consistency, despite this being seemingly unused
+    if (IsPlayerNo(4)) {
+        EnableCharacterDefaultBackread(chrEntityId6);
+        SetCharacterEnableDistance(chrEntityId6, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId6);
+        SetNetworkUpdateAuthority(chrEntityId6, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(chrEntityId6);
+    }
+    if (IsPlayerNo(5)) {
+        EnableCharacterDefaultBackread(chrEntityId7);
+        SetCharacterEnableDistance(chrEntityId7, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId7);
+        SetNetworkUpdateAuthority(chrEntityId7, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(chrEntityId7);
+    }
+    if (IsPlayerNo(6)) {
+        EnableCharacterDefaultBackread(chrEntityId8);
+        SetCharacterEnableDistance(chrEntityId8, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId8);
+        SetNetworkUpdateAuthority(chrEntityId8, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(chrEntityId8);
+    }
     ForceAnimationPlayback(chrEntityId, 20003, false, true, false);
     ForceAnimationPlayback(chrEntityId, 30005, true, false, false);
 });
 
-$Event(90035233, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, eventFlagId) {
+$Event(90035233, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, eventFlagId) {
+    // Actually-used portion of Gnoster's invasion event
     EndIf(!EventFlag(8078));
     EndIf(EventFlag(8062));
     EndIf(HPRatio(chrEntityId) <= 0);
@@ -4221,6 +4288,10 @@ L0:
         ShootBullet(chrEntityId2, 10002, -1, 201200099, 0, 0, 0);
         ShootBullet(chrEntityId3, 10003, -1, 201200099, 0, 0, 0);
         ShootBullet(chrEntityId4, 10004, -1, 201200099, 0, 0, 0);
+        // NR6PF: Extra entities functions
+        ShootBullet(chrEntityId5, 10005, -1, 201200099, 0, 0, 0);
+        ShootBullet(chrEntityId6, 10006, -1, 201200099, 0, 0, 0);
+        ShootBullet(chrEntityId7, 10007, -1, 201200099, 0, 0 ,0);
     }
     EndIf(hp);
     if (IsPlayerNo(1)) {
@@ -4240,6 +4311,25 @@ L0:
         IssueShortWarpRequest(chrEntityId4, TargetEntityType.Character, 10004, 210);
         WaitFor(CharacterBackreadStatus(chrEntityId4));
         SetSpEffect(chrEntityId4, 16641);
+    }
+    // NR6PF: Extra entities functions
+    if (IsPlayerNo(4)) {
+        SetCharacterEventTarget(chrEntityId5, chrEntityId);
+        IssueShortWarpRequest(chrEntityId5, TargetEntityType.Character, 10005, 210);
+        WaitFor(CharacterBackreadStatus(chrEntityId5));
+        SetSpEffect(chrEntityId5, 16641);
+    }
+    if (IsPlayerNo(5)) {
+        SetCharacterEventTarget(chrEntityId6, chrEntityId);
+        IssueShortWarpRequest(chrEntityId6, TargetEntityType.Character, 10006, 210);
+        WaitFor(CharacterBackreadStatus(chrEntityId6));
+        SetSpEffect(chrEntityId6, 16641);
+    }
+    if (IsPlayerNo(6)) {
+        SetCharacterEventTarget(chrEntityId7, chrEntityId);
+        IssueShortWarpRequest(chrEntityId7, TargetEntityType.Character, 10007, 210);
+        WaitFor(CharacterBackreadStatus(chrEntityId7));
+        SetSpEffect(chrEntityId7, 16641);
     }
     WaitFor(ElapsedSeconds(10));
     RestartEvent();
@@ -4293,6 +4383,7 @@ L0:
 });
 
 $Event(90035236, Default, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2) {
+    // Players win Gnoster event
     EndIf(!EventFlag(8078));
     EndIf(EventFlag(8062));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId2));
@@ -4317,6 +4408,16 @@ $Event(90035236, Default, function(chrEntityId, chrEntityId2, eventFlagId, event
     }
     if (CharacterHasSpEffect(10004, 16643)) {
         SetSpEffect(10004, 16644);
+    }
+    // NR6PF: apply effects to extra players too
+    if (CharacterHasSpEffect(10005, 16643)) {
+        SetSpEffect(10005, 16644);
+    }
+     if (CharacterHasSpEffect(10006, 16643)) {
+        SetSpEffect(10006, 16644);
+    }
+    if (CharacterHasSpEffect(10007, 16643)) {
+        SetSpEffect(10007, 16644);
     }
     DisableCharacterDefaultBackread(chrEntityId);
     SetCharacterEnableDistance(chrEntityId, -1);
