@@ -1683,6 +1683,16 @@ $Event(90035010, Default, function(eventFlagId, eventFlagId2) {
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
     }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
+    }
     if (!EventFlag(9999)) {
         EndIf(!(PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59) && InsidePlayArea(0, -75)));
     }
@@ -1707,6 +1717,16 @@ $Event(90035010, Default, function(eventFlagId, eventFlagId2) {
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     EndIf(EventFlag(8042) && !EventFlag(eventFlagId));
     EndIf(EventFlag(eventFlagId2));
