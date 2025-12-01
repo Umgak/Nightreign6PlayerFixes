@@ -8575,8 +8575,6 @@ $Event(99075421, Restart, function(chrEntityId) {
 });
 
 $Event(99075422, Restart, function(chrEntityId, areaEntityId, areaEntityId2, areaEntityId3, areaEntityId4, areaEntityId5, areaEntityId6, areaEntityId7, areaEntityId8, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9) {
-    // EVERDARK LIBRA
-    // Just had to edit the instantiation over in common.emevd
     EndIf(EventFlag(7512));
     WaitFor(EventFlag(7511));
     WaitFor(
@@ -8739,7 +8737,7 @@ $Event(90075452, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
 
 $Event(99075460, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10) {
     // EVERDARK LIBRA
-    // Just had to edit the instantiation over in common.emevd
+    // This is how he records what players are playing as - I didn't actually have to edit this, just the instantiation over in common.emevd
     EndIf(!TargetingBoss(TargetBoss.Libra));
     EndIf(!(IsCampaignSession() || IsPlayMode(2)));
     EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId10));
@@ -8786,6 +8784,8 @@ S1:
 });
 
 $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
+    // ED Libra - these are actually just armor variations.
+    // Seriously. That's all this is for. The game records here which skin you're wearing.
     EndIf(!TargetingBoss(TargetBoss.Libra));
     EndIf(!(IsCampaignSession() || IsPlayMode(2)));
     EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId6));
@@ -8861,6 +8861,7 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
 });
 
 $Event(99075462, Restart, function(playerNo, eventFlagId, eventFlagId2) {
+    // ED Libra - randomizer for clone stat flags
     EndIf(!TargetingBoss(TargetBoss.Libra));
     EndIf(!(IsCampaignSession() || IsPlayMode(2)));
     EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId2));
@@ -8880,6 +8881,9 @@ $Event(99075462, Restart, function(playerNo, eventFlagId, eventFlagId2) {
 });
 
 $Event(99075465, Restart, function(slot, entityId, entityId2, entityId3, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10, eventFlagId11, eventFlagId12, eventFlagId13, eventFlagId14, eventFlagId15, eventFlagId16, eventFlagId17, eventFlagId18, eventFlagId19) {
+    // ED Libra - set clone charaInitParam
+    // Thank fuck, they didn't do something horrible like hardcode all of it into one event - just had to find an unallocated block of flags
+    // and edit the instantiation again
     EndIf(!TargetingBoss(TargetBoss.Libra));
     EndIf(!(IsCampaignSession() || IsPlayMode(2)));
     WaitFor(
