@@ -23,6 +23,16 @@ $Event(0, Default, function() {
         if (IsPlayerNo(3)) {
             $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 8087);
         }
+        // NR6PF: conditions and flags for extra players.
+        if (IsPlayerNo(4)) {
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 11008085);
+        }
+        if (IsPlayerNo(5)) {
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 11008086);
+        }
+        if (IsPlayerNo(6)) {
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 11008087);
+        }
     }
     $InitializeCommonEvent(0, 90015002, 8075, 46780200, 46780800, 46780800, 1020, 213001, 0, 0, 0);
     $InitializeCommonEvent(0, 90035050, 46780800, 46780200);

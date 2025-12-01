@@ -1667,6 +1667,7 @@ $Event(90035001, Restart, function(chrEntityId) {
 });
 
 $Event(90035010, Default, function(eventFlagId, eventFlagId2) {
+    // Meteorite event
     DisableNetworkSync();
     EndIf(!EventFlag(7701) && !EventFlag(7721));
     if (!EventFlag(7721)) {
@@ -2511,9 +2512,10 @@ $Event(90035088, Default, function(eventFlagId, chrEntityId) {
 });
 
 $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targetDistance) {
+    // Margit
     DisableNetworkSync();
     EndIf(!EventFlag(8075));
-    EndIf(AnyBatchEventFlags(8085, 8087));
+    EndIf(AnyBatchEventFlags(8085, 8087 || AnyBatchEventFlags(11008085, 11008087))); // extra flags for players 3-6 are stashed in the Spirit Shelter range
     WaitFor(EventFlag(eventFlagId2));
     if (IsPlayerNo(1)) {
         WaitFor(ElapsedSeconds(0));
@@ -2523,6 +2525,16 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     if (!EventFlag(9999)) {
         EndIf(
@@ -2538,7 +2550,17 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
                 && CharacterBackreadStatus(chrEntityId))
             || (EntityInRadiusOfEntity(10004, chrEntityId, targetDistance, 1)
                 && CharacterBackreadStatus(10004)
-                && CharacterBackreadStatus(chrEntityId))));
+                && CharacterBackreadStatus(chrEntityId))
+            // NR6PF: consider players 4-6
+            || EntityInRadiusOfEntity(10005, chrEntityId, targetDistance, 1)
+            && CharacterBackreadStatus(10005)
+            && CharacterBackreadStatus(chrEntityId))
+            || (EntityInRadiusOfEntity(10006, chrEntityId, targetDistance, 1)
+                && CharacterBackreadStatus(10006)
+                && CharacterBackreadStatus(chrEntityId))
+            || (EntityInRadiusOfEntity(10007, chrEntityId, targetDistance, 1)
+                && CharacterBackreadStatus(10007)
+                && CharacterBackreadStatus(chrEntityId)));
     if (EventFlag(9999)) {
         SetNetworkconnectedEventFlagID(8085, ON);
     } else if (EntityInRadiusOfEntity(10002, chrEntityId, targetDistance, 1)
@@ -2553,18 +2575,32 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
         && CharacterBackreadStatus(10004)
         && CharacterBackreadStatus(chrEntityId)) {
         SetNetworkconnectedEventFlagID(8087, ON);
+    // NR6PF: extra conditions for players 4-6
+    } else if (EntityInRadiusOfEntity(10005, chrEntityId, targetDistance, 1)
+        && CharacterBackreadStatus(10005)
+        && CharacterBackreadStatus(chrEntityId)) {
+        SetNetworkconnectedEventFlagID(11008085, ON);
+    } else if (EntityInRadiusOfEntity(10006, chrEntityId, targetDistance, 1)
+        && CharacterBackreadStatus(10006)
+        && CharacterBackreadStatus(chrEntityId)) {
+        SetNetworkconnectedEventFlagID(11008086, ON);
+    } else if (EntityInRadiusOfEntity(10007, chrEntityId, targetDistance, 1)
+        && CharacterBackreadStatus(10007)
+        && CharacterBackreadStatus(chrEntityId)) {
+        SetNetworkconnectedEventFlagID(11008087, ON);
         Goto(L0);
     }
 L0:
-    WaitFor(AnyBatchEventFlags(8085, 8087));
+    WaitFor(AnyBatchEventFlags(8085, 8087) || AnyBatchEventFlags(11008085, 11008087)); // Once again, extra flags for players 3-6 in Spirit Shelter range
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
 });
 
 $Event(90035201, Default, function(eventFlagId) {
+    // Margit
     EndIf(!EventFlag(8075));
-    EndIf(AnyBatchEventFlags(8085, 8087));
+    EndIf(AnyBatchEventFlags(8085, 8087) || AnyBatchEventFlags(11008085, 11008087)); // extra flags for players 3-6 are stashed in the Spirit Shelter range
     WaitFor(EventFlag(8060));
     WaitFor(EventFlag(8089) || EventFlag(8061));
     WaitFor(ElapsedFrames(1));
@@ -2575,7 +2611,7 @@ $Event(90035201, Default, function(eventFlagId) {
         EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     }
     if (PlayerIsInOwnWorld()) {
-        chr |= CharacterHasTeamType(10002, TeamType.Human)
+        chr |= CharacterHasTeamType(10002, TeamType.Human) // why is this one a bitwise OR assignment instead of a regular assignment, weird game
             || CharacterHasTeamType(10002, TeamType.WhitePhantom);
         if (chr) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
@@ -2599,17 +2635,49 @@ $Event(90035201, Default, function(eventFlagId) {
                 Goto(L0);
             }
         }
+        // NR6PF: add checks for players 4-6
+        chr4 = CharacterHasTeamType(10005, TeamType.Human)
+            || CharacterHasTeamType(10005, TeamType.WhitePhantom);
+        if (chr4) {
+            if (EventFlagAndRandomCondition(6001, 0.3)) {
+                SetNetworkconnectedEventFlagID(11008085, ON);
+                Goto(L0);
+            }
+        }
+        chr5 = CharacterHasTeamType(10006, TeamType.Human)
+            || CharacterHasTeamType(10006, TeamType.WhitePhantom);
+        if (chr5) {
+            if (EventFlagAndRandomCondition(6001, 0.3)) {
+                SetNetworkconnectedEventFlagID(11008086, ON);
+                Goto(L0);
+            }
+        }
+        chr6 = CharacterHasTeamType(10007, TeamType.Human)
+            || CharacterHasTeamType(10007, TeamType.WhitePhantom);
+        if (chr6) {
+            if (EventFlagAndRandomCondition(6001, 0.3)) {
+                SetNetworkconnectedEventFlagID(11008087, ON);
+                Goto(L0);
+            }
+        }
         if (chr) {
             SetNetworkconnectedEventFlagID(8085, ON);
         } else if (chr2) {
             SetNetworkconnectedEventFlagID(8086, ON);
         } else if (chr3) {
             SetNetworkconnectedEventFlagID(8087, ON);
+        // NR6PF: extra conditions for players 4-6
+        } else if (chr4) {
+            SetNetworkconnectedEventFlagID(11008085, ON);
+        } else if (chr5) {
+            SetNetworkconnectedEventFlagID(11008086, ON);
+        } else if (chr6) {
+            SetNetworkconnectedEventFlagID(11008087, ON);
             Goto(L0);
         }
     }
 L0:
-    WaitFor(AnyBatchEventFlags(8085, 8087));
+    WaitFor(AnyBatchEventFlags(8085, 8087) || AnyBatchEventFlags(11008085, 11008087)); // Once again, extra flags for players 3-6 in Spirit Shelter range
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
@@ -2659,6 +2727,19 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
                 cond &= IsPlayerNo(3) && CharacterHasSpEffect(10004, 99171);
                 WaitFor(cond);
             }
+            // NR6PF: extra conditions for players 4-6
+            if (EventFlag(11008085)) {
+                cond &= IsPlayerNo(4) && CharacterHasSpEffect(10005, 99171);
+                WaitFor(cond);
+            }
+            if (EventFlag(11008086)) {
+                cond &= IsPlayerNo(5) && CharacterHasSpEffect(10006, 99171);
+                WaitFor(cond);
+            }
+            if (EventFlag(11008087)) {
+                cond &= IsPlayerNo(6) && CharacterHasSpEffect(10007, 99171);
+                WaitFor(cond);
+            }
         }
         DisableCharacterDefaultBackread(chrEntityId);
         SetCharacterEnableDistance(chrEntityId, -1);
@@ -2686,6 +2767,28 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
             EnableCharacterDisableOnHitUnload(chrEntityId);
         }
     }
+    // NR6PF: I hate Margit. There are so many checks.
+        if (EventFlag(11008085)) {
+        if (!IsPlayerNo(4)) {
+            DisableCharacterDefaultBackread(chrEntityId);
+            SetCharacterEnableDistance(chrEntityId, -1);
+            EnableCharacterDisableOnHitUnload(chrEntityId);
+        }
+    }
+    if (EventFlag(11008086)) {
+        if (!IsPlayerNo(5)) {
+            DisableCharacterDefaultBackread(chrEntityId);
+            SetCharacterEnableDistance(chrEntityId, -1);
+            EnableCharacterDisableOnHitUnload(chrEntityId);
+        }
+    }
+    if (EventFlag(11008087)) {
+        if (!IsPlayerNo(6)) {
+            DisableCharacterDefaultBackread(chrEntityId);
+            SetCharacterEnableDistance(chrEntityId, -1);
+            EnableCharacterDisableOnHitUnload(chrEntityId);
+        }
+    }
     if (EventFlag(8085)) {
         if (IsPlayerNo(1)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
@@ -2698,6 +2801,22 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
     }
     if (EventFlag(8087)) {
         if (IsPlayerNo(3)) {
+            SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
+        }
+    }
+    // NR6PF: Seriously, why does this guy have a check EVERY SINGLE LINE
+        if (EventFlag(11008085)) {
+        if (IsPlayerNo(4)) {
+            SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
+        }
+    }
+    if (EventFlag(11008086)) {
+        if (IsPlayerNo(5)) {
+            SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
+        }
+    }
+    if (EventFlag(11008087)) {
+        if (IsPlayerNo(6)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
     }
@@ -2719,6 +2838,16 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
         if (EventFlag(8087)) {
             SetSpEffect(10004, 99170);
         }
+        // NR6PF: effect for players 4-6 as well
+        if (EventFlag(11008085)) {
+            SetSpEffect(10005, 99170);
+        }
+        if (EventFlag(11008086)) {
+            SetSpEffect(10006, 99170);
+        }
+        if (EventFlag(11008087)) {
+            SetSpEffect(10007, 99170);
+        }
     }
     WaitFor(ElapsedSeconds(2));
     ForceAnimationPlayback(chrEntityId, 20024, false, false, false);
@@ -2736,6 +2865,16 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
         if (EventFlag(8087)) {
             WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10004, 900, 10004);
         }
+        // NR6PF: I do wish they had loops sometimes, jeez
+        if (EventFlag(11008085)) {
+            WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10005, 900, 10005);
+        }
+        if (EventFlag(11008086)) {
+            WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10006, 900, 10006);
+        }
+        if (EventFlag(11008087)) {
+            WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10007, 900, 10007);
+        }
     }
     WaitFor(ElapsedSeconds(0.25));
     if (EventFlag(9999)) {
@@ -2749,6 +2888,16 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
         }
         if (EventFlag(8087)) {
             SetSpEffect(10004, 99171);
+        }
+        // NR6PF: effect for players 4-6 as well
+        if (EventFlag(11008085)) {
+            SetSpEffect(10005, 99171);
+        }
+        if (EventFlag(11008086)) {
+            SetSpEffect(10006, 99171);
+        }
+        if (EventFlag(11008087)) {
+            SetSpEffect(10007, 99171);
         }
     }
     SetNetworkUpdateRate(chrEntityId, false, CharacterUpdateFrequency.AlwaysUpdate);
@@ -2768,6 +2917,13 @@ $Event(90035203, Default, function(eventFlagId) {
         SetSpEffect(10003, 509);
         SetSpEffect(10004, 99156);
         SetSpEffect(10004, 509);
+        // NR6PF: Give all players the effect
+        SetSpEffect(10005, 99156);
+        SetSpEffect(10005, 509);
+        SetSpEffect(10006, 99156);
+        SetSpEffect(10006, 509);
+        SetSpEffect(10007, 99156);
+        SetSpEffect(10007, 509);
         EndEvent();
     }
     WaitFor(EventFlag(8061));
@@ -2788,6 +2944,19 @@ $Event(90035203, Default, function(eventFlagId) {
             SetSpEffect(10004, 99191);
             SetSpEffect(10004, 508);
         }
+        // NR6PF: Apply to players 4-6 too
+        if (EventFlag(11008085)) {
+            SetSpEffect(10005, 99191);
+            SetSpEffect(10005, 508);
+        }
+        if (EventFlag(11008086)) {
+            SetSpEffect(10006, 99191);
+            SetSpEffect(10006, 508);
+        }
+        if (EventFlag(11008087)) {
+            SetSpEffect(10007, 99191);
+            SetSpEffect(10007, 508);
+        }
     }
     if (EventFlag(9999)) {
         spFlag |= !CharacterHasSpEffect(10000, 99191) || !CharacterHasSpEffect(10000, 508);
@@ -2801,6 +2970,16 @@ $Event(90035203, Default, function(eventFlagId) {
         if (EventFlag(8087)) {
             spFlag |= !CharacterHasSpEffect(10004, 99191) || !CharacterHasSpEffect(10004, 508);
         }
+        // NR6PF: Ditto
+        if (EventFlag(11008085)) {
+            spFlag |= !CharacterHasSpEffect(10005, 99191) || !CharacterHasSpEffect(10005, 508);
+        }
+        if (EventFlag(11008086)) {
+            spFlag |= !CharacterHasSpEffect(10006, 99191) || !CharacterHasSpEffect(10006, 508);
+        }
+        if (EventFlag(11008087)) {
+            spFlag |= !CharacterHasSpEffect(10007, 99191) || !CharacterHasSpEffect(10007, 508);
+        }
     }
     spFlag |= EventFlag(8062);
     WaitFor(spFlag);
@@ -2808,6 +2987,7 @@ $Event(90035203, Default, function(eventFlagId) {
 });
 
 $Event(90035204, Default, function(chrEntityId, eventFlagId) {
+    // Margit delaying his attack
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -2824,6 +3004,16 @@ $Event(90035204, Default, function(chrEntityId, eventFlagId) {
         if (EventFlag(8087)) {
             chrSp &= IsPlayerNo(3) && CharacterHasSpEffect(10004, 99171);
         }
+        // NR6PF: extra conditions for players 4-6
+        if (EventFlag(11008085)) {
+            chrSp &= IsPlayerNo(4) && CharacterHasSpEffect(10005, 99171);
+        }
+        if (EventFlag(11008086)) {
+            chrSp &= IsPlayerNo(5) && CharacterHasSpEffect(10006, 99171);
+        }
+        if (EventFlag(11008087)) {
+            chrSp &= IsPlayerNo(6) && CharacterHasSpEffect(10007, 99171);
+        }
     }
 L0:
     WaitFor(chrSp);
@@ -2836,6 +3026,16 @@ L0:
         }
         if (EventFlag(8087)) {
             chrSpHpArea &= IsPlayerNo(3);
+        }
+        // NR6PF: extra conditions for players 4-6
+        if (EventFlag(11008085)) {
+            chrSpHpArea &= IsPlayerNo(4);
+        }
+        if (EventFlag(11008086)) {
+            chrSpHpArea &= IsPlayerNo(5);
+        }
+        if (EventFlag(11008087)) {
+            chrSpHpArea &= IsPlayerNo(6);
         }
     }
 L1:
@@ -2852,6 +3052,16 @@ L1:
         if (EventFlag(8087)) {
             chrSpHpArea &= CharacterHPValue(10004) != 0;
         }
+        // NR6PF: extra conditions for players 4-6
+        if (EventFlag(11008085)) {
+            chrSpHpArea &= CharacterHPValue(10005) != 0;
+        }
+        if (EventFlag(11008086)) {
+            chrSpHpArea &= CharacterHPValue(10006) != 0;
+        }
+        if (EventFlag(11008087)) {
+            chrSpHpArea &= CharacterHPValue(10007) != 0;
+        }
     }
 L2:
     if (EventFlag(9999)) {
@@ -2865,6 +3075,16 @@ L2:
         }
         if (EventFlag(8087)) {
             areaSp |= !EntityInRadiusOfEntity(10004, chrEntityId, 25, 1);
+        }
+        // NR6PF: extra conditions for players 4-6
+        if (EventFlag(11008085)) {
+            areaSp |= !EntityInRadiusOfEntity(10005, chrEntityId, 25, 1);
+        }
+        if (EventFlag(11008086)) {
+            areaSp |= !EntityInRadiusOfEntity(10006, chrEntityId, 25, 1);
+        }
+        if (EventFlag(11008087)) {
+            areaSp |= !EntityInRadiusOfEntity(10007, chrEntityId, 25, 1);
         }
     }
 L3:
@@ -2902,6 +3122,28 @@ L3:
                 || CharacterHasSpEffect(10004, 102610)
                 || CharacterHasSpEffect(10004, 16166);
         }
+        // NR6PF: Apply effects to other players, again. Why does this bastard have to have a check before he does ANYTHING
+        if (EventFlag(11008085)) {
+            sp |= CharacterHasSpEffect(10005, 32)
+                || CharacterHasSpEffect(10005, 99200)
+                || CharacterHasSpEffect(10005, 99201)
+                || CharacterHasSpEffect(10005, 102610)
+                || CharacterHasSpEffect(10005, 16166);
+        }
+        if (EventFlag(11008086)) {
+            sp |= CharacterHasSpEffect(10006, 32)
+                || CharacterHasSpEffect(10006, 99200)
+                || CharacterHasSpEffect(10006, 99201)
+                || CharacterHasSpEffect(10006, 102610)
+                || CharacterHasSpEffect(10006, 16166);
+        }
+        if (EventFlag(11008087)) {
+            sp |= CharacterHasSpEffect(10007, 32)
+                || CharacterHasSpEffect(10007, 99200)
+                || CharacterHasSpEffect(10007, 99201)
+                || CharacterHasSpEffect(10007, 102610)
+                || CharacterHasSpEffect(10007, 16166);
+        }
     }
 L4:
     if (sp) {
@@ -2935,6 +3177,28 @@ L4:
                     && !CharacterHasSpEffect(10004, 102610)
                     && !CharacterHasSpEffect(10004, 16166);
             }
+            // xnopyt
+            if (EventFlag(11008085)) {
+                sp2 &= !CharacterHasSpEffect(10005, 32)
+                    && !CharacterHasSpEffect(10005, 99200)
+                    && !CharacterHasSpEffect(10005, 99201)
+                    && !CharacterHasSpEffect(10005, 102610)
+                    && !CharacterHasSpEffect(10005, 16166);
+            }
+            if (EventFlag(11008086)) {
+                sp2 &= !CharacterHasSpEffect(10006, 32)
+                    && !CharacterHasSpEffect(10006, 99200)
+                    && !CharacterHasSpEffect(10006, 99201)
+                    && !CharacterHasSpEffect(10006, 102610)
+                    && !CharacterHasSpEffect(10006, 16166);
+            }
+            if (EventFlag(11008087)) {
+                sp2 &= !CharacterHasSpEffect(10007, 32)
+                    && !CharacterHasSpEffect(10007, 99200)
+                    && !CharacterHasSpEffect(10007, 99201)
+                    && !CharacterHasSpEffect(10007, 102610)
+                    && !CharacterHasSpEffect(10007, 16166);
+            }
         }
 L6:
         WaitFor(sp2);
@@ -2958,10 +3222,21 @@ L5:
     if (EventFlag(8087)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10004, 900, 10004);
     }
+    // NR6PF: extra warps for players 4-6
+    if (EventFlag(11008085)) {
+        WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10005, 900, 10005);
+    }
+    if (EventFlag(11008086)) {
+        WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10006, 900, 10006);
+    }
+    if (EventFlag(11008087)) {
+        WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10007, 900, 10007);
+    }
     RestartEvent();
 });
 
 $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
+    // Margit won his invasion, ripbozo L players
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -2999,6 +3274,31 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
                 || CharacterHasTeamType(10004, TeamType.Disabled);
             chr |= !chr2;
         }
+        // NR6PF: Check if players 4-6 are targeted/dead
+        if (EventFlag(11008085)) {
+            chr |= CharacterDead(10005);
+            chr2 |= CharacterHasTeamType(10005, TeamType.Human)
+                || CharacterHasTeamType(10005, TeamType.WhitePhantom)
+                || CharacterHasTeamType(10005, TeamType.Unknown77)
+                || CharacterHasTeamType(10005, TeamType.Disabled);
+            chr |= !chr2;
+        }
+        if (EventFlag(11008086)) {
+            chr |= CharacterDead(10006);
+            chr2 |= CharacterHasTeamType(10006, TeamType.Human)
+                || CharacterHasTeamType(10006, TeamType.WhitePhantom)
+                || CharacterHasTeamType(10006, TeamType.Unknown77)
+                || CharacterHasTeamType(10006, TeamType.Disabled);
+            chr |= !chr2;
+        }
+        if (EventFlag(11008087)) {
+            chr |= CharacterDead(10007);
+            chr2 |= CharacterHasTeamType(10007, TeamType.Human)
+                || CharacterHasTeamType(10007, TeamType.WhitePhantom)
+                || CharacterHasTeamType(10007, TeamType.Unknown77)
+                || CharacterHasTeamType(10007, TeamType.Disabled);
+            chr |= !chr2;
+        }
     }
     WaitFor(hp || chr || PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59));
     SetNetworkconnectedEventFlagID(8062, ON);
@@ -3023,6 +3323,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
+    // Margit teleporting in, if the player target is dead already
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -3038,6 +3339,16 @@ $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
         }
         if (EventFlag(8087)) {
             hpFlag |= CharacterHPValue(10004) == 0;
+        }
+        // NR6PF: extra conditions for players 4-6
+        if (EventFlag(11008085)) {
+            hpFlag |= CharacterHPValue(10005) == 0;
+        }
+        if (EventFlag(11008086)) {
+            hpFlag |= CharacterHPValue(10006) == 0;
+        }
+        if (EventFlag(11008087)) {
+            hpFlag |= CharacterHPValue(10007) == 0;
         }
     }
     hpFlag |= EventFlag(8062);
@@ -3055,6 +3366,16 @@ $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
         if (EventFlag(8087)) {
             IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10004, 220);
         }
+        // Warp for players 4-6
+        if (EventFlag(11008085)) {
+            IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10005, 220);
+        }
+        if (EventFlag(11008086)) {
+            IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10006, 220);
+        }
+        if (EventFlag(11008087)) {
+            IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10007, 220);
+        }
     }
     SetCharacterEventTarget(chrEntityId, chrEntityId2);
     if (EventFlag(9999)) {
@@ -3068,6 +3389,16 @@ $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
         }
         if (EventFlag(8087)) {
             WaitFor(CharacterHPValue(10004) != 0);
+        }
+        // Wait for players 4-6 to respawn
+        if (EventFlag(11008085)) {
+            WaitFor(CharacterHPValue(10005) != 0);
+        }
+        if (EventFlag(11008086)) {
+            WaitFor(CharacterHPValue(10006) != 0);
+        }
+        if (EventFlag(11008087)) {
+            WaitFor(CharacterHPValue(10007) != 0);
         }
     }
     RestartEvent();
@@ -3100,6 +3431,7 @@ $Event(90035208, Default, function(eventFlagId, eventFlagId2) {
 });
 
 $Event(90035209, Default, function(eventFlagId) {
+    // Margit music control
     DisableNetworkSync();
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
@@ -3124,6 +3456,22 @@ $Event(90035209, Default, function(eventFlagId) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
+        // NR6PF: Let the other players hear the BGM :<
+        if (EventFlag(11008085)) {
+            if (IsPlayerNo(4)) {
+                SetBossBGM(213021, BossBGMState.Start);
+            }
+        }
+        if (EventFlag(11008086)) {
+            if (IsPlayerNo(5)) {
+                SetBossBGM(213021, BossBGMState.Start);
+            }
+        }
+        if (EventFlag(11008087)) {
+            if (IsPlayerNo(6)) {
+                SetBossBGM(213021, BossBGMState.Start);
+            }
+        }
         if (EventFlag(8085)) {
             area |= EntityInRadiusOfEntity(20000, 10002, 30, 1);
             if (area) {
@@ -3142,6 +3490,25 @@ $Event(90035209, Default, function(eventFlagId) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
+        // NR6PF: Boss BGM for when players 4-6 are target
+        if (EventFlag(11008085)) {
+            area |= EntityInRadiusOfEntity(20000, 10005, 30, 1);
+            if (area) {
+                SetBossBGM(213021, BossBGMState.Start);
+            }
+        }
+        if (EventFlag(11008086)) {
+            area |= EntityInRadiusOfEntity(20000, 10006, 30, 1);
+            if (area) {
+                SetBossBGM(213021, BossBGMState.Start);
+            }
+        }
+        if (EventFlag(11008087)) {
+            area |= EntityInRadiusOfEntity(20000, 10007, 30, 1);
+            if (area) {
+                SetBossBGM(213021, BossBGMState.Start);
+            }
+        }
         if (EventFlag(8085)) {
             EndIf(!IsPlayerNo(1));
         }
@@ -3150,6 +3517,16 @@ $Event(90035209, Default, function(eventFlagId) {
         }
         if (EventFlag(8087)) {
             EndIf(!IsPlayerNo(3));
+        }
+        // NR6PF: The game has a guard clause here to block BGM if the player is not the target
+        if (EventFlag(11008085)) {
+            EndIf(!IsPlayerNo(4));
+        }
+        if (EventFlag(11008086)) {
+            EndIf(!IsPlayerNo(5));
+        }
+        if (EventFlag(11008087)) {
+            EndIf(!IsPlayerNo(6));
         }
     }
 L0:
