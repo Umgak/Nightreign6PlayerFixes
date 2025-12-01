@@ -8575,6 +8575,8 @@ $Event(99075421, Restart, function(chrEntityId) {
 });
 
 $Event(99075422, Restart, function(chrEntityId, areaEntityId, areaEntityId2, areaEntityId3, areaEntityId4, areaEntityId5, areaEntityId6, areaEntityId7, areaEntityId8, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9) {
+    // EVERDARK LIBRA
+    // Just had to edit the instantiation over in common.emevd
     EndIf(EventFlag(7512));
     WaitFor(EventFlag(7511));
     WaitFor(
@@ -8736,6 +8738,8 @@ $Event(90075452, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
 });
 
 $Event(99075460, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10) {
+    // EVERDARK LIBRA
+    // Just had to edit the instantiation over in common.emevd
     EndIf(!TargetingBoss(TargetBoss.Libra));
     EndIf(!(IsCampaignSession() || IsPlayMode(2)));
     EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId10));

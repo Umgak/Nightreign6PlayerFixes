@@ -266,22 +266,40 @@ S23:
     $InitializeEvent(0, 1140);
     $InitializeEvent(0, 1150);
     $InitializeEvent(0, 1151);
+    // NR6PF: <fuck>
+    // at least there's a massive valid unused block of flags going all the way up to 700170. I can keep the pattern the devs used going forward and not clobber anything or have to take a bite out of 11_00 again
+    // anyway, this is ED Libra's initialization stuff. No more comments for this, the entire thing is twice as long as it used to be, anything referencing 4, 5, or 6 is mine.
     $InitializeCommonEvent(0, 99075460, 1, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009);
     $InitializeCommonEvent(0, 99075460, 2, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039);
     $InitializeCommonEvent(0, 99075460, 3, 70060, 70061, 70062, 70063, 70064, 70065, 70066, 70067, 70068, 70069);
+    $InitializeCommonEvent(0, 99075460, 4, 70090, 70091, 70092, 70093, 70094, 70095, 70096, 70097, 70098, 70099);
+    $InitializeCommonEvent(0, 99075460, 5, 70120, 70121, 70122, 70123, 70124, 70125, 70126, 70127, 70128, 70129);
+    $InitializeCommonEvent(0, 99075460, 6, 70150, 70151, 70152, 70153, 70154, 70155, 70156, 70157, 70158, 70159);
     $InitializeCommonEvent(0, 99075461, 1, 70010, 70011, 70012, 70013, 70014, 70015);
     $InitializeCommonEvent(0, 99075461, 2, 70040, 70041, 70042, 70043, 70044, 70045);
     $InitializeCommonEvent(0, 99075461, 3, 70070, 70071, 70072, 70073, 70074, 70075);
+    $InitializeCommonEvent(0, 99075461, 4, 70100, 70101, 70102, 70103, 70104, 70105);
+    $InitializeCommonEvent(0, 99075461, 5, 70130, 70131, 70132, 70133, 70134, 70135);
+    $InitializeCommonEvent(0, 99075461, 6, 70160, 70161, 70162, 70163, 70164, 70165);
     $InitializeCommonEvent(0, 99075462, 1, 70020, 70022);
     $InitializeCommonEvent(0, 99075462, 2, 70050, 70052);
     $InitializeCommonEvent(0, 99075462, 3, 70080, 70082);
+    $InitializeCommonEvent(0, 99075462, 4, 70110, 70112);
+    $InitializeCommonEvent(0, 99075462, 5, 70140, 70142);
+    $InitializeCommonEvent(0, 99075462, 6, 70170, 70172);
     $InitializeCommonEvent(0, 99075465, 1, 19010450, 19010453, 0, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009, 70010, 70011, 70012, 70013, 70014, 70015, 70020, 70021, 70022);
     $InitializeCommonEvent(0, 99075465, 2, 19010451, 19010454, 0, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039, 70040, 70041, 70042, 70043, 70044, 70045, 70050, 70051, 70052);
     $InitializeCommonEvent(0, 99075465, 3, 19010452, 19010455, 0, 70060, 70061, 70062, 70063, 70064, 70065, 70066, 70067, 70068, 70069, 70070, 70071, 70072, 70073, 70074, 70075, 70080, 70081, 70082);
+    $InitializeCommonEvent(0, 99075465, 4, 19010460, 19010463, 0, 70090, 70091, 70092, 70093, 70094, 70095, 70096, 70097, 70098, 70099, 70100, 70101, 70102, 70103, 70104, 70105, 70110, 70111, 70112);
+    $InitializeCommonEvent(0, 99075465, 5, 19010461, 19010464, 0, 70120, 70121, 70122, 70123, 70124, 70125, 70126, 70127, 70128, 70129, 70130, 70131, 70132, 70133, 70134, 70135, 70140, 70141, 70142);
+    $InitializeCommonEvent(0, 99075465, 6, 19010462, 19010465, 0, 70150, 70151, 70152, 70153, 70154, 70155, 70156, 70157, 70158, 70159, 70160, 70161, 70162, 70163, 70164, 70165, 70170, 70171, 70172);
+    // NR6PF </fuck>
     $InitializeEvent(0, 1909);
     $InitializeEvent(0, 1300);
     $InitializeEvent(0, 1301);
     $InitializeEvent(0, 1302);
+    // NR6PF: Wending Grace/Noklateo blessing
+    // Only 2 valid flags in this block that aren't used, then it gets into P1 mission flag. Gotta stash 'em somewhere
     if (IsPlayerNo(1)) {
         $InitializeEvent(0, 1310, 7010);
     }
