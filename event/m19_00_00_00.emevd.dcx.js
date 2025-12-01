@@ -620,6 +620,18 @@ $Event(0, Default, function() {
         if (IsPlayerNo(3)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000245, 19004744, 19000248);
         }
+        // ED Maris
+        // Added flags with +100 for other players
+        // Doesn't have that big InitializeCommonEvent block? Weirdge
+        if (IsPlayerNo(4)) {
+            $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000343, 19004744, 19000346);
+        }
+        if (IsPlayerNo(5)) {
+            $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000344, 19004744, 19000347);
+        }
+        if (IsPlayerNo(6)) {
+            $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000345, 19004744, 19000348);
+        }
         $InitializeCommonEvent(0, 90075405, 19000240, 19000241, 19000246, 19000247, 19000248);
         $InitializeCommonEvent(0, 99075406, 19010849, 19000240, 19000701, 19000241);
         $InitializeCommonEvent(0, 99075410, 19010840);
