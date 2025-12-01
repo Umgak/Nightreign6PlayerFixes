@@ -3538,6 +3538,7 @@ L0:
 });
 
 $Event(90035210, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance) {
+    // Augur Invasion
     EndIf(!EventFlag(8076));
     EndIf(EventFlag(8061));
     WaitFor(EventFlag(eventFlagId2));
@@ -3549,6 +3550,16 @@ $Event(90035210, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     if (!EventFlag(9999)) {
         EndIf(
@@ -3581,6 +3592,16 @@ $Event(9005211, Default, function(eventFlagId) {
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {
@@ -3646,7 +3667,7 @@ $Event(90035212, Default, function(chrEntityId, assetEntityId, eventFlagId) {
     ForceAnimationPlayback(assetEntityId, 110, true, false, false);
 });
 
-$Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chrEntityId3, chrEntityId4, assetEntityId2, assetEntityId3, assetEntityId4, areaEntityId, eventFlagId) {
+$Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, assetEntityId2, assetEntityId3, assetEntityId4, assetEntityId5, assetEntityId6, assetEntityId7, areaEntityId, eventFlagId) {
     if (!EventFlag(8076)) {
         DisableCharacter(chrEntityId);
         DisableAsset(assetEntityId);
@@ -3669,6 +3690,10 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         AttachAssetToCharacter(chrEntityId2, 220, assetEntityId2);
         AttachAssetToCharacter(chrEntityId3, 220, assetEntityId3);
         AttachAssetToCharacter(chrEntityId4, 220, assetEntityId4);
+        // Attach bubble vfx to extra player's entity
+        AttachAssetToCharacter(chrEntityId5, 220, assetEntityId5);
+        AttachAssetToCharacter(chrEntityId6, 220, assetEntityId6);
+        AttachAssetToCharacter(chrEntityId7, 220, assetEntityId7);
     } else {
         DisableCharacter(chrEntityId);
         DisableAsset(assetEntityId);
@@ -3683,6 +3708,13 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         DisableCharacterDisableOnHitUnload(chrEntityId3);
         SetCharacterEnableDistance(chrEntityId4, 1200);
         DisableCharacterDisableOnHitUnload(chrEntityId4);
+        //NR6PF: Setup extra flags for extra bubbles
+        SetCharacterEnableDistance(chrEntityId5, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId5);
+        SetCharacterEnableDistance(chrEntityId6, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId6);
+        SetCharacterEnableDistance(chrEntityId7, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId7);
         if (IsPlayerNo(1)) {
             SetNetworkUpdateAuthority(chrEntityId2, AuthorityLevel.Forced);
         }
@@ -3692,9 +3724,23 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         if (IsPlayerNo(3)) {
             SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
         }
+        // NR6PF: Give extra players update authority of their bubble
+        if (IsPlayerNo(4)) {
+            SetNetworkUpdateAuthority(chrEntityId5, AuthorityLevel.Forced);
+        }
+        if (IsPlayerNo(5)) {
+            SetNetworkUpdateAuthority(chrEntityId6, AuthorityLevel.Forced);
+        }
+        if (IsPlayerNo(6)) {
+            SetNetworkUpdateAuthority(chrEntityId7, AuthorityLevel.Forced);
+        }
         AttachAssetToCharacter(chrEntityId2, 220, assetEntityId2);
         AttachAssetToCharacter(chrEntityId3, 220, assetEntityId3);
         AttachAssetToCharacter(chrEntityId4, 220, assetEntityId4);
+        // NR6PF: Attach assets to extra bubbles (again)
+        AttachAssetToCharacter(chrEntityId5, 220, assetEntityId5);
+        AttachAssetToCharacter(chrEntityId6, 220, assetEntityId6);
+        AttachAssetToCharacter(chrEntityId7, 220, assetEntityId7);
         if (IsPlayerNo(1)) {
             WaitFor(CharacterBackreadStatus(chrEntityId2));
         }
@@ -3703,6 +3749,16 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         }
         if (IsPlayerNo(3)) {
             WaitFor(CharacterBackreadStatus(chrEntityId4));
+        }
+        // NR6PF: Backread for extra players' bubbles
+        if (IsPlayerNo(4)) {
+            WaitFor(CharacterBackreadStatus(chrEntityId5));
+        }
+        if (IsPlayerNo(5)) {
+            WaitFor(CharacterBackreadStatus(chrEntityId6));
+        }
+        if (IsPlayerNo(6)) {
+            WaitFor(CharacterBackreadStatus(chrEntityId7));
         }
         WaitFor(ElapsedSeconds(3));
         if (!InArea(10002, areaEntityId)) {
@@ -3713,6 +3769,16 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         }
         if (!InArea(10004, areaEntityId)) {
             WarpCharacterAndCopyFloor(chrEntityId4, TargetEntityType.Character, 10004, 220, 10004);
+        }
+        // NR6PF: Warp extra players' bubbles too
+        if (!InArea(10005, areaEntityId)) {
+            WarpCharacterAndCopyFloor(chrEntityId5, TargetEntityType.Character, 10005, 220, 10005);
+        }
+        if (!InArea(10006, areaEntityId)) {
+            WarpCharacterAndCopyFloor(chrEntityId6, TargetEntityType.Character, 10006, 220, 10006);
+        }
+        if (!InArea(10007, areaEntityId)) {
+            WarpCharacterAndCopyFloor(chrEntityId7, TargetEntityType.Character, 10007, 220, 10007);
         }
         EnableCharacter(chrEntityId);
         EnableAsset(assetEntityId);
@@ -3737,6 +3803,13 @@ L0:
     EnableCharacterDisableOnHitUnload(chrEntityId3);
     SetCharacterEnableDistance(chrEntityId4, -1);
     EnableCharacterDisableOnHitUnload(chrEntityId4);
+    // NR6PF: Setup bubbles again
+    SetCharacterEnableDistance(chrEntityId5, -1);
+    EnableCharacterDisableOnHitUnload(chrEntityId5);
+    SetCharacterEnableDistance(chrEntityId6, -1);
+    EnableCharacterDisableOnHitUnload(chrEntityId6);
+    SetCharacterEnableDistance(chrEntityId7, -1);
+    EnableCharacterDisableOnHitUnload(chrEntityId7);
     DisableCharacter(chrEntityId);
     DisableAsset(assetEntityId);
 });
