@@ -4048,6 +4048,16 @@ $Event(90035230, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
     }
+    // NR6PF: added extra conditionals
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
+    }
     if (EventFlag(9999)) {
         WaitFixedTimeFrames(1);
     }
