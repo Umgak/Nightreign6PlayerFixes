@@ -655,6 +655,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 99075440, 7511, 7512, 0, 19010840, 5108, 0);
     }
     if (IsMapVariation(14)) {
+        // More ED Libra
+        // Why did I think I would be done with just the clones, those were actually easy
         $InitializeCommonEvent(0, 90015012, 19015842, 7511);
         $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260);
         $InitializeCommonEvent(0, 99075468, 19010840, 19010453, 113, 19011253, 19000250, 19000263);
@@ -684,6 +686,16 @@ $Event(0, Default, function() {
         }
         if (!IsPlayerNo(3)) {
             $InitializeCommonEvent(0, 99075481, 19010840, 10004);
+        }
+        // Surprise! It's ED Libra again!
+        if (!IsPlayerNo(4)) {
+            $InitializeCommonEvent(0, 99075481, 19010840, 10005);
+        }
+        if (!IsPlayerNo(5)) {
+            $InitializeCommonEvent(0, 99075481, 19010840, 10006);
+        }
+        if (!IsPlayerNo(6)) {
+            $InitializeCommonEvent(0, 99075481, 19010840, 10007);
         }
         $InitializeCommonEvent(0, 99075470, 19010840, 49690, 8001);
     }
