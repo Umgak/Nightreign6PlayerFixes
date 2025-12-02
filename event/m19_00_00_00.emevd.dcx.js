@@ -235,15 +235,6 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075302, 19000830, 19000246);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000247);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000248);
-        // Maris
-        // Initialize with the new flags as well
-        $InitializeCommonEvent(0, 90075302, 19000830, 19000343);
-        $InitializeCommonEvent(0, 90075302, 19000830, 19000344);
-        $InitializeCommonEvent(0, 90075302, 19000830, 19000345);
-        $InitializeCommonEvent(0, 90075302, 19000830, 19000346);
-        $InitializeCommonEvent(0, 90075302, 19000830, 19000347);
-        $InitializeCommonEvent(0, 90075302, 19000830, 19000348);
-        // End of new flags
         $InitializeCommonEvent(0, 90075302, 19000830, 19000249);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000250);
         $InitializeCommonEvent(0, 90075302, 19000830, 19000251);
@@ -622,7 +613,6 @@ $Event(0, Default, function() {
         }
         // ED Maris
         // Added flags with +100 for other players
-        // Doesn't have that big InitializeCommonEvent block? Weirdge
         if (IsPlayerNo(4)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000343, 19004744, 19000346);
         }
@@ -656,23 +646,47 @@ $Event(0, Default, function() {
     }
     if (IsMapVariation(14)) {
         // More ED Libra
-        // Why did I think I would be done with just the clones, those were actually easy
-        $InitializeCommonEvent(0, 90015012, 19015842, 7511);
-        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260);
-        $InitializeCommonEvent(0, 99075468, 19010840, 19010453, 113, 19011253, 19000250, 19000263);
-        $InitializeCommonEvent(0, 99075467, 19010840, 19010450, 19000260);
-        $InitializeCommonEvent(0, 99075467, 19010840, 19010453, 19000253);
+        // Why did I think I would be done with the clones, that other thing in common was just the initializer
+        // This is generators for them
+        // P1
+        $InitializeCommonEvent(0, 90015012, 19015842, 7511); // not sure - used by other boss too? Entity ID isn't something I can find any references to
+        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260); // clone generator
+        $InitializeCommonEvent(0, 99075468, 19010840, 19010453, 113, 19011253, 19000250, 19000263); // Alt clone generator
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010450, 19000260); // clone tracker
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010453, 19000253); // alt clone tracker
+        // P2
         $InitializeCommonEvent(0, 90015012, 19015843, 7511);
         $InitializeCommonEvent(0, 99075466, 19010840, 10003, 19010451, 111, 19011251, 19000251, 19000261);
         $InitializeCommonEvent(0, 99075468, 19010840, 19010454, 114, 19011254, 19000251, 19000264);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010451, 19000261);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010454, 19000254);
+        // P3
         $InitializeCommonEvent(0, 90015012, 19015844, 7511);
         $InitializeCommonEvent(0, 99075466, 19010840, 10004, 19010452, 112, 19011252, 19000252, 19000262);
         $InitializeCommonEvent(0, 99075468, 19010840, 19010455, 115, 19011255, 19000252, 19000265);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010452, 19000262);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010455, 19000255);
-        $InitializeCommonEvent(0, 99075471, 19010840, 19000250, 19000260, 19000251, 19000261, 19000252, 19000262);
+        // NR6PF: Clone spawners, with new flags & emitters
+        // P4
+        $InitializeCommonEvent(0, 90015012, 19015845, 7511);
+        $InitializeCommonEvent(0, 99075466, 19010840, 10005, 19010460, 116, 19011350, 19000350, 19000360);
+        $InitializeCommonEvent(0, 99075468, 19010840, 19010463, 119, 19011353, 19000350, 19000363);
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010460, 19000360);
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010463, 19000353);
+        // P5
+        $InitializeCommonEvent(0, 90015012, 19015846, 7511);
+        $InitializeCommonEvent(0, 99075466, 19010840, 10006, 19010461, 117, 19011351, 19000351, 19000361);
+        $InitializeCommonEvent(0, 99075468, 19010840, 19010464, 120, 19011354, 19000351, 19000364);
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010461, 19000361);
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010464, 19000354);
+        // P6
+        $InitializeCommonEvent(0, 90015012, 19015847, 7511);
+        $InitializeCommonEvent(0, 99075466, 19010840, 10007, 19010462, 118, 19011352, 19000352, 19000362);
+        $InitializeCommonEvent(0, 99075468, 19010840, 19010465, 120, 19011355, 19000352, 19000365);
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010462, 19000362);
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010465, 19000355);
+        // End
+        $InitializeCommonEvent(0, 99075471, 19010840, 19000250, 19000260, 19000251, 19000261, 19000252, 19000262, 19000350, 19000360, 19000351, 19000361, 19000352, 19000362); // NR6PF: Set up new clone flags
         $InitializeCommonEvent(0, 99075470, 19010840, 49691, 8002);
     }
     if (IsMapVariation(14)) {

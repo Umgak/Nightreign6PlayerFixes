@@ -9488,6 +9488,7 @@ L9:
 });
 
 $Event(99075466, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, dummypolyId, generatorEntityId, eventFlagId, eventFlagId2) {
+    // ED Libra: Generators for clones
     EndIf(CharacterHPValue(chrEntityId) <= 0);
     if (EventFlag(eventFlagId2)) {
         SetCharacterBackreadState(chrEntityId3, false);
@@ -9502,6 +9503,16 @@ $Event(99075466, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, dumm
             WaitFor(HPRatio(chrEntityId3) > 0);
         }
         if (IsPlayerNo(3)) {
+            WaitFor(HPRatio(chrEntityId3) > 0);
+        }
+        // NR6PF: Extra player checks, as usual
+        if (IsPlayerNo(4)) {
+            WaitFor(HPRatio(chrEntityId3) > 0);
+        }
+        if (IsPlayerNo(5)) {
+            WaitFor(HPRatio(chrEntityId3) > 0);
+        }
+        if (IsPlayerNo(6)) {
             WaitFor(HPRatio(chrEntityId3) > 0);
         }
         SetCharacterBackreadState(chrEntityId3, false);
@@ -9550,6 +9561,19 @@ L0:
         WaitFor(!EventFlag(eventFlagId2));
         RestartEvent();
     }
+    // NR6PF: Restart event for extra players too, yep yep
+    if (IsPlayerNo(4)) {
+        WaitFor(!EventFlag(eventFlagId2));
+        RestartEvent();
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(!EventFlag(eventFlagId2));
+        RestartEvent();
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(!EventFlag(eventFlagId2));
+        RestartEvent();
+    }
 });
 
 $Event(99075467, Restart, function(chrEntityId, chrEntityId2, eventFlagId) {
@@ -9571,6 +9595,7 @@ $Event(99075467, Restart, function(chrEntityId, chrEntityId2, eventFlagId) {
 });
 
 $Event(99075468, Restart, function(chrEntityId, chrEntityId2, dummypolyId, generatorEntityId, eventFlagId, eventFlagId2) {
+    // ED Libra
     EndIf(CharacterHPValue(chrEntityId) <= 0);
     if (EventFlag(eventFlagId2)) {
         SetCharacterBackreadState(chrEntityId2, false);
@@ -9585,6 +9610,16 @@ $Event(99075468, Restart, function(chrEntityId, chrEntityId2, dummypolyId, gener
             WaitFor(HPRatio(chrEntityId2) > 0);
         }
         if (IsPlayerNo(3)) {
+            WaitFor(HPRatio(chrEntityId2) > 0);
+        }
+        // NR6PF: More checks, as usual
+        if (IsPlayerNo(4)) {
+            WaitFor(HPRatio(chrEntityId2) > 0);
+        }
+        if (IsPlayerNo(5)) {
+            WaitFor(HPRatio(chrEntityId2) > 0);
+        }
+        if (IsPlayerNo(6)) {
             WaitFor(HPRatio(chrEntityId2) > 0);
         }
         SetCharacterBackreadState(chrEntityId2, false);
@@ -9624,6 +9659,19 @@ L0:
         WaitFor(!EventFlag(eventFlagId2));
         RestartEvent();
     }
+    // NR6PF: Once again
+    if (IsPlayerNo(4)) {
+        WaitFor(!EventFlag(eventFlagId2));
+        RestartEvent();
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(!EventFlag(eventFlagId2));
+        RestartEvent();
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(!EventFlag(eventFlagId2));
+        RestartEvent();
+    }
     RestartEvent();
 });
 
@@ -9639,7 +9687,8 @@ L0:
     RestartEvent();
 });
 
-$Event(99075471, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
+$Event(99075471, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10, eventFlagId11, eventFlagId12) {
+    // ED Libra
     DisableNetworkSync();
     EndIf(CharacterHPValue(chrEntityId) <= 0);
     if (!CharacterHasSpEffect(chrEntityId, 49100)) {
@@ -9657,6 +9706,16 @@ L0:
     }
     if (EventFlag(eventFlagId5)) {
         flag |= !EventFlag(eventFlagId6);
+    }
+    // NR6PF: extra checks
+    if (EventFlag(eventFlagId7)) {
+        flag |= !EventFlag(eventFlagId8);
+    }
+    if (EventFlag(eventFlagId9)) {
+        flag |= !EventFlag(eventFlagId10);
+    }
+    if (EventFlag(eventFlagId11)) {
+        flag |= !EventFlag(eventFlagId12)
     }
     if (flag) {
         DisplayTextEffectId(8000);
