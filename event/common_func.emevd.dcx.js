@@ -8497,7 +8497,8 @@ $Event(90075404, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, even
     SetNetworkconnectedEventFlagID(eventFlagId5, ON);
 });
 
-$Event(90075405, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5) {
+$Event(90075405, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
+    // Maris/ED Maris
     EndIf(EventFlag(7512));
     EndIf(EventFlag(7511));
     EndIf(EventFlag(eventFlagId));
@@ -8510,7 +8511,17 @@ $Event(90075405, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, even
                 || EventFlag(eventFlagId4))
             && (!(CharacterHasTeamType(10004, TeamType.Human)
                 || CharacterHasTeamType(10004, TeamType.WhitePhantom))
-                || EventFlag(eventFlagId5)))
+                || EventFlag(eventFlagId5))
+            // NR6PF: Check extra players for this
+            && (!(CharacterHasTeamType(10005, TeamType.Human)
+                || CharacterHasTeamType(10005, TeamType.WhitePhantom))
+                || EventFlag(eventFlagId6))
+            && (!(CharacterHasTeamType(10006, TeamType.Human)
+                || CharacterHasTeamType(10006, TeamType.WhitePhantom))
+                || EventFlag(eventFlagId7))
+            && (!(CharacterHasTeamType(10007, TeamType.Human)
+                || CharacterHasTeamType(10007, TeamType.WhitePhantom))
+                || EventFlag(eventFlagId8)))
             || EventFlag(eventFlagId));
     EndIf(EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(eventFlagId, ON);

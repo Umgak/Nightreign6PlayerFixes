@@ -289,7 +289,7 @@ $Event(0, Default, function() {
         if (IsPlayerNo(6)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000345, 19004744, 19000348);
         }
-        $InitializeCommonEvent(0, 90075405, 19000240, 19000241, 19000246, 19000247, 19000248);
+        $InitializeCommonEvent(0, 90075405, 19000240, 19000241, 19000246, 19000247, 19000248, 19000346, 19000347, 19000348); // NR6PF: Pass new player flags to call
         $InitializeCommonEvent(0, 99075406, 19000849, 19000240, 19000701, 19000241);
         $InitializeCommonEvent(0, 99075410, 19000840);
         $InitializeCommonEvent(0, 99075420, 19000840);
@@ -622,7 +622,7 @@ $Event(0, Default, function() {
         if (IsPlayerNo(6)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000345, 19004744, 19000348);
         }
-        $InitializeCommonEvent(0, 90075405, 19000240, 19000241, 19000246, 19000247, 19000248);
+        $InitializeCommonEvent(0, 90075405, 19000240, 19000241, 19000246, 19000247, 19000248, 19000346, 19000347, 19000348); // NR6PF: Pass new flags to call
         $InitializeCommonEvent(0, 99075406, 19010849, 19000240, 19000701, 19000241);
         $InitializeCommonEvent(0, 99075410, 19010840);
         $InitializeCommonEvent(0, 99075420, 19010840);
