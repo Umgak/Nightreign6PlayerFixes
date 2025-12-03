@@ -6159,11 +6159,17 @@ $Event(90065083, Restart, function(chrEntityId, generatorEntityId, generatorEnti
 });
 
 $Event(90065084, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
+    // The Duke's Dear Freyja
+    // Slows players
     if (EventFlag(eventFlagId2)) {
         ClearSpEffect(10000, 42312);
         ClearSpEffect(10002, 42312);
         ClearSpEffect(10003, 42312);
         ClearSpEffect(10004, 42312);
+        // NR6PF: Remove effects for p4-6
+        ClearSpEffect(10005, 42312);
+        ClearSpEffect(10006, 42312);
+        ClearSpEffect(10007, 42312);
         EndEvent();
     }
     WaitFor(EventFlag(eventFlagId));
@@ -6172,11 +6178,19 @@ $Event(90065084, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
     SetSpEffect(10002, 42312);
     SetSpEffect(10003, 42312);
     SetSpEffect(10004, 42312);
+    // NR6PF: Apply the effect
+    SetSpEffect(10005, 42312);
+    SetSpEffect(10006, 42312);
+    SetSpEffect(10007, 42312);
     WaitFor(EventFlag(eventFlagId2));
     ClearSpEffect(10000, 42312);
     ClearSpEffect(10002, 42312);
     ClearSpEffect(10003, 42312);
     ClearSpEffect(10004, 42312);
+    // NR6PF: Remove effects again
+    ClearSpEffect(10005, 42312);
+    ClearSpEffect(10006, 42312);
+    ClearSpEffect(10007, 42312);
 });
 
 $Event(90065090, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
