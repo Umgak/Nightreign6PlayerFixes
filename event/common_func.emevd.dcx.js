@@ -10823,6 +10823,11 @@ L3:
 });
 
 $Event(90085010, Default, function(missionId, eventFlagId, userDispLogParamId) {
+    // Missions
+    // New flags are, for once, in the same block
+    // 7018 Mission player_pl4
+    // 7019 Mission player_pl5
+    // 7020 Mission player_pl6
     DisableNetworkSync();
     EndIf(!IsGameMode(2));
     EndIf(!MissionActive(missionId));
@@ -10834,6 +10839,16 @@ $Event(90085010, Default, function(missionId, eventFlagId, userDispLogParamId) {
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     WaitFixedTimeSeconds(5);
     EndIf(EventFlag(eventFlagId));
@@ -10972,6 +10987,7 @@ $Event(90085016, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
 });
 
 $Event(90085020, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, chrEntityId, spEffectId, eventFlagId4) {
+    // Missions
     DisableNetworkSync();
     GotoIf(L2, !MissionActive(missionId));
     GotoIf(S0, !IsPlayerNo(1));
@@ -10983,6 +10999,16 @@ S1:
     GotoIf(S2, !IsPlayerNo(3));
     GotoIf(L2, !EventFlag(7017));
 S2:
+    // NR6PF: More players!
+    GotoIf(S3, !IsPlayerNo(4));
+    GotoIf(L2, !EventFlag(7018));
+S3:
+    GotoIf(S4, !IsPlayerNo(5));
+    GotoIf(L2, !EventFlag(7019));
+S4:
+    GotoIf(S5, !IsPlayerNo(6));
+    GotoIf(L2, !EventFlag(7020));
+S5:
     GotoIf(L2, EventFlag(eventFlagId3));
     if (!(EventFlag(eventFlagId2) && EventFlag(eventFlagId4))) {
         if (!EventFlag(eventFlagId)) {
@@ -11013,6 +11039,7 @@ L2:
 });
 
 $Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFlagId2) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11024,6 +11051,16 @@ $Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFl
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
+    }
     EndIf(EventFlag(eventFlagId));
     WaitFor(InArea(20000, areaEntityId));
     EndIf(EventFlag(eventFlagId));
@@ -11032,6 +11069,7 @@ $Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFl
 });
 
 $Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityId, operationGuideParamId) {
+    // Missions
     DisableNetworkSync();
     HideFloatingMessage(operationGuideParamId, entityId);
     EndIf(!MissionActive(missionId));
@@ -11043,6 +11081,16 @@ $Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityI
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(EventFlag(eventFlagId));
     WaitFor(InArea(20000, areaEntityId) || EventFlag(eventFlagId));
@@ -11055,6 +11103,7 @@ $Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityI
 });
 
 $Event(90085023, Default, function(missionId, eventFlagId, eventFlagId2, entityId, actionButtonParameterId, eventFlagId3) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11065,6 +11114,16 @@ $Event(90085023, Default, function(missionId, eventFlagId, eventFlagId2, entityI
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(EventFlag(eventFlagId2));
     WaitFor(EventFlag(eventFlagId));
@@ -11082,6 +11141,7 @@ $Event(90085024, Default, function(missionId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11092,6 +11152,16 @@ $Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2) {
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId2));
@@ -11105,6 +11175,7 @@ $Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90085026, Default, function(missionId, eventFlagId, value) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11115,6 +11186,16 @@ $Event(90085026, Default, function(missionId, eventFlagId, value) {
     }
     if (IsPlayerNo(3)) {
         EndIf(EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(EventFlag(7020));
     }
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
@@ -11127,6 +11208,7 @@ $Event(90085026, Default, function(missionId, eventFlagId, value) {
 });
 
 $Event(90085027, Default, function(missionId, mapVariationId, eventFlagId) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11137,6 +11219,16 @@ $Event(90085027, Default, function(missionId, mapVariationId, eventFlagId) {
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(!IsMapVariation(mapVariationId));
     EndIf(EventFlag(eventFlagId));
@@ -11149,6 +11241,7 @@ $Event(90085027, Default, function(missionId, mapVariationId, eventFlagId) {
 });
 
 $Event(90085028, Default, function(missionId, eventFlagId, eventFlagId2, userDispLogParamId) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11159,6 +11252,16 @@ $Event(90085028, Default, function(missionId, eventFlagId, eventFlagId2, userDis
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId2));
@@ -11233,6 +11336,7 @@ $Event(90085034, Default, function(missionId, eventFlagId, eventFlagId2, chrEnti
 });
 
 $Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButtonParameterId, eventFlagId2) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11244,6 +11348,16 @@ $Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButto
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
+    }
     EndIf(EventFlag(eventFlagId));
     WaitFor(ActionButtonInArea(actionButtonParameterId, entityId));
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
@@ -11252,10 +11366,6 @@ $Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButto
 
 $Event(90085036, Default, function(eventFlagId, userDispLogParamId) {
     // Missions
-    // New flags are, for once, in the same block
-    // 7018 Mission player_pl4
-    // 7019 Mission player_pl5
-    // 7020 Mission player_pl6
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
     WaitFixedTimeSeconds(3);
@@ -11490,6 +11600,7 @@ $Event(90085221, Default, function(missionId, chrEntityId, eventFlagId) {
 });
 
 $Event(90085222, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11500,6 +11611,16 @@ $Event(90085222, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(EventFlag(eventFlagId));
     SetEventFlagID(eventFlagId2, ON);
