@@ -9897,6 +9897,7 @@ $Event(90075501, Restart, function(chrEntityId) {
 });
 
 $Event(90075510, Restart, function(chrEntityId) {
+    // Fulghor, Champion of Nightglow and ED variant
     DisableNetworkSync();
     EndIf(EventFlag(7512));
     WaitFor(EventFlag(7511));
@@ -9909,6 +9910,7 @@ $Event(90075510, Restart, function(chrEntityId) {
     if (IsPlayerNo(3)) {
         SetSpEffect(20000, 46332);
     }
+    // TODO: Figure out wtf this actually does.
     WaitFor(
         CharacterHasSpEffect(chrEntityId, 46305)
             && !CharacterHasSpEffect(chrEntityId, 46306)
@@ -10261,7 +10263,8 @@ $Event(90075702, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
     LinkToBossHealthBar(Enabled, 907580000, chrEntityId);
 });
 
-$Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, entityId, entityId2, entityId3, entityId4, eventFlagId, eventFlagId2, eventFlagId3) {
+$Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, entityId, entityId2, entityId3,/* did this to myself lol*/ entityId5, entityId6, entityId7, entityId4, eventFlagId, eventFlagId2, eventFlagId3) {
+    // Heolstor the Nightlord
     if (EventFlag(eventFlagId3)) {
         ForceCharacterDeath(chrEntityId2, false);
         EndEvent();
@@ -10289,6 +10292,16 @@ $Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, enti
     }
     if (IsPlayerNo(3)) {
         WarpCharacterAndCopyFloorUnknown200489(10004, TargetEntityType.Area, entityId3, -1, 10004, -1, -1);
+    }
+    // NR6PF: Warp extra players to conveniently-added new targets!
+    if (IsPlayerNo(4)) {
+        WarpCharacterAndCopyFloorUnknown200489(10005, TargetEntityType.Area, entityId5, -1, 10005, -1, -1);
+    }
+    if (IsPlayerNo(5)) {
+        WarpCharacterAndCopyFloorUnknown200489(10006, TargetEntityType.Area, entityId6, -1, 10006, -1, -1);
+    }
+    if (IsPlayerNo(6)) {
+        WarpCharacterAndCopyFloorUnknown200489(10007, TargetEntityType.Area, entityId7, -1, 10007, -1, -1);
     }
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
     WaitFor(ElapsedSeconds(1));
