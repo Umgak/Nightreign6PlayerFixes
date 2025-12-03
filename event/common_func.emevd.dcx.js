@@ -4473,6 +4473,7 @@ $Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEn
     ShootBullet(chrEntityId2, 10002, 220, 201200099, 0, 0, 0);
     ShootBullet(chrEntityId3, 10003, 220, 201200099, 0, 0, 0);
     ShootBullet(chrEntityId4, 10004, 220, 201200099, 0, 0, 0);
+    // NR6PF: Gnoster extra entities targeting extra players
     ShootBullet(chrEntityId5, 10005, 220, 201200099, 0, 0, 0);
     ShootBullet(chrEntityId6, 10006, 220, 201200099, 0, 0, 0);
     ShootBullet(chrEntityId7, 10007, 220, 201200099, 0, 0, 0);
@@ -6321,6 +6322,8 @@ $Event(90065100, Restart, function(chrEntityId, chrEntityId2, generatorEntityId,
 });
 
 $Event(90065101, Restart, function(eventFlagId, eventFlagId2) {
+    // Night Boss: Wormface
+    // TODO: Figure out what this is for. Same issue as Fulghor, random speffects that seem to not do anything and are probably AI related - but aren't referenced in the actual AI scripts... at all
     if (EventFlag(eventFlagId2)) {
         ClearSpEffect(10002, 42180);
         ClearSpEffect(10003, 42181);
