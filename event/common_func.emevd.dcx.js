@@ -4461,7 +4461,9 @@ $Event(90035237, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
     SpawnOneshotSFX(TargetEntityType.Character, 20000, 220, 43);
 });
 
-$Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4) {
+$Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7) {
+    // How did I miss this?
+    // Gnoster invasion
     EndIf(!EventFlag(8078));
     EndIf(EventFlag(8062));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
@@ -4471,6 +4473,9 @@ $Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEn
     ShootBullet(chrEntityId2, 10002, 220, 201200099, 0, 0, 0);
     ShootBullet(chrEntityId3, 10003, 220, 201200099, 0, 0, 0);
     ShootBullet(chrEntityId4, 10004, 220, 201200099, 0, 0, 0);
+    ShootBullet(chrEntityId5, 10005, 220, 201200099, 0, 0, 0);
+    ShootBullet(chrEntityId6, 10006, 220, 201200099, 0, 0, 0);
+    ShootBullet(chrEntityId7, 10007, 220, 201200099, 0, 0, 0);
 });
 
 $Event(90035240, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
@@ -11232,6 +11237,11 @@ $Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButto
 });
 
 $Event(90085036, Default, function(eventFlagId, userDispLogParamId) {
+    // Missions
+    // New flags are, for once, in the same block
+    // 7018 Mission player_pl4
+    // 7019 Mission player_pl5
+    // 7020 Mission player_pl6
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
     WaitFixedTimeSeconds(3);
@@ -11244,9 +11254,19 @@ $Event(90085036, Default, function(eventFlagId, userDispLogParamId) {
     if (EventFlag(7017)) {
         RecordUserDispLog(userDispLogParamId, 10004, LogObjectType.None, -1);
     }
+    if (EventFlag(7018)) {
+        RecordUserDispLog(userDispLogParamId, 10005, LogObjectType.None, -1);
+    }
+    if (EventFlag(7019)) {
+        RecordUserDispLog(userDispLogParamId, 10006, LogObjectType.None, -1);
+    }
+    if (EventFlag(7020)) {
+        RecordUserDispLog(userDispLogParamId, 10007, LogObjectType.None, -1);
+    }
 });
 
 $Event(90085037, Default, function(missionId, eventFlagId, eventFlagId2, assetEntityId, eventFlagId3) {
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -11257,6 +11277,16 @@ $Event(90085037, Default, function(missionId, eventFlagId, eventFlagId2, assetEn
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // Flags for extra players. so it is possible for them to receive events
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
     EnableAsset(assetEntityId);

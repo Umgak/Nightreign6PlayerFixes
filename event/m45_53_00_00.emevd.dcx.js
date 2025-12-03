@@ -20,7 +20,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035235, 45534200, 45530200);
     $InitializeCommonEvent(0, 90035236, 45530800, 45535810, 45530800, 45530200);
     $InitializeCommonEvent(0, 90035237, 45534200, 45534201, 45530200);
-    $InitializeCommonEvent(0, 90035238, 45530200, 45530800, 45530810, 45530811, 45530812);
+    $InitializeCommonEvent(0, 90035238, 45530200, 45530800, 45530810, 45530811, 45530812, 45530813, 45530814, 45530815); // NR6PF: Missed one
 });
 
 $Event(45530900, Default, function() {
