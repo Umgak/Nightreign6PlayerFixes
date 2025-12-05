@@ -787,7 +787,11 @@ $Event(1111, Default, function() {
     WaitFor(EventFlag(7500));
     if ((CharacterHasSpEffect(10002, 702000)
         || CharacterHasSpEffect(10003, 702000)
-        || CharacterHasSpEffect(10004, 702000))
+        || CharacterHasSpEffect(10004, 702000)
+        // NR6PF: check all players for this item discovery buff
+        || CharacterHasSpEffect(10005, 702000)
+        || CharacterHasSpEffect(10006, 702000)
+        || CharacterHasSpEffect(10007, 702000))
         && !IsHero(Hero.Ironeye)) {
         SetSpEffect(10000, 702001);
     }
