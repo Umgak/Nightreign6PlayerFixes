@@ -308,6 +308,8 @@ S23:
     $InitializeEvent(0, 1302);
     // NR6PF: Wending Grace/Noklateo blessing
     // Only 2 valid flags in this block that aren't used, then it gets into P1 mission flag. Gotta stash 'em somewhere
+
+    //NR6PF: TEMP: Stashing these flags in 11_00
     if (IsPlayerNo(1)) {
         $InitializeEvent(0, 1310, 7010);
     }
@@ -316,6 +318,16 @@ S23:
     }
     if (IsPlayerNo(3)) {
         $InitializeEvent(0, 1310, 7012);
+    }
+    // NR6PF: Setup wending graces
+    if (IsPlayerNo(4)) {
+        $InitializeEvent(0, 1310, 11007010);
+    }
+    if (IsPlayerNo(5)) {
+        $InitializeEvent(0, 1310, 11007011);
+    }
+    if (IsPlayerNo(6)) {
+        $InitializeEvent(0, 1310, 11007012);
     }
     $InitializeEvent(0, 1108, 9019);
     $InitializeEvent(0, 1305);
@@ -537,6 +549,16 @@ $Event(50, Default, function() {
     $InitializeEvent(0, 1180);
     $InitializeEvent(0, 1181);
     if (!HasMultiplayerState(MultiplayerState.Singleplayer)) {
+        // These are where the game sets up "I am alive" and "owns revival ticket" flags.
+        // NR6PF: My flags are +11000000 again
+        // 11007005 I am alive flag_PL4
+        // 11007006 I am alive flag_PL5
+        // 11007007 I am alive flag_PL6
+
+        // 11007010 Owns 1 revival ticket_PL4
+        // 11007011 Owns 1 revival ticket_PL5
+        // 11007012 Owns 1 revival ticket_PL6
+
         if (IsPlayerNo(1)) {
             $InitializeEvent(0, 1182, 7005);
             $InitializeEvent(0, 1183, 7010, 7005);
@@ -549,9 +571,26 @@ $Event(50, Default, function() {
             $InitializeEvent(0, 1182, 7007);
             $InitializeEvent(0, 1183, 7012, 7007);
         }
+        // NR6PF: Setup wending grace/death flags
+        if (IsPlayerNo(4)) {
+            $InitializeEvent(0, 1182, 11007005);
+            $InitializeEvent(0, 1183, 11007010, 11007005);
+        }
+        if (IsPlayerNo(5)) {
+            $InitializeEvent(0, 1182, 11007006);
+            $InitializeEvent(0, 1183, 11007011, 11007006);
+        }
+        if (IsPlayerNo(6)) {
+            $InitializeEvent(0, 1182, 11007007);
+            $InitializeEvent(0, 1183, 11007012, 11007007);
+        }
         $InitializeEvent(0, 1184, 10002, 7005, 7010);
         $InitializeEvent(1, 1184, 10003, 7006, 7011);
         $InitializeEvent(2, 1184, 10004, 7007, 7012);
+        //NR6PF: Again!
+        $InitializeEvent(3, 1184, 10005, 11007005, 11007010);
+        $InitializeEvent(4, 1184, 10006, 11007006, 11007011);
+        $InitializeEvent(5, 1184, 10007, 11007007, 11007012);
     }
     $InitializeEvent(0, 1900);
     $InitializeEvent(0, 1901);
@@ -1179,26 +1218,28 @@ $Event(1170, Default, function() {
 });
 
 $Event(1180, Restart, function() {
+    // Trigger wending grace/Noklateo, game end state
     EndIf(HasMultiplayerState(MultiplayerState.Singleplayer));
-    WaitFor(EventFlag(7500));
-    cond &= !AnyBatchEventFlags(7005, 7007);
-    cond &= EventFlag(7515) || EventFlag(7510);
+    WaitFor(EventFlag(7500)); // Day 1 started flag - do not kill the players before they arrive
+    cond &= !(AnyBatchEventFlags(7005, 7007) || AnyBatchEventFlags(11007005, 11007007)); // NR6PF: Added check to extra "I am alive" flags - if this evaluates to true then the party has planked. Check for revives or end game.
+    cond &= EventFlag(7515) || EventFlag(7510); // Night boss OR day 3 started
     WaitFor(cond);
-    if (AnyBatchEventFlags(7010, 7012)) {
+    if (AnyBatchEventFlags(7010, 7012) || AnyBatchEventFlags(11007010, 11007012)) { // NR6PF: Added check to extra "Owns revival ticket" flags
         if (IsPlayerNo(1)) {
-            if (CharacterHasSpEffect(10002, 540155)) {
-                cond &= CharacterHasSpEffect(10002, 540157) && InsidePlayArea(10002, 0);
+            if (CharacterHasSpEffect(10002, 540155)) { // Wending grace held spEffect
+                cond &= CharacterHasSpEffect(10002, 540157) && InsidePlayArea(10002, 0);    // Dead
                 WaitFor(cond);
-                SetSpEffect(10002, 540150);
-                RemoveItemFromPlayer(ItemType.Goods, 700, 1);
-            } else if (CharacterHasSpEffect(10002, 6999100)) {
-                cond &= CharacterHasSpEffect(10002, 540157) && InsidePlayArea(10002, 0);
+                SetSpEffect(10002, 540150); // Revive
+                RemoveItemFromPlayer(ItemType.Goods, 700, 1);   // Remove wending grace
+            } else if (CharacterHasSpEffect(10002, 6999100)) {  // Noklateo buff
+                cond &= CharacterHasSpEffect(10002, 540157) && InsidePlayArea(10002, 0);    // Dead
                 WaitFor(cond);
-                SetSpEffect(10002, 6999101);
-                SetSpEffect(10002, 6999104);
-                SetSpEffect(10002, 6999105);
-                SetSpEffect(10002, 6999106);
-                SetSpEffect(10002, 6999107);
+                // These are noklateo's revive buffs
+                SetSpEffect(10002, 6999101);    // Delete Favor of Noklateo
+                SetSpEffect(10002, 6999104);    // 40s 30% HP/FP/Stamina bonus
+                SetSpEffect(10002, 6999105);    // vfx
+                SetSpEffect(10002, 6999106);    // 10s 5%+1 HP/0.5s, vfx
+                SetSpEffect(10002, 6999107);    // 10s 3 ultimate art gauge/sec
             }
         }
 L1:
@@ -1235,37 +1276,103 @@ L2:
                 SetSpEffect(10004, 6999107);
             }
         }
+        // NR6PF: No point duplicating the labels here, they aren't used anywhere in the code atm
+        // NR6PF: Add Wending Grace and Favor of Noklateo functionality to extra players!
+        if (IsPlayerNo(4)) {
+            if (CharacterHasSpEffect(10005, 540155)) { // Wending grace held spEffect
+                cond &= CharacterHasSpEffect(10005, 540157) && InsidePlayArea(10005, 0);    // Dead
+                WaitFor(cond);
+                SetSpEffect(10005, 540150); // Revive
+                RemoveItemFromPlayer(ItemType.Goods, 700, 1);   // Remove wending grace
+            } else if (CharacterHasSpEffect(10005, 6999100)) {  // Noklateo buff
+                cond &= CharacterHasSpEffect(10005, 540157) && InsidePlayArea(10005, 0);    // Dead
+                WaitFor(cond);
+                // These are noklateo's revive buffs
+                SetSpEffect(10005, 6999101);    // Delete Favor of Noklateo
+                SetSpEffect(10005, 6999104);    // 40s 30% HP/FP/Stamina bonus
+                SetSpEffect(10005, 6999105);    // vfx
+                SetSpEffect(10005, 6999106);    // 10s 5%+1 HP/0.5s, vfx
+                SetSpEffect(10005, 6999107);    // 10s 3 ultimate art gauge/sec
+            }
+        }
+        if (IsPlayerNo(5)) {
+            if (CharacterHasSpEffect(10006, 540155)) { // Wending grace held spEffect
+                cond &= CharacterHasSpEffect(10006, 540157) && InsidePlayArea(10006, 0);    // Dead
+                WaitFor(cond);
+                SetSpEffect(10006, 540150); // Revive
+                RemoveItemFromPlayer(ItemType.Goods, 700, 1);   // Remove wending grace
+            } else if (CharacterHasSpEffect(10006, 6999100)) {  // Noklateo buff
+                cond &= CharacterHasSpEffect(10006, 540157) && InsidePlayArea(10006, 0);    // Dead
+                WaitFor(cond);
+                // These are noklateo's revive buffs
+                SetSpEffect(10006, 6999101);    // Delete Favor of Noklateo
+                SetSpEffect(10006, 6999104);    // 40s 30% HP/FP/Stamina bonus
+                SetSpEffect(10006, 6999105);    // vfx
+                SetSpEffect(10006, 6999106);    // 10s 5%+1 HP/0.5s, vfx
+                SetSpEffect(10006, 6999107);    // 10s 3 ultimate art gauge/sec
+            }
+        }
+        if (IsPlayerNo(6)) {
+            if (CharacterHasSpEffect(10007, 540155)) { // Wending grace held spEffect
+                cond &= CharacterHasSpEffect(10007, 540157) && InsidePlayArea(10007, 0);    // Dead
+                WaitFor(cond);
+                SetSpEffect(10007, 540150); // Revive
+                RemoveItemFromPlayer(ItemType.Goods, 700, 1);   // Remove wending grace
+            } else if (CharacterHasSpEffect(10007, 6999100)) {  // Noklateo buff
+                cond &= CharacterHasSpEffect(10007, 540157) && InsidePlayArea(10007, 0);    // Dead
+                WaitFor(cond);
+                // These are noklateo's revive buffs
+                SetSpEffect(10007, 6999101);    // Delete Favor of Noklateo
+                SetSpEffect(10007, 6999104);    // 40s 30% HP/FP/Stamina bonus
+                SetSpEffect(10007, 6999105);    // vfx
+                SetSpEffect(10007, 6999106);    // 10s 5%+1 HP/0.5s, vfx
+                SetSpEffect(10007, 6999107);    // 10s 3 ultimate art gauge/sec
+            }
+        }
 L3:
         SaveRequest();
-        WaitFor(AnyBatchEventFlags(7005, 7007) || ElapsedSeconds(20));
+        WaitFor((AnyBatchEventFlags(7005, 7007) || AnyBatchEventFlags(11007005, 11007007)) || ElapsedSeconds(20)); // NR6PF: Check extra I am alive flags
         WaitFixedTimeSeconds(1);
         RestartEvent();
     }
 L0:
-    EndIf(EventFlag(7513));
+    EndIf(EventFlag(7513)); // Nightlord dead flag
     EnableCharacterInvincibility(10002);
     EnableCharacterInvincibility(10003);
     EnableCharacterInvincibility(10004);
+    // NR6PF: Don't allow extra players to be hit after the party has lost
+    EnableCharacterInvincibility(10005);
+    EnableCharacterInvincibility(10006);
+    EnableCharacterInvincibility(10007);
     SetEventFlagID(9017, ON);
     WaitFor(ElapsedSeconds(2));
-    if (AnyBatchEventFlags(7005, 7007)) {
+    if ((AnyBatchEventFlags(7005, 7007)|| AnyBatchEventFlags(11007005, 11007007))) { // NR6PF: Check extra I am alive flags
         DisableCharacterInvincibility(10002);
         DisableCharacterInvincibility(10003);
         DisableCharacterInvincibility(10004);
+        // NR6PF: Disable invincibility if someone got back up
+        DisableCharacterInvincibility(10005);
+        DisableCharacterInvincibility(10006);
+        DisableCharacterInvincibility(10007);
         SetEventFlagID(9017, OFF);
         RestartEvent();
     }
+    // Game over, you lost
     SetSpEffect(10002, 102140);
     SetSpEffect(10003, 102140);
     SetSpEffect(10004, 102140);
+    // NR6PF: Give other players the death event speffect
+    SetSpEffect(10005, 102140);
+    SetSpEffect(10006, 102140);
+    SetSpEffect(10007, 102140);
     WaitFor(ElapsedSeconds(2));
-    EndIf(EventFlag(7513));
+    EndIf(EventFlag(7513)); // If the boss just died, stop!
     UnknownTextEffect200721(3000);
     SetEventFlagID(7519, ON);
     DisplayTextEffectId(4010);
-    SetEventFlagID(7516, ON);
+    SetEventFlagID(7516, ON); // Game over confirmed
     WaitFixedTimeSeconds(5);
-    SetEventFlagID(7001, ON);
+    SetEventFlagID(7001, ON); // Game over
     EndEvent();
 });
 
@@ -1672,7 +1779,7 @@ $Event(1310, Restart, function(eventFlagId) {
             && CharacterHasTeamType(20000, TeamType.Unknown77)
             && CharacterHasSpEffect(20000, 540157)
             && !InsidePlayArea(20000, 0));
-    cond = !AnyBatchEventFlags(7005, 7007) && EventFlag(eventFlagId);
+    cond = !(AnyBatchEventFlags(7005, 7007) || AnyBatchEventFlags(11007005, 11007007)) && EventFlag(eventFlagId); // NR6PF: Check the extra flags!! 11007005 will be I am alive flag_PL2 etc
     flagChr = !EventFlag(9015) || !CharacterHasTeamType(20000, TeamType.Unknown77) || InsidePlayArea(20000, 0);
     WaitFor(ElapsedSeconds(15) || cond || flagChr);
     EndIf(EventFlag(7516));
