@@ -124,12 +124,18 @@ $Event(30302500, Restart, function() {
 });
 
 $Event(30302501, Restart, function() {
+    // Guardian Golem fort
     EndIf(EventFlag(30300810));
     if (!EventFlag(30303250)) {
         WaitFor(
             (InArea(10002, 30302200)
                 || InArea(10003, 30302200)
                 || InArea(10004, 30302200)
+                // NR6PF: area ID for the section the golem is watching over
+                // NR6PF: appears to be used for targeting, given SetCharacterEventTarget
+                || InArea(10005, 30302200)
+                || InArea(10006, 30302200)
+                || InArea(10007, 30302200)
                 || EventFlag(30300810))
                 && PlayAreaCurrentTimeInRange(0, 0, 0, 23, 58, 59)
                 && !EventFlag(7515));
@@ -141,6 +147,13 @@ $Event(30302501, Restart, function() {
             SetCharacterEventTarget(30300300, 10003);
         } else if (InArea(10004, 30302200)) {
             SetCharacterEventTarget(30300300, 10004);
+        // NR6PF: Let extra players get shot, lol
+        } else if (InArea(10005, 30302200)) {
+            SetCharacterEventTarget(30300300, 10005);
+        } else if (InArea(10006, 30302200)) {
+            SetCharacterEventTarget(30300300, 10006);
+        } else if (InArea(10007, 30302200)) {
+            SetCharacterEventTarget(30300300, 10007);
             Goto(L0);
         }
 L0:
