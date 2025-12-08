@@ -6065,6 +6065,7 @@ $Event(90065070, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
 });
 
 $Event(90065071, Restart, function(eventFlagId, chrEntityId) {
+    // Gaping Dragon: repeatedly clears max HP effect when the boss dies
     DisableNetworkSync();
     WaitFor(EventFlag(eventFlagId));
     EndIf(!CharacterHasSpEffect(chrEntityId, 46551));

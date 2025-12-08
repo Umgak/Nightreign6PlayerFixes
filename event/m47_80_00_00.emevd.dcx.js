@@ -30,6 +30,10 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90065071, 47800800, 10002);
     $InitializeCommonEvent(0, 90065071, 47800800, 10003);
     $InitializeCommonEvent(0, 90065071, 47800800, 10004);
+    // NR6PF: Fix gaping dragon max hp drain effect for all players
+    $InitializeCommonEvent(0, 90065071, 47800800, 10005);
+    $InitializeCommonEvent(0, 90065071, 47800800, 10006);
+    $InitializeCommonEvent(0, 90065071, 47800800, 10007);
     $InitializeCommonEvent(0, 90035001, 47800800);
 });
 
