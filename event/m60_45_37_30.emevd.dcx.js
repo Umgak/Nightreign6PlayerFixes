@@ -124,12 +124,17 @@ L0:
 });
 
 $Event(1057302810, Restart, function() {
+    // Let extra players trigger linked boss in rotted woods
     if (!EventFlag(1057302830)) {
         WaitFor(
             EventFlag(1057302801)
                 && (InArea(10002, 1045372800)
                     || InArea(10003, 1045372800)
                     || InArea(10004, 1045372800)
+                    // NR6PF: Extra checks
+                    || InArea(10005, 1045372800)
+                    || InArea(10006, 1045372800)
+                    || InArea(10007, 1045372800)
                     || InArea(20000, 1045372800)));
         EnableGenerator(1045371810);
         EnableCharacterAI(1045375800);

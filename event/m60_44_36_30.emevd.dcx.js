@@ -121,13 +121,18 @@ L0:
 });
 
 $Event(1046302810, Restart, function() {
+    // Let extra players trigger linked boss in rotted woods
     if (!EventFlag(1046302830)) {
         WaitFor(
             EventFlag(1046302801)
                 && (InArea(10002, 1046302891)
                     || InArea(10003, 1046302891)
                     || InArea(10004, 1046302891)
-                    || InArea(20000, 1057302800)));
+                    // NR6PF: Extra checks
+                    || InArea(10005, 1046302891)
+                    || InArea(10006, 1046302891)
+                    || InArea(10007, 1046302891)
+                    || InArea(20000, 1057302800))); // vanilla typo? m60_45_37_30 has this id, but not m60_44_36_30
         EnableCharacter(1044365810);
         EnableGenerator(1044361850);
         CreateReferredDamagePair(1044365810, 1044360890);
