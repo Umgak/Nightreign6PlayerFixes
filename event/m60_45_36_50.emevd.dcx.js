@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -51,5 +51,4 @@ $Event(1045362900, Restart, function() {
     WaitFor(SmallBaseAttached(1045362999, 30300000));
     EnableAsset(1045361900);
 });
-
 

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -36,5 +36,4 @@ $Event(49422910, Default, function(chrEntityId) {
     WaitFor(!CharacterHasSpEffect(20000, 99210));
     EnableCharacterAI(chrEntityId);
 });
-
 

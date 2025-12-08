@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -18,6 +18,9 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 11002601);
     $InitializeEvent(0, 11002602);
     $InitializeEvent(0, 11002603);
+    $InitializeEvent(0, 11002605);
+    $InitializeEvent(0, 11002606);
+    $InitializeEvent(0, 11002607);
 });
 
 $Event(11002500, Default, function() {
@@ -168,6 +171,49 @@ $Event(11002604, Restart, function() {
     SetEventFlagID(11002599, ON);
 });
 
+$Event(11002605, Default, function() {
+    DisableNetworkSync();
+    WaitFor(EventFlag(11002550));
+    WaitFor(EventFlag(11002597));
+    UnknownTalk2003120(1);
+    PlayCutsceneToPlayer(11000010, CutscenePlayMode.Skippable, 10000);
+    WaitFixedTimeFrames(1);
+    FadeToBlack(1, 0, false, -1);
+    SetEventFlagID(964, ON);
+    SetEventFlagID(24, ON);
+});
+
+$Event(11002606, Restart, function() {
+    DisableNetworkSync();
+    flagChr = EventFlag(11002550) && IsHero(Hero.Undertaker);
+    EndIf(PlayerHasItem(ItemType.Goods, 8500));
+    WaitFor(flagChr);
+    if (!ItemSlotAvailable()) {
+        AwardItemLotOld(113000);
+        WaitFixedTimeFrames(1);
+    }
+    AwardItemLotOld(113010);
+    DisplayPermanentBuffPopup(160);
+    SetEventFlagID(11001210, ON);
+});
+
+$Event(11002607, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(PlayerHasItem(ItemType.Goods, 8500));
+    SetEventFlagID(11002210, OFF);
+    WaitFixedTimeFrames(1);
+    WaitFor(!PlayerHasItem(ItemType.Goods, 8500) && EventFlag(1029651));
+    SetNetworkUpdateRate(11000610, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterCollision(11000610);
+    DisableCharacterGravity(11000610);
+    WaitFixedTimeFrames(1);
+    IssueShortWarpRequest(11000610, TargetEntityType.Character, 20000, 220);
+    WaitFixedTimeFrames(1);
+    SetEventFlagID(11002210, ON);
+    WaitFor(PlayerHasItem(ItemType.Goods, 8500));
+    RestartEvent();
+});
+
 $Event(11002620, Default, function() {
     WaitFor(EventFlag(951));
     PlayCutsceneToPlayer(11000100, CutscenePlayMode.SkippableWithFadeOutSkip, 10000);
@@ -203,5 +249,4 @@ $Event(11002810, Restart, function() {
     ActivateGparamOverride(3, 0);
     RestartEvent();
 });
-
 

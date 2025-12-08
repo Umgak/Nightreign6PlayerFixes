@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -613,6 +613,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(4, 90075920, 4, 154, 9074);
     $InitializeCommonEvent(5, 90075920, 5, 155, 9075);
     $InitializeCommonEvent(6, 90075920, 6, 156, 9076);
+    $InitializeCommonEvent(0, 90075931);
     $InitializeCommonEvent(0, 90015200, 9307, 0);
     $InitializeCommonEvent(0, 90015200, 9308, 1);
     $InitializeCommonEvent(0, 90015200, 9309, 2);
@@ -641,14 +642,14 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015201, 9315, 14, 154);
     $InitializeCommonEvent(0, 90015201, 9315, 15, 155);
     $InitializeCommonEvent(0, 90015201, 9315, 16, 156);
-    $InitializeCommonEvent(0, 90085027, 203, 4, 9200);
-    $InitializeCommonEvent(0, 90085027, 303, 5, 9211);
-    $InitializeCommonEvent(0, 90085027, 601, 0, 9214);
-    $InitializeCommonEvent(0, 90085027, 601, 5, 9214);
-    $InitializeCommonEvent(0, 90085027, 203, 14, 9200);
-    $InitializeCommonEvent(0, 90085027, 303, 15, 9211);
-    $InitializeCommonEvent(0, 90085027, 601, 10, 9214);
-    $InitializeCommonEvent(0, 90085027, 601, 15, 9214);
+    $InitializeCommonEvent(0, 90085027, 203, 4, 9200, Hero.Guardian);
+    $InitializeCommonEvent(0, 90085027, 303, 5, 9211, Hero.Ironeye);
+    $InitializeCommonEvent(0, 90085027, 601, 0, 9214, Hero.Revenant);
+    $InitializeCommonEvent(0, 90085027, 601, 5, 9214, Hero.Revenant);
+    $InitializeCommonEvent(0, 90085027, 203, 14, 9200, Hero.Guardian);
+    $InitializeCommonEvent(0, 90085027, 303, 15, 9211, Hero.Ironeye);
+    $InitializeCommonEvent(0, 90085027, 601, 10, 9214, Hero.Revenant);
+    $InitializeCommonEvent(0, 90085027, 601, 15, 9214, Hero.Revenant);
 });
 
 $Event(50, Default, function() {
@@ -1376,5 +1377,4 @@ $Event(19004500, Restart, function(eventFlagId, chrEntityId) {
     DisplayNetworkconnectedPermanentBuffPopup(131);
     SetSpEffect(20000, 9731);
 });
-
 

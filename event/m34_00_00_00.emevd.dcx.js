@@ -4,13 +4,13 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015310, 34000050, 34000051, 2, 34000200, 34000202, 34000203, 34002405, 34002406, 34002407, 34002410, 34002411, 34002412, 34002415, 34002416, 34002417, 34002420, 34002421, 34002422, 34002400);
     $InitializeCommonEvent(0, 90015301, 34005300, 34000200, 34000201, 34000202, 34000203, 2);
-    $InitializeCommonEvent(0, 90015302, 34006500);
+    $InitializeCommonEvent(0, 90015306, 34006500);
     $InitializeCommonEvent(0, 90015303, 34002401);
     $InitializeCommonEvent(0, 90015305, 34002430, 34002431, 34002432, 34002433);
     $InitializeCommonEvent(0, 90015304, 34000050, 34000200, 34000202);
@@ -63,6 +63,18 @@ S5:
     if (IsMapVariation(1)) {
         $InitializeCommonEvent(0, 90015050, 34000810, 8170);
     }
+    if (IsMapVariation(1)) {
+        $InitializeCommonEvent(0, 90045040, 1, 34000400);
+        $InitializeCommonEvent(0, 90045041, 1, 34000400, 34005200, 34005201);
+    }
+    if (IsMapVariation(1)) {
+        $InitializeCommonEvent(0, 90045040, 1, 34000401);
+        $InitializeCommonEvent(0, 90045041, 1, 34000401, 34005210, 34005211);
+    }
+    if (IsMapVariation(1)) {
+        $InitializeCommonEvent(0, 90045040, 1, 34000402);
+        $InitializeCommonEvent(0, 90045041, 1, 34000402, 34005220, 34005221);
+    }
     if (940000 == 0) {
         $InitializeCommonEvent(0, 90015007, 0, 34005820, 34002820, 30, 907100530, 0, 0);
         $InitializeCommonEvent(0, 90015031, 0, 34005820, 34002820, 30, 940000, 0);
@@ -109,6 +121,20 @@ S11:
     if (IsMapVariation(3)) {
         $InitializeCommonEvent(0, 90015050, 34000830, 8170);
     }
+    $InitializeCommonEvent(0, 90035280, 34002491, 34000700, 34000701, 34000702, 8060, 0, 34000800, 34000810, 34000820, 34000830, 0);
+    $InitializeCommonEvent(0, 90035280, 34002491, 34000700, 34000701, 34000702, 80010, 0, 34000800, 34000810, 34000820, 34000830, 0);
+    if (!IsPlayerCount(1)) {
+        $InitializeCommonEvent(0, 90035280, 34002491, 34000700, 34000701, 34000702, 80011, 1, 34000800, 34000810, 34000820, 34000830, 0);
+    }
+    $InitializeCommonEvent(0, 90035281, 34002491, 34000700, 34000701, 34000702, 80011, 34000800, 34000810, 34000820, 34000830, 0);
+    $InitializeCommonEvent(0, 90035282, 34000490, 34002490, 34000700, 34000701, 34000702, 34000703);
+    $InitializeCommonEvent(0, 90035283, 34000490, 34002491, 34001690, 34000700, 34000701, 34000702, 34000704, 34000705, 34000706);
+    $InitializeCommonEvent(0, 90035284, 34005490, 34005491, 34000700, 34000702, 34000705, 34000706);
+    $InitializeCommonEvent(0, 90035285, 34000490, 34000700, 34000701, 34000702, 34000705, 34000706);
+    $InitializeCommonEvent(0, 90035286, 34000490, 34002491, 34000700, 34000701, 34000702, 34000705, 34000706);
+    $InitializeCommonEvent(0, 90035288, 34002491, 34000700, 34000702, 34000705, 34000706);
+    $InitializeCommonEvent(0, 90015000, 34000704, 34000490, 907640001, 50, 0, 34000706);
+    $InitializeCommonEvent(0, 90015025, 8081, 34000704, 34000705, 34000490, 1020, 0, -1, -1, 34000490, 0);
     $InitializeCommonEvent(0, 90005526, 34000500, 34001200);
     $InitializeEvent(0, 34002600);
     $InitializeCommonEvent(0, 90085700, 701, 8475, 0, 34000800);
@@ -168,5 +194,4 @@ $Event(34002803, Restart, function(chrEntityId) {
     WaitFixedTimeSeconds(4);
     PlaySE(chrEntityId, SoundType.SFX, 888880000);
 });
-
 

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    ""
 // @linked    []
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(90015000, Default, function(eventFlagId, chrEntityId, nameId, targetDistance, bgmBossConvParamId, eventFlagId2) {
@@ -577,6 +577,232 @@ $Event(90015022, Default, function(chrEntityId, eventFlagId) {
     RestartEvent();
 });
 
+$Event(90015023, Default, function(eventFlagId, targetDistance, eventFlagId2, chrEntityId, chrEntityId2, nameId, chrEntityId3, nameId2, chrEntityId4, nameId3) {
+    DisableNetworkSync();
+    if (eventFlagId != 0) {
+        WaitFor(EventFlag(eventFlagId));
+    }
+    chrArea = CharacterAIState(chrEntityId, AIStateType.Combat, GreaterOrEqual, 1)
+        && EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
+    chr = CharacterRatioDead(chrEntityId);
+    chrAreaFlag |= chrArea || chr;
+    if (eventFlagId2 != 0) {
+        chrAreaFlag |= EventFlag(eventFlagId2);
+    }
+    WaitFor(chrAreaFlag);
+    if (eventFlagId2 != 0) {
+        EndIf(EventFlag(eventFlagId2));
+    }
+    SetWorldMapPointFlag(0, ON);
+    SetWorldMapPointFlag(8, OFF);
+    EndIf(chr.Passed);
+    DisplayBossHealthBar(Disabled, 0, 0, 0);
+    DisplayBossHealthBar(Disabled, 0, 1, 0);
+    DisplayBossHealthBar(Disabled, 0, 2, 0);
+    SetEventFlagID(5000, ON);
+    SetEventFlagID(5001, ON);
+    if (chrEntityId3 == 0) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+    } else if (chrEntityId4 == 0) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
+        DisplayBossHealthBar(Enabled, chrEntityId3, 0, nameId2);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+    } else {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 2, nameId);
+        DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+        DisplayBossHealthBar(Enabled, chrEntityId4, 0, nameId3);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+        LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
+        Goto(L0);
+    }
+L0:
+    chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
+    area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
+    chr2 = CharacterRatioDead(chrEntityId);
+    chr3 = CharacterDead(20000);
+    chrAreaFlag2 |= chrArea2 || !area || InArea(20000, 1043372980) || chr2 || chr3;
+    if (eventFlagId2 != 0) {
+        chrAreaFlag2 |= EventFlag(eventFlagId2);
+    }
+    WaitFor(chrAreaFlag2);
+    GotoIf(S0, eventFlagId2 == 0);
+    GotoIf(L1, EventFlag(eventFlagId2));
+S0:
+    if (chr2.Passed) {
+        WaitFixedTimeSeconds(5);
+    } else {
+        WaitFixedTimeSeconds(1);
+    }
+    GotoIf(S1, !chr3.Passed);
+    WaitFixedTimeSeconds(2.5);
+S1:
+L1:
+    SetEventFlagID(5000, OFF);
+    SetEventFlagID(5001, OFF);
+    if (chrEntityId3 == 0) {
+        DisplayBossHealthBar(Disabled, chrEntityId2, 0, nameId);
+    } else if (chrEntityId4 == 0) {
+        DisplayBossHealthBar(Disabled, chrEntityId2, 1, nameId);
+        DisplayBossHealthBar(Disabled, chrEntityId3, 0, nameId2);
+    } else {
+        DisplayBossHealthBar(Disabled, chrEntityId2, 2, nameId);
+        DisplayBossHealthBar(Disabled, chrEntityId3, 1, nameId2);
+        DisplayBossHealthBar(Disabled, chrEntityId4, 0, nameId3);
+        Goto(L2);
+    }
+L2:
+    if (eventFlagId2 != 0) {
+        EndIf(EventFlag(eventFlagId2));
+    }
+    EndIf(chr2.Passed);
+    WaitFor(!CharacterDead(20000));
+    RestartEvent();
+});
+
+$Event(90015024, Default, function(spEffectId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, permanentBuffParamId, timeSeconds) {
+    DisableNetworkSync();
+    if (eventFlagId != 0) {
+        flag |= EventFlag(eventFlagId);
+    }
+    if (eventFlagId2 != 0) {
+        flag |= EventFlag(eventFlagId2);
+    }
+    EndIf(!flag);
+    EndIf(EventFlag(eventFlagId5));
+    if (eventFlagId3 != 0) {
+        flag2 &= EventFlag(eventFlagId3);
+    }
+    if (eventFlagId4 != 0) {
+        flag2 &= EventFlag(eventFlagId4);
+    }
+    WaitFor(flag2);
+    if (CharacterDead(20000)) {
+        WaitFor(CharacterDead(20000, Equal, 0));
+        WaitFor(ElapsedSeconds(3));
+    }
+    if (eventFlagId3 != 0) {
+        flag3 &= EventFlag(eventFlagId3);
+    }
+    if (eventFlagId4 != 0) {
+        flag3 &= EventFlag(eventFlagId4);
+    }
+    RestartIf(!flag3);
+    EndIf(EventFlag(eventFlagId5));
+    SetEventFlagID(eventFlagId5, ON);
+    SetSpEffect(20000, spEffectId);
+    WaitFixedTimeSeconds(timeSeconds);
+    DisplayNetworkconnectedPermanentBuffPopup(permanentBuffParamId);
+    WaitFor(!EventFlag(eventFlagId5));
+    RestartEvent();
+});
+
+$Event(90015025, Default, function(eventFlagId, eventFlagId2, eventFlagId3, chrEntityId, textEffectParamId, bgmBossConvParamId, userDispLogParamId, logObjectId, entityId, flagIndex) {
+    DisableNetworkSync();
+    if (eventFlagId != 0) {
+        EndIf(!EventFlag(eventFlagId));
+    }
+    EndIf(EventFlag(eventFlagId3));
+    if (eventFlagId2 != 0) {
+        WaitFor(EventFlag(eventFlagId2));
+    }
+    chrArea = CharacterAIState(chrEntityId, AIStateType.Combat, GreaterOrEqual, 1)
+        && EntityInRadiusOfEntity(20000, chrEntityId, 30, 1);
+    hp = CharacterRatioHPValue(chrEntityId) <= 0;
+    WaitFor(chrArea || hp);
+    if (hp.Passed) {
+        WaitFixedTimeSeconds(5);
+    } else {
+        chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+            && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
+            && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
+            && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
+            && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
+            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+            && !EntityInRadiusOfEntity(20000, chrEntityId, 30, 1);
+        area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
+        hp2 = CharacterRatioHPValue(chrEntityId) <= 0;
+        WaitFor(chrArea2 || !area || hp2 || CharacterDead(20000));
+        RestartIf(!hp2.Passed);
+        WaitFixedTimeSeconds(5);
+        PlaySE(chrEntityId, SoundType.SFX, 888880000);
+        DisplayTextEffectId(textEffectParamId);
+    }
+L0:
+    RecordUserDispLog(userDispLogParamId, entityId, LogObjectType.NpcName, logObjectId);
+    IncrementTeamBossesKilled(1);
+    if (BossBGMPlaying(bgmBossConvParamId)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Stop2);
+    }
+    SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+    SetWorldMapPointFlag(flagIndex, ON);
+    SetWorldMapPointFlag(8, OFF);
+    EndEvent();
+});
+
+$Event(90015026, Default, function(eventFlagId, targetDistance, eventFlagId2, chrEntityId, chrEntityId2, nameId) {
+    DisableNetworkSync();
+    if (eventFlagId != 0) {
+        WaitFor(EventFlag(eventFlagId));
+    }
+    chrArea = CharacterAIState(chrEntityId, AIStateType.Combat, GreaterOrEqual, 1)
+        && EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
+    chr = CharacterRatioDead(chrEntityId);
+    chrAreaFlag |= chrArea || chr;
+    if (eventFlagId2 != 0) {
+        chrAreaFlag |= EventFlag(eventFlagId2);
+    }
+    WaitFor(chrAreaFlag);
+    if (eventFlagId2 != 0) {
+        EndIf(EventFlag(eventFlagId2));
+    }
+    EndIf(chr.Passed);
+    DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
+    LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+    chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
+    area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
+    chr2 = CharacterRatioDead(chrEntityId);
+    chr3 = CharacterDead(20000);
+    chrAreaFlag2 |= chrArea2 || !area || InArea(20000, 1043372980) || chr2 || chr3;
+    if (eventFlagId2 != 0) {
+        chrAreaFlag2 |= EventFlag(eventFlagId2);
+    }
+    WaitFor(chrAreaFlag2);
+    GotoIf(S0, eventFlagId2 == 0);
+    GotoIf(L1, EventFlag(eventFlagId2));
+S0:
+    if (chr2.Passed) {
+        WaitFixedTimeSeconds(5);
+    } else {
+        WaitFixedTimeSeconds(1);
+    }
+    GotoIf(S1, !chr3.Passed);
+    WaitFixedTimeSeconds(2.5);
+S1:
+L1:
+    DisplayBossHealthBar(Disabled, chrEntityId2, 1, nameId);
+    if (eventFlagId2 != 0) {
+        EndIf(EventFlag(eventFlagId2));
+    }
+    EndIf(chr2.Passed);
+    WaitFor(!CharacterDead(20000));
+    RestartEvent();
+});
+
 $Event(90015030, Restart, function(eventFlagId, chrEntityId, targetDistance, bgmBossConvParamId, eventFlagId2) {
     DisableNetworkSync();
     if (eventFlagId != 0) {
@@ -729,6 +955,22 @@ $Event(90015050, Default, function(eventFlagId, eventFlagId2) {
     IncrementNetworkconnectedEventValue(eventFlagId2, 4, 10);
 });
 
+$Event(90015060, Restart, function() {
+L0:
+    NoOp();
+});
+
+$Event(90015070, Default, function(attachPointEntityId, mapId, eventFlagId) {
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(SmallBaseAttached(attachPointEntityId, mapId) && IsMapVariation(2));
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90015071, Restart, function(chrEntityId) {
+    WaitFor(CharacterBackreadStatus(chrEntityId) && InArea(chrEntityId, 1039402650));
+    SetSpEffect(chrEntityId, 7796);
+});
+
 $Event(90015100, Restart, function(eventFlagId, eventFlagId2, spEffectId, eventFlagId3) {
     DisableNetworkSync();
     EndIf(!EventFlag(eventFlagId));
@@ -740,9 +982,14 @@ $Event(90015100, Restart, function(eventFlagId, eventFlagId2, spEffectId, eventF
 $Event(90015140, Restart, function(assetEntityId, objactParamId, eventFlagId, eventFlagId2) {
     DisableNetworkSync();
     DisableObjAct(assetEntityId, objactParamId);
-    WaitFor(EventFlag(eventFlagId));
+    WaitFor(EventFlag(eventFlagId) && AssetBackread(assetEntityId));
     EnableAsset(assetEntityId);
     if (EventFlag(eventFlagId2)) {
+        WaitFixedTimeSeconds(1);
+        DisableAsset(assetEntityId);
+        WaitFixedTimeFrames(3);
+        DisableObjAct(assetEntityId, objactParamId);
+        EnableAsset(assetEntityId);
         ForceAnimationPlayback(assetEntityId, 1, true, false, false);
         EndEvent();
     }
@@ -1340,6 +1587,16 @@ $Event(90015305, Restart, function(areaEntityId, areaEntityId2, areaEntityId3, a
     RestartEvent();
 });
 
+$Event(90015306, Default, function(assetEntityId) {
+    if (!IsHotSpot()) {
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Disabled, 1);
+        DisableAsset(assetEntityId);
+        EndEvent();
+    }
+    ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
+    EnableAsset(assetEntityId);
+});
+
 $Event(90015400, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7) {
     if (EventFlag(eventFlagId7) && !EventFlag(eventFlagId2)) {
         DisableCharacter(chrEntityId);
@@ -1618,6 +1875,467 @@ L0:
     EndEvent();
 });
 
+$Event(90015440, Restart, function(assetEntityId, eventFlagId, eventFlagId2, eventFlagId3) {
+    if (EventFlag(1037400210) && !EventFlag(eventFlagId)) {
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Disabled, 0);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId2)) {
+        ReproduceAssetDestruction(assetEntityId, 1);
+        SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+        EndEvent();
+    }
+    EndIf(EventFlag(1037400205));
+    WaitFor(EventFlag(1037400210));
+    if (!EventFlag(eventFlagId)) {
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Disabled, 0);
+        EndEvent();
+    }
+    CreateAssetfollowingSFX(assetEntityId, 200, 807535);
+    WaitFor(
+        ActionButtonInArea(107800, assetEntityId)
+            || EventFlag(eventFlagId2)
+            || EventFlag(1037400205));
+    DeleteAssetfollowingSFX(assetEntityId, true);
+    EndIf(EventFlag(1037400205));
+    RequestAssetDestruction(assetEntityId, 0);
+    SpawnOneshotSFX(TargetEntityType.Asset, assetEntityId, -1, 807536);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+    IncrementNetworkconnectedEventValue(1037400200, 5, 31);
+    WaitFixedTimeSeconds(4);
+    GotoIf(S0, HasMultiplayerState(MultiplayerState.Multiplayer));
+    GotoIf(S2, EventValue(1037400200, 5) > 2);
+S0:
+    GotoIf(S1, HasMultiplayerState(MultiplayerState.Singleplayer));
+    GotoIf(S2, EventValue(1037400200, 5) > 3);
+S1:
+    RecordUserDispLog(110210, assetEntityId, LogObjectType.None, -1);
+S2:
+    NoOp();
+});
+
+$Event(90015441, Restart, function(areaEntityId, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId));
+    WaitFor(InArea(20000, areaEntityId) || EventFlag(eventFlagId2));
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90015442, Restart, function(entityId, eventFlagId) {
+    EndIf(EventFlag(eventFlagId));
+    if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+        WaitFor(EventFlag(1028400200));
+    }
+    if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+        WaitFor(EventFlag(1028400205));
+    }
+    if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+        WaitFor(EventFlag(1028400210));
+    }
+    if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+        WaitFor(EventFlag(1056400200));
+    }
+    if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+        WaitFor(EventFlag(1056400205));
+    }
+    if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+        WaitFor(EventFlag(1056400210));
+    }
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90015443, Restart, function(entityId, eventFlagId) {
+    WaitFor(EventFlag(eventFlagId));
+    if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+        SetNetworkconnectedEventFlagID(1028400201, ON);
+    }
+    if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+        SetNetworkconnectedEventFlagID(1028400206, ON);
+    }
+    if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+        SetNetworkconnectedEventFlagID(1028400211, ON);
+    }
+    if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+        SetNetworkconnectedEventFlagID(1056400201, ON);
+    }
+    if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+        SetNetworkconnectedEventFlagID(1056400206, ON);
+    }
+    if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+        SetNetworkconnectedEventFlagID(1056400211, ON);
+    }
+});
+
+$Event(90015444, Restart, function(assetEntityId, chrEntityId, eventFlagId) {
+    if (EventFlag(eventFlagId)) {
+        RegisterBonfire(assetEntityId, 0, 5);
+    } else {
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Disabled, 0);
+        DisableCharacter(chrEntityId);
+        WaitFor(EventFlag(eventFlagId));
+        SpawnOneshotSFX(TargetEntityType.Asset, assetEntityId, 200, 1060);
+        WaitFixedTimeSeconds(0.5);
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
+        EnableCharacter(chrEntityId);
+        RegisterBonfire(assetEntityId, 0, 5);
+    }
+L0:
+    NoOp();
+});
+
+$Event(90015445, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, areaEntityId, spEffectId, spEffectId2, entityId, sfxId, userDispLogParamId, eventFlagId4) {
+    DisableNetworkSync();
+    EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId2) && !EventFlag(eventFlagId3));
+    if (AnyBatchEventFlags(eventFlagId, eventFlagId2)
+        && EventFlag(eventFlagId3)
+        && InArea(20000, areaEntityId)) {
+        SetSpEffect(20000, spEffectId);
+    } else {
+        WaitFor(AnyBatchEventFlags(eventFlagId, eventFlagId2));
+        EndIf(!EventFlag(eventFlagId3));
+        WaitFor(InArea(20000, areaEntityId));
+        SpawnOneshotSFX(TargetEntityType.Asset, entityId, -1, sfxId);
+        SetSpEffect(20000, spEffectId);
+        WaitFor(ElapsedSeconds(0.5));
+        if (!EventFlag(eventFlagId4)) {
+            RecordUserDispLog(userDispLogParamId, 20000, LogObjectType.None, -1);
+        }
+        SetEventFlagID(eventFlagId4, ON);
+    }
+L0:
+    WaitFor(!InArea(20000, areaEntityId));
+    SetSpEffect(20000, spEffectId2);
+    RestartEvent();
+});
+
+$Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entityId) {
+    EndIf(EventFlag(eventFlagId2));
+    if (!(CharacterRatioHasSpEffect(chrEntityId, 98280, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98281, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98282, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98283, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98284, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98285, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98286, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98287, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98288, NotEqual, 0)
+        || CharacterRatioHasSpEffect(chrEntityId, 98289, NotEqual, 0))) {
+        WaitFor(EventFlag(eventFlagId));
+        if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+            areaSp &= InArea(10002, 1028402550);
+            areaSp2 &= InArea(10003, 1028402550);
+            areaSp3 &= InArea(10004, 1028402550);
+        }
+        if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+            areaSp &= InArea(10002, 1028402551);
+            areaSp2 &= InArea(10003, 1028402551);
+            areaSp3 &= InArea(10004, 1028402551);
+        }
+        if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+            areaSp &= InArea(10002, 1028402552);
+            areaSp2 &= InArea(10003, 1028402552);
+            areaSp3 &= InArea(10004, 1028402552);
+        }
+        if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+            areaSp &= InArea(10002, 1056402550);
+            areaSp2 &= InArea(10003, 1056402550);
+            areaSp3 &= InArea(10004, 1056402550);
+        }
+        if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+            areaSp &= InArea(10002, 1056402551);
+            areaSp2 &= InArea(10003, 1056402551);
+            areaSp3 &= InArea(10004, 1056402551);
+        }
+        if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+            areaSp &= InArea(10002, 1056402552);
+            areaSp2 &= InArea(10003, 1056402552);
+            areaSp3 &= InArea(10004, 1056402552);
+        }
+        areaSp &= CharacterHasSpEffect(10002, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98269, NotEqual, 0);
+        areaSp2 &= CharacterHasSpEffect(10003, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98269, NotEqual, 0);
+        areaSp3 &= CharacterHasSpEffect(10004, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98269, NotEqual, 0);
+        WaitFor(areaSp || areaSp2 || areaSp3);
+        if (areaSp.Passed) {
+            if (!CharacterHasSpEffect(10002, 98260, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10002, 98261, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10002, 98262, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10002, 98263, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10002, 98264, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10002, 98265, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10002, 98266, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10002, 98267, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10002, 98268, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10002, 98269, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98289);
+            }
+        } else if (areaSp2.Passed) {
+            if (!CharacterHasSpEffect(10003, 98260, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10003, 98261, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10003, 98262, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10003, 98263, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10003, 98264, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10003, 98265, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10003, 98266, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10003, 98267, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10003, 98268, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10003, 98269, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98289);
+            }
+        } else if (areaSp3.Passed) {
+            if (!CharacterHasSpEffect(10004, 98260, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10004, 98261, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10004, 98262, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10004, 98263, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10004, 98264, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10004, 98265, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10004, 98266, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10004, 98267, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10004, 98268, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10004, 98269, Equal, 0)) {
+                SetSpEffect(chrEntityId, 98289);
+            }
+            Goto(L0);
+        }
+    }
+L0:
+    WaitFixedTimeSeconds(0.5);
+    if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+        area &= InArea(10002, 1028402570);
+        area2 |= !area || !InArea(10002, 1028402550);
+        area3 &= InArea(10003, 1028402570);
+        area4 |= !area3 || !InArea(10003, 1028402550);
+        area5 &= InArea(10004, 1028402570);
+        area6 |= !area5 || !InArea(10004, 1028402550);
+    }
+L1:
+    if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+        area &= InArea(10002, 1028402570);
+        area2 |= !area || !InArea(10002, 1028402551);
+        area3 &= InArea(10003, 1028402570);
+        area4 |= !area3 || !InArea(10003, 1028402551);
+        area5 &= InArea(10004, 1028402570);
+        area6 |= !area5 || !InArea(10004, 1028402551);
+    }
+L2:
+    if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+        area &= InArea(10002, 1028402570);
+        area2 |= !area || !InArea(10002, 1028402552);
+        area3 &= InArea(10003, 1028402570);
+        area4 |= !area3 || !InArea(10003, 1028402552);
+        area5 &= InArea(10004, 1028402570);
+        area6 |= !area5 || !InArea(10004, 1028402552);
+    }
+L3:
+    if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+        area &= InArea(10002, 1056402570);
+        area2 |= !area || !InArea(10002, 1056402550);
+        area3 &= InArea(10003, 1056402570);
+        area4 |= !area3 || !InArea(10003, 1056402550);
+        area5 &= InArea(10004, 1056402570);
+        area6 |= !area5 || !InArea(10004, 1056402550);
+    }
+L4:
+    if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+        area &= InArea(10002, 1056402570);
+        area2 |= !area || !InArea(10002, 1056402551);
+        area3 &= InArea(10003, 1056402570);
+        area4 |= !area3 || !InArea(10003, 1056402551);
+        area5 &= InArea(10004, 1056402570);
+        area6 |= !area5 || !InArea(10004, 1056402551);
+    }
+L5:
+    if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+        area &= InArea(10002, 1056402570);
+        area2 |= !area || !InArea(10002, 1056402552);
+        area3 &= InArea(10003, 1056402570);
+        area4 |= !area3 || !InArea(10003, 1056402552);
+        area5 &= InArea(10004, 1056402570);
+        area6 |= !area5 || !InArea(10004, 1056402552);
+    }
+L6:
+    WaitFor((area2 && area4 && area6) || EventFlag(eventFlagId2));
+    SetSpEffect(chrEntityId, 98279);
+    WaitFixedTimeSeconds(0.5);
+    RestartEvent();
+});
+
+$Event(90015447, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
+    SetNetworkconnectedEventFlagID(eventFlagId4, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId5, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId6, OFF);
+    WaitFor(EventFlag(eventFlagId));
+    if (!EventFlag(eventFlagId2)) {
+        SetNetworkconnectedEventFlagID(eventFlagId4, ON);
+        SetNetworkconnectedEventFlagID(eventFlagId5, OFF);
+        SetNetworkconnectedEventFlagID(eventFlagId6, OFF);
+        WaitFor(EventFlag(eventFlagId2));
+    }
+    if (!EventFlag(eventFlagId3)) {
+        SetNetworkconnectedEventFlagID(eventFlagId4, OFF);
+        SetNetworkconnectedEventFlagID(eventFlagId5, ON);
+        SetNetworkconnectedEventFlagID(eventFlagId6, OFF);
+        WaitFor(EventFlag(eventFlagId3));
+    }
+    SetNetworkconnectedEventFlagID(eventFlagId4, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId5, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId6, ON);
+});
+
+$Event(90015448, Restart, function(assetEntityId, eventFlagId, eventFlagId2) {
+    DisableNetworkSync();
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId));
+    CreateAssetfollowingSFX(assetEntityId, 90, 806920);
+    SpawnOneshotSFX(TargetEntityType.Asset, assetEntityId, 90, 806925);
+    WaitFor(ActionButtonInArea(109210, assetEntityId));
+    RotateCharacter(20000, assetEntityId, -1, true);
+    ForceAnimationPlayback(20000, 61040, false, false, false);
+    DeleteAssetfollowingSFX(assetEntityId, true);
+    WaitFixedTimeSeconds(4);
+    SetEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90015449, Restart, function(areaEntityId) {
+    DisableNetworkSync();
+    EndIf(IsGameMode(3));
+    WaitFor(InArea(20000, areaEntityId));
+    if (!CharacterHasSpEffect(20000, 6999610)) {
+        SetSpEffect(20000, 98251);
+        SetSpEffect(20000, 6999600);
+        if (IsHero(Hero.Duchess)
+            || IsHero(Hero.Revenant)
+            || IsHero(Hero.Recluse)
+            || IsHero(Hero.Undertaker)) {
+            SetSpEffect(20000, 6999601);
+        }
+        if (IsHero(Hero.Wylder)
+            || IsHero(Hero.Guardian)
+            || IsHero(Hero.Ironeye)
+            || IsHero(Hero.Executor)
+            || IsHero(Hero.Scholar)) {
+            SetSpEffect(20000, 6999604);
+        }
+        if (IsHero(Hero.Raider)) {
+            SetSpEffect(20000, 6999605);
+        }
+        SetEventFlagID(9045, ON);
+    }
+L0:
+    if (CharacterHasSpEffect(20000, 6999610)) {
+        SetSpEffect(20000, 98251);
+        if (IsHero(Hero.Duchess)
+            || IsHero(Hero.Revenant)
+            || IsHero(Hero.Recluse)
+            || IsHero(Hero.Undertaker)) {
+            SetSpEffect(20000, 6999601);
+        }
+        if (IsHero(Hero.Wylder)
+            || IsHero(Hero.Guardian)
+            || IsHero(Hero.Ironeye)
+            || IsHero(Hero.Executor)
+            || IsHero(Hero.Scholar)) {
+            SetSpEffect(20000, 6999604);
+        }
+        if (IsHero(Hero.Raider)) {
+            SetSpEffect(20000, 6999605);
+        }
+    }
+L1:
+    WaitFixedTimeSeconds(1);
+    if (CharacterHasSpEffect(20000, 6999610)) {
+        SetSpEffect(20000, 98252);
+        SetSpEffect(20000, 6999612);
+    }
+    WaitFor(!InArea(20000, areaEntityId));
+    SetEventFlagID(9045, OFF);
+    SetSpEffect(20000, 98252);
+    SetSpEffect(20000, 6999602);
+    SetSpEffect(20000, 6999603);
+    RestartEvent();
+});
+
 $Event(90015450, Restart, function(chrEntityId, chrEntityId2) {
     if (EventFlag(chrEntityId)) {
         DisableCharacter(chrEntityId);
@@ -1638,6 +2356,779 @@ $Event(90015450, Restart, function(chrEntityId, chrEntityId2) {
     DisableCharacter(chrEntityId2);
 });
 
+$Event(90015460, Default, function(entityId, chrEntityId) {
+    EndIf(!EventFlag(7604));
+    EndIf(chrEntityId == 0);
+    area = EntityInRadiusOfEntity(1028402600, entityId, 15, 1)
+        || EntityInRadiusOfEntity(1056402601, entityId, 15, 1);
+    area2 = EntityInRadiusOfEntity(1028402601, entityId, 15, 1)
+        || EntityInRadiusOfEntity(1056402602, entityId, 15, 1);
+    area3 = EntityInRadiusOfEntity(1028402602, entityId, 15, 1)
+        || EntityInRadiusOfEntity(1056402603, entityId, 15, 1);
+    WaitFor(area || area2 || area3);
+    WaitFor(
+        !CharacterHasSpEffect(chrEntityId, 98330)
+            && !CharacterHasSpEffect(chrEntityId, 98331)
+            && !CharacterHasSpEffect(chrEntityId, 98332)
+            && !CharacterHasSpEffect(chrEntityId, 98333)
+            && !CharacterHasSpEffect(chrEntityId, 98334)
+            && !CharacterHasSpEffect(chrEntityId, 98335)
+            && !CharacterHasSpEffect(chrEntityId, 98340)
+            && !CharacterHasSpEffect(chrEntityId, 98341)
+            && !CharacterHasSpEffect(chrEntityId, 98342)
+            && !CharacterHasSpEffect(chrEntityId, 98343)
+            && !CharacterHasSpEffect(chrEntityId, 98344)
+            && !CharacterHasSpEffect(chrEntityId, 98345));
+    if (chrEntityId == 49290810) {
+        SetSpEffect(chrEntityId, 98334);
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98304);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98314);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98324);
+        }
+    } else if (chrEntityId == 47800810) {
+        SetSpEffect(chrEntityId, 98335);
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98305);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98315);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98325);
+        }
+    } else {
+        GotoIf(S0, chrEntityId == 48500801);
+        GotoIf(S0, chrEntityId == 48500802);
+        GotoIf(S0, chrEntityId == 48500805);
+        GotoIf(S0, chrEntityId == 48500806);
+        GotoIf(S0, chrEntityId == 48600801);
+        GotoIf(S0, chrEntityId == 48600802);
+        GotoIf(S0, chrEntityId == 48600805);
+        GotoIf(S0, chrEntityId == 48600806);
+        Goto(S1);
+S0:
+        SetSpEffect(chrEntityId, 98343);
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98303);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98313);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98323);
+        }
+        Goto(L2);
+S1:
+        if (CharacterHasSpEffect(chrEntityId, 7705)) {
+            SetSpEffect(chrEntityId, 98330);
+        } else if (CharacterHasSpEffect(chrEntityId, 7706)) {
+            SetSpEffect(chrEntityId, 98340);
+        } else {
+            Goto(S2);
+        }
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98300);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98310);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98320);
+        }
+        Goto(L2);
+S2:
+        if (CharacterHasSpEffect(chrEntityId, 7715)) {
+            SetSpEffect(chrEntityId, 98331);
+        } else if (CharacterHasSpEffect(chrEntityId, 7716)) {
+            SetSpEffect(chrEntityId, 98341);
+        } else {
+            Goto(S3);
+        }
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98301);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98311);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98321);
+        }
+        Goto(L2);
+S3:
+        if (CharacterHasSpEffect(chrEntityId, 7725)) {
+            SetSpEffect(chrEntityId, 98332);
+        } else if (CharacterHasSpEffect(chrEntityId, 7726)) {
+            SetSpEffect(chrEntityId, 98342);
+        } else {
+            Goto(S4);
+        }
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98302);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98312);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98322);
+        }
+        Goto(L2);
+S4:
+        if (CharacterHasSpEffect(chrEntityId, 7735)) {
+            SetSpEffect(chrEntityId, 98333);
+        } else if (CharacterHasSpEffect(chrEntityId, 7736)) {
+            SetSpEffect(chrEntityId, 98343);
+        } else {
+            Goto(S5);
+        }
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98303);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98313);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98323);
+        }
+        Goto(L2);
+S5:
+        if (CharacterHasSpEffect(chrEntityId, 7745)) {
+            SetSpEffect(chrEntityId, 98334);
+        } else if (CharacterHasSpEffect(chrEntityId, 7746)) {
+            SetSpEffect(chrEntityId, 98344);
+        } else {
+            Goto(S6);
+        }
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98304);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98314);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98324);
+        }
+        Goto(L2);
+S6:
+        if (CharacterHasSpEffect(chrEntityId, 7755)) {
+            SetSpEffect(chrEntityId, 98335);
+        } else if (CharacterHasSpEffect(chrEntityId, 7756)) {
+            SetSpEffect(chrEntityId, 98345);
+        } else {
+            Goto(S7);
+        }
+        if (area.Passed) {
+            SetSpEffect(chrEntityId, 98305);
+        }
+        if (area2.Passed) {
+            SetSpEffect(chrEntityId, 98315);
+        }
+        if (area3.Passed) {
+            SetSpEffect(chrEntityId, 98325);
+        }
+        Goto(L2);
+S7:
+        EndEvent();
+    }
+L2:
+    WaitFor(ElapsedSeconds(1));
+    RestartEvent();
+});
+
+$Event(90015461, Default, function(eventFlagId, targetProbability, eventFlagId2, eventFlagId3, eventFlagId4) {
+    DisableNetworkSync();
+    WaitFor(PlayerIsInOwnWorld());
+    WaitFor(
+        CompareEventValues(eventFlagId3, 5, Greater, eventFlagId4, 5) || EventFlag(eventFlagId2));
+    if (!EventFlag(eventFlagId2)) {
+        IncrementNetworkconnectedEventValue(eventFlagId4, 5, 31);
+        if (!EventFlagAndRandomCondition(6001, targetProbability)) {
+            WaitFor(ElapsedSeconds(1));
+            RestartEvent();
+        }
+    }
+L0:
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90015462, Default, function(eventFlagId, eventFlagId2, eventFlagId3, chrEntityId) {
+    if (EventFlag(eventFlagId3)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    EndIf(EventFlag(eventFlagId2));
+    DisableCharacter(chrEntityId);
+    DisableCharacterCollision(chrEntityId);
+    WaitFor(EventFlag(eventFlagId));
+    ForceRatioAnimationPlayback(chrEntityId, 30027, true, false, false);
+    if (eventFlagId == 8240) {
+        areaFlag |= InArea(20000, 1039402800);
+    }
+    if (eventFlagId == 8250) {
+        areaFlag |= InArea(20000, 1047402800);
+    }
+    if (eventFlagId == 8260) {
+        areaFlag |= InArea(20000, 1046402810);
+    }
+    areaFlag |= EventFlag(eventFlagId2);
+    WaitFor(areaFlag);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    WaitFor(ElapsedSeconds(1));
+    EnableCharacter(chrEntityId);
+    EnableCharacterCollision(chrEntityId);
+    ForceRatioAnimationPlayback(chrEntityId, 20027, false, false, false);
+});
+
+$Event(90015463, Default, function(eventFlagId, eventFlagId2, entityId) {
+    if (EventFlag(eventFlagId2)) {
+        DeleteMapSFX(entityId, false);
+        EndEvent();
+    }
+    WaitFor(EventFlag(eventFlagId));
+    SpawnMapSFX(entityId);
+    WaitFor(EventFlag(eventFlagId2));
+    DeleteMapSFX(entityId, true);
+});
+
+$Event(90015464, Default, function(eventFlagId, eventFlagId2) {
+    if (!EventFlag(eventFlagId)) {
+        WaitFor(EventFlag(eventFlagId));
+        RecordUserDispLog(110222, 0, LogObjectType.None, -1);
+    }
+    if (!EventFlag(eventFlagId2)) {
+        WaitFor(EventFlag(eventFlagId2));
+        RecordUserDispLog(110220, 0, LogObjectType.None, -1);
+    }
+});
+
+$Event(90015465, Default, function(chrEntityId, value, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(CharacterRatioDead(chrEntityId));
+    if (value == 0) {
+        WaitFor(ElapsedSeconds(3));
+    }
+    if (value != 0) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    IncrementNetworkconnectedEventValue(eventFlagId, 5, 31);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90015466, Default, function(eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId));
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90015467, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
+    EndIf(EventFlag(eventFlagId));
+    if (eventFlagId2 != 0) {
+        flag &= EventFlag(eventFlagId2);
+    }
+    if (eventFlagId3 != 0) {
+        flag &= EventFlag(eventFlagId3);
+    }
+    if (eventFlagId4 != 0) {
+        flag &= EventFlag(eventFlagId4);
+    }
+    if (eventFlagId5 != 0) {
+        flag &= EventFlag(eventFlagId5);
+    }
+    if (eventFlagId6 != 0) {
+        flag &= EventFlag(eventFlagId6);
+    }
+    WaitFor(flag);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90015468, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(CharacterRatioDead(chrEntityId) && CharacterRatioHasSpEffect(chrEntityId, 7706));
+    WaitFor(ElapsedSeconds(6));
+    IncrementNetworkconnectedEventValue(eventFlagId, 5, 31);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffectId3) {
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(EventFlag(eventFlagId));
+    if (!IsPlayerCount(2)) {
+        if (!IsPlayerCount(3)) {
+            SetSpEffect(10000, spEffectId);
+        }
+    }
+    if (!IsPlayerCount(1)) {
+        if (!IsPlayerCount(3)) {
+            SetSpEffect(10000, spEffectId2);
+        }
+    }
+    if (!IsPlayerCount(1)) {
+        if (!IsPlayerCount(2)) {
+            SetSpEffect(10000, spEffectId3);
+        }
+    }
+});
+
+$Event(90015470, Restart, function(entityId, eventFlagId, eventFlagId2, chrEntityId, chrEntityId2, chrEntityId3) {
+    DisableNetworkSync();
+    if (EventFlag(eventFlagId2)) {
+        EnableCharacterCollision(chrEntityId);
+        ClearSpEffect(chrEntityId, 98295);
+        EnableLockOnPoint(chrEntityId, 220);
+        EnableLockOnPoint(chrEntityId, 221);
+        EnableLockOnPoint(chrEntityId, 222);
+        EnableLockOnPoint(chrEntityId, 223);
+        EnableLockOnPoint(chrEntityId, 224);
+        EnableLockOnPoint(chrEntityId, 225);
+        EnableLockOnPoint(chrEntityId, 226);
+        EnableLockOnPoint(chrEntityId, 227);
+        EnableLockOnPoint(chrEntityId, 228);
+        EnableLockOnPoint(chrEntityId, 229);
+        if (chrEntityId2 != 0) {
+            EnableCharacterCollision(chrEntityId2);
+            ClearSpEffect(chrEntityId2, 98295);
+            EnableLockOnPoint(chrEntityId2, 220);
+            EnableLockOnPoint(chrEntityId2, 221);
+            EnableLockOnPoint(chrEntityId2, 222);
+            EnableLockOnPoint(chrEntityId2, 223);
+            EnableLockOnPoint(chrEntityId2, 224);
+            EnableLockOnPoint(chrEntityId2, 225);
+            EnableLockOnPoint(chrEntityId2, 226);
+            EnableLockOnPoint(chrEntityId2, 227);
+            EnableLockOnPoint(chrEntityId2, 228);
+            EnableLockOnPoint(chrEntityId2, 229);
+        }
+        if (chrEntityId3 != 0) {
+            EnableCharacterCollision(chrEntityId3);
+            ClearSpEffect(chrEntityId3, 98295);
+            EnableLockOnPoint(chrEntityId3, 220);
+            EnableLockOnPoint(chrEntityId3, 221);
+            EnableLockOnPoint(chrEntityId3, 222);
+            EnableLockOnPoint(chrEntityId3, 223);
+            EnableLockOnPoint(chrEntityId3, 224);
+            EnableLockOnPoint(chrEntityId3, 225);
+            EnableLockOnPoint(chrEntityId3, 226);
+            EnableLockOnPoint(chrEntityId3, 227);
+            EnableLockOnPoint(chrEntityId3, 228);
+            EnableLockOnPoint(chrEntityId3, 229);
+        }
+        EndEvent();
+    }
+L10:
+    WaitFor(EventFlag(eventFlagId));
+    if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1028402550);
+    }
+    if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1028402551);
+    }
+    if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1028402552);
+    }
+    if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1056402550);
+    }
+    if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1056402551);
+    }
+    if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1056402552);
+    }
+    areaFlag |= EventFlag(eventFlagId2);
+    WaitFor(areaFlag);
+    if (!EventFlag(eventFlagId2)) {
+        DisableCharacterCollision(chrEntityId);
+        SetSpEffect(chrEntityId, 98295);
+        DisableLockOnPoint(chrEntityId, 220);
+        DisableLockOnPoint(chrEntityId, 221);
+        DisableLockOnPoint(chrEntityId, 222);
+        DisableLockOnPoint(chrEntityId, 223);
+        DisableLockOnPoint(chrEntityId, 224);
+        DisableLockOnPoint(chrEntityId, 225);
+        DisableLockOnPoint(chrEntityId, 226);
+        DisableLockOnPoint(chrEntityId, 227);
+        DisableLockOnPoint(chrEntityId, 228);
+        DisableLockOnPoint(chrEntityId, 229);
+        if (chrEntityId2 != 0) {
+            DisableCharacterCollision(chrEntityId2);
+            SetSpEffect(chrEntityId2, 98295);
+            DisableLockOnPoint(chrEntityId2, 220);
+            DisableLockOnPoint(chrEntityId2, 221);
+            DisableLockOnPoint(chrEntityId2, 222);
+            DisableLockOnPoint(chrEntityId2, 223);
+            DisableLockOnPoint(chrEntityId2, 224);
+            DisableLockOnPoint(chrEntityId2, 225);
+            DisableLockOnPoint(chrEntityId2, 226);
+            DisableLockOnPoint(chrEntityId2, 227);
+            DisableLockOnPoint(chrEntityId2, 228);
+            DisableLockOnPoint(chrEntityId2, 229);
+        }
+        if (chrEntityId3 != 0) {
+            DisableCharacterCollision(chrEntityId3);
+            SetSpEffect(chrEntityId3, 98295);
+            DisableLockOnPoint(chrEntityId3, 220);
+            DisableLockOnPoint(chrEntityId3, 221);
+            DisableLockOnPoint(chrEntityId3, 222);
+            DisableLockOnPoint(chrEntityId3, 223);
+            DisableLockOnPoint(chrEntityId3, 224);
+            DisableLockOnPoint(chrEntityId3, 225);
+            DisableLockOnPoint(chrEntityId3, 226);
+            DisableLockOnPoint(chrEntityId3, 227);
+            DisableLockOnPoint(chrEntityId3, 228);
+            DisableLockOnPoint(chrEntityId3, 229);
+        }
+        if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1028402550);
+        }
+        if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1028402551);
+        }
+        if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1028402552);
+        }
+        if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1056402550);
+        }
+        if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1056402551);
+        }
+        if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1056402552);
+        }
+        areaFlag2 |= EventFlag(eventFlagId2);
+        WaitFor(areaFlag2);
+    }
+L0:
+    EnableCharacterCollision(chrEntityId);
+    ClearSpEffect(chrEntityId, 98295);
+    EnableLockOnPoint(chrEntityId, 220);
+    EnableLockOnPoint(chrEntityId, 221);
+    EnableLockOnPoint(chrEntityId, 222);
+    EnableLockOnPoint(chrEntityId, 223);
+    EnableLockOnPoint(chrEntityId, 224);
+    EnableLockOnPoint(chrEntityId, 225);
+    EnableLockOnPoint(chrEntityId, 226);
+    EnableLockOnPoint(chrEntityId, 227);
+    EnableLockOnPoint(chrEntityId, 228);
+    EnableLockOnPoint(chrEntityId, 229);
+    if (chrEntityId2 != 0) {
+        EnableCharacterCollision(chrEntityId2);
+        ClearSpEffect(chrEntityId2, 98295);
+        EnableLockOnPoint(chrEntityId2, 220);
+        EnableLockOnPoint(chrEntityId2, 221);
+        EnableLockOnPoint(chrEntityId2, 222);
+        EnableLockOnPoint(chrEntityId2, 223);
+        EnableLockOnPoint(chrEntityId2, 224);
+        EnableLockOnPoint(chrEntityId2, 225);
+        EnableLockOnPoint(chrEntityId2, 226);
+        EnableLockOnPoint(chrEntityId2, 227);
+        EnableLockOnPoint(chrEntityId2, 228);
+        EnableLockOnPoint(chrEntityId2, 229);
+    }
+    if (chrEntityId3 != 0) {
+        EnableCharacterCollision(chrEntityId3);
+        ClearSpEffect(chrEntityId3, 98295);
+        EnableLockOnPoint(chrEntityId3, 220);
+        EnableLockOnPoint(chrEntityId3, 221);
+        EnableLockOnPoint(chrEntityId3, 222);
+        EnableLockOnPoint(chrEntityId3, 223);
+        EnableLockOnPoint(chrEntityId3, 224);
+        EnableLockOnPoint(chrEntityId3, 225);
+        EnableLockOnPoint(chrEntityId3, 226);
+        EnableLockOnPoint(chrEntityId3, 227);
+        EnableLockOnPoint(chrEntityId3, 228);
+        EnableLockOnPoint(chrEntityId3, 229);
+    }
+    EndIf(EventFlag(eventFlagId2));
+    RestartEvent();
+});
+
+$Event(90015471, Restart, function(entityId, eventFlagId, eventFlagId2, chrEntityId, chrEntityId2, chrEntityId3, spEffectId, spEffectId2, spEffectId3, spEffectId4) {
+    DisableNetworkSync();
+    if (EventFlag(eventFlagId2)) {
+        EnableCharacterCollision(chrEntityId);
+        ClearSpEffect(chrEntityId, 98295);
+        EnableLockOnPoint(chrEntityId, 220);
+        EnableLockOnPoint(chrEntityId, 221);
+        EnableLockOnPoint(chrEntityId, 222);
+        EnableLockOnPoint(chrEntityId, 223);
+        EnableLockOnPoint(chrEntityId, 224);
+        EnableLockOnPoint(chrEntityId, 225);
+        EnableLockOnPoint(chrEntityId, 226);
+        EnableLockOnPoint(chrEntityId, 227);
+        EnableLockOnPoint(chrEntityId, 228);
+        EnableLockOnPoint(chrEntityId, 229);
+        if (chrEntityId2 != 0) {
+            EnableCharacterCollision(chrEntityId2);
+            ClearSpEffect(chrEntityId2, 98295);
+            EnableLockOnPoint(chrEntityId2, 220);
+            EnableLockOnPoint(chrEntityId2, 221);
+            EnableLockOnPoint(chrEntityId2, 222);
+            EnableLockOnPoint(chrEntityId2, 223);
+            EnableLockOnPoint(chrEntityId2, 224);
+            EnableLockOnPoint(chrEntityId2, 225);
+            EnableLockOnPoint(chrEntityId2, 226);
+            EnableLockOnPoint(chrEntityId2, 227);
+            EnableLockOnPoint(chrEntityId2, 228);
+            EnableLockOnPoint(chrEntityId2, 229);
+        }
+        if (chrEntityId3 != 0) {
+            EnableCharacterCollision(chrEntityId3);
+            ClearSpEffect(chrEntityId3, 98295);
+            EnableLockOnPoint(chrEntityId3, 220);
+            EnableLockOnPoint(chrEntityId3, 221);
+            EnableLockOnPoint(chrEntityId3, 222);
+            EnableLockOnPoint(chrEntityId3, 223);
+            EnableLockOnPoint(chrEntityId3, 224);
+            EnableLockOnPoint(chrEntityId3, 225);
+            EnableLockOnPoint(chrEntityId3, 226);
+            EnableLockOnPoint(chrEntityId3, 227);
+            EnableLockOnPoint(chrEntityId3, 228);
+            EnableLockOnPoint(chrEntityId3, 229);
+        }
+        EndEvent();
+    }
+L10:
+    WaitFor(EventFlag(eventFlagId));
+    if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1028402550);
+    }
+    if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1028402551);
+    }
+    if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1028402552);
+    }
+    if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1056402550);
+    }
+    if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1056402551);
+    }
+    if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+        areaFlag |= !InArea(20000, 1056402552);
+    }
+    areaFlag |= EventFlag(eventFlagId2);
+    WaitFor(areaFlag);
+    if (!EventFlag(eventFlagId2)) {
+        DisableCharacterCollision(chrEntityId);
+        SetSpEffect(chrEntityId, 98295);
+        DisableLockOnPoint(chrEntityId, 220);
+        DisableLockOnPoint(chrEntityId, 221);
+        DisableLockOnPoint(chrEntityId, 222);
+        DisableLockOnPoint(chrEntityId, 223);
+        DisableLockOnPoint(chrEntityId, 224);
+        DisableLockOnPoint(chrEntityId, 225);
+        DisableLockOnPoint(chrEntityId, 226);
+        DisableLockOnPoint(chrEntityId, 227);
+        DisableLockOnPoint(chrEntityId, 228);
+        DisableLockOnPoint(chrEntityId, 229);
+        if (chrEntityId2 != 0) {
+            DisableCharacterCollision(chrEntityId2);
+            SetSpEffect(chrEntityId2, 98295);
+            DisableLockOnPoint(chrEntityId2, 220);
+            DisableLockOnPoint(chrEntityId2, 221);
+            DisableLockOnPoint(chrEntityId2, 222);
+            DisableLockOnPoint(chrEntityId2, 223);
+            DisableLockOnPoint(chrEntityId2, 224);
+            DisableLockOnPoint(chrEntityId2, 225);
+            DisableLockOnPoint(chrEntityId2, 226);
+            DisableLockOnPoint(chrEntityId2, 227);
+            DisableLockOnPoint(chrEntityId2, 228);
+            DisableLockOnPoint(chrEntityId2, 229);
+        }
+        if (chrEntityId3 != 0) {
+            DisableCharacterCollision(chrEntityId3);
+            SetSpEffect(chrEntityId3, 98295);
+            DisableLockOnPoint(chrEntityId3, 220);
+            DisableLockOnPoint(chrEntityId3, 221);
+            DisableLockOnPoint(chrEntityId3, 222);
+            DisableLockOnPoint(chrEntityId3, 223);
+            DisableLockOnPoint(chrEntityId3, 224);
+            DisableLockOnPoint(chrEntityId3, 225);
+            DisableLockOnPoint(chrEntityId3, 226);
+            DisableLockOnPoint(chrEntityId3, 227);
+            DisableLockOnPoint(chrEntityId3, 228);
+            DisableLockOnPoint(chrEntityId3, 229);
+        }
+        if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1028402550);
+        }
+        if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1028402551);
+        }
+        if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1028402552);
+        }
+        if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1056402550);
+        }
+        if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1056402551);
+        }
+        if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+            areaFlag2 |= InArea(20000, 1056402552);
+        }
+        areaFlag2 |= EventFlag(eventFlagId2);
+        WaitFor(areaFlag2);
+    }
+L0:
+    flagSp &= EventFlag(6001);
+    if (Signed(spEffectId) != 0) {
+        flagSp &= !CharacterHasSpEffect(chrEntityId, spEffectId);
+    }
+    if (Signed(spEffectId3) != 0) {
+        flagSp &= CharacterHasSpEffect(chrEntityId, spEffectId3);
+    }
+    flagSp2 &= EventFlag(6001);
+    if (Signed(spEffectId2) != 0) {
+        flagSp2 &= !CharacterHasSpEffect(chrEntityId, spEffectId2);
+    }
+    if (Signed(spEffectId4) != 0) {
+        flagSp2 &= CharacterHasSpEffect(chrEntityId, spEffectId4);
+    }
+    EnableCharacterCollision(chrEntityId);
+    ClearSpEffect(chrEntityId, 98295);
+    EnableLockOnPoint(chrEntityId, 220);
+    if (flagSp) {
+        EnableLockOnPoint(chrEntityId, 221);
+    }
+    if (flagSp2) {
+        EnableLockOnPoint(chrEntityId, 222);
+    }
+    EnableLockOnPoint(chrEntityId, 223);
+    EnableLockOnPoint(chrEntityId, 224);
+    EnableLockOnPoint(chrEntityId, 225);
+    EnableLockOnPoint(chrEntityId, 226);
+    EnableLockOnPoint(chrEntityId, 227);
+    EnableLockOnPoint(chrEntityId, 228);
+    EnableLockOnPoint(chrEntityId, 229);
+    if (chrEntityId2 != 0) {
+        EnableCharacterCollision(chrEntityId2);
+        ClearSpEffect(chrEntityId2, 98295);
+        EnableLockOnPoint(chrEntityId2, 220);
+        EnableLockOnPoint(chrEntityId2, 221);
+        EnableLockOnPoint(chrEntityId2, 222);
+        EnableLockOnPoint(chrEntityId2, 223);
+        EnableLockOnPoint(chrEntityId2, 224);
+        EnableLockOnPoint(chrEntityId2, 225);
+        EnableLockOnPoint(chrEntityId2, 226);
+        EnableLockOnPoint(chrEntityId2, 227);
+        EnableLockOnPoint(chrEntityId2, 228);
+        EnableLockOnPoint(chrEntityId2, 229);
+    }
+    if (chrEntityId3 != 0) {
+        EnableCharacterCollision(chrEntityId3);
+        ClearSpEffect(chrEntityId3, 98295);
+        EnableLockOnPoint(chrEntityId3, 220);
+        EnableLockOnPoint(chrEntityId3, 221);
+        EnableLockOnPoint(chrEntityId3, 222);
+        EnableLockOnPoint(chrEntityId3, 223);
+        EnableLockOnPoint(chrEntityId3, 224);
+        EnableLockOnPoint(chrEntityId3, 225);
+        EnableLockOnPoint(chrEntityId3, 226);
+        EnableLockOnPoint(chrEntityId3, 227);
+        EnableLockOnPoint(chrEntityId3, 228);
+        EnableLockOnPoint(chrEntityId3, 229);
+    }
+    EndIf(EventFlag(eventFlagId2));
+    RestartEvent();
+});
+
+$Event(90015472, Default, function() {
+    DisableNetworkSync();
+    WaitFor(
+        (CharacterHasSpEffect(20000, 98260)
+            || CharacterHasSpEffect(20000, 98261)
+            || CharacterHasSpEffect(20000, 98262)
+            || CharacterHasSpEffect(20000, 98263)
+            || CharacterHasSpEffect(20000, 98264)
+            || CharacterHasSpEffect(20000, 98265)
+            || CharacterHasSpEffect(20000, 98266)
+            || CharacterHasSpEffect(20000, 98267)
+            || CharacterHasSpEffect(20000, 98268)
+            || CharacterHasSpEffect(20000, 98269))
+            && !EventFlag(9024)
+            && !EventFlag(9037));
+    SetEventFlagID(9023, ON);
+    if (CharacterHasSpEffect(20000, 98260)) {
+        ActivateGparamOverride(16, 3);
+        sp &= !CharacterHasSpEffect(20000, 98260);
+    }
+    if (CharacterHasSpEffect(20000, 98261)) {
+        ActivateGparamOverride(17, 3);
+        sp &= !CharacterHasSpEffect(20000, 98261);
+    }
+    if (CharacterHasSpEffect(20000, 98262)) {
+        ActivateGparamOverride(18, 3);
+        sp &= !CharacterHasSpEffect(20000, 98262);
+    }
+    if (CharacterHasSpEffect(20000, 98263)) {
+        ActivateGparamOverride(19, 3);
+        sp &= !CharacterHasSpEffect(20000, 98263);
+    }
+    if (CharacterHasSpEffect(20000, 98264)) {
+        ActivateGparamOverride(20, 3);
+        sp &= !CharacterHasSpEffect(20000, 98264);
+    }
+    if (CharacterHasSpEffect(20000, 98265)) {
+        ActivateGparamOverride(21, 3);
+        sp &= !CharacterHasSpEffect(20000, 98265);
+    }
+    if (CharacterHasSpEffect(20000, 98266)) {
+        ActivateGparamOverride(22, 3);
+        sp &= !CharacterHasSpEffect(20000, 98266);
+    }
+    if (CharacterHasSpEffect(20000, 98267)) {
+        ActivateGparamOverride(23, 3);
+        sp &= !CharacterHasSpEffect(20000, 98267);
+    }
+    if (CharacterHasSpEffect(20000, 98268)) {
+        ActivateGparamOverride(24, 3);
+        sp &= !CharacterHasSpEffect(20000, 98268);
+    }
+    if (CharacterHasSpEffect(20000, 98269)) {
+        ActivateGparamOverride(25, 3);
+        sp &= !CharacterHasSpEffect(20000, 98269);
+    }
+    WaitFor(sp || EventFlag(9024) || EventFlag(9037));
+    if (!EventFlag(9024)) {
+        if (!EventFlag(9037)) {
+            DeactivateGparamOverride(3);
+        }
+    }
+    WaitFixedTimeFrames(1);
+    SetEventFlagID(9023, OFF);
+    RestartEvent();
+});
+
+$Event(90015473, Default, function() {
+    DisableNetworkSync();
+    WaitFor(
+        CharacterHasSpEffect(20000, 98250)
+            && !EventFlag(9024)
+            && !EventFlag(9037)
+            && !EventFlag(9023));
+    SetEventFlagID(9022, ON);
+    ActivateGparamOverride(12, 3);
+    WaitFor(
+        !CharacterHasSpEffect(20000, 98250) || EventFlag(9024) || EventFlag(9037) || EventFlag(9023));
+    if (!EventFlag(9024)) {
+        if (!EventFlag(9037)) {
+            if (!EventFlag(9023)) {
+                DeactivateGparamOverride(3);
+            }
+        }
+    }
+    WaitFixedTimeFrames(1);
+    SetEventFlagID(9022, OFF);
+    RestartEvent();
+});
+
 $Event(90015500, Restart, function(areaEntityId) {
     EndIf(!EventFlag(7811));
     WaitFor(InArea(20000, areaEntityId));
@@ -1648,6 +3139,44 @@ $Event(90015501, Restart, function(areaEntityId, eventFlagId) {
     EndIf(!EventFlag(7811));
     WaitFor(InArea(20000, areaEntityId));
     SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+});
+
+$Event(90025000, Default, function(areaEntityId, eventFlagId, gparamSubId) {
+    DisableNetworkSync();
+    EndIf(IsHotSpot());
+    WaitFor(InArea(20000, areaEntityId) && !EventFlag(9024) && !EventFlag(9037));
+    SetEventFlagID(eventFlagId, ON);
+    WaitFor(ElapsedFrames(1));
+    if (!EventFlag(9025)) {
+        ActivateGparamOverride(gparamSubId, 3);
+    }
+    WaitFor(
+        !InArea(20000, areaEntityId)
+            || !EventFlag(eventFlagId)
+            || EventFlag(9024)
+            || EventFlag(9037));
+    SetEventFlagID(eventFlagId, OFF);
+    WaitFor(ElapsedFrames(1));
+    if (!EventFlag(9037)) {
+        if (!EventFlag(9024)) {
+            if (!EventFlag(9025)) {
+                DeactivateGparamOverride(3);
+            }
+        }
+    }
+    RestartEvent();
+});
+
+$Event(90025010, Default, function(areaEntityId, eventFlagId, dummy) {
+    DisableNetworkSync();
+    EndIf(!IsHotSpot());
+    WaitFor(InArea(20000, areaEntityId));
+    SetEventFlagID(eventFlagId, ON);
+    ActivateGparamUnknown201213(dummy, 3);
+    WaitFor(!InArea(20000, areaEntityId) || !EventFlag(eventFlagId));
+    SetEventFlagID(eventFlagId, OFF);
+    DeactivateGparamUnknown201214(3);
+    RestartEvent();
 });
 
 $Event(90035000, Restart, function(eventFlagId) {
@@ -2302,11 +3831,17 @@ $Event(90035077, Default, function(eventFlagId, entityId, entityId2, entityId3, 
         DeleteMapSFX(entityId2, false);
         DeleteMapSFX(entityId3, false);
         DeleteMapSFX(entityId4, false);
-        if (!EventFlag(1044360220)) {
+        if (EventFlag(1044360220)) {
+            DisableAsset(1044361290);
+        }
+        if (EventFlag(1044380230)) {
             DisableAsset(1044381290);
         }
-        if (!EventFlag(1044380230)) {
-            DisableAsset(1044361290);
+        if (EventFlag(1046400230)) {
+            DisableAsset(1046401290);
+        }
+        if (EventFlag(1038400230)) {
+            DisableAsset(1038401290);
         }
         EndEvent();
     }
@@ -2314,22 +3849,34 @@ $Event(90035077, Default, function(eventFlagId, entityId, entityId2, entityId3, 
     SpawnMapSFX(entityId2);
     SpawnMapSFX(entityId3);
     SpawnMapSFX(entityId4);
-    if (!EventFlag(1044360220)) {
+    if (EventFlag(1044360220)) {
+        EnableAsset(1044361290);
+    }
+    if (EventFlag(1044380230)) {
         EnableAsset(1044381290);
     }
-    if (!EventFlag(1044380230)) {
-        EnableAsset(1044361290);
+    if (EventFlag(1046400230)) {
+        EnableAsset(1046401290);
+    }
+    if (EventFlag(1038400230)) {
+        EnableAsset(1038401290);
     }
     WaitFor(EventFlag(8027) || EventFlag(8073));
     DeleteMapSFX(entityId, true);
     DeleteMapSFX(entityId2, true);
     DeleteMapSFX(entityId3, true);
     DeleteMapSFX(entityId4, true);
-    if (!EventFlag(1044360220)) {
+    if (EventFlag(1044360220)) {
+        DisableAsset(1044361290);
+    }
+    if (EventFlag(1044380230)) {
         DisableAsset(1044381290);
     }
-    if (!EventFlag(1044380230)) {
-        DisableAsset(1044361290);
+    if (EventFlag(1046400230)) {
+        DisableAsset(1046401290);
+    }
+    if (EventFlag(1038400230)) {
+        DisableAsset(1038401290);
     }
     EndIf(EventFlag(8027));
     WaitFor(!EventFlag(8073));
@@ -2427,13 +3974,13 @@ $Event(90035084, Default, function(eventFlagId, bulletProducerEntityId, chrEntit
     RestartEvent();
 });
 
-$Event(90035085, Default, function(eventFlagId, areaEntityId) {
+$Event(90035085, Default, function(eventFlagId, areaEntityId, gparamSubId) {
     DisableNetworkSync();
     EndIf(!((EventFlag(7707) || EventFlag(7727)) && EventFlag(eventFlagId) && !EventFlag(8027)));
     WaitFor((InArea(20000, areaEntityId) && !EventFlag(8073)) || EventFlag(8027));
     EndIf(EventFlag(8027));
     SetEventFlagID(9037, ON);
-    ActivateGparamOverride(6, 3);
+    ActivateGparamOverride(gparamSubId, 3);
     WaitFor(!InArea(20000, areaEntityId) || EventFlag(8073) || EventFlag(8027));
     SetEventFlagID(9037, OFF);
     if (EventFlag(8027)) {
@@ -3394,7 +4941,9 @@ L1:
     PlaySE(20000, SoundType.GeometrySet, 596517099);
     FadeToBlack(1, 1, true, -1);
     EnableCharacterInvincibility(20000);
-    WaitFor(ElapsedSeconds(1));
+    WaitFor(ElapsedSeconds(0.9));
+    SetSpEffect(20000, 99280);
+    WaitFor(ElapsedSeconds(0.1));
     chr = CharacterBackreadStatus(chrEntityId);
     if (!chr) {
         DisableCharacterGravity(20000);
@@ -3538,6 +5087,353 @@ $Event(90035219, Default, function(eventFlagId, eventFlagId2, chrEntityId, nameI
         DisplayBossHealthBar(Disabled, chrEntityId, 1, nameId);
     }
     EndIf(or5.Passed);
+    RestartEvent();
+});
+
+$Event(90035220, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
+    if (!EventFlag(8077)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId2)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    if (EventFlag(8061) && !EventFlag(eventFlagId)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    if (EventFlag(8061) && EventFlag(eventFlagId)) {
+        SetCharacterBackreadState(chrEntityId, false);
+        EnableCharacter(chrEntityId);
+        EnableCharacterDefaultBackread(chrEntityId);
+        SetCharacterEnableDistance(chrEntityId, 1200);
+    }
+L10:
+    WaitFor(EventFlag(8061));
+    EndIf(!EventFlag(eventFlagId));
+    SetCharacterBackreadState(chrEntityId, false);
+    EnableCharacterDefaultBackread(chrEntityId);
+    SetCharacterEnableDistance(chrEntityId, 1200);
+    ForceAnimationPlayback(chrEntityId, 20025, false, true, false);
+});
+
+$Event(90035221, Default, function(chrEntityId, eventFlagId, eventFlagId2, chrEntityId2, playerNo, eventFlagId3, value, animationId) {
+    if (!EventFlag(8077)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    if (EventFlag(8062)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    if (EventFlag(8061) && !EventFlag(eventFlagId)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    if (EventFlag(8061) && EventFlag(eventFlagId) && EventFlag(eventFlagId2)) {
+        SetCharacterBackreadState(chrEntityId, false);
+        EnableCharacter(chrEntityId);
+        if (IsPlayerNo(playerNo)) {
+            EnableCharacterDefaultBackread(chrEntityId);
+            SetCharacterEnableDistance(chrEntityId, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId);
+            SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
+        }
+    }
+L10:
+    if (!EventFlag(eventFlagId3)) {
+        WaitFor(EventFlag(eventFlagId));
+        SetCharacterBackreadState(chrEntityId, false);
+        DisableCharacter(chrEntityId);
+        if (IsPlayerNo(playerNo)) {
+            EnableCharacterDefaultBackread(chrEntityId);
+            SetCharacterEnableDistance(chrEntityId, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId);
+            SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
+        }
+        WaitFor(EventFlag(8061));
+        WaitFor(
+            (CharacterHasTeamType(chrEntityId2, TeamType.Human)
+                || CharacterHasTeamType(chrEntityId2, TeamType.WhitePhantom)
+                || CharacterHasTeamType(chrEntityId2, TeamType.Indiscriminate)
+                || CharacterHasTeamType(chrEntityId2, TeamType.Unknown77)
+                || CharacterHasTeamType(chrEntityId2, TeamType.Disabled))
+                && EventFlag(8221));
+        SetEventFlagID(eventFlagId3, ON);
+    }
+L6:
+    WaitFor(
+        !CharacterHasSpEffect(chrEntityId2, 32)
+            && !CharacterHasSpEffect(chrEntityId2, 99200)
+            && !CharacterHasSpEffect(chrEntityId2, 99201)
+            && !CharacterHasSpEffect(chrEntityId2, 102610)
+            && !CharacterHasSpEffect(chrEntityId2, 16166)
+            && !CharacterHasSpEffect(chrEntityId2, 99211)
+            && !CharacterHasSpEffect(chrEntityId2, 102450));
+    WaitFor(ElapsedSeconds(0.5));
+    RestartIf(
+        !(!CharacterHasSpEffect(chrEntityId2, 32)
+            && !CharacterHasSpEffect(chrEntityId2, 99200)
+            && !CharacterHasSpEffect(chrEntityId2, 99201)
+            && !CharacterHasSpEffect(chrEntityId2, 102610)
+            && !CharacterHasSpEffect(chrEntityId2, 16166)
+            && !CharacterHasSpEffect(chrEntityId2, 99211)
+            && !CharacterHasSpEffect(chrEntityId2, 102450)));
+    SetEventFlagID(eventFlagId3, OFF);
+    EndIf(EventFlag(8062));
+    if (value != 1) {
+        WaitFor(ElapsedFrames(1));
+    }
+    if (IsPlayerNo(playerNo)) {
+        WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, chrEntityId2, 900, chrEntityId2);
+    }
+    WaitFor(ElapsedSeconds(1));
+    ForceAnimationPlayback(chrEntityId, animationId, false, false, false);
+    EnableCharacter(chrEntityId);
+    EnableCharacterGravity(chrEntityId);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90035223, Default, function(eventFlagId, entityId, eventFlagId2) {
+    WaitFor(EventFlag(8077) && EventFlag(8061) && EventFlag(eventFlagId));
+    WaitFor(
+        (!EventFlag(eventFlagId2) && !InsidePlayArea(entityId, 50))
+            || PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59));
+    SetNetworkconnectedEventFlagID(8062, ON);
+});
+
+$Event(90035224, Default, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2) {
+    WaitFor(EventFlag(eventFlagId));
+    WaitFor(EventFlag(8062));
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    SetSpEffect(chrEntityId, 51230);
+    SetSpEffect(chrEntityId2, 51230);
+    EnableCharacterInvincibility(chrEntityId);
+    EnableCharacterInvincibility(chrEntityId2);
+    WaitFor(ElapsedSeconds(5));
+    SetCharacterBackreadState(chrEntityId, true);
+    SetCharacterBackreadState(chrEntityId2, true);
+});
+
+$Event(90035225, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
+    WaitFor(CharacterHPValue(chrEntityId) <= 0);
+    WaitFor(ElapsedSeconds(5));
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90035227, Default, function(chrEntityId, chrEntityId2, targetDistance, playerNo, targetDistance2, eventFlagId, eventFlagId2, value) {
+    if (!EventFlag(eventFlagId2)) {
+        WaitFor(EventFlag(8061));
+        EndIf(!IsPlayerNo(playerNo));
+        spFlagArea &= !CharacterHasSpEffect(chrEntityId, 51221) && !EventFlag(eventFlagId);
+        if (!IsPlayerNo(1)) {
+            area |= EntityInRadiusOfEntity(10002, chrEntityId, targetDistance2, 1);
+        }
+        if (!IsPlayerNo(2)) {
+            area |= EntityInRadiusOfEntity(10003, chrEntityId, targetDistance2, 1);
+        }
+        if (!IsPlayerNo(3)) {
+            area |= EntityInRadiusOfEntity(10004, chrEntityId, targetDistance2, 1);
+        }
+        spFlagArea &= !area
+            && (CharacterHasSpEffect(51225, -1)
+                || (CharacterHasSpEffect(chrEntityId, 51220)
+                    && !EntityInRadiusOfEntity(chrEntityId2, chrEntityId, targetDistance, 1)));
+        WaitFor(spFlagArea);
+        ForceAnimationPlayback(chrEntityId, 20026, false, false, false);
+        WaitFor(ElapsedSeconds(0.5));
+        DisableCharacter(chrEntityId);
+        DisableCharacterGravity(chrEntityId);
+        SetEventFlagID(eventFlagId2, ON);
+    }
+L6:
+    WaitFor(
+        !CharacterHasSpEffect(chrEntityId2, 32)
+            && !CharacterHasSpEffect(chrEntityId2, 99200)
+            && !CharacterHasSpEffect(chrEntityId2, 99201)
+            && !CharacterHasSpEffect(chrEntityId2, 102610)
+            && !CharacterHasSpEffect(chrEntityId2, 16166)
+            && !CharacterHasSpEffect(chrEntityId2, 99211)
+            && !CharacterHasSpEffect(chrEntityId2, 102450));
+    WaitFor(ElapsedSeconds(0.5));
+    RestartIf(
+        !(!CharacterHasSpEffect(chrEntityId2, 32)
+            && !CharacterHasSpEffect(chrEntityId2, 99200)
+            && !CharacterHasSpEffect(chrEntityId2, 99201)
+            && !CharacterHasSpEffect(chrEntityId2, 102610)
+            && !CharacterHasSpEffect(chrEntityId2, 16166)
+            && !CharacterHasSpEffect(chrEntityId2, 99211)
+            && !CharacterHasSpEffect(chrEntityId2, 102450)));
+    SetEventFlagID(eventFlagId2, OFF);
+    EndIf(EventFlag(8062));
+    if (value != 1) {
+        WaitFor(ElapsedFrames(1));
+    }
+    WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, chrEntityId2, 900, chrEntityId2);
+    WaitFor(ElapsedSeconds(1));
+    ForceAnimationPlayback(chrEntityId, 20025, false, false, false);
+    EnableCharacter(chrEntityId);
+    EnableCharacterGravity(chrEntityId);
+    WaitFor(ElapsedSeconds(1));
+    RestartEvent();
+});
+
+$Event(90035228, Default, function(eventFlagId, entityId, eventFlagId2, eventFlagId3, targetDistance, targetDistance2) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(8061));
+    EndIf(!EventFlag(eventFlagId));
+    SetEventFlagID(eventFlagId3, OFF);
+    WaitFor(
+        EventFlag(eventFlagId2)
+            || EventFlag(8062)
+            || (!EventFlag(8224) && EntityInRadiusOfEntity(entityId, 20000, targetDistance, 1))
+            || (EventFlag(8224) && EntityInRadiusOfEntity(entityId, 20000, targetDistance2, 1)));
+    EndIf(EventFlag(eventFlagId2));
+    EndIf(EventFlag(8062));
+    SetEventFlagID(eventFlagId3, ON);
+    WaitFor(
+        EventFlag(eventFlagId2)
+            || EventFlag(8062)
+            || (!EventFlag(8224) && !EntityInRadiusOfEntity(entityId, 20000, targetDistance, 1))
+            || (EventFlag(8224) && !EntityInRadiusOfEntity(entityId, 20000, targetDistance2, 1)));
+    SetEventFlagID(eventFlagId3, OFF);
+    RestartEvent();
+});
+
+$Event(90035229, Default, function(chrEntityId, chrEntityId2, eventFlagId, generatorEntityId, chrEntityId3, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10, value) {
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8062));
+    if (!EventFlag(eventFlagId10)) {
+        if (!EventFlag(eventFlagId9)) {
+            if (!EventFlag(eventFlagId5)) {
+                WaitFor(EventFlag(8061));
+                EndIf(!EventFlag(chrEntityId));
+                WaitFor(EventFlag(eventFlagId));
+                WaitFor(CharacterDead(chrEntityId2));
+                if (!EventFlag(eventFlagId5)) {
+                    if (IsPlayerNo(1)) {
+                        WaitFor(!CharacterBackreadStatus(chrEntityId2));
+                        SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+                    } else if (IsPlayerNo(2)) {
+                        WaitFor(!CharacterBackreadStatus(chrEntityId2));
+                        SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+                    } else if (IsPlayerNo(3)) {
+                        WaitFor(!CharacterBackreadStatus(chrEntityId2));
+                        SetNetworkconnectedEventFlagID(eventFlagId4, ON);
+                        Goto(L0);
+                    }
+L0:
+                    chrFlag &= (!(CharacterHasTeamType(10002, TeamType.Human)
+                        || CharacterHasTeamType(10002, TeamType.WhitePhantom)
+                        || CharacterHasTeamType(10002, TeamType.Indiscriminate)
+                        || CharacterHasTeamType(10002, TeamType.Unknown77)
+                        || CharacterHasTeamType(10002, TeamType.Disabled))
+                        || EventFlag(eventFlagId2))
+                        && (!(CharacterHasTeamType(10003, TeamType.Human)
+                            || CharacterHasTeamType(10003, TeamType.WhitePhantom)
+                            || CharacterHasTeamType(10003, TeamType.Indiscriminate)
+                            || CharacterHasTeamType(10003, TeamType.Unknown77)
+                            || CharacterHasTeamType(10003, TeamType.Disabled))
+                            || EventFlag(eventFlagId3))
+                        && (!(CharacterHasTeamType(10004, TeamType.Human)
+                            || CharacterHasTeamType(10004, TeamType.WhitePhantom)
+                            || CharacterHasTeamType(10004, TeamType.Indiscriminate)
+                            || CharacterHasTeamType(10004, TeamType.Unknown77)
+                            || CharacterHasTeamType(10004, TeamType.Disabled))
+                            || EventFlag(eventFlagId4));
+                    WaitFor(chrFlag);
+                    SetNetworkconnectedEventFlagID(eventFlagId5, ON);
+                }
+            }
+L1:
+            InvokeEnemyGenerator(generatorEntityId);
+            if (IsPlayerNo(1)) {
+                WaitFor(!CharacterDead(chrEntityId2));
+                SetNetworkconnectedEventFlagID(eventFlagId6, ON);
+            } else if (IsPlayerNo(2)) {
+                WaitFor(!CharacterDead(chrEntityId2));
+                SetNetworkconnectedEventFlagID(eventFlagId7, ON);
+            } else if (IsPlayerNo(3)) {
+                WaitFor(!CharacterDead(chrEntityId2));
+                SetNetworkconnectedEventFlagID(eventFlagId8, ON);
+                Goto(L2);
+            }
+L2:
+            DisableCharacter(chrEntityId2);
+            chrFlag &= (!(CharacterHasTeamType(10002, TeamType.Human)
+                || CharacterHasTeamType(10002, TeamType.WhitePhantom)
+                || CharacterHasTeamType(10002, TeamType.Indiscriminate)
+                || CharacterHasTeamType(10002, TeamType.Unknown77)
+                || CharacterHasTeamType(10002, TeamType.Disabled))
+                || EventFlag(eventFlagId6))
+                && (!(CharacterHasTeamType(10003, TeamType.Human)
+                    || CharacterHasTeamType(10003, TeamType.WhitePhantom)
+                    || CharacterHasTeamType(10003, TeamType.Indiscriminate)
+                    || CharacterHasTeamType(10003, TeamType.Unknown77)
+                    || CharacterHasTeamType(10003, TeamType.Disabled))
+                    || EventFlag(eventFlagId7))
+                && (!(CharacterHasTeamType(10004, TeamType.Human)
+                    || CharacterHasTeamType(10004, TeamType.WhitePhantom)
+                    || CharacterHasTeamType(10004, TeamType.Indiscriminate)
+                    || CharacterHasTeamType(10004, TeamType.Unknown77)
+                    || CharacterHasTeamType(10004, TeamType.Disabled))
+                    || EventFlag(eventFlagId8));
+            WaitFor(chrFlag || ElapsedSeconds(5));
+            RestartIf(!chrFlag.Passed);
+            SetNetworkconnectedEventFlagID(eventFlagId9, ON);
+        }
+L3:
+        WaitFor(
+            (CharacterHasTeamType(chrEntityId3, TeamType.Human)
+                || CharacterHasTeamType(chrEntityId3, TeamType.WhitePhantom)
+                || CharacterHasTeamType(chrEntityId3, TeamType.Indiscriminate)
+                || CharacterHasTeamType(chrEntityId3, TeamType.Unknown77)
+                || CharacterHasTeamType(chrEntityId3, TeamType.Disabled))
+                && EventFlag(8221));
+        SetEventFlagID(eventFlagId10, ON);
+    }
+L6:
+    WaitFor(
+        !CharacterHasSpEffect(chrEntityId3, 32)
+            && !CharacterHasSpEffect(chrEntityId3, 99200)
+            && !CharacterHasSpEffect(chrEntityId3, 99201)
+            && !CharacterHasSpEffect(chrEntityId3, 102610)
+            && !CharacterHasSpEffect(chrEntityId3, 16166)
+            && !CharacterHasSpEffect(chrEntityId3, 99211)
+            && !CharacterHasSpEffect(chrEntityId3, 102450));
+    WaitFor(ElapsedSeconds(0.5));
+    RestartIf(
+        !(!CharacterHasSpEffect(chrEntityId3, 32)
+            && !CharacterHasSpEffect(chrEntityId3, 99200)
+            && !CharacterHasSpEffect(chrEntityId3, 99201)
+            && !CharacterHasSpEffect(chrEntityId3, 102610)
+            && !CharacterHasSpEffect(chrEntityId3, 16166)
+            && !CharacterHasSpEffect(chrEntityId3, 99211)
+            && !CharacterHasSpEffect(chrEntityId3, 102450)));
+    SetEventFlagID(eventFlagId10, OFF);
+    EndIf(EventFlag(8062));
+    if (value != 1) {
+        WaitFor(ElapsedFrames(1));
+    }
+    WarpCharacterAndCopyFloor(chrEntityId2, TargetEntityType.Character, chrEntityId3, 900, chrEntityId3);
+    WaitFor(ElapsedSeconds(1));
+    ForceAnimationPlayback(chrEntityId2, 20025, false, false, false);
+    EnableCharacter(chrEntityId2);
+    EnableCharacterGravity(chrEntityId);
+    SetNetworkconnectedEventFlagID(eventFlagId2, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId3, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId4, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId5, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId6, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId7, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId8, OFF);
+    SetNetworkconnectedEventFlagID(eventFlagId9, OFF);
+    WaitFor(ElapsedSeconds(1));
     RestartEvent();
 });
 
@@ -3828,6 +5724,7 @@ $Event(90035236, Default, function(chrEntityId, chrEntityId2, eventFlagId, event
         DisableCharacter(chrEntityId);
         DisableCharacter(chrEntityId2);
         RecordUserDispLog(11143, chrEntityId, LogObjectType.None, -1);
+        SetWorldMapPointFlag(0, OFF);
         EndEvent();
     }
     EnableCharacterGravity(chrEntityId);
@@ -3839,6 +5736,7 @@ $Event(90035236, Default, function(chrEntityId, chrEntityId2, eventFlagId, event
     DisplayTextEffectId(2200);
     DisableCharacter(chrEntityId2);
     RecordUserDispLog(11142, chrEntityId, LogObjectType.None, -1);
+    SetWorldMapPointFlag(0, OFF);
 });
 
 $Event(90035237, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
@@ -4355,6 +6253,2142 @@ $Event(90035253, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
     RestartEvent();
 });
 
+$Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8061));
+    WaitFor(EventFlag(eventFlagId2));
+    if (IsPlayerNo(1)) {
+        WaitFor(ElapsedSeconds(0));
+    }
+    if (IsPlayerNo(2)) {
+        WaitFor(ElapsedSeconds(1.5));
+    }
+    if (IsPlayerNo(3)) {
+        WaitFor(ElapsedSeconds(3));
+    }
+    if (EventFlag(9999)) {
+        WaitFixedTimeFrames(1);
+    }
+    if (!EventFlag(9999)) {
+        EndIf(
+            !(PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59)
+                && InsidePlayAreaByTime(0, 0, 17, 0, 0)
+                && !InsidePlayAreaByTime(0, 0, 23, 59, 0)));
+        EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    }
+    EndIf(
+        !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1))
+            && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1))));
+    SetNetworkconnectedEventFlagID(8061, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    SetWorldMapPointFlag(0, ON);
+    SetWorldMapPointFlag(4, ON);
+    RecordUserDispLog(110200, entityId, LogObjectType.None, -1);
+});
+
+$Event(90035261, Default, function(entityId, eventFlagId, eventFlagId2) {
+    DisableNetworkSync();
+    WaitFor(EventFlag(eventFlagId2) || EventFlag(8061));
+    WaitFor(ElapsedSeconds(5));
+    if (IsPlayerNo(1)) {
+        WaitFor(ElapsedSeconds(0));
+    }
+    if (IsPlayerNo(2)) {
+        WaitFor(ElapsedSeconds(1.5));
+    }
+    if (IsPlayerNo(3)) {
+        WaitFor(ElapsedSeconds(3));
+    }
+    EndIf(EventFlag(8061));
+    if (!EventFlag(9999)) {
+        EndIf(
+            !(PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59)
+                && InsidePlayAreaByTime(0, 0, 17, 0, 0)
+                && !InsidePlayAreaByTime(0, 0, 23, 59, 0)));
+    }
+    if (!EventFlagAndRandomCondition(6001, 0.3)) {
+        WaitFor(ElapsedFrames(1));
+        EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    }
+    SetNetworkconnectedEventFlagID(8061, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    SetWorldMapPointFlag(0, ON);
+    SetWorldMapPointFlag(4, ON);
+    RecordUserDispLog(110200, entityId, LogObjectType.None, -1);
+});
+
+$Event(90035262, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, eventFlagId) {
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    if (EventFlag(8061) && EventFlag(eventFlagId)) {
+        EnableCharacterDefaultBackread(chrEntityId);
+        DisableCharacterHPBarDisplay(chrEntityId);
+        if (IsPlayerNo(1)) {
+            EnableCharacterDefaultBackread(chrEntityId2);
+            SetCharacterEnableDistance(chrEntityId2, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId2);
+            SetNetworkUpdateAuthority(chrEntityId2, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(chrEntityId2);
+        }
+        if (IsPlayerNo(2)) {
+            EnableCharacterDefaultBackread(chrEntityId3);
+            SetCharacterEnableDistance(chrEntityId3, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId3);
+            SetNetworkUpdateAuthority(chrEntityId3, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(chrEntityId3);
+        }
+        if (IsPlayerNo(3)) {
+            EnableCharacterDefaultBackread(chrEntityId4);
+            SetCharacterEnableDistance(chrEntityId4, 1200);
+            DisableCharacterDisableOnHitUnload(chrEntityId4);
+            SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(chrEntityId4);
+        }
+        DisableCharacterCollision(chrEntityId2);
+        DisableCharacterCollision(chrEntityId3);
+        DisableCharacterCollision(chrEntityId4);
+        DisableCharacterGravity(chrEntityId2);
+        DisableCharacterGravity(chrEntityId3);
+        DisableCharacterGravity(chrEntityId4);
+        if (HPRatio(chrEntityId) < 1) {
+            WaitFor(CharacterBackreadStatus(chrEntityId));
+            ForceAnimationPlayback(chrEntityId, 30020, false, false, false);
+        }
+        EndEvent();
+    }
+L10:
+    DisableCharacter(chrEntityId);
+    DisableCharacter(chrEntityId2);
+    DisableCharacter(chrEntityId3);
+    DisableCharacter(chrEntityId4);
+    WaitFor(EventFlag(8061));
+    EndIf(!EventFlag(eventFlagId));
+    WaitFor(ElapsedSeconds(3));
+    EnableCharacterDefaultBackread(chrEntityId);
+    EnableCharacter(chrEntityId);
+    DisableCharacterHPBarDisplay(chrEntityId);
+    if (IsPlayerNo(1)) {
+        EnableCharacterDefaultBackread(chrEntityId2);
+        EnableCharacter(chrEntityId2);
+        SetCharacterEnableDistance(chrEntityId2, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId2);
+        SetNetworkUpdateAuthority(chrEntityId2, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(chrEntityId2);
+    }
+    if (IsPlayerNo(2)) {
+        EnableCharacterDefaultBackread(chrEntityId3);
+        EnableCharacter(chrEntityId3);
+        SetCharacterEnableDistance(chrEntityId3, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId3);
+        SetNetworkUpdateAuthority(chrEntityId3, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(chrEntityId3);
+    }
+    if (IsPlayerNo(3)) {
+        EnableCharacterDefaultBackread(chrEntityId4);
+        EnableCharacter(chrEntityId4);
+        SetCharacterEnableDistance(chrEntityId4, 1200);
+        DisableCharacterDisableOnHitUnload(chrEntityId4);
+        SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(chrEntityId4);
+    }
+    DisableCharacterCollision(chrEntityId2);
+    DisableCharacterCollision(chrEntityId3);
+    DisableCharacterCollision(chrEntityId4);
+    DisableCharacterGravity(chrEntityId2);
+    DisableCharacterGravity(chrEntityId3);
+    DisableCharacterGravity(chrEntityId4);
+    WaitFor(CharacterBackreadStatus(chrEntityId));
+    ForceAnimationPlayback(chrEntityId, 30020, false, false, false);
+});
+
+$Event(90035263, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, eventFlagId) {
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    WaitFor(EventFlag(8061));
+    EndIf(!EventFlag(eventFlagId));
+    hp = HPRatio(chrEntityId) < 0.99;
+    hpTime |= hp;
+    if (!EventFlag(9999)) {
+        time |= !InsidePlayArea(chrEntityId, 50);
+    }
+    time |= PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59);
+    hpTime |= time;
+    WaitFor(hpTime);
+    DisableCharacterDefaultBackread(chrEntityId);
+    DisableCharacterDefaultBackread(chrEntityId2);
+    SetCharacterEnableDistance(chrEntityId2, -1);
+    EnableCharacterDisableOnHitUnload(chrEntityId2);
+    SetNetworkUpdateAuthority(chrEntityId2, AuthorityLevel.Normal);
+    DisableCharacterDefaultBackread(chrEntityId3);
+    SetCharacterEnableDistance(chrEntityId3, -1);
+    EnableCharacterDisableOnHitUnload(chrEntityId3);
+    SetNetworkUpdateAuthority(chrEntityId3, AuthorityLevel.Normal);
+    DisableCharacterDefaultBackread(chrEntityId4);
+    SetCharacterEnableDistance(chrEntityId4, -1);
+    EnableCharacterDisableOnHitUnload(chrEntityId4);
+    SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Normal);
+    if (!hp.Passed) {
+        SetNetworkconnectedEventFlagID(8062, ON);
+        ForceAnimationPlayback(chrEntityId, 20021, false, false, false);
+        WaitFor(ElapsedSeconds(10));
+        DisableCharacter(chrEntityId);
+        DisableCharacter(chrEntityId2);
+        DisableCharacter(chrEntityId3);
+        DisableCharacter(chrEntityId4);
+        SetCharacterBackreadState(chrEntityId, true);
+        SetCharacterBackreadState(chrEntityId2, true);
+        SetCharacterBackreadState(chrEntityId3, true);
+        SetCharacterBackreadState(chrEntityId4, true);
+        RecordUserDispLog(110202, chrEntityId, LogObjectType.None, -1);
+        SetWorldMapPointFlag(0, OFF);
+        SetWorldMapPointFlag(4, OFF);
+        EndEvent();
+    }
+L0:
+    ForceAnimationPlayback(chrEntityId, 20021, false, false, false);
+    WaitFor(ElapsedSeconds(5));
+    PlaySE(20000, SoundType.EnvironmentalSound, 600081102);
+    WaitFor(ElapsedSeconds(1));
+    SetWorldMapPointFlag(0, OFF);
+    SetWorldMapPointFlag(4, OFF);
+    SetNetworkconnectedEventFlagID(8062, ON);
+    SetNetworkconnectedEventFlagID(8025, ON);
+    DisplayTextEffectId(2200);
+    RecordUserDispLog(110201, chrEntityId, LogObjectType.None, -1);
+    if (!IsPlayerCount(1)) {
+        if (!IsPlayerCount(2)) {
+            SetSpEffect(10000, 98800);
+        }
+    }
+    if (!IsPlayerCount(1)) {
+        if (!IsPlayerCount(3)) {
+            SetSpEffect(10000, 98801);
+        }
+    }
+    if (!IsPlayerCount(2)) {
+        if (!IsPlayerCount(3)) {
+            SetSpEffect(10000, 98802);
+        }
+    }
+    WaitFor(ElapsedSeconds(10));
+    DisableCharacter(chrEntityId);
+    DisableCharacter(chrEntityId2);
+    DisableCharacter(chrEntityId3);
+    DisableCharacter(chrEntityId4);
+    SetCharacterBackreadState(chrEntityId, true);
+    SetCharacterBackreadState(chrEntityId2, true);
+    SetCharacterBackreadState(chrEntityId3, true);
+    SetCharacterBackreadState(chrEntityId4, true);
+});
+
+$Event(90035264, Default, function(eventFlagId) {
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    if (!(EventFlag(8061) && EventFlag(eventFlagId))) {
+        WaitFor(EventFlag(8061));
+        EndIf(!EventFlag(eventFlagId));
+        WaitFor(ElapsedSeconds(18));
+    }
+L0:
+    WaitFor((ElapsedSeconds(45) && PlayerIsInOwnWorld()) || EventFlag(80002) || EventFlag(8062));
+    EndIf(EventFlag(8062));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(80002, ON);
+    }
+    WaitFor((ElapsedSeconds(22) && PlayerIsInOwnWorld()) || !EventFlag(80002) || EventFlag(8062));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(80002, OFF);
+    }
+    EndIf(EventFlag(8062));
+    RestartEvent();
+});
+
+$Event(90035265, Default, function(chrEntityId, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    if (!(EventFlag(8061) && EventFlag(eventFlagId))) {
+        WaitFor(EventFlag(8061));
+        EndIf(!EventFlag(eventFlagId));
+        WaitFor(ElapsedSeconds(1));
+        DisableCharacterCollision(chrEntityId);
+        DisableCharacterGravity(chrEntityId);
+        WaitFor(ElapsedFrames(1));
+        WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 20000, 210, 20000);
+        CreateBulletOwner(chrEntityId);
+        PlaySE(20000, SoundType.EnvironmentalSound, 600081100);
+        WaitFor(ElapsedSeconds(6));
+        PlaySE(20000, SoundType.EnvironmentalSound, 600081101);
+        WaitFor(ElapsedSeconds(4));
+        if (!EventFlag(8062)) {
+            WaitFor(RandomElapsedSeconds(0, 0.3));
+            if (!CharacterHasSpEffect(20000, 16166)) {
+                if (!CharacterHasSpEffect(20000, 99200)) {
+                    if (!CharacterHasSpEffect(20000, 99201)) {
+                        if (!CharacterHasSpEffect(20000, 99211)) {
+                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                WaitFixedTimeFrames(1);
+                                ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                            }
+                        }
+                    }
+                }
+            }
+            WaitFor(ElapsedSeconds(0.1));
+            if (!EventFlag(8062)) {
+                if (!CharacterHasSpEffect(20000, 16166)) {
+                    if (!CharacterHasSpEffect(20000, 99200)) {
+                        if (!CharacterHasSpEffect(20000, 99201)) {
+                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                    ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                }
+                            }
+                        }
+                    }
+                }
+                WaitFor(ElapsedSeconds(0.1));
+                if (!EventFlag(8062)) {
+                    if (!CharacterHasSpEffect(20000, 16166)) {
+                        if (!CharacterHasSpEffect(20000, 99200)) {
+                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                        ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    WaitFor(ElapsedSeconds(0.1));
+                    if (!EventFlag(8062)) {
+                        if (!CharacterHasSpEffect(20000, 16166)) {
+                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                            ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        WaitFor(ElapsedSeconds(0.1));
+                        if (!EventFlag(8062)) {
+                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            WaitFor(ElapsedSeconds(0.2));
+                            if (!EventFlag(8062)) {
+                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                    ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                WaitFor(ElapsedSeconds(0.1));
+                                if (!EventFlag(8062)) {
+                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                        ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    WaitFor(ElapsedSeconds(0.1));
+                                    if (!EventFlag(8062)) {
+                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                            ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        WaitFor(ElapsedSeconds(0.1));
+                                        if (!EventFlag(8062)) {
+                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            WaitFor(RandomElapsedSeconds(0.1, 0.5));
+                                            if (!EventFlag(8062)) {
+                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                    ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                    WaitFixedTimeFrames(1);
+                                                                    ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                WaitFor(ElapsedSeconds(0.1));
+                                                if (!EventFlag(8062)) {
+                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                        ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    WaitFor(ElapsedSeconds(0.1));
+                                                    if (!EventFlag(8062)) {
+                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                            ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        WaitFor(ElapsedSeconds(0.1));
+                                                        if (!EventFlag(8062)) {
+                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            WaitFor(ElapsedSeconds(0.1));
+                                                            if (!EventFlag(8062)) {
+                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                WaitFor(ElapsedSeconds(0.2));
+                                                                if (!EventFlag(8062)) {
+                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    WaitFor(ElapsedSeconds(0.1));
+                                                                    if (!EventFlag(8062)) {
+                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        WaitFor(
+                                                                            ElapsedSeconds(0.1));
+                                                                        if (!EventFlag(8062)) {
+                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            WaitFor(
+                                                                                ElapsedSeconds(0.1));
+                                                                            if (!EventFlag(8062)) {
+                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                WaitFor(
+                                                                                    RandomElapsedSeconds(0.1, 0.5));
+                                                                                if (!EventFlag(8062)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                                                        WaitFixedTimeFrames(1);
+                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                    WaitFor(
+                                                                                        ElapsedSeconds(0.1));
+                                                                                    if (!EventFlag(8062)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                        WaitFor(
+                                                                                            ElapsedSeconds(0.1));
+                                                                                        if (!EventFlag(8062)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                            WaitFor(
+                                                                                                ElapsedSeconds(0.4));
+                                                                                            if (!EventFlag(8062)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                                WaitFor(
+                                                                                                    ElapsedSeconds(0.1));
+                                                                                                if (!EventFlag(8062)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                    WaitFor(
+                                                                                                        ElapsedSeconds(0.1));
+                                                                                                    if (!EventFlag(8062)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                        WaitFor(
+                                                                                                            ElapsedSeconds(0.1));
+                                                                                                        if (!EventFlag(8062)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                            WaitFor(
+                                                                                                                RandomElapsedSeconds(0.1, 0.5));
+                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                                                                                    WaitFixedTimeFrames(1);
+                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                                WaitFor(
+                                                                                                                    ElapsedSeconds(0.1));
+                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    WaitFor(
+                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                        WaitFor(
+                                                                                                                            ElapsedSeconds(0.1));
+                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                            WaitFor(
+                                                                                                                                ElapsedSeconds(0.3));
+                                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                                WaitFor(
+                                                                                                                                    ElapsedSeconds(0.1));
+                                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                    WaitFor(
+                                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                        WaitFor(
+                                                                                                                                            ElapsedSeconds(0.1));
+                                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                            WaitFor(
+                                                                                                                                                RandomElapsedSeconds(0.1, 0.5));
+                                                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                                                                                                                    WaitFixedTimeFrames(1);
+                                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                WaitFor(
+                                                                                                                                                    ElapsedSeconds(0.1));
+                                                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                    WaitFor(
+                                                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                        WaitFor(
+                                                                                                                                                            ElapsedSeconds(0.1));
+                                                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            WaitFor(
+                                                                                                                                                                ElapsedSeconds(0.1));
+                                                                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                                WaitFor(
+                                                                                                                                                                    ElapsedSeconds(0.2));
+                                                                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    WaitFor(
+                                                                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                                                                                                                        }
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                        WaitFor(
+                                                                                                                                                                            ElapsedSeconds(0.1));
+                                                                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                            WaitFor(
+                                                                                                                                                                                ElapsedSeconds(0.1));
+                                                                                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                                                                                                                                }
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                                WaitFor(
+                                                                                                                                                                                    ElapsedSeconds(3));
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+L0:
+        NoOp();
+    }
+L1:
+    DisableCharacterCollision(chrEntityId);
+    DisableCharacterGravity(chrEntityId);
+    WaitFor(EventFlag(80002) || EventFlag(8062));
+    EndIf(EventFlag(8062));
+    WaitFor(ElapsedSeconds(7));
+    WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 20000, 210, 20000);
+    CreateBulletOwner(chrEntityId);
+    PlaySE(20000, SoundType.EnvironmentalSound, 600081101);
+    WaitFor(ElapsedSeconds(4));
+    if (!EventFlag(8062)) {
+        WaitFor(RandomElapsedSeconds(0, 0.3));
+        if (!CharacterHasSpEffect(20000, 16166)) {
+            if (!CharacterHasSpEffect(20000, 99200)) {
+                if (!CharacterHasSpEffect(20000, 99201)) {
+                    if (!CharacterHasSpEffect(20000, 99211)) {
+                        if (!CharacterHasSpEffect(20000, 102610)) {
+                            ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                            WaitFixedTimeFrames(1);
+                            ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                        }
+                    }
+                }
+            }
+        }
+        WaitFor(ElapsedSeconds(0.1));
+        if (!EventFlag(8062)) {
+            if (!CharacterHasSpEffect(20000, 16166)) {
+                if (!CharacterHasSpEffect(20000, 99200)) {
+                    if (!CharacterHasSpEffect(20000, 99201)) {
+                        if (!CharacterHasSpEffect(20000, 99211)) {
+                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                            }
+                        }
+                    }
+                }
+            }
+            WaitFor(ElapsedSeconds(0.1));
+            if (!EventFlag(8062)) {
+                if (!CharacterHasSpEffect(20000, 16166)) {
+                    if (!CharacterHasSpEffect(20000, 99200)) {
+                        if (!CharacterHasSpEffect(20000, 99201)) {
+                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                    ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                }
+                            }
+                        }
+                    }
+                }
+                WaitFor(ElapsedSeconds(0.1));
+                if (!EventFlag(8062)) {
+                    if (!CharacterHasSpEffect(20000, 16166)) {
+                        if (!CharacterHasSpEffect(20000, 99200)) {
+                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                        ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    WaitFor(ElapsedSeconds(0.1));
+                    if (!EventFlag(8062)) {
+                        if (!CharacterHasSpEffect(20000, 16166)) {
+                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                            ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        WaitFor(ElapsedSeconds(0.2));
+                        if (!EventFlag(8062)) {
+                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            WaitFor(ElapsedSeconds(0.1));
+                            if (!EventFlag(8062)) {
+                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                    ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                WaitFor(ElapsedSeconds(0.1));
+                                if (!EventFlag(8062)) {
+                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                        ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    WaitFor(ElapsedSeconds(0.1));
+                                    if (!EventFlag(8062)) {
+                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                            ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        WaitFor(RandomElapsedSeconds(0.1, 0.5));
+                                        if (!EventFlag(8062)) {
+                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                WaitFixedTimeFrames(1);
+                                                                ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            WaitFor(ElapsedSeconds(0.1));
+                                            if (!EventFlag(8062)) {
+                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                    ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                WaitFor(ElapsedSeconds(0.1));
+                                                if (!EventFlag(8062)) {
+                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                        ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    WaitFor(ElapsedSeconds(0.1));
+                                                    if (!EventFlag(8062)) {
+                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                            ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        WaitFor(ElapsedSeconds(0.1));
+                                                        if (!EventFlag(8062)) {
+                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            WaitFor(ElapsedSeconds(0.2));
+                                                            if (!EventFlag(8062)) {
+                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                WaitFor(ElapsedSeconds(0.1));
+                                                                if (!EventFlag(8062)) {
+                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    WaitFor(ElapsedSeconds(0.1));
+                                                                    if (!EventFlag(8062)) {
+                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        WaitFor(
+                                                                            ElapsedSeconds(0.1));
+                                                                        if (!EventFlag(8062)) {
+                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            WaitFor(
+                                                                                RandomElapsedSeconds(0.1, 0.5));
+                                                                            if (!EventFlag(8062)) {
+                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                                                    WaitFixedTimeFrames(1);
+                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                WaitFor(
+                                                                                    ElapsedSeconds(0.1));
+                                                                                if (!EventFlag(8062)) {
+                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                    WaitFor(
+                                                                                        ElapsedSeconds(0.1));
+                                                                                    if (!EventFlag(8062)) {
+                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                        WaitFor(
+                                                                                            ElapsedSeconds(0.4));
+                                                                                        if (!EventFlag(8062)) {
+                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                            WaitFor(
+                                                                                                ElapsedSeconds(0.1));
+                                                                                            if (!EventFlag(8062)) {
+                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                                WaitFor(
+                                                                                                    ElapsedSeconds(0.1));
+                                                                                                if (!EventFlag(8062)) {
+                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                    WaitFor(
+                                                                                                        ElapsedSeconds(0.1));
+                                                                                                    if (!EventFlag(8062)) {
+                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                        WaitFor(
+                                                                                                            RandomElapsedSeconds(0.1, 0.5));
+                                                                                                        if (!EventFlag(8062)) {
+                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                                                                                WaitFixedTimeFrames(1);
+                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                            WaitFor(
+                                                                                                                ElapsedSeconds(0.1));
+                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                                WaitFor(
+                                                                                                                    ElapsedSeconds(0.1));
+                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    WaitFor(
+                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                        WaitFor(
+                                                                                                                            ElapsedSeconds(0.3));
+                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                            WaitFor(
+                                                                                                                                ElapsedSeconds(0.1));
+                                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                                WaitFor(
+                                                                                                                                    ElapsedSeconds(0.1));
+                                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                    WaitFor(
+                                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                        WaitFor(
+                                                                                                                                            RandomElapsedSeconds(0.1, 0.5));
+                                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001040, 0, 0, 0);
+                                                                                                                                                                WaitFixedTimeFrames(1);
+                                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001130, 0, 0, 0);
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                            WaitFor(
+                                                                                                                                                ElapsedSeconds(0.1));
+                                                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001050, 0, 0, 0);
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                WaitFor(
+                                                                                                                                                    ElapsedSeconds(0.1));
+                                                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001060, 0, 0, 0);
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                    WaitFor(
+                                                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001070, 0, 0, 0);
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                        WaitFor(
+                                                                                                                                                            ElapsedSeconds(0.1));
+                                                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001080, 0, 0, 0);
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            WaitFor(
+                                                                                                                                                                ElapsedSeconds(0.2));
+                                                                                                                                                            if (!EventFlag(8062)) {
+                                                                                                                                                                if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                    ShootBullet(chrEntityId, 20000, -1, 802001090, 0, 0, 0);
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                                WaitFor(
+                                                                                                                                                                    ElapsedSeconds(0.1));
+                                                                                                                                                                if (!EventFlag(8062)) {
+                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                        ShootBullet(chrEntityId, 20000, -1, 802001100, 0, 0, 0);
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    WaitFor(
+                                                                                                                                                                        ElapsedSeconds(0.1));
+                                                                                                                                                                    if (!EventFlag(8062)) {
+                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                            ShootBullet(chrEntityId, 20000, -1, 802001110, 0, 0, 0);
+                                                                                                                                                                                        }
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                        WaitFor(
+                                                                                                                                                                            ElapsedSeconds(0.1));
+                                                                                                                                                                        if (!EventFlag(8062)) {
+                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 16166)) {
+                                                                                                                                                                                if (!CharacterHasSpEffect(20000, 99200)) {
+                                                                                                                                                                                    if (!CharacterHasSpEffect(20000, 99201)) {
+                                                                                                                                                                                        if (!CharacterHasSpEffect(20000, 99211)) {
+                                                                                                                                                                                            if (!CharacterHasSpEffect(20000, 102610)) {
+                                                                                                                                                                                                ShootBullet(chrEntityId, 20000, -1, 802001120, 0, 0, 0);
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                            WaitFor(
+                                                                                                                                                                                ElapsedSeconds(7));
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+L2:
+    WaitFor(!EventFlag(80002));
+    RestartEvent();
+});
+
+$Event(90035266, Default, function(entityId, targetDistance, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    if (!EventFlag(8062)) {
+        GotoIf(L10, !(EventFlag(8061) && EventFlag(eventFlagId)));
+        SetEventFlagID(9024, ON);
+        GotoIf(L0, CharacterHasSpEffect(20000, 16166));
+        GotoIf(L2, EntityInRadiusOfEntity(entityId, 20000, targetDistance, 1));
+        if (!EventFlag(80002)) {
+            Goto(L0);
+L10:
+            WaitFor(EventFlag(8061));
+            EndIf(!EventFlag(eventFlagId));
+            WaitFor(ElapsedSeconds(1));
+            SetEventFlagID(9024, ON);
+            if (!CharacterHasSpEffect(20000, 16166)) {
+                if (!EventFlag(7604)) {
+                    ActivateGparamOverride(11, 4);
+                }
+                if (EventFlag(7604)) {
+                    ActivateGparamOverride(37, 4);
+                }
+            }
+            WaitFor(ElapsedSeconds(4));
+            WaitFor(ElapsedSeconds(15) || CharacterHasSpEffect(20000, 16166) || EventFlag(8062));
+            GotoIf(L3, EventFlag(8062));
+            RestartEvent();
+L0:
+            if (!EventFlag(7604)) {
+                ActivateGparamOverride(10, 3);
+            }
+            if (EventFlag(7604)) {
+                ActivateGparamOverride(36, 3);
+            }
+            WaitFor(
+                (!CharacterHasSpEffect(20000, 16166)
+                    && (EventFlag(80002) || EntityInRadiusOfEntity(entityId, 20000, targetDistance, 1)))
+                    || EventFlag(8062));
+            GotoIf(L3, EventFlag(8062));
+            RestartEvent();
+        }
+L1:
+        if (!EventFlag(7604)) {
+            ActivateGparamOverride(11, 10);
+        }
+        if (EventFlag(7604)) {
+            ActivateGparamOverride(37, 10);
+        }
+        WaitFor(ElapsedSeconds(10));
+        WaitFor(!EventFlag(80002) || CharacterHasSpEffect(20000, 16166) || EventFlag(8062));
+        GotoIf(L3, EventFlag(8062));
+        RestartEvent();
+L2:
+        if (!EventFlag(7604)) {
+            ActivateGparamOverride(11, 4);
+        }
+        if (EventFlag(7604)) {
+            ActivateGparamOverride(37, 4);
+        }
+        WaitFor(ElapsedSeconds(4));
+        WaitFor(
+            !EntityInRadiusOfEntity(entityId, 20000, targetDistance, 1)
+                || CharacterHasSpEffect(20000, 16166)
+                || EventFlag(8062));
+        if (!EventFlag(8062)) {
+            RestartEvent();
+        }
+    }
+L3:
+    DeactivateGparamOverride(10);
+    WaitFixedTimeFrames(1);
+    SetEventFlagID(9024, OFF);
+});
+
+$Event(90035267, Default, function(eventFlagId) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    GotoIf(L3, EventFlag(8062));
+    GotoIf(L10, !(EventFlag(8061) && EventFlag(eventFlagId)));
+    GotoIf(L2, CharacterHasSpEffect(20000, 16166));
+    if (!EventFlag(80002)) {
+        Goto(L0);
+L10:
+        WaitFor(EventFlag(8061));
+        EndIf(!EventFlag(eventFlagId));
+        WaitFor(ElapsedSeconds(1));
+        if (!CharacterHasSpEffect(20000, 16166)) {
+            SetSpEffect(20000, 63010);
+        }
+        WaitFor(ElapsedSeconds(4));
+        if (!CharacterHasSpEffect(20000, 16166)) {
+            SetSpEffect(20000, 63000);
+        }
+        WaitFor(ElapsedSeconds(15) || CharacterHasSpEffect(20000, 16166) || EventFlag(8062));
+        GotoIf(L3, EventFlag(8062));
+        RestartEvent();
+L0:
+        SetSpEffect(20000, 63010);
+        WaitFor(CharacterHasSpEffect(20000, 16166) || EventFlag(80002) || EventFlag(8062));
+        GotoIf(L3, EventFlag(8062));
+        RestartEvent();
+    }
+L1:
+    WaitFor(ElapsedSeconds(10));
+    if (!CharacterHasSpEffect(20000, 16166)) {
+        SetSpEffect(20000, 63000);
+    }
+    WaitFor(CharacterHasSpEffect(20000, 16166) || !EventFlag(80002) || EventFlag(8062));
+    GotoIf(L3, EventFlag(8062));
+    RestartEvent();
+L2:
+    SetSpEffect(20000, 63011);
+    WaitFor(!CharacterHasSpEffect(20000, 16166) || EventFlag(8062));
+    GotoIf(L3, EventFlag(8062));
+    RestartEvent();
+L3:
+    SetSpEffect(20000, 63011);
+});
+
+$Event(90035268, Default, function(chrEntityId, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
+    WaitFor(EventFlag(8061));
+    EndIf(!EventFlag(eventFlagId));
+    WaitFor(CharacterBackreadStatus(chrEntityId));
+    WaitFor(ElapsedSeconds(1));
+    WaitFor(
+        (CharacterBackreadStatus(chrEntityId)
+            && !CharacterHasSpEffect(chrEntityId, 63030, GreaterOrEqual, 1))
+            || EventFlag(8062));
+    EndIf(EventFlag(8062));
+    if (!CharacterHasSpEffect(chrEntityId, 63030, GreaterOrEqual, 1)) {
+        ForceAnimationPlayback(chrEntityId, 30020, false, false, false);
+    }
+    WaitFor(ElapsedSeconds(0.5));
+    RestartEvent();
+});
+
+$Event(90035270, Default, function(chrEntityId, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(EventFlag(8062));
+    WaitFor(EventFlag(8061));
+    EndIf(!EventFlag(eventFlagId));
+    WaitFor(
+        CharacterAIState(chrEntityId, AIStateType.Normal)
+            || CharacterAIState(chrEntityId, AIStateType.Recognition)
+            || CharacterAIState(chrEntityId, AIStateType.Alert)
+            || CharacterAIState(chrEntityId, AIStateType.Combat)
+            || CharacterAIState(chrEntityId, AIStateType.PassiveAlert)
+            || CharacterAIState(chrEntityId, AIStateType.ActiveAlert)
+            || CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget));
+    DisableCharacterGravity(chrEntityId);
+    areaChr |= EntityInRadiusOfEntity(10002, chrEntityId, 330, 1)
+        || EntityInRadiusOfEntity(10003, chrEntityId, 330, 1)
+        || EntityInRadiusOfEntity(10004, chrEntityId, 330, 1);
+    area &= areaChr && IsStableMap(0, 0, 0, 0);
+    if (area) {
+        EnableCharacterGravity(chrEntityId);
+    } else {
+        chr = CharacterAIState(chrEntityId, AIStateType.Normal)
+            || CharacterAIState(chrEntityId, AIStateType.Recognition)
+            || CharacterAIState(chrEntityId, AIStateType.Alert)
+            || CharacterAIState(chrEntityId, AIStateType.Combat)
+            || CharacterAIState(chrEntityId, AIStateType.PassiveAlert)
+            || CharacterAIState(chrEntityId, AIStateType.ActiveAlert)
+            || CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget);
+        areaChr |= !chr;
+        area &= (EntityInRadiusOfEntity(10002, chrEntityId, 300, 1)
+            || EntityInRadiusOfEntity(10003, chrEntityId, 300, 1)
+            || EntityInRadiusOfEntity(10004, chrEntityId, 300, 1))
+            && IsStableMap(0, 0, 0, 0);
+        areaChr |= area;
+        WaitFor(areaChr);
+        RestartIf(!chr.Passed);
+        EnableCharacterGravity(chrEntityId);
+    }
+L0:
+    WaitFor(
+        !(CharacterAIState(chrEntityId, AIStateType.Normal)
+            || CharacterAIState(chrEntityId, AIStateType.Recognition)
+            || CharacterAIState(chrEntityId, AIStateType.Alert)
+            || CharacterAIState(chrEntityId, AIStateType.Combat)
+            || CharacterAIState(chrEntityId, AIStateType.PassiveAlert)
+            || CharacterAIState(chrEntityId, AIStateType.ActiveAlert)
+            || CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget))
+            || !(EntityInRadiusOfEntity(10002, chrEntityId, 330, 1)
+                || EntityInRadiusOfEntity(10003, chrEntityId, 330, 1)
+                || EntityInRadiusOfEntity(10004, chrEntityId, 330, 1)));
+    RestartEvent();
+});
+
+$Event(90035272, Default, function(eventFlagId, chrEntityId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId));
+    if (!EventFlag(8224)) {
+        WaitFor(EventFlag(8223));
+        EndIf(EventFlag(eventFlagId2));
+        SetSpEffect(chrEntityId, 98180);
+        WaitFor(EventFlag(8224));
+        EndIf(EventFlag(eventFlagId2));
+    }
+L0:
+    SetSpEffect(chrEntityId, 98181);
+});
+
+$Event(90035273, Default, function(eventFlagId, eventFlagId2) {
+    DisableNetworkSync();
+    WaitFor(EventFlag(8061));
+    EndIf(!EventFlag(eventFlagId));
+    if (!EventFlag(53002900)) {
+        timeFlag = PlayAreaCurrentTimeInRange(21, 0, 0, 23, 59, 59) || EventFlag(eventFlagId2);
+        WaitFor(InArea(20000, 53002830) || timeFlag);
+        EndIf(timeFlag.Passed);
+        SetEventFlagID(53002900, ON);
+    }
+L0:
+    timeFlag2 = PlayAreaCurrentTimeInRange(21, 0, 0, 23, 59, 59) || EventFlag(eventFlagId2);
+    WaitFor(!InArea(20000, 53002830) || timeFlag2);
+    SetEventFlagID(53002900, OFF);
+    EndIf(timeFlag2.Passed);
+    RestartEvent();
+});
+
+$Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, value, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(8061));
+    WaitFor(EventFlag(eventFlagId4));
+    if (IsPlayerNo(1)) {
+        WaitFor(ElapsedSeconds(0));
+    }
+    if (IsPlayerNo(2)) {
+        WaitFor(ElapsedSeconds(3));
+    }
+    if (IsPlayerNo(3)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (EventFlag(9999)) {
+        WaitFixedTimeFrames(1);
+    }
+    if (!EventFlag(9999)) {
+        timeFlag &= PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59) && InsidePlayAreaByTime(0, 0, 17, 0, 0);
+    }
+    timeFlag &= !EventFlag(eventFlagId5)
+        && !EventFlag(eventFlagId6)
+        && !EventFlag(eventFlagId7)
+        && !EventFlag(eventFlagId8)
+        && !EventFlag(eventFlagId9)
+        && !IsHotSpot()
+        && !AnyBatchEventFlags(eventFlagId, eventFlagId3);
+    EndIf(!timeFlag);
+    if (IsPlayerNo(1)) {
+        EndIf(EventFlag(80012));
+    }
+    if (IsPlayerNo(2)) {
+        EndIf(EventFlag(80013));
+    }
+    if (IsPlayerNo(3)) {
+        EndIf(EventFlag(80014));
+    }
+    if (value == 0) {
+        EndIf(!EventFlagAndRandomCondition(6001, 0.3));
+    }
+    if (IsPlayerNo(1)) {
+        SetNetworkconnectedEventFlagID(80012, ON);
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    }
+    if (IsPlayerNo(2)) {
+        SetNetworkconnectedEventFlagID(80013, ON);
+        SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    }
+    if (IsPlayerNo(3)) {
+        SetNetworkconnectedEventFlagID(80014, ON);
+        SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+    }
+    WaitFor(EventFlag(8061) || PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59));
+    EndIf(!EventFlag(8061));
+    RecordUserDispLog(110050, entityId, LogObjectType.None, -1);
+});
+
+$Event(90035281, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(8061));
+    cond &= EventFlag(eventFlagId4) && PlayerIsInOwnWorld();
+    WaitFor(cond || EventFlag(8061));
+    WaitFor(ElapsedSeconds(15));
+    EndIf(EventFlag(8061));
+    if (!EventFlag(9999)) {
+        cond &= PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59) && InsidePlayAreaByTime(0, 0, 17, 0, 0);
+    }
+    cond &= !EventFlag(eventFlagId5)
+        && !EventFlag(eventFlagId6)
+        && !EventFlag(eventFlagId7)
+        && !EventFlag(eventFlagId8)
+        && !EventFlag(eventFlagId9)
+        && !IsHotSpot()
+        && !AnyBatchEventFlags(eventFlagId, eventFlagId3);
+    EndIf(!cond);
+    if (!EventFlag(80012)) {
+        SetNetworkconnectedEventFlagID(80012, ON);
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    } else if (!EventFlag(80013)) {
+        SetNetworkconnectedEventFlagID(80013, ON);
+        SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    } else {
+        if (!IsPlayerCount(1)) {
+            if (!EventFlag(80014)) {
+                SetNetworkconnectedEventFlagID(80014, ON);
+                SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+                Goto(L0);
+            }
+        }
+        EndEvent();
+    }
+L0:
+    WaitFor(EventFlag(8061) || PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59));
+    EndEvent();
+    RecordUserDispLog(110050, entityId, LogObjectType.None, -1);
+});
+
+$Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8061));
+    WaitFor(EventFlag(8061));
+    if (IsPlayerNo(1)) {
+        EndIf(!EventFlag(eventFlagId));
+    }
+    if (IsPlayerNo(2)) {
+        EndIf(!EventFlag(eventFlagId2));
+    }
+    if (IsPlayerNo(3)) {
+        EndIf(!EventFlag(eventFlagId3));
+    }
+    WaitFor(ElapsedSeconds(3));
+    SetSpEffect(20000, 63101);
+    WaitFor(ElapsedSeconds(8));
+    SetSpEffect(20000, 63105);
+    WaitFor(ElapsedSeconds(2));
+    FadeToBlack(1, 1, true, -1);
+    DisableCharacterInvincibility(20000);
+    SetSpEffect(20000, 98205);
+    WaitFor(ElapsedSeconds(0.9));
+    SetSpEffect(20000, 99280);
+    WaitFor(ElapsedSeconds(0.1));
+    chr = CharacterBackreadStatus(chrEntityId);
+    if (!chr) {
+        DisableCharacterGravity(20000);
+    }
+    WarpCharacterAndCopyFloorUnknown200489(20000, TargetEntityType.Area, entityId, -1, chrEntityId, -1, -1);
+    UnknownTalk2003121();
+    SetSpEffect(20000, 63103);
+    if (!chr) {
+        Unknown2003128(true);
+        WaitFor(CharacterBackreadStatus(chrEntityId));
+        EnableCharacterGravity(20000);
+        WaitFor(ElapsedFrames(1));
+        WarpCharacterAndCopyFloorUnknown200489(20000, TargetEntityType.Area, entityId, -1, chrEntityId, -1, -1);
+        UnknownTalk2003121();
+        Unknown2003128(false);
+    }
+    UnknownCamera200805(0);
+    WaitFor(ElapsedSeconds(2));
+    SetSpEffect(20000, 63106);
+    WaitFixedTimeFrames(1);
+    FadeToBlack(0, 1, false, -1);
+    WaitFor(ElapsedSeconds(2));
+    DisableCharacterInvincibility(20000);
+    SetSpEffect(20000, 98206);
+    EndEvent();
+    SetNetworkconnectedEventFlagID(eventFlagId4, ON);
+});
+
+$Event(90035283, Default, function(chrEntityId, areaEntityId, assetEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId3));
+    if (EventFlag(eventFlagId5) || EventFlag(eventFlagId6)) {
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Disabled, 3);
+        SetWorldMapPointFlag(4, OFF);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId4)) {
+        SetCharacterBackreadState(chrEntityId, false);
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 3);
+        SetWorldMapPointFlag(4, ON);
+    } else {
+L10:
+        WaitFor(EventFlag(8061));
+        EndIf(!AnyBatchEventFlags(eventFlagId, eventFlagId3));
+        WaitFor(ElapsedSeconds(3));
+        SetCharacterBackreadState(chrEntityId, false);
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        WaitFor(ElapsedSeconds(11));
+        if (EventFlag(eventFlagId)) {
+            areaFlag |= InArea(10002, areaEntityId) || !EventFlag(7005);
+        }
+        if (EventFlag(eventFlagId2)) {
+            areaFlag |= InArea(10003, areaEntityId) || !EventFlag(7006);
+        }
+        if (EventFlag(eventFlagId3)) {
+            areaFlag |= InArea(10004, areaEntityId) || !EventFlag(7007);
+        }
+        WaitFor(areaFlag);
+        SetCharacterBackreadState(chrEntityId, false);
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 3);
+        SetWorldMapPointFlag(4, ON);
+        WaitFor(CharacterBackreadStatus(chrEntityId));
+        EnableCharacter(chrEntityId);
+        ForceAnimationPlayback(chrEntityId, 30023, false, false, false);
+        WaitFor(ElapsedSeconds(1));
+        ForceAnimationPlayback(chrEntityId, 20030, false, false, false);
+        EnableCharacterAI(chrEntityId);
+        SetNetworkconnectedEventFlagID(eventFlagId4, ON);
+    }
+L0:
+    WaitFor(EventFlag(eventFlagId5) || EventFlag(eventFlagId6));
+    ChangeAssetEnableStateUnknown200510(assetEntityId, Disabled, 3);
+    SetWorldMapPointFlag(4, OFF);
+});
+
+$Event(90035284, Default, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(eventFlagId3));
+    EndIf(EventFlag(eventFlagId4));
+    EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId2));
+    if (EventFlag(8061)) {
+        SetSpEffect(chrEntityId, 63113);
+        SetSpEffect(chrEntityId, 63115);
+        SetSpEffect(chrEntityId2, 63111);
+    } else {
+        WaitFor(EventFlag(8061));
+        EndIf(!AnyBatchEventFlags(eventFlagId, eventFlagId2));
+        WaitFor(ElapsedSeconds(6));
+        SetSpEffect(chrEntityId, 63113);
+        SetSpEffect(chrEntityId, 63115);
+        SetSpEffect(chrEntityId2, 63111);
+    }
+L0:
+    WaitFor(EventFlag(eventFlagId3) || EventFlag(eventFlagId4));
+    EndIf(EventFlag(eventFlagId4));
+    SetSpEffect(chrEntityId, 63116);
+    WaitFixedTimeFrames(1);
+    SetSpEffect(chrEntityId, 63117);
+});
+
+$Event(90035285, Default, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5) {
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(eventFlagId4));
+    EndIf(EventFlag(eventFlagId5));
+    EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId3));
+    WaitFor(EventFlag(8061));
+    EndIf(!AnyBatchEventFlags(eventFlagId, eventFlagId3));
+    WaitFor(CharacterHPValue(chrEntityId) <= 0 || EventFlag(eventFlagId5));
+    EndIf(EventFlag(eventFlagId5));
+    if (CharacterHPValue(chrEntityId) <= 0) {
+        WaitFor(EventFlag(eventFlagId4));
+        if (!IsPlayerCount(2)) {
+            GotoIf(S0, IsPlayerCount(3));
+            if (CountEventFlags(TargetEventFlagType.EventFlag, 80018, 80020) < 1) {
+                RecordUserDispLog(110052, chrEntityId, LogObjectType.None, -1);
+            }
+        } else {
+S0:
+            if (!IsPlayerCount(1)) {
+                if (CountEventFlags(TargetEventFlagType.EventFlag, 80018, 80020) < 2) {
+                    RecordUserDispLog(110052, chrEntityId, LogObjectType.None, -1);
+                }
+                Goto(L1);
+            }
+        }
+L1:
+        if (EventFlag(eventFlagId)) {
+            SetNetworkconnectedEventFlagID(80018, ON);
+        }
+        if (EventFlag(eventFlagId2)) {
+            SetNetworkconnectedEventFlagID(80019, ON);
+        }
+        if (EventFlag(eventFlagId3)) {
+            SetNetworkconnectedEventFlagID(80020, ON);
+        }
+        EndEvent();
+    }
+L0:
+    NoOp();
+});
+
+$Event(90035286, Default, function(chrEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5) {
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(eventFlagId4));
+    EndIf(EventFlag(eventFlagId5));
+    EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId3));
+    WaitFor(EventFlag(8061));
+    EndIf(!AnyBatchEventFlags(eventFlagId, eventFlagId3));
+    EndIf(EventFlag(9999));
+    WaitFor(
+        PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59)
+            || CharacterHPValue(chrEntityId) <= 0
+            || EventFlag(eventFlagId4));
+    EndIf(CharacterHPValue(chrEntityId) <= 0 || EventFlag(eventFlagId4));
+    SetSpEffect(chrEntityId, 63150);
+    WaitFor(CharacterHasSpEffect(chrEntityId, 63151) || ElapsedSeconds(20));
+    EndIf(CharacterHPValue(chrEntityId) <= 0 || EventFlag(eventFlagId4));
+    if (!CharacterHasSpEffect(chrEntityId, 63150)) {
+        ForceAnimationPlayback(chrEntityId, 20031, false, false, false);
+        WaitFor(CharacterHasSpEffect(chrEntityId, 63151) || ElapsedSeconds(20));
+    }
+    EndIf(CharacterHPValue(chrEntityId) <= 0 || EventFlag(eventFlagId4));
+    WaitFor(ElapsedSeconds(5));
+    if (EventFlag(eventFlagId)) {
+        SetNetworkconnectedEventFlagID(80015, ON);
+    }
+    if (EventFlag(eventFlagId2)) {
+        SetNetworkconnectedEventFlagID(80016, ON);
+    }
+    if (EventFlag(eventFlagId3)) {
+        SetNetworkconnectedEventFlagID(80017, ON);
+    }
+    SetNetworkconnectedEventFlagID(eventFlagId5, ON);
+    if (CharacterBackreadStatus(chrEntityId)) {
+        RecordUserDispLog(110054, chrEntityId, LogObjectType.None, -1);
+    } else {
+        RecordUserDispLog(110054, entityId, LogObjectType.None, -1);
+    }
+    DisableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, true);
+});
+
+$Event(90035287, Default, function() {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    GotoIf(S0, !EventFlag(8061));
+    GotoIf(L0, !EventFlag(8062));
+    GotoIf(L1, EventFlag(8062));
+S0:
+    WaitFor(EventFlag(8061));
+    WaitFor(ElapsedSeconds(10) || CharacterHasSpEffect(20000, 448));
+L0:
+    SetSpEffect(20000, 448);
+    WaitFor(EventFlag(8062) || !CharacterHasSpEffect(20000, 448));
+    RestartEvent();
+L1:
+    SetSpEffect(20000, 449);
+});
+
+$Event(90035288, Default, function(areaEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(eventFlagId3));
+    EndIf(EventFlag(eventFlagId4));
+    EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId2));
+    WaitFor(EventFlag(8061));
+    EndIf(!AnyBatchEventFlags(eventFlagId, eventFlagId2));
+    WaitFor(
+        EventFlag(eventFlagId3)
+            || EventFlag(eventFlagId4)
+            || (InArea(20000, areaEntityId)
+                && CompareBossBGMPriority(Less, 762020)
+                && !BossBGMPlaying(762020)));
+    EndIf(EventFlag(eventFlagId3) || EventFlag(eventFlagId4));
+    SetBossBGM(762020, BossBGMState.Start);
+    WaitFixedTimeFrames(1);
+    WaitFor(
+        EventFlag(eventFlagId3)
+            || EventFlag(eventFlagId4)
+            || !InArea(20000, areaEntityId)
+            || !BossBGMPlaying(762020));
+    if (BossBGMPlaying(762020)) {
+        SetBossBGM(762020, BossBGMState.Stop2);
+    }
+    EndIf(EventFlag(eventFlagId3) || EventFlag(eventFlagId4));
+    WaitFixedTimeFrames(1);
+    RestartEvent();
+});
+
 $Event(90035300, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
     DisableNetworkSync();
     if (!EventFlag(8075)) {
@@ -4556,6 +8590,233 @@ $Event(9045011, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrEn
     EndEvent();
 });
 
+$Event(90045020, Restart, function(eventFlagId, eventFlagId2) {
+    DisableNetworkSync();
+    WaitFor(MapHasPermissionToUpdate(false, 0, 0, 0, 0));
+    EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId2));
+    RandomlySetNetworkconnectedEventFlagInRange(eventFlagId, eventFlagId2, ON);
+});
+
+$Event(90045021, Restart, function(eventFlagId, assetEntityId, assetEntityId2, assetEntityId3, eventFlagId2, eventFlagId3, eventFlagId4) {
+    WaitFor(EventFlag(eventFlagId));
+    ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 0);
+    ChangeAssetEnableStateUnknown200510(assetEntityId2, Enabled, 0);
+    ChangeAssetEnableStateUnknown200510(assetEntityId3, Enabled, 0);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId4, ON);
+});
+
+$Event(90045022, Restart, function(assetEntityId, eventFlagId, eventFlagId2, eventFlagId3) {
+    DisableNetworkSync();
+    WaitFor(EventFlag(eventFlagId2));
+    if (EventFlag(eventFlagId3)) {
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    }
+    if (EventFlag(eventFlagId)) {
+        CreateAssetfollowingSFX(assetEntityId, 200, 803292);
+        EndEvent();
+    }
+L0:
+    CreateAssetfollowingSFX(assetEntityId, 200, 807015);
+    WaitFor(
+        ActionButtonInArea(109200, assetEntityId)
+            || EventFlag(eventFlagId)
+            || EventFlag(eventFlagId3));
+    DeleteAssetfollowingSFX(assetEntityId, false);
+    CreateAssetfollowingSFX(assetEntityId, 200, 803292);
+    PlaySE(assetEntityId, SoundType.EnvironmentalSound, 600100000);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90045023, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, entityId) {
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(CountEventFlags(TargetEventFlagType.EventFlag, eventFlagId2, eventFlagId3) >= 1);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    RecordUserDispLog(110100, entityId, LogObjectType.None, -1);
+});
+
+$Event(90045024, Restart, function(assetEntityId, eventFlagId, eventFlagId2, eventFlagId3) {
+    DisableNetworkSync();
+    EndIf(EventFlag(eventFlagId3));
+    if (!EventFlag(eventFlagId2)) {
+        if (!EventFlag(eventFlagId)) {
+            CreateAssetfollowingSFX(assetEntityId, 200, 807025);
+            WaitFor(EventFlag(eventFlagId));
+            DeleteAssetfollowingSFX(assetEntityId, true);
+        }
+L0:
+        CreateAssetfollowingSFX(assetEntityId, 200, 807026);
+        WaitFor(EventFlag(eventFlagId2));
+        DeleteAssetfollowingSFX(assetEntityId, true);
+    }
+L1:
+    CreateAssetfollowingSFX(assetEntityId, 200, 807027);
+    WaitFor(EventFlag(eventFlagId3));
+    DeleteAssetfollowingSFX(assetEntityId, true);
+});
+
+$Event(90045025, Default, function(eventFlagId, areaEntityId) {
+    DisableNetworkSync();
+    HideFloatingMessage(600, areaEntityId);
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(InArea(20000, areaEntityId) || EventFlag(eventFlagId));
+    EndIf(EventFlag(eventFlagId));
+    ShowFloatingMessage(600, areaEntityId);
+    WaitFor(!InArea(20000, areaEntityId) || EventFlag(eventFlagId));
+    HideFloatingMessage(600, areaEntityId);
+    EndIf(EventFlag(eventFlagId));
+    RestartEvent();
+});
+
+$Event(90045030, Default, function(areaEntityId, spEffectId, spEffectId2) {
+    DisableNetworkSync();
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeSeconds(0.1);
+    WaitFor(InArea(20000, areaEntityId));
+    SetSpEffect(20000, spEffectId);
+    WaitFixedTimeSeconds(0.1);
+    WaitFor(!InArea(20000, areaEntityId));
+    RestartEvent();
+});
+
+$Event(90045040, Default, function(mapVariationId, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(!IsMapVariation(mapVariationId));
+    WaitFor(EventFlag(8230) && HasMultiplayerState(MultiplayerState.Host));
+    WaitFor(RandomElapsedFrames(1, 10));
+    EndIf(EventFlag(8231));
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    SetNetworkconnectedEventFlagID(8231, ON);
+});
+
+$Event(90045041, Default, function(mapVariationId, eventFlagId, chrEntityId, chrEntityId2) {
+    EndIf(!IsMapVariation(mapVariationId));
+    SetCharacterBackreadState(chrEntityId, true);
+    WaitFor(EventFlag(eventFlagId));
+    SetCharacterBackreadState(chrEntityId2, true);
+    SetCharacterBackreadState(chrEntityId, false);
+});
+
+$Event(90045050, Restart, function(chrEntityId, chrEntityId2, areaEntityId, areaEntityId2, areaEntityId3, areaEntityId4, areaEntityId5, areaEntityId6, areaEntityId7, areaEntityId8, areaEntityId9, areaEntityId10, areaEntityId11, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
+    EndIf(CharacterHPValue(chrEntityId) <= 0);
+    if (!AnyBatchEventFlags(areaEntityId11, 22)) {
+        RandomlySetNetworkconnectedEventFlagInRange(areaEntityId11, eventFlagId9, ON);
+    }
+    WaitFor(
+        (CharacterAIState(chrEntityId, AIStateType.Combat)
+            && CharacterHasSpEffect(chrEntityId, 15042)
+            && !CharacterHasSpEffect(chrEntityId, 15044)
+            && !CharacterRatioDead(chrEntityId2, Greater, 0)
+            && (CharacterHasSpEffect(chrEntityId, 15046)
+                || (!InArea(chrEntityId, areaEntityId)
+                    && !InArea(chrEntityId, areaEntityId2)
+                    && !InArea(chrEntityId, areaEntityId3)
+                    && !InArea(chrEntityId, areaEntityId4)
+                    && !InArea(chrEntityId, areaEntityId5)
+                    && !InArea(chrEntityId, areaEntityId6)
+                    && !InArea(chrEntityId, areaEntityId7)
+                    && !InArea(chrEntityId, areaEntityId8)
+                    && !InArea(chrEntityId, areaEntityId9)
+                    && !InArea(chrEntityId, areaEntityId10)
+                    && !InArea(chrEntityId, areaEntityId11))))
+            || CharacterHPValue(chrEntityId) <= 0);
+    EndIf(CharacterHPValue(chrEntityId) <= 0);
+    WaitFor(ElapsedSeconds(0.5));
+    GotoIf(S0, !EventFlag(areaEntityId11));
+    GotoIf(S1, InArea(chrEntityId, areaEntityId));
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId, -1);
+    Goto(L0);
+S0:
+    GotoIf(S2, !EventFlag(eventFlagId));
+    GotoIf(S3, InArea(chrEntityId, areaEntityId2));
+S1:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId2, -1);
+    Goto(L0);
+S2:
+    GotoIf(S4, !EventFlag(eventFlagId2));
+    GotoIf(S5, InArea(chrEntityId, areaEntityId3));
+S3:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId3, -1);
+    Goto(L0);
+S4:
+    GotoIf(S6, !EventFlag(eventFlagId3));
+    GotoIf(S7, InArea(chrEntityId, areaEntityId4));
+S5:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId4, -1);
+    Goto(L0);
+S6:
+    GotoIf(S8, !EventFlag(eventFlagId4));
+    GotoIf(S9, InArea(chrEntityId, areaEntityId5));
+S7:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId5, -1);
+    Goto(L0);
+S8:
+    GotoIf(S10, !EventFlag(eventFlagId5));
+    GotoIf(S11, InArea(chrEntityId, areaEntityId6));
+S9:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId6, -1);
+    Goto(L0);
+S10:
+    GotoIf(S12, !EventFlag(eventFlagId6));
+    GotoIf(S13, InArea(chrEntityId, areaEntityId7));
+S11:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId7, -1);
+    Goto(L0);
+S12:
+    GotoIf(S14, !EventFlag(eventFlagId7));
+    GotoIf(S15, InArea(chrEntityId, areaEntityId8));
+S13:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId8, -1);
+    Goto(L0);
+S14:
+    GotoIf(S16, !EventFlag(eventFlagId8));
+    GotoIf(S17, InArea(chrEntityId, areaEntityId9));
+S15:
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId9, -1);
+    Goto(L0);
+S16:
+    GotoIf(S18, !EventFlag(eventFlagId9));
+    if (!InArea(chrEntityId, areaEntityId10)) {
+S17:
+        IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId10, -1);
+        Goto(L0);
+    }
+    IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, areaEntityId, -1);
+    Goto(L0);
+S18:
+L0:
+    BatchSetNetworkconnectedEventFlags(areaEntityId11, eventFlagId9, OFF);
+    WaitFor(ElapsedSeconds(5));
+    RestartEvent();
+});
+
+$Event(90045051, Restart, function(chrEntityId, chrEntityId2, generatorEntityId, areaEntityId) {
+    EndIf(CharacterHPValue(chrEntityId) <= 0);
+    if (InArea(chrEntityId, areaEntityId)) {
+        SetSpEffect(chrEntityId, 15044);
+    }
+    WaitFor(
+        (CharacterAIState(chrEntityId, AIStateType.Combat)
+            && (CharacterRatioDead(chrEntityId2, GreaterOrEqual, 1)
+                || InArea(chrEntityId, areaEntityId)))
+            || CharacterHPValue(chrEntityId) <= 0);
+    if (CharacterHPValue(chrEntityId) <= 0) {
+        ForceCharacterDeath(chrEntityId2, false);
+        EndEvent();
+    }
+    if (!InArea(chrEntityId, areaEntityId)) {
+        WaitFor(ElapsedSeconds(1));
+    }
+    SetSpEffect(chrEntityId, 15044);
+    WaitFor(CharacterHasSpEffect(chrEntityId, 15007));
+    InvokeEnemyGenerator(generatorEntityId);
+    WaitFor(!CharacterRatioDead(chrEntityId2, GreaterOrEqual, 1));
+    SetSpEffect(chrEntityId, 15045);
+    WaitFor(ElapsedSeconds(5));
+    RestartEvent();
+});
+
 $Event(90055000, Restart, function(chrEntityId, value, areaEntityId, eventFlagId) {
     if (value != 1) {
         if (value != 2) {
@@ -4713,6 +8974,7 @@ $Event(90065001, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         EnableCharacter(chrEntityId6);
         DisableCharacterCollision(chrEntityId6);
         EnableCharacterAI(chrEntityId6);
+        EndIf(IsMapVariation(2));
         DisplayBossHealthBar(Enabled, chrEntityId2, 1, 904950600);
         DisplayBossHealthBar(Enabled, chrEntityId6, 0, 904950604);
         LinkToBossHealthBar(Disabled, 904950600, 0);
@@ -4723,6 +8985,7 @@ $Event(90065001, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
         EndEvent();
     }
+L10:
     DisableCharacter(chrEntityId2);
     DisableCharacterAI(chrEntityId2);
     DisableCharacter(chrEntityId3);
@@ -4738,7 +9001,9 @@ $Event(90065001, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690050);
         WaitFor(ElapsedSeconds(2.5));
     }
-    SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    if (!IsMapVariation(2)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    }
     SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690047);
     WaitFor(ElapsedSeconds(4));
     ForceAnimationPlayback(chrEntityId2, 20026, false, false, false);
@@ -4764,13 +9029,17 @@ $Event(90065001, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
     EnableCharacter(chrEntityId6);
     DisableCharacterCollision(chrEntityId6);
     EnableCharacterAI(chrEntityId6);
-    DisplayBossHealthBar(Enabled, chrEntityId2, 1, 904950600);
-    DisplayBossHealthBar(Enabled, chrEntityId6, 0, 904950604);
-    LinkToBossHealthBar(Disabled, 904950600, 0);
-    LinkToBossHealthBar(Enabled, 904950600, chrEntityId);
-    LinkToBossHealthBar(Enabled, 904980600, chrEntityId3);
-    LinkToBossHealthBar(Enabled, 904950604, chrEntityId4);
-    LinkToBossHealthBar(Enabled, 904950604, chrEntityId5);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, 904950600, 0);
+    }
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 1, 904950600);
+        DisplayBossHealthBar(Enabled, chrEntityId6, 0, 904950604);
+        LinkToBossHealthBar(Enabled, 904950600, chrEntityId);
+        LinkToBossHealthBar(Enabled, 904980600, chrEntityId3);
+        LinkToBossHealthBar(Enabled, 904950604, chrEntityId4);
+        LinkToBossHealthBar(Enabled, 904950604, chrEntityId5);
+    }
     SetNetworkconnectedEventFlagID(eventFlagId4, ON);
 });
 
@@ -5080,6 +9349,7 @@ $Event(90065030, Restart, function(chrEntityId, spEffectId, npcPartId, npcPartGr
     DisableNetworkSync();
     EndIf(EventFlag(eventFlagId2));
     if (EventFlag(eventFlagId)) {
+        WaitFor(CharacterBackreadStatus(chrEntityId));
         GotoIf(S0, !CharacterHasSpEffect(chrEntityId, spEffectId));
         CreateNPCPart(chrEntityId, npcPartId, npcPartGroupIdx, 150, 1, 1, false, false);
         SetNPCPartSEAndSFX(chrEntityId, npcPartId, 109, 109, 139, 123, 0);
@@ -5115,10 +9385,8 @@ $Event(90065031, Restart, function(chrEntityId, spEffectId, spEffectId2, generat
     DisableNetworkSync();
     EndIf(EventFlag(eventFlagId2));
     if (EventFlag(eventFlagId)) {
+        WaitFor(CharacterBackreadStatus(chrEntityId));
         GotoIf(S0, !CharacterHasSpEffect(chrEntityId, spEffectId2));
-        ForceAnimationPlayback(chrEntityId2, 30000, false, false, false);
-        DisableCharacterCollision(chrEntityId2);
-        DisableCharacterAI(chrEntityId2);
         Goto(L1);
 S0:
         EnableCharacterCollision(chrEntityId2);
@@ -5133,11 +9401,11 @@ L0:
         ForceCharacterDeath(chrEntityId2, false);
         EndEvent();
     }
+L1:
     InvokeEnemyGenerator(generatorEntityId);
     ForceAnimationPlayback(chrEntityId2, 30000, false, false, false);
     DisableCharacterCollision(chrEntityId2);
     DisableCharacterAI(chrEntityId2);
-L1:
     WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId) || CharacterHPValue(chrEntityId) <= 0);
     if (CharacterHPValue(chrEntityId) <= 0) {
         DisableCharacter(chrEntityId2);
@@ -5161,6 +9429,7 @@ $Event(90065032, Restart, function(chrEntityId, chrEntityId2, spEffectId, eventF
     DisableNetworkSync();
     EndIf(EventFlag(eventFlagId2));
     GotoIf(S0, !EventFlag(eventFlagId));
+    WaitFor(CharacterBackreadStatus(chrEntityId));
     GotoIf(L1, HPRatio(chrEntityId2) > 0);
     Goto(L0);
     WaitFor(EventFlag(eventFlagId));
@@ -5219,6 +9488,7 @@ $Event(90065050, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         EnableCharacterAI(chrEntityId);
         EnableCharacter(chrEntityId5);
         EnableCharacter(chrEntityId6);
+        EndIf(IsMapVariation(2));
         SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
         DisplayBossHealthBar(Enabled, chrEntityId2, 2, nameId);
         DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
@@ -5229,6 +9499,7 @@ $Event(90065050, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
         EndEvent();
     }
+L10:
     WaitFor(ElapsedSeconds(1));
     DisableCharacter(chrEntityId);
     DisableCharacterAI(chrEntityId);
@@ -5239,7 +9510,9 @@ $Event(90065050, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690050);
         WaitFor(ElapsedSeconds(2.5));
     }
-    SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    if (!IsMapVariation(2)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    }
     SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690047);
     SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisableCharacterHPBarDisplay(chrEntityId);
@@ -5256,13 +9529,17 @@ $Event(90065050, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
     EnableCharacterAI(chrEntityId);
     DisableCharacterInvincibility(chrEntityId5);
     DisableCharacterInvincibility(chrEntityId6);
-    DisplayBossHealthBar(Enabled, chrEntityId2, 2, nameId);
-    DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
-    DisplayBossHealthBar(Enabled, chrEntityId4, 0, nameId3);
-    LinkToBossHealthBar(Disabled, nameId, 0);
-    LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-    LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
-    LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, nameId, 0);
+    }
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 2, nameId);
+        DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+        DisplayBossHealthBar(Enabled, chrEntityId4, 0, nameId3);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+        LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
+    }
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
 
@@ -5336,6 +9613,31 @@ $Event(90065055, Restart, function(chrEntityId, chrEntityId2, spEffectId, eventF
     SetSpEffect(chrEntityId, spEffectId);
 });
 
+$Event(90065056, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, spEffectId, dummypolyId, areaEntityId, entityId, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 13744));
+    if (!CharacterHasSpEffect(chrEntityId, spEffectId)) {
+        WaitFor(!CharacterHasSpEffect(chrEntityId, 13744) || EventFlag(eventFlagId2));
+        RestartEvent();
+    }
+    if (InArea(chrEntityId, areaEntityId)) {
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId3, TargetEntityType.Character, chrEntityId, dummypolyId, chrEntityId, -1, -1);
+    }
+    if (!InArea(chrEntityId, areaEntityId)) {
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId3, TargetEntityType.Area, entityId, -1, 0, -1, -1);
+    }
+    SetSpEffect(chrEntityId2, 13745);
+    SetSpEffect(chrEntityId3, 13745);
+    EnableCharacter(chrEntityId3);
+    EnableCharacter(chrEntityId2);
+    EnableCharacterAI(chrEntityId2);
+    DisableCharacterInvincibility(chrEntityId3);
+    WaitFixedTimeFrames(1);
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 13744) || EventFlag(eventFlagId2));
+    RestartEvent();
+});
+
 $Event(90065060, Restart, function(entityId, eventFlagId, eventFlagId2, eventFlagId3) {
     EndIf(EventFlag(eventFlagId3));
     EndIf(EventFlag(eventFlagId2));
@@ -5383,6 +9685,34 @@ $Event(90065063, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
     WaitFor(EventFlag(eventFlagId));
     WaitFor(CharacterRatioDead(chrEntityId2));
     SetSpEffect(chrEntityId, 11135);
+});
+
+$Event(90065064, Restart, function(chrEntityId, chrEntityId2, animationId, dummypolyId, spEffectId, areaEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3) {
+    if (EventFlag(eventFlagId3)) {
+        DisableCharacter(chrEntityId2);
+        DisableCharacterAI(chrEntityId2);
+        ForceCharacterDeath(chrEntityId2, false);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId)) {
+        EnableCharacter(chrEntityId2);
+        EnableCharacterAI(chrEntityId2);
+        EndEvent();
+    }
+    DisableCharacter(chrEntityId2);
+    DisableCharacterAI(chrEntityId2);
+    WaitFor(EventFlag(eventFlagId2));
+    WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId) && !CharacterDead(chrEntityId));
+    if (InArea(chrEntityId, areaEntityId)) {
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId, dummypolyId, 0, -1, -1);
+    }
+    if (!InArea(chrEntityId, areaEntityId)) {
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Area, entityId, -1, 0, -1, -1);
+    }
+    EnableCharacter(chrEntityId2);
+    EnableCharacterAI(chrEntityId2);
+    ForceAnimationPlayback(chrEntityId2, animationId, false, false, false);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
 });
 
 $Event(90065070, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2) {
@@ -5684,6 +10014,7 @@ $Event(90065110, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         DisableCharacterHPBarDisplay(chrEntityId);
         EnableCharacter(chrEntityId);
         EnableCharacterAI(chrEntityId);
+        EndIf(IsMapVariation(2));
         SetBossBGM(921000, BossBGMState.Start);
         DisplayBossHealthBar(Enabled, chrEntityId2, 1, 903150608);
         DisplayBossHealthBar(Enabled, chrEntityId3, 0, 903150609);
@@ -5692,6 +10023,7 @@ $Event(90065110, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         LinkToBossHealthBar(Enabled, 903150609, chrEntityId3);
         EndEvent();
     }
+L10:
     WaitFor(ElapsedSeconds(1));
     DisableCharacter(chrEntityId);
     DisableCharacterAI(chrEntityId);
@@ -5701,7 +10033,9 @@ $Event(90065110, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690050);
         WaitFor(ElapsedSeconds(2.5));
     }
-    SetBossBGM(921000, BossBGMState.Start);
+    if (!IsMapVariation(2)) {
+        SetBossBGM(921000, BossBGMState.Start);
+    }
     SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690047);
     SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisableCharacterHPBarDisplay(chrEntityId);
@@ -5714,11 +10048,15 @@ $Event(90065110, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
     EnableCharacter(chrEntityId3);
     EnableCharacterAI(chrEntityId3);
     DisableCharacterInvincibility(chrEntityId4);
-    DisplayBossHealthBar(Enabled, chrEntityId2, 1, 903150608);
-    DisplayBossHealthBar(Enabled, chrEntityId3, 0, 903150609);
-    LinkToBossHealthBar(Disabled, 903150610, 0);
-    LinkToBossHealthBar(Enabled, 903150608, chrEntityId2);
-    LinkToBossHealthBar(Enabled, 903150609, chrEntityId3);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, 903150610, 0);
+    }
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 1, 903150608);
+        DisplayBossHealthBar(Enabled, chrEntityId3, 0, 903150609);
+        LinkToBossHealthBar(Enabled, 903150608, chrEntityId2);
+        LinkToBossHealthBar(Enabled, 903150609, chrEntityId3);
+    }
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
 
@@ -5755,21 +10093,20 @@ $Event(90065112, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
     RestartEvent();
 });
 
-$Event(90065120, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, nameId) {
+$Event(90065120, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, nameId, eventFlagId3) {
     if (EventFlag(eventFlagId2)) {
         DisableCharacter(chrEntityId2);
         DisableCharacterAI(chrEntityId2);
         ForceCharacterDeath(chrEntityId2, false);
         EndEvent();
     }
-    if (HPRatio(chrEntityId) <= 0.3) {
-        if (CharacterHasSpEffect(chrEntityId, 14601)) {
-            EnableCharacter(chrEntityId2);
-            EnableCharacterAI(chrEntityId2);
-            DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
-            LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-            EndEvent();
-        }
+    if (EventFlag(eventFlagId3)) {
+        EnableCharacter(chrEntityId2);
+        EnableCharacterAI(chrEntityId2);
+        EndIf(IsMapVariation(2));
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        EndEvent();
     }
     DisableCharacter(chrEntityId2);
     DisableCharacterAI(chrEntityId2);
@@ -5782,8 +10119,11 @@ $Event(90065120, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
     EnableCharacter(chrEntityId2);
     EnableCharacterAI(chrEntityId2);
     ForceRatioAnimationPlayback(chrEntityId2, 20026, false, false, false);
-    DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
-    LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+    SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+    }
 });
 
 $Event(90065121, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmBossConvParamId, sfxId, chrEntityId, chrEntityId2, nameId, chrEntityId3, nameId2, chrEntityId4, nameId3) {
@@ -5798,6 +10138,7 @@ $Event(90065121, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         DisableCharacterHPBarDisplay(chrEntityId2);
         EnableCharacter(chrEntityId2);
         EnableCharacterAI(chrEntityId2);
+        EndIf(IsMapVariation(2));
         SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
         DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
         LinkToBossHealthBar(Disabled, nameId, 0);
@@ -5810,6 +10151,7 @@ $Event(90065121, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         }
         EndEvent();
     }
+L10:
     DisableCharacter(chrEntityId);
     DisableCharacterAI(chrEntityId);
     WaitFor(EventFlag(eventFlagId));
@@ -5817,7 +10159,9 @@ $Event(90065121, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690050);
         WaitFor(ElapsedSeconds(2.5));
     }
-    SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    if (!IsMapVariation(2)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    }
     SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, sfxId);
     SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisableCharacterHPBarDisplay(chrEntityId2);
@@ -5825,33 +10169,36 @@ $Event(90065121, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
     ForceAnimationPlayback(chrEntityId2, 20026, false, false, false);
     EnableCharacter(chrEntityId2);
     EnableCharacterAI(chrEntityId2);
-    DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
-    LinkToBossHealthBar(Disabled, nameId, 0);
-    LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-    if (0 != 0) {
-        DisplayBossHealthBar(Enabled, chrEntityId3, 0, nameId2);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, nameId, 0);
     }
-    if (0 != 0) {
-        DisplayBossHealthBar(Enabled, chrEntityId4, 2, nameId3);
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        if (0 != 0) {
+            DisplayBossHealthBar(Enabled, chrEntityId3, 0, nameId2);
+        }
+        if (0 != 0) {
+            DisplayBossHealthBar(Enabled, chrEntityId4, 2, nameId3);
+        }
     }
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
 
-$Event(90065130, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, nameId) {
+$Event(90065130, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, nameId, eventFlagId3) {
     if (EventFlag(eventFlagId2)) {
         DisableCharacter(chrEntityId2);
         DisableCharacterAI(chrEntityId2);
         ForceCharacterDeath(chrEntityId2, false);
         EndEvent();
     }
-    if (HPRatio(chrEntityId) <= 0.7) {
-        if (CharacterHasSpEffect(chrEntityId, 15501)) {
-            EnableCharacter(chrEntityId2);
-            EnableCharacterAI(chrEntityId2);
-            DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
-            LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-            EndEvent();
-        }
+    if (EventFlag(eventFlagId3)) {
+        EnableCharacter(chrEntityId2);
+        EnableCharacterAI(chrEntityId2);
+        EndIf(IsMapVariation(2));
+        DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        EndEvent();
     }
     DisableCharacter(chrEntityId2);
     DisableCharacterAI(chrEntityId2);
@@ -5864,8 +10211,11 @@ $Event(90065130, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
     EnableCharacter(chrEntityId2);
     EnableCharacterAI(chrEntityId2);
     ForceRatioAnimationPlayback(chrEntityId2, 20026, false, false, false);
-    DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
-    LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+    SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+    }
 });
 
 $Event(90065131, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmBossConvParamId, sfxId, chrEntityId, chrEntityId2, nameId, chrEntityId3, nameId2, chrEntityId4, nameId3) {
@@ -5880,6 +10230,7 @@ $Event(90065131, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         DisableCharacterHPBarDisplay(chrEntityId2);
         EnableCharacter(chrEntityId2);
         EnableCharacterAI(chrEntityId2);
+        EndIf(IsMapVariation(2));
         SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
         DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
         LinkToBossHealthBar(Disabled, nameId, 0);
@@ -5892,6 +10243,7 @@ $Event(90065131, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         }
         EndEvent();
     }
+L10:
     DisableCharacter(chrEntityId);
     DisableCharacterAI(chrEntityId);
     WaitFor(EventFlag(eventFlagId));
@@ -5899,7 +10251,9 @@ $Event(90065131, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690050);
         WaitFor(ElapsedSeconds(2.5));
     }
-    SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    if (!IsMapVariation(2)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    }
     SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, sfxId);
     SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisableCharacterHPBarDisplay(chrEntityId2);
@@ -5907,16 +10261,874 @@ $Event(90065131, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
     ForceAnimationPlayback(chrEntityId2, 20026, false, false, false);
     EnableCharacter(chrEntityId2);
     EnableCharacterAI(chrEntityId2);
-    DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
-    LinkToBossHealthBar(Disabled, nameId, 0);
-    LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-    if (0 != 0) {
-        DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, nameId, 0);
     }
-    if (0 != 0) {
-        DisplayBossHealthBar(Enabled, chrEntityId4, 2, nameId3);
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        if (0 != 0) {
+            DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+        }
+        if (0 != 0) {
+            DisplayBossHealthBar(Enabled, chrEntityId4, 2, nameId3);
+        }
     }
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90065201, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmBossConvParamId, sfxId, chrEntityId, chrEntityId2, nameId, chrEntityId3, nameId2) {
+    if (EventFlag(eventFlagId3)) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        ForceCharacterDeath(chrEntityId, false);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId2)) {
+        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        DisableCharacterHPBarDisplay(chrEntityId);
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        ChangeCharacterHitmask(chrEntityId2, 4, ON);
+        ChangeCharacterHitmask(chrEntityId2, 5, ON);
+        ChangeCharacterHitmask(chrEntityId3, 4, ON);
+        ChangeCharacterHitmask(chrEntityId3, 5, ON);
+        EndIf(IsMapVariation(2));
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+        LinkToBossHealthBar(Disabled, nameId, 0);
+        if (!CharacterHasSpEffect(chrEntityId, 60870)) {
+            DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+            DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        }
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+        EndEvent();
+    }
+L1:
+    DisableCharacter(chrEntityId);
+    DisableCharacterAI(chrEntityId);
+    WaitFor(EventFlag(eventFlagId));
+    if (IsMapVariation(1)) {
+        SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690050);
+        WaitFor(ElapsedSeconds(2.5));
+    }
+    if (!IsMapVariation(2)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    }
+    SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, sfxId);
+    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterHPBarDisplay(chrEntityId);
+    WaitFor(ElapsedSeconds(3));
+    ForceAnimationPlayback(chrEntityId2, 20026, false, false, false);
+    EnableCharacter(chrEntityId2);
+    EnableCharacterAI(chrEntityId2);
+    ChangeCharacterHitmask(chrEntityId2, 4, ON);
+    ChangeCharacterHitmask(chrEntityId2, 5, ON);
+    WaitFor(ElapsedSeconds(1.5));
+    ForceAnimationPlayback(chrEntityId3, 20026, false, false, false);
+    EnableCharacter(chrEntityId3);
+    EnableCharacterAI(chrEntityId3);
+    ChangeCharacterHitmask(chrEntityId3, 4, ON);
+    ChangeCharacterHitmask(chrEntityId3, 5, ON);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, nameId2, 0);
+    }
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+    }
+L0:
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90065202, Restart, function(eventFlagId, eventFlagId2, bgmBossConvParamId, chrEntityId, chrEntityId2, nameId, chrEntityId3, nameId2) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId));
+    SetSpEffect(10000, 509);
+    SetSpEffect(10001, 509);
+    SetSpEffect(10002, 509);
+    SetSpEffect(10003, 509);
+    SetSpEffect(10004, 509);
+    SetSpEffect(10005, 509);
+    SetSpEffect(10006, 509);
+    SetSpEffect(10007, 509);
+    SetSpEffect(10008, 509);
+    SetSpEffect(10009, 509);
+    SetSpEffect(10010, 509);
+    WaitFor(
+        CharacterHasSpEffect(chrEntityId, 60870, GreaterOrEqual, 1)
+            || CharacterRatioDead(chrEntityId));
+    DisplayBossHealthBar(Disabled, chrEntityId3, 1, nameId2);
+    DisplayBossHealthBar(Disabled, chrEntityId2, 0, nameId);
+    WaitFor(CharacterRatioDead(chrEntityId));
+    WaitFixedTimeSeconds(4);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    if (BossBGMPlaying(bgmBossConvParamId)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Stop2);
+    }
+});
+
+$Event(90065205, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3) {
+    EndIf(EventFlag(eventFlagId));
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId3));
+    WaitFor(
+        PlayerIsInOwnWorld()
+            && (CharacterHPValue(chrEntityId) <= 1
+                || EventFlag(eventFlagId)
+                || EventFlag(eventFlagId2)));
+    EndIf(EventFlag(eventFlagId));
+    EndIf(EventFlag(eventFlagId2));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    }
+});
+
+$Event(90065206, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    EndIf(EventFlag(eventFlagId4));
+    WaitFor(EventFlag(eventFlagId3));
+    WaitFor(EventFlag(eventFlagId) || EventFlag(eventFlagId2));
+    if (EventFlag(eventFlagId)) {
+        SetSpEffect(chrEntityId2, 60826);
+        SetSpEffect(chrEntityId2, 60840);
+        SetSpEffect(chrEntityId2, 60864);
+        EndEvent();
+    }
+    SetSpEffect(chrEntityId, 60826);
+    SetSpEffect(chrEntityId, 60840);
+    SetSpEffect(chrEntityId, 60864);
+});
+
+$Event(90065207, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId));
+    DisableNetworkSync();
+    WaitFor(EventFlag(eventFlagId2));
+    GotoIf(L20, CharacterDead(chrEntityId) && CharacterDead(chrEntityId2));
+    GotoIf(L5, CharacterDead(chrEntityId2) && CharacterHasSpEffect(chrEntityId2, 60852));
+    GotoIf(L10, CharacterDead(chrEntityId) && CharacterHasSpEffect(chrEntityId, 60852));
+    GotoIf(L1, 
+        EntityInRadiusOfEntity(20000, chrEntityId, 8, 1)
+            || EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1));
+    GotoIf(L2, 
+        !EntityInRadiusOfEntity(20000, chrEntityId, 8, 1)
+            && !EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1));
+L1:
+    ChangeCamera(7930);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(
+        (!EntityInRadiusOfEntity(20000, chrEntityId, 8, 1)
+            && !EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1))
+            || CharacterHasSpEffect(chrEntityId, 60852)
+            || CharacterHasSpEffect(chrEntityId2, 60852));
+    Goto(L0);
+L2:
+    ChangeCamera(7931);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(
+        EntityInRadiusOfEntity(20000, chrEntityId, 8, 1)
+            || EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1)
+            || CharacterHasSpEffect(chrEntityId, 60852)
+            || CharacterHasSpEffect(chrEntityId2, 60852));
+    Goto(L0);
+L5:
+    GotoIf(L6, EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+    GotoIf(L7, !EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+L6:
+    ChangeCamera(7930);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(CharacterDead(chrEntityId) || !EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+    Goto(L0);
+L7:
+    ChangeCamera(7931);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(CharacterDead(chrEntityId) || EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+    Goto(L0);
+L10:
+    GotoIf(L11, EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1));
+    GotoIf(L12, !EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1));
+L11:
+    ChangeCamera(7930);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(CharacterDead(chrEntityId2) || !EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1));
+    Goto(L0);
+L12:
+    ChangeCamera(7931);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(CharacterDead(chrEntityId2) || EntityInRadiusOfEntity(20000, chrEntityId2, 8, 1));
+    Goto(L0);
+L0:
+    RestartEvent();
+L20:
+    WaitFixedTimeSeconds(3);
+    ChangeCamera(-1);
+    WaitFixedTimeSeconds(0.5);
+    EndEvent();
+});
+
+$Event(90065211, Default, function(eventFlagId, eventFlagId2, eventFlagId3, chrEntityId, entityId, animationId, nameId, eventFlagId4, eventFlagId5, value) {
+    if (EventFlag(eventFlagId3)) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        ForceCharacterDeath(chrEntityId, false);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId2)) {
+        WaitFor(EventFlag(eventFlagId4) || EventFlag(eventFlagId5) || ElapsedSeconds(20));
+        if ((EventFlag(eventFlagId4) && !EventFlag(eventFlagId5))
+            || (((EventFlag(eventFlagId4) && EventFlag(eventFlagId5))
+                || (!EventFlag(eventFlagId4) && !EventFlag(eventFlagId5)))
+                && value == 0)) {
+            DisableCharacter(chrEntityId);
+            DisableCharacterAI(chrEntityId);
+            EndEvent();
+        }
+    }
+L10:
+    if (EventFlag(eventFlagId2)) {
+        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        DisableCharacterHPBarDisplay(chrEntityId);
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        EndIf(IsMapVariation(2));
+        SetBossBGM(793000, BossBGMState.Start);
+        LinkToBossHealthBar(Disabled, nameId, 0);
+        DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId);
+        if (entityId != 0) {
+            LinkToBossHealthBar(Enabled, nameId, entityId);
+        }
+        EndEvent();
+    }
+L10:
+    DisableCharacter(chrEntityId);
+    DisableCharacterAI(chrEntityId);
+    WaitFor(EventFlag(eventFlagId));
+    if ((EventFlag(eventFlagId4) && !EventFlag(eventFlagId5))
+        || (((EventFlag(eventFlagId4) && EventFlag(eventFlagId5))
+            || (!EventFlag(eventFlagId4) && !EventFlag(eventFlagId5)))
+            && value == 0)) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        ForceCharacterDeath(chrEntityId, false);
+        EndEvent();
+    }
+    WaitFor(EventFlag(eventFlagId));
+    if (IsMapVariation(1)) {
+        SpawnOneshotSFX(TargetEntityType.Character, chrEntityId, 900, 690050);
+        WaitFor(ElapsedSeconds(2.5));
+    }
+    if (!IsMapVariation(2)) {
+        SetBossBGM(793000, BossBGMState.Start);
+    }
+    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterHPBarDisplay(chrEntityId);
+    WaitFor(ElapsedSeconds(3));
+    ForceAnimationPlayback(chrEntityId, animationId, false, false, false);
+    EnableCharacter(chrEntityId);
+    EnableCharacterAI(chrEntityId);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, nameId, 0);
+    }
+    if (!IsMapVariation(2)) {
+        WaitFor(CharacterHasSpEffect(chrEntityId, 60875) || ElapsedSeconds(10));
+        DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId);
+        if (entityId != 0) {
+            LinkToBossHealthBar(Enabled, nameId, entityId);
+        }
+    }
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90065215, Restart, function(chrEntityId, chrEntityId2, generatorEntityId, eventFlagId, eventFlagId2, eventFlagId3) {
+    DisableNetworkSync();
+    EndIf(EventFlag(eventFlagId3));
+    if (CharacterDead(chrEntityId)) {
+        DisableCharacter(chrEntityId2);
+        ForceCharacterDeath(chrEntityId2, true);
+        EndEvent();
+    }
+    EndIf(CharacterHasSpEffect(chrEntityId, 60862));
+    WaitFor(EventFlag(eventFlagId2));
+    InvokeEnemyGenerator(generatorEntityId);
+    WaitFor(!CharacterDead(chrEntityId2));
+    WaitFixedTimeFrames(1);
+    DisableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    WaitFixedTimeFrames(1);
+    DisableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    WaitFixedTimeFrames(1);
+    DisableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    WaitFixedTimeFrames(1);
+    DisableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    WaitFixedTimeFrames(1);
+    DisableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+    }
+    WaitFixedTimeFrames(25);
+    DisableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    WaitFixedTimeSeconds(3);
+    DisableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    WaitFor(!CharacterDead(chrEntityId) && CharacterDead(chrEntityId2));
+    WaitFor(ElapsedSeconds(5));
+    RestartEvent();
+});
+
+$Event(90065216, Restart, function(chrEntityId, chrEntityId2, eventFlagId, spEffectId, dummypolyId, value, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    EndIf(CharacterHasSpEffect(chrEntityId, 60862));
+    WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId) && !EventFlag(eventFlagId));
+    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
+    EnableCharacter(chrEntityId2);
+    DisableCharacterGravity(chrEntityId2);
+    WaitFixedTimeFrames(1);
+    IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, chrEntityId, dummypolyId);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    }
+    RequestCharacterAIReplan(chrEntityId2);
+    if (Signed(1) == value) {
+        SetCharacterEventTarget(chrEntityId2, chrEntityId);
+    }
+    RestartEvent();
+});
+
+$Event(90065217, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3) {
+    EndIf(EventFlag(eventFlagId));
+    EndIf(EventFlag(eventFlagId3));
+    DisableNetworkSync();
+    WaitFor(EventFlag(eventFlagId2));
+    GotoIf(L20, EventFlag(eventFlagId));
+    GotoIf(L6, EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+    GotoIf(L7, !EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+L6:
+    ChangeCamera(7930);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(CharacterDead(chrEntityId) || !EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+    Goto(L0);
+L7:
+    ChangeCamera(7931);
+    WaitFixedTimeSeconds(0.5);
+    WaitFor(CharacterDead(chrEntityId) || EntityInRadiusOfEntity(20000, chrEntityId, 8, 1));
+    Goto(L0);
+L0:
+    RestartEvent();
+L20:
+    WaitFixedTimeSeconds(3);
+    ChangeCamera(-1);
+    WaitFixedTimeSeconds(0.5);
+    EndEvent();
+});
+
+$Event(90065220, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmBossConvParamId, sfxId, chrEntityId, nameId, nameId2, eventFlagId4) {
+    if (EventFlag(eventFlagId3)) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        ForceCharacterDeath(chrEntityId, false);
+        EndIf(EventFlag(eventFlagId4));
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId2)) {
+        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        DisableCharacterHPBarDisplay(chrEntityId);
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+        DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
+        LinkToBossHealthBar(Disabled, nameId2, 0);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId);
+    } else {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        WaitFor(EventFlag(eventFlagId));
+        if (IsMapVariation(1)) {
+            SpawnOneshotSFX(TargetEntityType.Character, chrEntityId, 900, 690050);
+            WaitFor(ElapsedSeconds(2.5));
+        }
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+        SpawnOneshotSFX(TargetEntityType.Character, chrEntityId, 900, sfxId);
+        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        DisableCharacterHPBarDisplay(chrEntityId);
+        WaitFor(ElapsedSeconds(4));
+        ForceAnimationPlayback(chrEntityId, 20026, false, false, false);
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
+        LinkToBossHealthBar(Disabled, nameId2, 0);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId);
+        SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    }
+L0:
+    WaitFor(CharacterDead(chrEntityId));
+    SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+});
+
+$Event(90065221, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, sfxId, chrEntityId, chrEntityId2, nameId, chrEntityId3, nameId2, chrEntityId4, nameId3, nameId4) {
+    if (EventFlag(eventFlagId3)) {
+        DisableCharacter(chrEntityId2);
+        DisableCharacterAI(chrEntityId2);
+        ForceCharacterDeath(chrEntityId2, false);
+        DisableCharacter(chrEntityId3);
+        DisableCharacterAI(chrEntityId3);
+        ForceCharacterDeath(chrEntityId3, false);
+        DisableCharacter(chrEntityId4);
+        DisableCharacterAI(chrEntityId4);
+        ForceCharacterDeath(chrEntityId4, false);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId2)) {
+        EnableCharacter(chrEntityId2);
+        EnableCharacterAI(chrEntityId2);
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        EnableCharacter(chrEntityId3);
+        EnableCharacterAI(chrEntityId3);
+        DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+        EnableCharacter(chrEntityId4);
+        EnableCharacterAI(chrEntityId4);
+        DisplayBossHealthBar(Enabled, chrEntityId4, 2, nameId3);
+        LinkToBossHealthBar(Disabled, nameId4, 0);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+        LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
+        EndEvent();
+    }
+    DisableCharacter(chrEntityId2);
+    DisableCharacterAI(chrEntityId2);
+    DisableCharacter(chrEntityId3);
+    DisableCharacterAI(chrEntityId3);
+    DisableCharacter(chrEntityId4);
+    DisableCharacterAI(chrEntityId4);
+    WaitFor(EventFlag(eventFlagId));
+    SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, sfxId);
+    SpawnOneshotSFX(TargetEntityType.Character, chrEntityId3, 900, sfxId);
+    SpawnOneshotSFX(TargetEntityType.Character, chrEntityId4, 900, sfxId);
+    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId3, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId4, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterHPBarDisplay(chrEntityId2);
+    DisableCharacterHPBarDisplay(chrEntityId3);
+    DisableCharacterHPBarDisplay(chrEntityId4);
+    WaitFor(ElapsedSeconds(4));
+    DisplayBossHealthBar(Disabled, chrEntityId, 0, 0);
+    EnableCharacter(chrEntityId2);
+    EnableCharacterAI(chrEntityId2);
+    ForceRatioAnimationPlayback(chrEntityId2, 20026, false, false, false);
+    DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+    EnableCharacter(chrEntityId3);
+    EnableCharacterAI(chrEntityId3);
+    ForceRatioAnimationPlayback(chrEntityId3, 20026, false, false, false);
+    DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+    EnableCharacter(chrEntityId4);
+    EnableCharacterAI(chrEntityId4);
+    ForceRatioAnimationPlayback(chrEntityId4, 20026, false, false, false);
+    DisplayBossHealthBar(Enabled, chrEntityId4, 2, nameId3);
+    LinkToBossHealthBar(Disabled, nameId4, 0);
+    LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+    LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+    LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90065222, Restart, function(eventFlagId, eventFlagId2, bgmBossConvParamId, chrEntityId, chrEntityId2, nameId, chrEntityId3, nameId2, chrEntityId4, nameId3) {
+    EndIf(EventFlag(eventFlagId2));
+    WaitFor(EventFlag(eventFlagId));
+    WaitFor(CharacterRatioHPRatio(chrEntityId) <= 0);
+    SetSpEffect(10000, 509);
+    SetSpEffect(10001, 509);
+    SetSpEffect(10002, 509);
+    SetSpEffect(10003, 509);
+    SetSpEffect(10004, 509);
+    SetSpEffect(10005, 509);
+    SetSpEffect(10006, 509);
+    SetSpEffect(10007, 509);
+    SetSpEffect(10008, 509);
+    SetSpEffect(10009, 509);
+    SetSpEffect(10010, 509);
+    WaitFor(CharacterRatioDead(chrEntityId));
+    WaitFixedTimeSeconds(4);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    if (BossBGMPlaying(bgmBossConvParamId)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Stop2);
+    }
+    DisplayBossHealthBar(Disabled, chrEntityId4, 2, nameId3);
+    DisplayBossHealthBar(Disabled, chrEntityId3, 1, nameId2);
+    DisplayBossHealthBar(Disabled, chrEntityId2, 0, nameId);
+    EndEvent();
+});
+
+$Event(90065235, Restart, function(chrEntityId, spEffectId, spEffectId2, spEffectId3, value) {
+    DisableNetworkSync();
+    EndIf(CharacterDead(chrEntityId));
+    WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId) || CharacterDead(chrEntityId));
+    EndIf(CharacterDead(chrEntityId) && value == 0);
+    SetSpEffect(20000, spEffectId2);
+    if (Signed(spEffectId3) != 0) {
+        SetSpEffect(20000, spEffectId3);
+    }
+    WaitFor(!CharacterHasSpEffect(chrEntityId, spEffectId));
+    RestartEvent();
+});
+
+$Event(90065236, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, eventFlagId) {
+    DisableNetworkSync();
+    if (CharacterDead(chrEntityId)) {
+        ForceCharacterDeath(chrEntityId2, false);
+        ForceCharacterDeath(chrEntityId3, false);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId)) {
+        SetCharacterBackreadState(chrEntityId2, false);
+        SetCharacterBackreadState(chrEntityId3, false);
+        GotoIf(L0, !CharacterHasSpEffect(chrEntityId, 62110));
+        GotoIf(L1, CharacterHasSpEffect(chrEntityId, 62110));
+    }
+    WaitFor(EventFlag(eventFlagId));
+    SetCharacterBackreadState(chrEntityId2, false);
+    WaitFor(CharacterRatioBackreadStatus(chrEntityId2));
+    ForceAnimationPlayback(chrEntityId2, 30000, false, false, false);
+    SetCharacterBackreadState(chrEntityId3, false);
+    WaitFor(CharacterRatioBackreadStatus(chrEntityId3));
+    ForceAnimationPlayback(chrEntityId3, 30000, false, false, false);
+L0:
+    WaitFor(CharacterHasSpEffect(chrEntityId, 62110) || CharacterDead(chrEntityId));
+    if (CharacterDead(chrEntityId)) {
+        ForceCharacterDeath(chrEntityId2, false);
+        ForceCharacterDeath(chrEntityId3, false);
+        EndEvent();
+    }
+    ForceAnimationPlayback(chrEntityId2, 20000, false, false, false);
+    WaitFor(ElapsedSeconds(1.5));
+    ForceAnimationPlayback(chrEntityId3, 20000, false, false, false);
+L1:
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 62110) || CharacterDead(chrEntityId));
+    if (CharacterDead(chrEntityId)) {
+        ForceCharacterDeath(chrEntityId2, false);
+        ForceCharacterDeath(chrEntityId3, false);
+        EndEvent();
+    }
+    RestartEvent();
+});
+
+$Event(90065245, Restart, function(chrEntityId, spEffectId, weather, spEffectId2, gparamSubId, gparamSubId2, eventFlagId, eventFlagId2, eventFlagId3) {
+    DisableNetworkSync();
+    EndIf(EventFlag(eventFlagId3));
+    if (EventFlag(eventFlagId)) {
+        ClearSpEffect(20000, 60260);
+        ClearSpEffect(20000, 60261);
+        ClearSpEffect(20000, 60262);
+        ChangeWeather(weather, -1, true);
+        if (!EventFlag(7604)) {
+            ActivateGparamOverride(gparamSubId, 0);
+        }
+        if (EventFlag(7604)) {
+            ActivateGparamOverride(gparamSubId2, 0);
+        }
+        SetSpEffect(20000, spEffectId2);
+    }
+    WaitFor(EventFlag(eventFlagId2));
+    WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId) || EventFlag(eventFlagId3));
+    EndIf(EventFlag(eventFlagId3));
+    ClearSpEffect(20000, 60260);
+    ClearSpEffect(20000, 60261);
+    ClearSpEffect(20000, 60262);
+    ChangeWeather(weather, -1, false);
+    if (!EventFlag(7604)) {
+        ActivateGparamOverride(gparamSubId, 10);
+    }
+    if (EventFlag(7604)) {
+        ActivateGparamOverride(gparamSubId2, 10);
+    }
+    SetSpEffect(20000, spEffectId2);
+    WaitFor(ElapsedSeconds(1));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    }
+L0:
+    WaitFor(!WeatherActive(weather, 0, 0));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+    }
+    WaitFor(ElapsedSeconds(1));
+    RestartEvent();
+});
+
+$Event(90065246, Restart, function(chrEntityId, spEffectId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5) {
+    DisableNetworkSync();
+    EndIf(
+        EventFlag(eventFlagId5)
+            && !EventFlag(eventFlagId)
+            && !EventFlag(eventFlagId2)
+            && !EventFlag(eventFlagId3));
+    if (EventFlag(eventFlagId5)) {
+        SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+        SetNetworkconnectedEventFlagID(eventFlagId2, OFF);
+        SetNetworkconnectedEventFlagID(eventFlagId3, OFF);
+        ChangeWeather(Weather.Type00, -1, true);
+        DeactivateGparamOverride(10);
+        ClearSpEffect(20000, 60260);
+        ClearSpEffect(20000, 60261);
+        ClearSpEffect(20000, 60262);
+        EndEvent();
+    }
+    WaitFor(EventFlag(eventFlagId4));
+    if (Signed(spEffectId) != 0) {
+        spFlag |= CharacterHasSpEffect(chrEntityId, spEffectId);
+    }
+    spFlag |= EventFlag(eventFlagId5);
+    WaitFor(spFlag);
+    ChangeWeather(Weather.Type00, -1, false);
+    DeactivateGparamOverride(10);
+    ClearSpEffect(20000, 60260);
+    ClearSpEffect(20000, 60261);
+    ClearSpEffect(20000, 60262);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+        SetNetworkconnectedEventFlagID(eventFlagId2, OFF);
+        SetNetworkconnectedEventFlagID(eventFlagId3, OFF);
+    }
+    EndIf(EventFlag(eventFlagId5));
+    WaitFor(ElapsedSeconds(1));
+    WaitFor(!CharacterHasSpEffect(chrEntityId, spEffectId));
+    RestartEvent();
+});
+
+$Event(90065247, Restart, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2) {
+    if (EventFlag(eventFlagId2)) {
+        if (CharacterHasSpEffect(chrEntityId2, 60220)) {
+            SetSpEffect(chrEntityId2, 60246);
+        }
+        EndEvent();
+    }
+    WaitFor(EventFlag(eventFlagId));
+    WaitFor(
+        (CharacterHasSpEffect(chrEntityId2, 60220) && CharacterHasSpEffect(chrEntityId2, 501000))
+            || EventFlag(eventFlagId2));
+    if (CharacterHasSpEffect(chrEntityId2, 60220)) {
+        SetSpEffect(chrEntityId2, 60246);
+    }
+    EndIf(EventFlag(eventFlagId2));
+    SetSpEffect(chrEntityId, 60221);
+    WaitFor(ElapsedSeconds(1));
+    RestartEvent();
+});
+
+$Event(90065250, Restart, function(eventFlagId, eventFlagId2) {
+    DisableNetworkSync();
+    WaitFor(HasMultiplayerState(MultiplayerState.Host));
+    EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId2));
+    RandomlySetNetworkconnectedEventFlagInRange(eventFlagId, eventFlagId2, ON);
+});
+
+$Event(90065251, Restart, function(eventFlagId, chrEntityId, eventFlagId2, chrEntityId2, eventFlagId3, eventFlagId4, eventFlagId5, entityId) {
+    EndIf(EventFlag(eventFlagId5));
+    if (EventFlag(eventFlagId2)) {
+        SetCharacterBackreadState(chrEntityId2, false);
+    } else {
+        WaitFor(
+            (EventFlag(eventFlagId) && !CharacterDead(chrEntityId, LessOrEqual, 4))
+                || EventFlag(eventFlagId5));
+        EndIf(EventFlag(eventFlagId4));
+        EndIf(EventFlag(eventFlagId5));
+        SetCharacterBackreadState(chrEntityId2, false);
+        DisableCharacter(chrEntityId2);
+        DisableCharacterAI(chrEntityId2);
+        WaitFor(
+            (CharacterRatioDead(chrEntityId, GreaterOrEqual, 1) && ElapsedSeconds(5))
+                || EventFlag(eventFlagId5));
+        if (EventFlag(eventFlagId5)) {
+            SetCharacterBackreadState(chrEntityId2, true);
+            EndEvent();
+        }
+        SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+        PlaySE(entityId, SoundType.CharacterMotion, 999997310);
+        WaitFor(ElapsedSeconds(2));
+        ForceAnimationPlayback(chrEntityId2, 20026, false, false, false);
+    }
+L0:
+    EnableCharacter(chrEntityId2);
+    EnableCharacterAI(chrEntityId2);
+    if (EventFlag(eventFlagId3)) {
+        SetNetworkconnectedEventFlagID(eventFlagId5, ON);
+    }
+});
+
+$Event(90065252, Restart, function(chrEntityId, value, areaEntityId, eventFlagId, eventFlagId2) {
+    if (EventFlag(7510)) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        EndEvent();
+    }
+    if (EventFlag(7506)) {
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        WaitFor(ElapsedSeconds(120));
+        SetEventFlagID(eventFlagId, ON);
+        EndEvent();
+    }
+    EndIf(EventFlag(7506));
+    if (value == 1) {
+        flag |= !EventFlag(7505);
+    }
+    if (value == 2) {
+        flag |= EventFlag(7505);
+    }
+    if (flag) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+    } else {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        if (value == 1) {
+            flagTime &= !EventFlag(7505);
+        }
+        if (value == 2) {
+            flagTime &= EventFlag(7505);
+        }
+        flagTime &= PlayAreaCurrentTimeInRange(0, 0, 0, 22, 59, 59);
+        WaitFor(flagTime);
+        WaitFor(ElapsedSeconds(30));
+    }
+L0:
+    if (value == 1) {
+        flagTimeArea &= !EventFlag(7505);
+    }
+    if (value == 2) {
+        flagTimeArea &= EventFlag(7505);
+    }
+    flagTimeArea &= PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59)
+        && (InArea(20000, areaEntityId) || PlayAreaCurrentTimeInRange(23, 59, 0, 23, 59, 59));
+    WaitFor(flagTimeArea);
+    if (value == 1) {
+        SetNetworkconnectedEventFlagID(7501, ON);
+    }
+    if (value == 2) {
+        SetNetworkconnectedEventFlagID(7506, ON);
+    }
+    PlaySE(areaEntityId, SoundType.CharacterMotion, 999997310);
+    WaitFor(ElapsedSeconds(2));
+    ForceAnimationPlayback(chrEntityId, 20026, false, false, false);
+    EnableCharacter(chrEntityId);
+    EnableCharacterAI(chrEntityId);
+    SetEventFlagID(52120300, ON);
+    WaitFor(ElapsedSeconds(120));
+    SetEventFlagID(eventFlagId, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90065253, Restart, function(eventFlagId, value, eventFlagId2, eventFlagId3) {
+    if (value != 1) {
+        if (value != 2) {
+            EndEvent();
+        }
+    }
+    EndIf(EventFlag(eventFlagId3));
+    if (value == 1) {
+        flagTime &= EventFlag(7501);
+    }
+    if (value == 2) {
+        flagTime &= EventFlag(7506);
+    }
+    flagTime &= PlayAreaCurrentTimeInRange(23, 59, 0, 23, 59, 59)
+        && (EventFlag(eventFlagId) || EventFlag(eventFlagId2));
+    WaitFor(flagTime);
+    SetNetworkconnectedEventFlagID(eventFlagId3, ON);
+    if (value == 1) {
+        SetNetworkconnectedEventFlagID(7504, ON);
+    }
+    if (value == 2) {
+        SetNetworkconnectedEventFlagID(7509, ON);
+    }
+});
+
+$Event(90065254, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmBossConvParamId, sfxId, chrEntityId, chrEntityId2, nameId) {
+    if (EventFlag(eventFlagId3)) {
+        DisableCharacter(chrEntityId);
+        DisableCharacterAI(chrEntityId);
+        ForceCharacterDeath(chrEntityId, false);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId2)) {
+        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        DisableCharacterHPBarDisplay(chrEntityId);
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        EndIf(IsMapVariation(2));
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+        LinkToBossHealthBar(Disabled, nameId, 0);
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        EndEvent();
+    }
+L1:
+    DisableCharacter(chrEntityId);
+    DisableCharacterAI(chrEntityId);
+    WaitFor(EventFlag(eventFlagId));
+    SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, sfxId);
+    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterHPBarDisplay(chrEntityId);
+    ForceAnimationPlayback(chrEntityId, 20026, false, false, false);
+    EnableCharacter(chrEntityId);
+    EnableCharacterAI(chrEntityId);
+    WaitFor(ElapsedSeconds(10));
+    if (!IsMapVariation(2)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    }
+    WaitFor(ElapsedSeconds(4));
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, nameId, 0);
+    }
+    if (!IsMapVariation(2)) {
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        Goto(L0);
+    }
+L0:
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90065255, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(eventFlagId2));
+    if (CharacterHasSpEffect(chrEntityId, 60754)) {
+        if (!EventFlag(7604)) {
+            ActivateGparamOverride(14, 0);
+        }
+        if (EventFlag(7604)) {
+            ActivateGparamOverride(41, 0);
+        }
+    } else {
+        WaitFor(EventFlag(eventFlagId));
+        WaitFor(CharacterHasSpEffect(chrEntityId, 60754) || CharacterHPValue(chrEntityId) <= 0);
+        if (CharacterHPValue(chrEntityId) > 0) {
+            if (!EventFlag(7604)) {
+                ActivateGparamOverride(14, 8);
+            }
+            if (EventFlag(7604)) {
+                ActivateGparamOverride(41, 8);
+            }
+        }
+    }
+L0:
+    WaitFor(CharacterHPValue(chrEntityId) <= 0);
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60762) || CharacterDead(chrEntityId));
+    if (!EventFlag(7604)) {
+        ActivateGparamOverride(32, 5);
+    }
+    if (EventFlag(7604)) {
+        ActivateGparamOverride(42, 5);
+    }
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 60762) || CharacterDead(chrEntityId));
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 60762) || ElapsedSeconds(10));
+    DeactivateGparamOverride(5);
 });
 
 $Event(90065900, Restart, function(entityId, value, assetEntityId, chrEntityId, textEffectParamId, bgmBossConvParamId, logObjectId, entityId2) {
@@ -5988,6 +11200,7 @@ $Event(90065910, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
         DisableCharacterHPBarDisplay(chrEntityId);
         EnableCharacter(chrEntityId);
         EnableCharacterAI(chrEntityId);
+        EndIf(IsMapVariation(2));
         SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
         LinkToBossHealthBar(Disabled, nameId, 0);
         if (chrEntityId3 == 0) {
@@ -6018,7 +11231,9 @@ L1:
         SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690050);
         WaitFor(ElapsedSeconds(2.5));
     }
-    SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    if (!IsMapVariation(2)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
+    }
     SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, sfxId);
     SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisableCharacterHPBarDisplay(chrEntityId);
@@ -6026,23 +11241,27 @@ L1:
     ForceAnimationPlayback(chrEntityId, 20026, false, false, false);
     EnableCharacter(chrEntityId);
     EnableCharacterAI(chrEntityId);
-    LinkToBossHealthBar(Disabled, nameId, 0);
-    if (chrEntityId3 == 0) {
-        DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
-        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-    } else if (chrEntityId4 == 0) {
-        DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
-        DisplayBossHealthBar(Enabled, chrEntityId3, 0, nameId2);
-        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
-    } else {
-        DisplayBossHealthBar(Enabled, chrEntityId2, 2, nameId);
-        DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
-        DisplayBossHealthBar(Enabled, chrEntityId4, 0, nameId3);
-        LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-        LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
-        LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
-        Goto(L0);
+    if (!IsMapVariation(2)) {
+        LinkToBossHealthBar(Disabled, nameId, 0);
+    }
+    if (!IsMapVariation(2)) {
+        if (chrEntityId3 == 0) {
+            DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
+            LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+        } else if (chrEntityId4 == 0) {
+            DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
+            DisplayBossHealthBar(Enabled, chrEntityId3, 0, nameId2);
+            LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+            LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+        } else {
+            DisplayBossHealthBar(Enabled, chrEntityId2, 2, nameId);
+            DisplayBossHealthBar(Enabled, chrEntityId3, 1, nameId2);
+            DisplayBossHealthBar(Enabled, chrEntityId4, 0, nameId3);
+            LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
+            LinkToBossHealthBar(Enabled, nameId2, chrEntityId3);
+            LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
+            Goto(L0);
+        }
     }
 L0:
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
@@ -6067,6 +11286,7 @@ $Event(90065911, Restart, function(eventFlagId, eventFlagId2, bgmBossConvParamId
     WaitFor(CharacterRatioDead(chrEntityId));
     WaitFixedTimeSeconds(4);
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    EndIf(IsMapVariation(2));
     if (BossBGMPlaying(bgmBossConvParamId)) {
         SetBossBGM(bgmBossConvParamId, BossBGMState.Stop2);
     }
@@ -6120,6 +11340,21 @@ L1:
     DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
     LinkToBossHealthBar(Enabled, nameId, chrEntityId);
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90065915, Restart, function(chrEntityId, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(EventFlag(eventFlagId));
+    SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Normal);
+    WaitFor(EntityInRadiusOfEntity(20000, chrEntityId, 100, 1) && PlayerIsInOwnWorld());
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
+    }
+    WaitFor(
+        !EntityInRadiusOfEntity(20000, chrEntityId, 100, 1)
+            || !PlayerIsInOwnWorld()
+            || EventFlag(eventFlagId));
+    RestartEvent();
 });
 
 $Event(90065920, Restart, function(chrEntityId, spEffectId) {
@@ -6241,6 +11476,7 @@ $Event(90075008, Restart, function(eventFlagId, eventFlagId2, spEffectId, chrEnt
         }
     }
     ChangeWeather(Weather.Type10, -1, false);
+    WaitFor(PlayerInMap(19, 0, 0, 0));
     SpawnMapSFX(19002400);
     SpawnMapSFX(19002401);
     SpawnMapSFX(19002402);
@@ -8126,13 +13362,12 @@ $Event(99075460, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
     if (IsHero(Hero.Executor)) {
         SetNetworkconnectedEventFlagID(eventFlagId8, ON);
     }
-    Goto(S0);
-    SetNetworkconnectedEventFlagID(eventFlagId9, ON);
-S0:
-    Goto(S1);
-    SetNetworkconnectedEventFlagID(eventFlagId10, ON);
-S1:
-    NoOp();
+    if (IsHero(Hero.Scholar)) {
+        SetNetworkconnectedEventFlagID(eventFlagId9, ON);
+    }
+    if (IsHero(Hero.Undertaker)) {
+        SetNetworkconnectedEventFlagID(eventFlagId10, ON);
+    }
 });
 
 $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
@@ -8144,10 +13379,8 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
     EndIf(AnyBatchEventFlags(eventFlagId, eventFlagId6));
     EndIf(
         !((IsPlayerNo(playerNo) && !EventFlag(7521)) || (PlayerIsInOwnWorld() && EventFlag(7521))));
-    flagOnlineChr &= EventFlag(7521) && !PlayerIsInOwnWorld();
-    EndIf(flagOnlineChr);
-    flagOnlineChr &= !EventFlag(7521) && !IsPlayerNo(playerNo);
-    EndIf(flagOnlineChr);
+    EndIf(EventFlag(7521) && !PlayerIsInOwnWorld());
+    EndIf(!EventFlag(7521) && !IsPlayerNo(playerNo));
     if (CharacterHasSpEffect(20000, 49300)
         || CharacterHasSpEffect(20000, 49310)
         || CharacterHasSpEffect(20000, 49320)
@@ -8155,7 +13388,9 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
         || CharacterHasSpEffect(20000, 49340)
         || CharacterHasSpEffect(20000, 49350)
         || CharacterHasSpEffect(20000, 49360)
-        || CharacterHasSpEffect(20000, 49370)) {
+        || CharacterHasSpEffect(20000, 49370)
+        || CharacterHasSpEffect(20000, 49980)
+        || CharacterHasSpEffect(20000, 49990)) {
         SetNetworkconnectedEventFlagID(eventFlagId, ON);
     }
     if (CharacterHasSpEffect(20000, 49301)
@@ -8165,7 +13400,9 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
         || CharacterHasSpEffect(20000, 49341)
         || CharacterHasSpEffect(20000, 49351)
         || CharacterHasSpEffect(20000, 49361)
-        || CharacterHasSpEffect(20000, 49371)) {
+        || CharacterHasSpEffect(20000, 49371)
+        || CharacterHasSpEffect(20000, 49981)
+        || CharacterHasSpEffect(20000, 49991)) {
         SetNetworkconnectedEventFlagID(eventFlagId2, ON);
     }
     if (CharacterHasSpEffect(20000, 49302)
@@ -8175,7 +13412,9 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
         || CharacterHasSpEffect(20000, 49342)
         || CharacterHasSpEffect(20000, 49352)
         || CharacterHasSpEffect(20000, 49362)
-        || CharacterHasSpEffect(20000, 49372)) {
+        || CharacterHasSpEffect(20000, 49372)
+        || CharacterHasSpEffect(20000, 49982)
+        || CharacterHasSpEffect(20000, 49992)) {
         SetNetworkconnectedEventFlagID(eventFlagId3, ON);
     }
     if (CharacterHasSpEffect(20000, 49303)
@@ -8185,7 +13424,9 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
         || CharacterHasSpEffect(20000, 49343)
         || CharacterHasSpEffect(20000, 49353)
         || CharacterHasSpEffect(20000, 49363)
-        || CharacterHasSpEffect(20000, 49373)) {
+        || CharacterHasSpEffect(20000, 49373)
+        || CharacterHasSpEffect(20000, 49983)
+        || CharacterHasSpEffect(20000, 49993)) {
         SetNetworkconnectedEventFlagID(eventFlagId4, ON);
     }
     if (CharacterHasSpEffect(20000, 49304)
@@ -8195,7 +13436,9 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
         || CharacterHasSpEffect(20000, 49344)
         || CharacterHasSpEffect(20000, 49354)
         || CharacterHasSpEffect(20000, 49364)
-        || CharacterHasSpEffect(20000, 49374)) {
+        || CharacterHasSpEffect(20000, 49374)
+        || CharacterHasSpEffect(20000, 49984)
+        || CharacterHasSpEffect(20000, 49994)) {
         SetNetworkconnectedEventFlagID(eventFlagId5, ON);
     }
     if (CharacterHasSpEffect(20000, 49305)
@@ -8205,7 +13448,9 @@ $Event(99075461, Restart, function(playerNo, eventFlagId, eventFlagId2, eventFla
         || CharacterHasSpEffect(20000, 49345)
         || CharacterHasSpEffect(20000, 49355)
         || CharacterHasSpEffect(20000, 49365)
-        || CharacterHasSpEffect(20000, 49375)) {
+        || CharacterHasSpEffect(20000, 49375)
+        || CharacterHasSpEffect(20000, 49985)
+        || CharacterHasSpEffect(20000, 49995)) {
         SetNetworkconnectedEventFlagID(eventFlagId6, ON);
     }
 });
@@ -8628,24 +13873,24 @@ L4:
         }
         if (EventFlag(eventFlagId15)) {
             if (EventFlag(eventFlagId17)) {
-                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035504, 30050, 35504);
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035404, 30040, 35404);
             }
             if (EventFlag(eventFlagId18)) {
-                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035504, 30050, 35514);
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035404, 30040, 35414);
             }
             if (EventFlag(eventFlagId19)) {
-                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035504, 30050, 35524);
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035404, 30040, 35424);
             }
         }
         if (EventFlag(eventFlagId16)) {
             if (EventFlag(eventFlagId17)) {
-                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035505, 30050, 35505);
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035405, 30040, 35405);
             }
             if (EventFlag(eventFlagId18)) {
-                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035505, 30050, 35515);
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035405, 30040, 35415);
             }
             if (EventFlag(eventFlagId19)) {
-                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035505, 30050, 35525);
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035405, 30040, 35425);
             }
         }
     }
@@ -8790,43 +14035,139 @@ L6:
 L7:
     if (EventFlag(eventFlagId9)) {
         if (EventFlag(eventFlagId11)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035800, 30080, 35800);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035800, 30080, 35810);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035800, 30080, 35820);
+            }
         }
         if (EventFlag(eventFlagId12)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035801, 30080, 35801);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035801, 30080, 35811);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035801, 30080, 35821);
+            }
         }
         if (EventFlag(eventFlagId13)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035802, 30080, 35802);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035802, 30080, 35812);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035802, 30080, 35822);
+            }
         }
         if (EventFlag(eventFlagId14)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035803, 30080, 35803);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035803, 30080, 35813);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035803, 30080, 35823);
+            }
         }
         if (EventFlag(eventFlagId15)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035804, 30080, 35804);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035804, 30080, 35814);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035804, 30080, 35824);
+            }
         }
         if (EventFlag(eventFlagId16)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035805, 30080, 35805);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035805, 30080, 35815);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035805, 30080, 35825);
+            }
         }
     }
 L8:
     if (EventFlag(eventFlagId10)) {
         if (EventFlag(eventFlagId11)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035900, 30090, 35900);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035900, 30090, 35910);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035900, 30090, 35920);
+            }
         }
         if (EventFlag(eventFlagId12)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035901, 30090, 35901);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035901, 30090, 35911);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035901, 30090, 35921);
+            }
         }
         if (EventFlag(eventFlagId13)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035902, 30090, 35902);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035902, 30090, 35912);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035902, 30090, 35922);
+            }
         }
         if (EventFlag(eventFlagId14)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035903, 30090, 35903);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035903, 30090, 35913);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035903, 30090, 35923);
+            }
         }
         if (EventFlag(eventFlagId15)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035904, 30090, 35904);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035904, 30090, 35914);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035904, 30090, 35924);
+            }
         }
         if (EventFlag(eventFlagId16)) {
-            OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, -1, -1, -1);
+            if (EventFlag(eventFlagId17)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035905, 30090, 35905);
+            }
+            if (EventFlag(eventFlagId18)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035905, 30090, 35915);
+            }
+            if (EventFlag(eventFlagId19)) {
+                OverrideCharacterCreateData(slot, entityId, entityId2, entityId3, 700035905, 30090, 35925);
+            }
         }
     }
 L9:
@@ -9078,9 +14419,6 @@ $Event(99075483, Restart, function(chrEntityId) {
     EndIf(CharacterHPValue(chrEntityId) <= 0);
     WaitFor(
         CharacterHasSpEffect(chrEntityId, 49695)
-            || CharacterHasSpEffect(20000, 49750)
-            || CharacterHasSpEffect(20000, 49751)
-            || CharacterHasSpEffect(20000, 49752)
             || CharacterHasSpEffect(20000, 49753)
             || CharacterHasSpEffect(20000, 49754)
             || CharacterHasSpEffect(20000, 46755));
@@ -9103,9 +14441,9 @@ $Event(99075485, Restart, function(chrEntityId, eventFlagId) {
     if (HPRatio(chrEntityId) <= 0.4) {
         flag |= EventValue(eventFlagId, 2) >= 1;
     } else if (HPRatio(chrEntityId) <= 0.6) {
-        flag |= EventValue(eventFlagId, 2) >= 2;
+        flag |= EventValue(eventFlagId, 2) >= 1;
     } else {
-        flag |= EventValue(eventFlagId, 2) >= 3;
+        flag |= EventValue(eventFlagId, 2) >= 2;
         Goto(L0);
     }
 L0:
@@ -9670,6 +15008,863 @@ $Event(90075706, Restart, function(chrEntityId, chrEntityId2, eventFlagId, event
     }
 });
 
+$Event(90075750, Default, function(chrEntityId, chrEntityId2, chrEntityId3) {
+    DisableNetworkSync();
+    map |= PlayerInMap(16, 10, 0, 0);
+    if (map) {
+        EnableCharacterDefaultBackread(chrEntityId);
+        EnableCharacterDefaultBackread(chrEntityId2);
+        EnableCharacterDefaultBackread(chrEntityId3);
+        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        DisableCharacterHPBarDisplay(chrEntityId);
+        ChangeCamera(7610);
+        EnableCharacter(chrEntityId2);
+        DisableCharacterCollision(chrEntityId3);
+        DisableCharacterInvincibility(chrEntityId3);
+        DisableCharacterGravity(chrEntityId3);
+        DisableCharacterAI(chrEntityId3);
+        DisableLockOnPoint(chrEntityId3, 220);
+        SetCharacterEventTarget(chrEntityId, chrEntityId3);
+        SetCharacterEventTarget(chrEntityId2, chrEntityId);
+    }
+L10:
+    EnableCharacterDefaultBackread(chrEntityId);
+    map |= PlayerInMap(16, 10, 0, 0);
+    if (or1) {
+        SetCharacterBackreadState(chrEntityId2, true);
+        SetCharacterBackreadState(chrEntityId3, true);
+    }
+    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterHPBarDisplay(chrEntityId);
+    WaitFor(PlayerInMap(16, 10, 0, 0));
+    WaitFor(ElapsedFrames(1));
+    ChangeCamera(7610);
+    WaitFor(ElapsedSeconds(5));
+    SetCharacterBackreadState(chrEntityId2, false);
+    SetCharacterBackreadState(chrEntityId3, false);
+    EnableCharacterDefaultBackread(chrEntityId2);
+    EnableCharacterDefaultBackread(chrEntityId3);
+    EnableCharacter(chrEntityId2);
+    DisableCharacterCollision(chrEntityId3);
+    DisableCharacterInvincibility(chrEntityId3);
+    DisableCharacterGravity(chrEntityId3);
+    DisableCharacterAI(chrEntityId3);
+    DisableLockOnPoint(chrEntityId3, 220);
+    SetCharacterEventTarget(chrEntityId, chrEntityId3);
+    SetCharacterEventTarget(chrEntityId2, chrEntityId);
+});
+
+$Event(90075751, Restart, function(chrEntityId) {
+    EndIf(EventFlag(7512));
+    EndIf(EventFlag(7511));
+    WaitFor(
+        InArea(10000, 16102801)
+            || HasDamageType(chrEntityId, 0, DamageType.Any)
+            || CharacterHasStateInfo(chrEntityId, 436)
+            || CharacterHasStateInfo(chrEntityId, 2)
+            || CharacterHasStateInfo(chrEntityId, 5)
+            || CharacterHasStateInfo(chrEntityId, 6)
+            || CharacterHasStateInfo(chrEntityId, 260)
+            || EventFlag(7511));
+    SetNetworkconnectedEventFlagID(7511, ON);
+});
+
+$Event(90075752, Restart, function(chrEntityId, eventFlagId) {
+    if (EventFlag(7512)) {
+        ForceCharacterDeath(chrEntityId, false);
+        EndEvent();
+    }
+    if (EventFlag(7511)) {
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        if (!EventFlag(eventFlagId)) {
+            EnableCharacterImmortality(chrEntityId);
+        }
+        if (EventFlag(eventFlagId)) {
+            DisplayBossHealthBar(Enabled, chrEntityId, 0, 907630001);
+            LinkToBossHealthBar(Disabled, 907630001, 0);
+            LinkToBossHealthBar(Enabled, 907630001, chrEntityId);
+            EndEvent();
+        }
+        DisplayBossHealthBar(Enabled, chrEntityId, 0, 907630000);
+        LinkToBossHealthBar(Disabled, 907630000, 0);
+        LinkToBossHealthBar(Enabled, 907630000, chrEntityId);
+        EndEvent();
+    }
+    EnableCharacter(chrEntityId);
+    DisableCharacterAI(chrEntityId);
+    EnableCharacterImmortality(chrEntityId);
+    ForceAnimationPlayback(chrEntityId, 30029, true, false, false);
+    WaitFor(EventFlag(7511));
+    ForceAnimationPlayback(chrEntityId, 20029, false, false, false);
+    EnableCharacterAI(chrEntityId);
+    LinkToBossHealthBar(Disabled, 907630000, 0);
+    LinkToBossHealthBar(Enabled, 907630000, chrEntityId);
+    WaitFor(ElapsedSeconds(4));
+    DisplayBossHealthBar(Enabled, chrEntityId, 0, 907630000);
+});
+
+$Event(90075755, Restart, function(chrEntityId, chrEntityId2, generatorEntityId, generatorEntityId2, targetHPRatio, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(7512));
+    EndIf(EventFlag(eventFlagId2));
+    if (EventFlag(eventFlagId)) {
+        EnableGenerator(generatorEntityId);
+    } else {
+        WaitFor(
+            (HPRatio(chrEntityId) <= targetHPRatio && CharacterHasSpEffect(chrEntityId, 60530))
+                || CharacterHPValue(chrEntityId) <= 1
+                || EventFlag(eventFlagId2));
+        EndIf(CharacterHPValue(chrEntityId) <= 1 || EventFlag(eventFlagId2));
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+        if (generatorEntityId2 != 0) {
+            InvokeEnemyGenerator(generatorEntityId2);
+        }
+        EnableGenerator(generatorEntityId);
+    }
+L0:
+    SetCharacterEventTarget(chrEntityId2, chrEntityId);
+    WaitFor(ElapsedSeconds(30) || CharacterHPValue(chrEntityId) <= 1 || EventFlag(eventFlagId2));
+    SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+    DisableGenerator(generatorEntityId);
+    if (IsPlayerNo(1)) {
+        WaitFor(!EventFlag(eventFlagId));
+    }
+    GotoIf(S0, !IsPlayerNo(1));
+    WaitFor(!EventFlag(eventFlagId));
+    if (IsPlayerNo(1)) {
+S0:
+        WaitFor(!EventFlag(eventFlagId));
+        RestartEvent();
+    }
+});
+
+$Event(90075756, Restart, function(chrEntityId, generatorEntityId, chrEntityId2, generatorEntityId2, chrEntityId3, targetHPRatio, eventFlagId, eventFlagId2) {
+    EndIf(EventFlag(7512));
+    EndIf(EventFlag(eventFlagId2));
+    flagHp = EventFlag(eventFlagId) && CharacterHPValue(chrEntityId2) > 0;
+    GotoIf(S0, mainGroupAbuse);
+    GotoIf(L0, !CharacterHasSpEffect(chrEntityId2, 62012));
+    GotoIf(L1, CharacterHasSpEffect(chrEntityId2, 62012));
+S0:
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 60530));
+    WaitFor(
+        (HPRatio(chrEntityId) <= targetHPRatio
+            && CharacterHasSpEffect(chrEntityId, 60530)
+            && (!EventFlag(eventFlagId) || CharacterHPValue(chrEntityId2) <= 0))
+            || CharacterHPValue(chrEntityId) <= 1
+            || EventFlag(eventFlagId2));
+    EndIf(CharacterHPValue(chrEntityId) <= 1 || EventFlag(eventFlagId2));
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    InvokeEnemyGenerator(generatorEntityId);
+    DisableNetworkSync();
+    WaitFor(CharacterHPValue(chrEntityId2) > 0);
+    EnableNetworkSync();
+L0:
+    SetCharacterEventTarget(chrEntityId2, chrEntityId);
+    WaitFor(CharacterHasSpEffect(chrEntityId2, 62010) || CharacterHPValue(chrEntityId2) <= 0);
+    RestartIf(CharacterHPValue(chrEntityId2) <= 0);
+    InvokeEnemyGenerator(generatorEntityId2);
+    DisableNetworkSync();
+    WaitFor(CharacterHPValue(chrEntityId3) > 0);
+    EnableNetworkSync();
+    ForceAnimationPlayback(chrEntityId3, 20020, false, false, false);
+    WaitFixedTimeFrames(1);
+    WarpCharacterAndCopyFloorUnknown200489(chrEntityId3, TargetEntityType.Character, chrEntityId2, 900, chrEntityId2, -1, -1);
+L1:
+    WaitFor(CharacterHPValue(chrEntityId3) <= 0);
+    ForceCharacterDeath(chrEntityId2, true);
+    RestartEvent();
+});
+
+$Event(90075757, Restart, function(chrEntityId, chrEntityId2, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(EventFlag(7512));
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(EventFlag(7511));
+    WaitFor(CharacterHasSpEffect(chrEntityId2, 62037, GreaterOrEqual, 1) || EventFlag(eventFlagId));
+    EndIf(EventFlag(eventFlagId));
+    SetCharacterEventTarget(chrEntityId2, chrEntityId);
+    WaitFor(
+        CharacterHasSpEffect(chrEntityId2, 62037, LessOrEqual, 0)
+            || EventFlag(eventFlagId)
+            || ElapsedSeconds(0.25));
+    EndIf(EventFlag(eventFlagId));
+    RestartEvent();
+});
+
+$Event(90075758, Restart, function() {
+    DisableNetworkSync();
+    EndIf(EventFlag(7512));
+    if (CharacterHasSpEffect(20000, 60541) || CharacterHasSpEffect(20000, 60539)) {
+        SetSpEffect(20000, 60540);
+        ChangeWeather(Weather.Type31, -1, true);
+    } else {
+        WaitFor(CharacterHasSpEffect(20000, 60541) || CharacterHasSpEffect(20000, 60539));
+        SetSpEffect(20000, 60540);
+        ChangeWeather(Weather.Type31, -1, false);
+    }
+L0:
+    WaitFor(!CharacterHasSpEffect(20000, 60541) && !CharacterHasSpEffect(20000, 60539));
+    ChangeWeather(Weather.Type21, -1, false);
+    RestartEvent();
+});
+
+$Event(90075760, Restart, function(chrEntityId) {
+    DisableNetworkSync();
+    EndIf(CharacterHasSpEffect(20000, 60541) || CharacterHasSpEffect(20000, 60539));
+    if (CharacterHasSpEffect(chrEntityId, 60547)) {
+        ChangeWeather(Weather.Type21, -1, true);
+        EndEvent();
+    }
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60547));
+    EndIf(CharacterHasSpEffect(20000, 60541) || CharacterHasSpEffect(20000, 60539));
+    ChangeWeather(Weather.Type21, -1, false);
+});
+
+$Event(90075770, Restart, function(chrEntityId, entityId, entityId2, entityId3, entityId4, eventFlagId) {
+    EndIf(EventFlag(eventFlagId));
+    EndIf(EventFlag(7512));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60507) || CharacterHasSpEffect(chrEntityId, 60505));
+    DisplayBossHealthBar(Disabled, chrEntityId, 0, 907630000);
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60505));
+    SetSpEffect(10000, 60506);
+    WaitFor(ElapsedSeconds(5));
+    FadeToBlack(1, 0.5, true, 0);
+    WaitFor(ElapsedSeconds(0.5));
+    WarpCharacterAndCopyFloorUnknown200489(chrEntityId, TargetEntityType.Area, entityId, -1, chrEntityId, -1, -1);
+    if (IsPlayerNo(1)) {
+        WarpCharacterAndCopyFloorUnknown200489(10002, TargetEntityType.Area, entityId2, -1, 10002, -1, -1);
+    }
+    if (IsPlayerNo(2)) {
+        WarpCharacterAndCopyFloorUnknown200489(10003, TargetEntityType.Area, entityId3, -1, 10003, -1, -1);
+    }
+    if (IsPlayerNo(3)) {
+        WarpCharacterAndCopyFloorUnknown200489(10004, TargetEntityType.Area, entityId4, -1, 10004, -1, -1);
+    }
+    SetCameraAngle(0, 0);
+    WaitFor(ElapsedSeconds(4));
+    FadeToBlack(0, 0.5, false, -1);
+    WaitFor(ElapsedSeconds(1));
+    SetSpEffect(chrEntityId, 60510);
+    DisableCharacterImmortality(chrEntityId);
+    LinkToBossHealthBar(Disabled, 907630001, 0);
+    LinkToBossHealthBar(Enabled, 907630001, chrEntityId);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 60507));
+    DisplayBossHealthBar(Enabled, chrEntityId, 0, 907630001);
+});
+
+$Event(90075771, Restart, function(chrEntityId, assetEntityId, eventFlagId) {
+    if (EventFlag(9999)) {
+        ForceAnimationPlayback(assetEntityId, 20, true, false, false);
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
+        EndEvent();
+    }
+    if (EventFlag(eventFlagId)) {
+        ForceAnimationPlayback(assetEntityId, 20, true, false, false);
+        ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
+        EndEvent();
+    }
+    EndIf(EventFlag(7512));
+    ForceAnimationPlayback(assetEntityId, 0, true, false, false);
+    EnableAssetInvunerability(assetEntityId);
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60514));
+    ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
+    ForceAnimationPlayback(assetEntityId, 10, false, false, false);
+    DisableAssetInvunerability(assetEntityId);
+    WaitFor(ElapsedSeconds(10));
+    ForceAnimationPlayback(assetEntityId, 20, true, false, false);
+});
+
+$Event(90075772, Restart, function(chrEntityId, chrEntityId2, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(EventFlag(7512));
+    if (EventFlag(eventFlagId)) {
+        ForceCharacterDeath(chrEntityId2, false);
+        EndEvent();
+    }
+    WaitFor(CharacterHPValue(chrEntityId) <= 1 || EventFlag(eventFlagId));
+    if (!CharacterDead(chrEntityId2, GreaterOrEqual, 1)) {
+        ForceCharacterDeath(chrEntityId2, false);
+    }
+    WaitFor(
+        ElapsedSeconds(0.1) || CharacterHasSpEffect(chrEntityId, 60505) || EventFlag(eventFlagId));
+    WaitFor(
+        !CharacterDead(chrEntityId2, GreaterOrEqual, 1) || CharacterHasSpEffect(chrEntityId, 60505));
+    if (CharacterHasSpEffect(chrEntityId, 60505)) {
+        ForceCharacterDeath(chrEntityId2, false);
+        EndEvent();
+    }
+    RestartEvent();
+});
+
+$Event(90075773, Restart, function(chrEntityId, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(EventFlag(7512));
+    EndIf(EventFlag(7511) && !CharacterHasSpEffect(20000, 6999200));
+    if ((CharacterHasSpEffect(chrEntityId, 60521) || EventFlag(eventFlagId))
+        && CharacterHasSpEffect(20000, 6999201)) {
+        SetSpEffect(20000, 6999201);
+        EndEvent();
+    }
+    WaitFor(EventFlag(7511));
+    EndIf(!CharacterHasSpEffect(20000, 6999200));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60521));
+    SetSpEffect(20000, 6999201);
+    SetSpEffect(20000, 60522);
+    WaitFor(ElapsedSeconds(2.2));
+    RecordUserDispLog(110400, 20000, LogObjectType.None, -1);
+});
+
+$Event(90075774, Restart, function(chrEntityId, areaEntityId) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(!InArea(chrEntityId, areaEntityId) || CharacterHasSpEffect(chrEntityId, 60555));
+    SetSpEffect(chrEntityId, 60555);
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60555));
+    EnableNetworkSync();
+    WaitFor(InArea(chrEntityId, areaEntityId) || !CharacterHasSpEffect(chrEntityId, 60555));
+    SetSpEffect(chrEntityId, 60556);
+    DisableNetworkSync();
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 60555));
+    EnableNetworkSync();
+    RestartEvent();
+});
+
+$Event(90075780, Restart, function(chrEntityId, eventFlagId) {
+    EndIf(EventFlag(7512));
+    if (EventFlag(eventFlagId)) {
+        SetBossBGM(761000, BossBGMState.HeatUp2);
+    } else {
+        if (CharacterHasSpEffect(chrEntityId, 5105)) {
+            SetBossBGM(761000, BossBGMState.HeatUp);
+        } else {
+            WaitFor(EventFlag(7511));
+            SetBossBGM(761000, BossBGMState.Start);
+            WaitFor(CharacterHasSpEffect(chrEntityId, 5105) || !BossBGMPlaying(761000));
+            RestartIf(!BossBGMPlaying(761000));
+            SetBossBGM(761000, BossBGMState.HeatUp);
+        }
+L0:
+        WaitFor(EventFlag(eventFlagId) || !BossBGMPlaying(761000));
+        RestartIf(!BossBGMPlaying(761000));
+        SetBossBGM(761000, BossBGMState.HeatUp2);
+    }
+L1:
+    WaitFor(!BossBGMPlaying(761000));
+    WaitFor(ElapsedSeconds(5));
+    RestartEvent();
+});
+
+$Event(90075800, Default, function(chrEntityId, chrEntityId2) {
+    DisableNetworkSync();
+    EnableCharacterDefaultBackread(chrEntityId);
+    EnableCharacterDefaultBackread(chrEntityId2);
+    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterHPBarDisplay(chrEntityId2);
+    CreateReferredDamagePair(chrEntityId, chrEntityId2);
+    DisableCharacterAI(chrEntityId2);
+    DisableCharacterCollision(chrEntityId2);
+    SetCharacterEventTarget(chrEntityId, chrEntityId2);
+    WaitFor(PlayerInMap(16, 10, 0, 0));
+    WaitFor(ElapsedFrames(1));
+    ChangeCamera(-1);
+});
+
+$Event(90075801, Restart, function(chrEntityId) {
+    EndIf(EventFlag(7512));
+    EndIf(EventFlag(7511));
+    WaitFor(
+        InArea(10000, 16002801)
+            || HasDamageType(chrEntityId, 0, DamageType.Any)
+            || CharacterHasStateInfo(chrEntityId, 436)
+            || CharacterHasStateInfo(chrEntityId, 2)
+            || CharacterHasStateInfo(chrEntityId, 5)
+            || CharacterHasStateInfo(chrEntityId, 6)
+            || CharacterHasStateInfo(chrEntityId, 260)
+            || EventFlag(7511));
+    SetNetworkconnectedEventFlagID(7511, ON);
+});
+
+$Event(90075802, Restart, function(chrEntityId, entityId, entityId2, entityId3, entityId4, entityId5, entityId6, entityId7, chrEntityId2) {
+    if (EventFlag(7512)) {
+        ForceCharacterDeath(chrEntityId, false);
+        EndEvent();
+    }
+    if (EventFlag(7511)) {
+        EnableCharacter(chrEntityId);
+        EnableCharacterAI(chrEntityId);
+        DisplayBossHealthBar(Enabled, chrEntityId2, 0, 907640000);
+        LinkToBossHealthBar(Disabled, 907640000, 0);
+        LinkToBossHealthBar(Enabled, 907640000, chrEntityId);
+        SetBossBGM(762000, BossBGMState.Start);
+        EndEvent();
+    }
+L10:
+    EnableCharacter(chrEntityId);
+    DisableCharacterAI(chrEntityId);
+    ForceAnimationPlayback(chrEntityId, 30029, true, false, false);
+    WaitFor(EventFlag(7511));
+    SetBossBGM(762000, BossBGMState.Start);
+    ForceAnimationPlayback(entityId, 20023, false, false, false);
+    ForceAnimationPlayback(entityId2, 20024, false, false, false);
+    ForceAnimationPlayback(entityId3, 20025, false, false, false);
+    ForceAnimationPlayback(entityId4, 20026, false, false, false);
+    ForceAnimationPlayback(entityId5, 20027, false, false, false);
+    ForceAnimationPlayback(entityId6, 20028, false, false, false);
+    ForceAnimationPlayback(entityId7, 20029, false, false, false);
+    EnableCharacterAI(chrEntityId);
+    LinkToBossHealthBar(Disabled, 907640000, 0);
+    LinkToBossHealthBar(Enabled, 907640000, chrEntityId);
+    WaitFor(ElapsedSeconds(4));
+    DisplayBossHealthBar(Enabled, chrEntityId2, 0, 907640000);
+});
+
+$Event(90075803, Restart, function(chrEntityId, chrEntityId2) {
+    EndIf(EventFlag(7512));
+    WaitFor(HPRatio(chrEntityId2) <= 0);
+    SetSpEffect(chrEntityId, 62565);
+    ForceCharacterDeath(chrEntityId, false);
+});
+
+$Event(90075810, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(
+        CharacterHasSpEffect(chrEntityId, 60614, GreaterOrEqual, 6)
+            && CharacterHasSpEffect(chrEntityId, 60606, LessOrEqual, 0)
+            && CharacterHasSpEffect(chrEntityId, 60607, LessOrEqual, 0)
+            && PlayerIsInOwnWorld());
+    if (PlayerIsInOwnWorld()) {
+        if (!CharacterHasSpEffect(chrEntityId2, 60614)) {
+            SetSpEffect(chrEntityId2, 60607);
+        } else if (!CharacterHasSpEffect(chrEntityId3, 60614)) {
+            SetSpEffect(chrEntityId3, 60607);
+        } else if (!CharacterHasSpEffect(chrEntityId4, 60614)) {
+            SetSpEffect(chrEntityId4, 60607);
+        } else if (!CharacterHasSpEffect(chrEntityId5, 60614)) {
+            SetSpEffect(chrEntityId5, 60607);
+        } else if (!CharacterHasSpEffect(chrEntityId6, 60614)) {
+            SetSpEffect(chrEntityId6, 60607);
+        } else if (!CharacterHasSpEffect(chrEntityId7, 60614)) {
+            SetSpEffect(chrEntityId7, 60607);
+        } else if (!CharacterHasSpEffect(chrEntityId8, 60614)) {
+            SetSpEffect(chrEntityId8, 60607);
+        } else if (!CharacterHasSpEffect(chrEntityId, 60607, GreaterOrEqual, 1)) {
+            SetSpEffect(chrEntityId2, 60607);
+        }
+    }
+L0:
+    WaitFor(PlayerIsInOwnWorld() && CharacterHasSpEffect(chrEntityId, 60607, LessOrEqual, 0));
+    RestartEvent();
+});
+
+$Event(90075811, Restart, function(chrEntityId, chrEntityId2, spEffectId) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60606, GreaterOrEqual, 1) && PlayerIsInOwnWorld());
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60606, LessOrEqual, 0) && PlayerIsInOwnWorld());
+    SetSpEffect(chrEntityId2, spEffectId);
+    RestartEvent();
+});
+
+$Event(90075812, Restart, function(chrEntityId) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60606, LessOrEqual, 0) && PlayerIsInOwnWorld());
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60606, GreaterOrEqual, 1) && PlayerIsInOwnWorld());
+    SetSpEffect(chrEntityId, 62627);
+    RestartEvent();
+});
+
+$Event(90075820, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(
+        CharacterHasSpEffect(chrEntityId, 60661, GreaterOrEqual, 1)
+            && CharacterHasSpEffect(chrEntityId2, 60660)
+            && !CharacterHasSpEffect(chrEntityId2, 60606));
+    ForceAnimationPlayback(chrEntityId2, 20020, false, false, false);
+    WaitFor(
+        CharacterHasSpEffect(chrEntityId2, 60665)
+            || CharacterHasSpEffect(chrEntityId, 60661, LessOrEqual, 0));
+    RestartIf(!CharacterHasSpEffect(chrEntityId2, 60665));
+    if (CharacterHasSpEffect(chrEntityId3, 60606)) {
+        WaitFixedTimeFrames(1);
+        GotoIf(S0, chrEntityId2 != chrEntityId3);
+        Goto(L0);
+S0:
+        GotoIf(S1, chrEntityId2 != chrEntityId4);
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId3, 50, chrEntityId3, -1, -1);
+        SetSpEffect(chrEntityId2, 60700);
+        Goto(L0);
+S1:
+        GotoIf(S2, chrEntityId2 != chrEntityId5);
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId3, 51, chrEntityId3, -1, -1);
+        SetSpEffect(chrEntityId2, 60701);
+        Goto(L0);
+S2:
+        GotoIf(S3, chrEntityId2 != chrEntityId6);
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId3, 52, chrEntityId3, -1, -1);
+        SetSpEffect(chrEntityId2, 60702);
+        Goto(L0);
+S3:
+        GotoIf(S4, chrEntityId2 != chrEntityId7);
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId3, 53, chrEntityId3, -1, -1);
+        SetSpEffect(chrEntityId2, 60703);
+        Goto(L0);
+S4:
+        GotoIf(S5, chrEntityId2 != chrEntityId8);
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId3, 54, chrEntityId3, -1, -1);
+        SetSpEffect(chrEntityId2, 60704);
+        Goto(L0);
+S5:
+        GotoIf(S6, chrEntityId2 != chrEntityId9);
+        WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId3, 55, chrEntityId3, -1, -1);
+        SetSpEffect(chrEntityId2, 60705);
+    } else {
+S6:
+L1:
+        if (CharacterHasSpEffect(chrEntityId4, 60606)) {
+            if (chrEntityId2 == chrEntityId3) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId4, 50, chrEntityId4, -1, -1);
+                SetSpEffect(chrEntityId2, 60700);
+                Goto(L0);
+            }
+            GotoIf(S7, chrEntityId2 != chrEntityId4);
+            Goto(L0);
+S7:
+            if (chrEntityId2 == chrEntityId5) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId4, 51, chrEntityId4, -1, -1);
+                SetSpEffect(chrEntityId2, 60701);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId6) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId4, 52, chrEntityId4, -1, -1);
+                SetSpEffect(chrEntityId2, 60702);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId7) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId4, 53, chrEntityId4, -1, -1);
+                SetSpEffect(chrEntityId2, 60703);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId8) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId4, 54, chrEntityId4, -1, -1);
+                SetSpEffect(chrEntityId2, 60704);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId9) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId4, 55, chrEntityId4, -1, -1);
+                SetSpEffect(chrEntityId2, 60705);
+                Goto(L0);
+            }
+        }
+L2:
+        if (CharacterHasSpEffect(chrEntityId5, 60606)) {
+            if (chrEntityId2 == chrEntityId3) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId5, 50, chrEntityId5, -1, -1);
+                SetSpEffect(chrEntityId2, 60700);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId4) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId5, 51, chrEntityId5, -1, -1);
+                SetSpEffect(chrEntityId2, 60701);
+                Goto(L0);
+            }
+            GotoIf(S8, chrEntityId2 != chrEntityId5);
+            Goto(L0);
+S8:
+            if (chrEntityId2 == chrEntityId6) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId5, 52, chrEntityId5, -1, -1);
+                SetSpEffect(chrEntityId2, 60702);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId7) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId5, 53, chrEntityId5, -1, -1);
+                SetSpEffect(chrEntityId2, 60703);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId8) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId5, 54, chrEntityId5, -1, -1);
+                SetSpEffect(chrEntityId2, 60704);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId9) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId5, 55, chrEntityId5, -1, -1);
+                SetSpEffect(chrEntityId2, 60705);
+                Goto(L0);
+            }
+        }
+L3:
+        if (CharacterHasSpEffect(chrEntityId6, 60606)) {
+            if (chrEntityId2 == chrEntityId3) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId6, 50, chrEntityId6, -1, -1);
+                SetSpEffect(chrEntityId2, 60700);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId4) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId6, 51, chrEntityId6, -1, -1);
+                SetSpEffect(chrEntityId2, 60701);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId5) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId6, 52, chrEntityId6, -1, -1);
+                SetSpEffect(chrEntityId2, 60702);
+                Goto(L0);
+            }
+            GotoIf(S9, chrEntityId2 != chrEntityId6);
+            Goto(L0);
+S9:
+            if (chrEntityId2 == chrEntityId7) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId6, 53, chrEntityId6, -1, -1);
+                SetSpEffect(chrEntityId2, 60703);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId8) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId6, 54, chrEntityId6, -1, -1);
+                SetSpEffect(chrEntityId2, 60704);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId9) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId6, 55, chrEntityId6, -1, -1);
+                SetSpEffect(chrEntityId2, 60705);
+                Goto(L0);
+            }
+        }
+L4:
+        if (CharacterHasSpEffect(chrEntityId7, 60606)) {
+            if (chrEntityId2 == chrEntityId3) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId7, 50, chrEntityId7, -1, -1);
+                SetSpEffect(chrEntityId2, 60700);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId4) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId7, 51, chrEntityId7, -1, -1);
+                SetSpEffect(chrEntityId2, 60701);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId5) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId7, 52, chrEntityId7, -1, -1);
+                SetSpEffect(chrEntityId2, 60702);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId6) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId7, 53, chrEntityId7, -1, -1);
+                SetSpEffect(chrEntityId2, 60703);
+                Goto(L0);
+            }
+            GotoIf(S10, chrEntityId2 != chrEntityId7);
+            Goto(L0);
+S10:
+            if (chrEntityId2 == chrEntityId8) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId7, 54, chrEntityId7, -1, -1);
+                SetSpEffect(chrEntityId2, 60704);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId9) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId7, 55, chrEntityId7, -1, -1);
+                SetSpEffect(chrEntityId2, 60705);
+                Goto(L0);
+            }
+        }
+L5:
+        if (CharacterHasSpEffect(chrEntityId8, 60606)) {
+            if (chrEntityId2 == chrEntityId3) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId8, 50, chrEntityId8, -1, -1);
+                SetSpEffect(chrEntityId2, 60700);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId4) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId8, 51, chrEntityId8, -1, -1);
+                SetSpEffect(chrEntityId2, 60701);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId5) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId8, 52, chrEntityId8, -1, -1);
+                SetSpEffect(chrEntityId2, 60702);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId6) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId8, 53, chrEntityId8, -1, -1);
+                SetSpEffect(chrEntityId2, 60703);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId7) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId8, 54, chrEntityId8, -1, -1);
+                SetSpEffect(chrEntityId2, 60704);
+                Goto(L0);
+            }
+            GotoIf(S11, chrEntityId2 != chrEntityId8);
+            Goto(L0);
+S11:
+            if (chrEntityId2 == chrEntityId9) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId7, 55, chrEntityId7, -1, -1);
+                SetSpEffect(chrEntityId2, 60705);
+                Goto(L0);
+            }
+        }
+L6:
+        if (CharacterHasSpEffect(chrEntityId9, 60606)) {
+            if (chrEntityId2 == chrEntityId3) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId9, 50, chrEntityId9, -1, -1);
+                SetSpEffect(chrEntityId2, 60700);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId4) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId9, 51, chrEntityId9, -1, -1);
+                SetSpEffect(chrEntityId2, 60701);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId5) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId9, 52, chrEntityId9, -1, -1);
+                SetSpEffect(chrEntityId2, 60702);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId6) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId9, 53, chrEntityId9, -1, -1);
+                SetSpEffect(chrEntityId2, 60703);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId7) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId9, 54, chrEntityId9, -1, -1);
+                SetSpEffect(chrEntityId2, 60704);
+                Goto(L0);
+            }
+            if (chrEntityId2 == chrEntityId8) {
+                WarpCharacterAndCopyFloorUnknown200489(chrEntityId2, TargetEntityType.Character, chrEntityId9, 55, chrEntityId9, -1, -1);
+                SetSpEffect(chrEntityId2, 60705);
+                Goto(L0);
+            }
+            GotoIf(S12, chrEntityId2 != chrEntityId9);
+            Goto(L0);
+        }
+S12:
+L7:
+        NoOp();
+    }
+L0:
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60661, LessOrEqual, 0));
+    RestartEvent();
+});
+
+$Event(90075830, Restart, function(chrEntityId, areaEntityId) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(!InArea(chrEntityId, areaEntityId) || CharacterHasSpEffect(chrEntityId, 62560));
+    SetSpEffect(chrEntityId, 62560);
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(chrEntityId, 62560));
+    EnableNetworkSync();
+    WaitFor(InArea(chrEntityId, areaEntityId) || !CharacterHasSpEffect(chrEntityId, 62560));
+    SetSpEffect(chrEntityId, 62561);
+    DisableNetworkSync();
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 62560));
+    EnableNetworkSync();
+    RestartEvent();
+});
+
+$Event(90075831, Restart, function(chrEntityId, chrEntityId2) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60651) && PlayerIsInOwnWorld());
+    if (!CharacterHasSpEffect(chrEntityId2, 60653, GreaterOrEqual, 1)) {
+        ForceAnimationPlayback(chrEntityId2, 20000, false, false, false);
+    }
+    WaitFor(ElapsedSeconds(1));
+    SetSpEffect(chrEntityId, 60652);
+    DisableNetworkSync();
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 60651) || ElapsedSeconds(20));
+    EnableNetworkSync();
+    RestartEvent();
+});
+
+$Event(90075842, Restart, function(chrEntityId, chrEntityId2) {
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 62525, GreaterOrEqual, 1) && PlayerIsInOwnWorld());
+    GotoIf(L0, !PlayerIsInOwnWorld());
+    if (!CharacterHasSpEffect(chrEntityId, 62526, Less, 1)) {
+        SetSpEffect(chrEntityId, 62588);
+        SetSpEffect(chrEntityId, 62589);
+        SetSpEffect(chrEntityId2, 62589);
+    }
+    if (!CharacterHasSpEffect(chrEntityId, 62526, Less, 3)) {
+        SetSpEffect(chrEntityId, 62588);
+        SetSpEffect(chrEntityId, 62589);
+        SetSpEffect(chrEntityId2, 62589);
+    }
+    if (!CharacterHasSpEffect(chrEntityId, 62526, Less, 5)) {
+        SetSpEffect(chrEntityId, 62588);
+        SetSpEffect(chrEntityId, 62589);
+        SetSpEffect(chrEntityId2, 62589);
+    }
+    WaitFor(PlayerIsInOwnWorld() && CharacterHasSpEffect(chrEntityId, 62525, LessOrEqual, 0));
+    RestartEvent();
+});
+
+$Event(90075843, Restart, function(chrEntityId, spEffectId, cameraId) {
+    DisableNetworkSync();
+    EndIf(EventFlag(7512));
+    WaitFor(EventFlag(7511));
+    WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId, GreaterOrEqual, 1));
+    ChangeCamera(cameraId);
+    WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId, LessOrEqual, 0));
+    ChangeCamera(-1);
+    WaitFor(ElapsedSeconds(1));
+    RestartEvent();
+});
+
+$Event(90075845, Restart, function(eventFlagId, eventFlagId2, chrEntityId, assetEntityId, spEffectId, targetAmount) {
+    if (!EventFlag(9999)) {
+        EndIf(EventFlag(eventFlagId2));
+        if (eventFlagId != 0) {
+            WaitFor(EventFlag(eventFlagId));
+        }
+        if (Signed(0) != spEffectId) {
+            WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId, GreaterOrEqual, 1));
+        } else {
+            WaitFor(CharacterRatioHPRatio(chrEntityId, NotEqual, 0) <= targetAmount);
+        }
+    }
+    ChangeWeather(Weather.Type01, -1, false);
+    ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
+});
+
+$Event(90075850, Default, function(chrEntityId, chrEntityId2) {
+    DisableNetworkSync();
+    EnableCharacterDefaultBackread(chrEntityId);
+    EnableCharacterDefaultBackread(chrEntityId2);
+    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisableCharacterHPBarDisplay(chrEntityId2);
+    DisableCharacterAI(chrEntityId2);
+    DisableCharacterCollision(chrEntityId2);
+    SetCharacterEventTarget(chrEntityId, chrEntityId2);
+    WaitFor(PlayerInMap(16, 10, 0, 0));
+    WaitFor(ElapsedFrames(1));
+    ChangeCamera(-1);
+});
+
+$Event(90075890, Restart, function(eventFlagId, eventFlagId2, chrEntityId, assetEntityId, assetEntityId2, spEffectId, targetAmount) {
+    if (!EventFlag(9999)) {
+        EndIf(EventFlag(eventFlagId2));
+        if (eventFlagId != 0) {
+            WaitFor(EventFlag(eventFlagId));
+        }
+        if (Signed(0) != spEffectId) {
+            WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId, GreaterOrEqual, 1));
+        } else {
+            WaitFor(CharacterRatioHPRatio(chrEntityId, NotEqual, 0) <= targetAmount);
+        }
+    }
+    ChangeWeather(Weather.Type11, -1, false);
+    ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
+    ChangeAssetEnableStateUnknown200510(assetEntityId2, Disabled, 1);
+});
+
 $Event(90075900, Restart, function(chrEntityId) {
     EndIf(EventFlag(7512));
     EndIf(EventFlag(7511));
@@ -9706,6 +15901,12 @@ $Event(90075901, Restart, function(chrEntityId, bgmBossConvParamId, logObjectId)
     WaitFixedTimeSeconds(5);
     PlaySE(chrEntityId, SoundType.SFX, 888880000);
     RecordUserDispLog(10111, 10000, LogObjectType.NpcName, logObjectId);
+    if (PlayerInMap(16, 0, 0, 0)) {
+        DisplayTextEffectId(1052);
+    }
+    if (PlayerInMap(16, 10, 0, 0)) {
+        DisplayTextEffectId(1053);
+    }
     if (PlayerInMap(18, 0, 0, 0)) {
         DisplayTextEffectId(1040);
     }
@@ -9784,6 +15985,56 @@ $Event(90075903, Restart, function(areaId, chrEntityId, chrEntityId2, chrEntityI
     RestartEvent();
 });
 
+$Event(90075904, Restart, function(chrEntityId, bgmBossConvParamId, logObjectId, timeSeconds, spEffectId, timeSeconds2) {
+    EndIf(EventFlag(7512));
+    EndIf(EventFlag(18002800));
+    WaitFor(HPRatio(chrEntityId) == 0);
+    EndIf(EventFlag(7516));
+    SetSpEffect(10000, 509);
+    SetSpEffect(10001, 509);
+    SetSpEffect(10002, 509);
+    SetSpEffect(10003, 509);
+    SetSpEffect(10004, 509);
+    SetSpEffect(10005, 509);
+    SetSpEffect(10006, 509);
+    SetSpEffect(10007, 509);
+    SetSpEffect(10008, 509);
+    SetSpEffect(10009, 509);
+    SetSpEffect(10010, 509);
+    EnableCharacterImmortality(20000);
+    SetNetworkconnectedEventFlagID(7513, ON);
+    WaitFor(ElapsedSeconds(5));
+    if (Signed(spEffectId) != 0) {
+        GotoIf(S0, !CharacterHasSpEffect(chrEntityId, spEffectId));
+        WaitFixedTimeSeconds(timeSeconds2);
+    } else {
+S0:
+        WaitFixedTimeSeconds(timeSeconds);
+    }
+    PlaySE(chrEntityId, SoundType.SFX, 888880000);
+    RecordUserDispLog(10111, 10000, LogObjectType.NpcName, logObjectId);
+    if (PlayerInMap(16, 0, 0, 0)) {
+        DisplayTextEffectId(1052);
+    }
+    if (PlayerInMap(16, 10, 0, 0)) {
+        DisplayTextEffectId(1053);
+    }
+    if (PlayerInMap(18, 0, 0, 0)) {
+        DisplayTextEffectId(1040);
+    }
+    if (PlayerInMap(19, 0, 0, 0)) {
+        DisplayTextEffectId(1051);
+    }
+    if (BossBGMPlaying(bgmBossConvParamId)) {
+        SetBossBGM(bgmBossConvParamId, BossBGMState.Stop2);
+    }
+    IncrementTeamBossesKilled(1);
+    DisplayBossHealthBar(Disabled, chrEntityId, 0, 0);
+    SetNetworkconnectedEventFlagID(7512, ON);
+    WaitFixedTimeSeconds(0.1);
+    SetSpEffect(20000, 102121);
+});
+
 $Event(90075910, Restart, function(eventFlagId, eventFlagId2, assetEntityId, chrEntityId, spEffectId, targetAmount) {
     if (!EventFlag(9999)) {
         EndIf(EventFlag(eventFlagId2));
@@ -9824,6 +16075,38 @@ $Event(90075930, Default, function(eventFlagId, eventFlagId2) {
     EndIf(EventFlag(eventFlagId));
     WaitFor(IsGameMode(2) && EventFlag(7512));
     SetEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90075931, Default, function() {
+    DisableNetworkSync();
+    EndIf(IsMapVariation(0));
+    EndIf(IsMapVariation(1));
+    EndIf(IsMapVariation(2));
+    EndIf(IsMapVariation(3));
+    EndIf(IsMapVariation(4));
+    EndIf(IsMapVariation(5));
+    EndIf(IsMapVariation(6));
+    EndIf(IsMapVariation(8));
+    WaitFor(
+        IsGameMode(2)
+            && EventFlag(7512)
+            && (IsMapVariation(10)
+                || IsMapVariation(11)
+                || IsMapVariation(12)
+                || IsMapVariation(13)
+                || IsMapVariation(14)
+                || IsMapVariation(15)
+                || IsMapVariation(16)
+                || IsMapVariation(18)));
+    GotoIf(L0, IsHero(Hero.Scholar));
+    GotoIf(L1, IsHero(Hero.Undertaker));
+    EndEvent();
+L0:
+    SetEventFlagID(6061, ON);
+    EndEvent();
+L1:
+    SetEventFlagID(6062, ON);
+    EndEvent();
 });
 
 $Event(90075950, Restart, function(bgmBossConvParamId, chrEntityId, spEffectId, targetAmount) {
@@ -9954,6 +16237,15 @@ $Event(90085004, Default, function(missionId, hero, eventFlagId, eventFlagId2, c
 $Event(90085005, Default, function(missionId, hero, eventFlagId, eventFlagId2) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
+    if (IsPlayerNo(1)) {
+        EndIf(!EventFlag(7015));
+    }
+    if (IsPlayerNo(2)) {
+        EndIf(!EventFlag(7016));
+    }
+    if (IsPlayerNo(3)) {
+        EndIf(!EventFlag(7017));
+    }
     EndIf(!HasMissionState(missionId, 1));
     EndIf(!IsHero(hero));
     if (!(!EventFlag(eventFlagId) && !EventFlag(eventFlagId2))) {
@@ -10066,7 +16358,7 @@ L3:
     NoOp();
 });
 
-$Event(90085010, Default, function(missionId, eventFlagId, userDispLogParamId) {
+$Event(90085010, Default, function(missionId, eventFlagId, userDispLogParamId, hero) {
     DisableNetworkSync();
     EndIf(!IsGameMode(2));
     EndIf(!MissionActive(missionId));
@@ -10079,6 +16371,8 @@ $Event(90085010, Default, function(missionId, eventFlagId, userDispLogParamId) {
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     WaitFixedTimeSeconds(5);
     EndIf(EventFlag(eventFlagId));
     RecordUserDispLog(userDispLogParamId, 20000, LogObjectType.None, -1);
@@ -10215,7 +16509,7 @@ $Event(90085016, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
 });
 
-$Event(90085020, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, chrEntityId, spEffectId, eventFlagId4) {
+$Event(90085020, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, chrEntityId, spEffectId, eventFlagId4, hero) {
     DisableNetworkSync();
     GotoIf(L2, !MissionActive(missionId));
     GotoIf(S0, !IsPlayerNo(1));
@@ -10227,6 +16521,8 @@ S1:
     GotoIf(S2, !IsPlayerNo(3));
     GotoIf(L2, !EventFlag(7017));
 S2:
+    GotoIf(L2, !IsHero(hero));
+    GotoIf(L2, !HasMissionState(missionId, 1));
     GotoIf(L2, EventFlag(eventFlagId3));
     if (!(EventFlag(eventFlagId2) && EventFlag(eventFlagId4))) {
         if (!EventFlag(eventFlagId)) {
@@ -10248,15 +16544,17 @@ L1:
     SetSpEffect(chrEntityId, spEffectId);
     WaitFor(EventFlag(eventFlagId3));
     ClearSpEffect(chrEntityId, spEffectId);
+    EndIf(MissionActive(1001));
     WaitFor(ElapsedSeconds(10));
     SetCharacterBackreadState(chrEntityId, true);
     EndEvent();
 L2:
     ClearSpEffect(chrEntityId, spEffectId);
+    EndIf(MissionActive(1001));
     SetCharacterBackreadState(chrEntityId, true);
 });
 
-$Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFlagId2) {
+$Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFlagId2, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10268,6 +16566,8 @@ $Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFl
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId));
     WaitFor(InArea(20000, areaEntityId));
     EndIf(EventFlag(eventFlagId));
@@ -10275,7 +16575,7 @@ $Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFl
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
 
-$Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityId, operationGuideParamId) {
+$Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityId, operationGuideParamId, hero) {
     DisableNetworkSync();
     HideFloatingMessage(operationGuideParamId, entityId);
     EndIf(!MissionActive(missionId));
@@ -10288,6 +16588,8 @@ $Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityI
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId));
     WaitFor(InArea(20000, areaEntityId) || EventFlag(eventFlagId));
     EndIf(EventFlag(eventFlagId));
@@ -10298,7 +16600,7 @@ $Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityI
     RestartEvent();
 });
 
-$Event(90085023, Default, function(missionId, eventFlagId, eventFlagId2, entityId, actionButtonParameterId, eventFlagId3) {
+$Event(90085023, Default, function(missionId, eventFlagId, eventFlagId2, entityId, actionButtonParameterId, eventFlagId3, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10310,6 +16612,8 @@ $Event(90085023, Default, function(missionId, eventFlagId, eventFlagId2, entityI
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId2));
     WaitFor(EventFlag(eventFlagId));
     EndIf(!EventFlag(eventFlagId3));
@@ -10325,7 +16629,7 @@ $Event(90085024, Default, function(missionId, eventFlagId, eventFlagId2) {
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
 
-$Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2) {
+$Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10337,6 +16641,8 @@ $Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2) {
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId2));
     IncrementMissionProgress(missionId, 1);
@@ -10348,18 +16654,20 @@ $Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2) {
     SetSpEffect(20000, 99250);
 });
 
-$Event(90085026, Default, function(missionId, eventFlagId, value) {
+$Event(90085026, Default, function(missionId, eventFlagId, value, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(EventFlag(7015));
+        flagChrMission &= EventFlag(7015);
     }
     if (IsPlayerNo(2)) {
-        EndIf(EventFlag(7016));
+        flagChrMission &= EventFlag(7016);
     }
     if (IsPlayerNo(3)) {
-        EndIf(EventFlag(7017));
+        flagChrMission &= EventFlag(7017);
     }
+    flagChrMission &= IsHero(hero) && HasMissionState(missionId, 1);
+    EndIf(flagChrMission);
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
     if (value != 0) {
@@ -10370,7 +16678,7 @@ $Event(90085026, Default, function(missionId, eventFlagId, value) {
     SetSpEffect(20000, 99250);
 });
 
-$Event(90085027, Default, function(missionId, mapVariationId, eventFlagId) {
+$Event(90085027, Default, function(missionId, mapVariationId, eventFlagId, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10382,6 +16690,8 @@ $Event(90085027, Default, function(missionId, mapVariationId, eventFlagId) {
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(!IsMapVariation(mapVariationId));
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(7512));
@@ -10392,7 +16702,7 @@ $Event(90085027, Default, function(missionId, mapVariationId, eventFlagId) {
     DisplayTextEffectId(2300);
 });
 
-$Event(90085028, Default, function(missionId, eventFlagId, eventFlagId2, userDispLogParamId) {
+$Event(90085028, Default, function(missionId, eventFlagId, eventFlagId2, userDispLogParamId, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10404,6 +16714,8 @@ $Event(90085028, Default, function(missionId, eventFlagId, eventFlagId2, userDis
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId2));
     WaitFixedTimeSeconds(2);
@@ -10476,7 +16788,7 @@ $Event(90085034, Default, function(missionId, eventFlagId, eventFlagId2, chrEnti
     DisableCharacterInvincibility(chrEntityId);
 });
 
-$Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButtonParameterId, eventFlagId2) {
+$Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButtonParameterId, eventFlagId2, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10488,28 +16800,39 @@ $Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButto
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId));
     WaitFor(ActionButtonInArea(actionButtonParameterId, entityId));
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
 });
 
-$Event(90085036, Default, function(eventFlagId, userDispLogParamId) {
+$Event(90085036, Default, function(eventFlagId, userDispLogParamId, hero, missionId) {
+    DisableNetworkSync();
     EndIf(EventFlag(eventFlagId));
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     WaitFor(EventFlag(eventFlagId));
     WaitFixedTimeSeconds(3);
-    if (EventFlag(7015)) {
-        RecordUserDispLog(userDispLogParamId, 10002, LogObjectType.None, -1);
+    if (IsPlayerNo(1)) {
+        if (EventFlag(7015)) {
+            RecordUserDispLog(userDispLogParamId, 10002, LogObjectType.None, -1);
+        }
     }
-    if (EventFlag(7016)) {
-        RecordUserDispLog(userDispLogParamId, 10003, LogObjectType.None, -1);
+    if (IsPlayerNo(2)) {
+        if (EventFlag(7016)) {
+            RecordUserDispLog(userDispLogParamId, 10003, LogObjectType.None, -1);
+        }
     }
-    if (EventFlag(7017)) {
-        RecordUserDispLog(userDispLogParamId, 10004, LogObjectType.None, -1);
+    if (IsPlayerNo(3)) {
+        if (EventFlag(7017)) {
+            RecordUserDispLog(userDispLogParamId, 10004, LogObjectType.None, -1);
+        }
     }
 });
 
-$Event(90085037, Default, function(missionId, eventFlagId, eventFlagId2, assetEntityId, eventFlagId3) {
+$Event(90085037, Default, function(missionId, eventFlagId, eventFlagId2, assetEntityId, eventFlagId3, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10521,6 +16844,8 @@ $Event(90085037, Default, function(missionId, eventFlagId, eventFlagId2, assetEn
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     ChangeAssetEnableStateUnknown200510(assetEntityId, Enabled, 1);
     EnableAsset(assetEntityId);
     EndIf(EventFlag(eventFlagId2));
@@ -10532,6 +16857,41 @@ L0:
     SetEventFlagID(eventFlagId3, OFF);
     WaitFor(AssetDestroyed(assetEntityId));
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+});
+
+$Event(90085040, Default, function(missionId, eventFlagId, eventFlagId2) {
+    DisableNetworkSync();
+    EndIf(!MissionActive(missionId));
+    WaitFor(HasMultiplayerState(MultiplayerState.Host));
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(RandomElapsedFrames(1, 5));
+    EndIf(EventFlag(eventFlagId));
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90085041, Default, function(missionId, eventFlagId, eventFlagId2, hero) {
+    DisableNetworkSync();
+    EndIf(!MissionActive(missionId));
+    if (IsPlayerNo(1)) {
+        EndIf(!EventFlag(7015));
+    }
+    if (IsPlayerNo(2)) {
+        EndIf(!EventFlag(7016));
+    }
+    if (IsPlayerNo(3)) {
+        EndIf(!EventFlag(7017));
+    }
+    EndIf(!(IsHero(hero) && HasMissionState(missionId, 1)));
+    if (EventFlag(eventFlagId)) {
+        SetWorldMapPointFlag(3, OFF);
+        EndEvent();
+    }
+L0:
+    WaitFor(EventFlag(eventFlagId2));
+    SetWorldMapPointFlag(3, ON);
+    WaitFor(EventFlag(eventFlagId));
+    SetWorldMapPointFlag(3, OFF);
 });
 
 $Event(90085100, Default, function(chrEntityId, eventFlagId) {
@@ -10708,7 +17068,7 @@ $Event(90085221, Default, function(missionId, chrEntityId, eventFlagId) {
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
 });
 
-$Event(90085222, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+$Event(90085222, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -10720,6 +17080,8 @@ $Event(90085222, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId));
     SetEventFlagID(eventFlagId2, ON);
     WaitFor(EventFlag(eventFlagId3) || EventFlag(eventFlagId4));
@@ -10914,6 +17276,60 @@ $Event(90085802, Default, function(missionId, eventFlagId, chrEntityId) {
     EndIf(EventFlag(eventFlagId));
     WaitFor(CharacterRatioDead(chrEntityId));
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90085900, Default, function(eventFlagId, entityId) {
+    DisableNetworkSync();
+    WaitFor(ActionButtonInArea(9390, entityId) || EventFlag(eventFlagId));
+    if (!EventFlag(eventFlagId)) {
+        DisplayGenericDialog(71100, PromptType.OKCANCEL, NumberofOptions.NoButtons, entityId, 10);
+        WaitFixedTimeSeconds(3);
+        RestartEvent();
+    }
+L1:
+    ForceAnimationPlayback(entityId, 2, true, false, false);
+    EndEvent();
+});
+
+$Event(90085950, Default, function(missionId, assetEntityId, chrEntityId, eventFlagId) {
+    if (!MissionActive(missionId)) {
+        SetCharacterBackreadState(chrEntityId, true);
+        EndEvent();
+    }
+    ChangeAssetEnableStateUnknown200510(assetEntityId, Disabled, 1);
+    SetCharacterBackreadState(chrEntityId, false);
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+});
+
+$Event(90085951, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    DisableNetworkSync();
+    EndIf(!MissionActive(missionId));
+    if (IsPlayerNo(1)) {
+        EndIf(!EventFlag(7015));
+    }
+    if (IsPlayerNo(2)) {
+        EndIf(!EventFlag(7016));
+    }
+    if (IsPlayerNo(3)) {
+        EndIf(!EventFlag(7017));
+    }
+    EndIf(!IsHero(Hero.Undertaker));
+    EndIf(!HasMissionState(missionId, 1));
+    EndIf(EventFlag(eventFlagId4));
+    if (!EventFlag(eventFlagId)) {
+        WaitFor(EventFlag(eventFlagId));
+        ForceAnimationPlayback(20000, 61050, false, false, false);
+        WaitFor(ElapsedSeconds(1));
+        SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+        WaitFor(EventFlag(eventFlagId3));
+    }
+L0:
+    SetNetworkconnectedEventFlagID(eventFlagId4, ON);
+});
+
+$Event(90085952, Default, function(missionId, assetEntityId) {
+    EndIf(!MissionActive(missionId));
+    ReproduceAssetAnimation(assetEntityId, 2);
 });
 
 $Event(90005200, Restart, function(chrEntityId, animationId, animationId2, areaEntityId, timeSeconds, value, value2, value3, value4) {
@@ -13121,6 +19537,21 @@ $Event(90005919, Restart, function(entityId, eventFlagId) {
     SetEventFlagID(eventFlagId, ON);
 });
 
+$Event(90005920, Default, function(eventFlagId) {
+    DisableNetworkSync();
+    WaitFor(EventFlag(eventFlagId));
+    SetWorldMapPointFlag(7, ON);
+    SetWorldMapPointFlag(8, OFF);
+});
+
+$Event(90005921, Default, function(eventFlagId) {
+    DisableNetworkSync();
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(EventFlag(eventFlagId));
+    ForceAnimationPlayback(20000, 60071, false, false, false);
+    SetSpEffect(20000, 99270);
+});
+
 $Event(90005931, Restart, function(eventFlagId, assetEntityId, value, assetEntityId2) {
     if (EventFlag(eventFlagId)) {
         ReproduceAssetDestruction(assetEntityId, 1);
@@ -13243,5 +19674,4 @@ $Event(90005934, Default, function(eventFlagId, tutorialParamId) {
     WaitFor(flag);
     ShowTutorialPopup(tutorialParamId, false, true);
 });
-
 

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -20,8 +20,8 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90005904, 0, 1044361550, 100, 6101);
     $InitializeCommonEvent(0, 90015140, 1044361210, 200, 9111, 1044368200);
     if (MissionActive(101)) {
-        $InitializeCommonEvent(0, 90085020, 101, 8326, 8327, 8325, 1044360280, 99850, 1044360920);
-        $InitializeCommonEvent(0, 90085021, 101, 8326, 1044362910, 1044360920);
+        $InitializeCommonEvent(0, 90085020, 101, 8326, 8327, 8325, 1044360280, 99850, 1044360920, Hero.Wylder);
+        $InitializeCommonEvent(0, 90085021, 101, 8326, 1044362910, 1044360920, Hero.Wylder);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085002, 101, 8327, 8326, 1044360920, 1044365910, 1044360281, 0, 0, 0, 20032);
         }
@@ -35,8 +35,8 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90085002, 101, 8327, 8326, 1044360920, 1044365910, 1044360281, 1044360282, 1044360283, 1044360284, 20032);
         }
         $InitializeCommonEvent(0, 90085016, 101, 8327, 8326, 1044360920, 1044365910, 1030, 1.5);
-        $InitializeCommonEvent(0, 90085022, 101, 8327, 1044362911, 1044360280, 500);
-        $InitializeCommonEvent(0, 90085023, 101, 8327, 8325, 1044360280, 6850, 1044360920);
+        $InitializeCommonEvent(0, 90085022, 101, 8327, 1044362911, 1044360280, 500, Hero.Wylder);
+        $InitializeCommonEvent(0, 90085023, 101, 8327, 8325, 1044360280, 6850, 1044360920, Hero.Wylder);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90015000, 8326, 1044360281, 912000000, 30, 0, 8327);
         }
@@ -70,7 +70,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035078, 1044360220, 1044366900);
     $InitializeCommonEvent(0, 90035079, 1044360220, 1044362700, 1044361211);
     $InitializeCommonEvent(0, 90035070, 0, 0, 1044365200, 1044360220);
-    $InitializeCommonEvent(0, 90035085, 1044360220, 1044362710);
+    $InitializeCommonEvent(0, 90035085, 1044360220, 1044362710, 6);
     $InitializeCommonEvent(0, 90035080, 1044360220, 1044365920, 1044362890);
     $InitializeCommonEvent(0, 90035081, 1044360220);
     $InitializeCommonEvent(0, 90035082, 1044360220, 1044360210, 1044360220, 1044360221);
@@ -139,5 +139,4 @@ $Event(1044362940, Default, function(eventFlagId, areaEntityId) {
     SetEventFlagID(eventFlagId, OFF);
     RestartEvent();
 });
-
 

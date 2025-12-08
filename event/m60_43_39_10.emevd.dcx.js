@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -24,6 +24,9 @@ S1:
     }
     $InitializeCommonEvent(0, 90015015, 1039100810);
     $InitializeCommonEvent(0, 90015016, 1039100810);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1039100810);
+    }
     $InitializeCommonEvent(0, 90015017, 1039100810, 25, 0, 1039102810, 72453, 1039102810);
     $InitializeCommonEvent(0, 90015041, 0, 0, 0, 72488);
     $InitializeCommonEvent(0, 90015041, 1, 0, 0, 72488);
@@ -44,6 +47,10 @@ S3:
     }
     $InitializeCommonEvent(0, 90015015, 1039100820);
     $InitializeCommonEvent(0, 90015016, 1039100820);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1039100820);
+        $InitializeCommonEvent(0, 90015468, 1039100820, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1039100820, 25, 0, 1039102820, 72457, 1039102820);
     $InitializeCommonEvent(0, 90015041, 60, 0, 0, 72489);
     $InitializeCommonEvent(0, 90015400, 1039100800, 1039100200, 1039100201, 1039100206, 1029100201, 1028100201, 1039100211, 1039100204);
@@ -587,5 +594,4 @@ $Event(1039103050, Default, function(entityId) {
     SetNetworkconnectedEventFlagID(1029100204, ON);
     SetNetworkconnectedEventFlagID(1028100204, ON);
 });
-
 

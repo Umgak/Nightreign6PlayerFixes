@@ -4,13 +4,13 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015310, 32000050, 32000051, 2, 32000200, 32000202, 32000203, 32002405, 32002406, 32002407, 32002410, 32002411, 32002412, 32002415, 32002416, 32002417, 32002420, 32002421, 32002422, 32002400);
     $InitializeCommonEvent(0, 90015301, 32005300, 32000200, 32000201, 32000202, 32000203, 2);
-    $InitializeCommonEvent(0, 90015302, 32006500);
+    $InitializeCommonEvent(0, 90015306, 32006500);
     $InitializeCommonEvent(0, 90015303, 32002401);
     $InitializeCommonEvent(0, 90015305, 32002430, 32002431, 32002432, 32002433);
     $InitializeCommonEvent(0, 90015304, 32000050, 32000200, 32000202);
@@ -63,6 +63,20 @@ S5:
     if (IsMapVariation(1)) {
         $InitializeCommonEvent(0, 90015050, 32000810, 8165);
     }
+    $InitializeCommonEvent(0, 90035280, 32002491, 32000700, 32000701, 32000702, 8060, 0, 32000800, 32000810, 0, 0, 0);
+    $InitializeCommonEvent(0, 90035280, 32002491, 32000700, 32000701, 32000702, 80010, 0, 32000800, 32000810, 0, 0, 0);
+    if (!IsPlayerCount(1)) {
+        $InitializeCommonEvent(0, 90035280, 32002491, 32000700, 32000701, 32000702, 80011, 1, 32000800, 32000810, 0, 0, 0);
+    }
+    $InitializeCommonEvent(0, 90035281, 32002491, 32000700, 32000701, 32000702, 80011, 32000800, 32000810, 0, 0, 0);
+    $InitializeCommonEvent(0, 90035282, 32000490, 32002490, 32000700, 32000701, 32000702, 32000703);
+    $InitializeCommonEvent(0, 90035283, 32000490, 32002491, 32001690, 32000700, 32000701, 32000702, 32000704, 32000705, 32000706);
+    $InitializeCommonEvent(0, 90035284, 32005490, 32005491, 32000700, 32000702, 32000705, 32000706);
+    $InitializeCommonEvent(0, 90035285, 32000490, 32000700, 32000701, 32000702, 32000705, 32000706);
+    $InitializeCommonEvent(0, 90035286, 32000490, 32002491, 32000700, 32000701, 32000702, 32000705, 32000706);
+    $InitializeCommonEvent(0, 90035288, 32002491, 32000700, 32000702, 32000705, 32000706);
+    $InitializeCommonEvent(0, 90015000, 32000704, 32000490, 907640001, 50, 0, 32000706);
+    $InitializeCommonEvent(0, 90015025, 8081, 32000704, 32000705, 32000490, 1020, 0, -1, -1, 32000490, 0);
     $InitializeCommonEvent(0, 90085700, 701, 8475, 0, 32000800);
     $InitializeCommonEvent(0, 90085700, 701, 8475, 1, 32000810);
 });
@@ -125,5 +139,4 @@ $Event(32002910, Restart, function(eventFlagId, chrEntityId, assetEntityId, dist
 L0:
     RegisterBonfire(assetEntityId, 0, distance);
 });
-
 

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -34,5 +34,4 @@ $Event(41012520, Default, function() {
     ForceAnimationPlayback(20000, 60071, false, false, false);
     SetSpEffect(20000, 99270);
 });
-
 

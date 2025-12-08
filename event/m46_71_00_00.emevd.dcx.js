@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -24,6 +24,9 @@ S1:
     }
     $InitializeCommonEvent(0, 90015015, 46710800);
     $InitializeCommonEvent(0, 90015016, 46710800);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 46710800);
+    }
     $InitializeCommonEvent(0, 90015199, 46710800);
     if (IsPlayMode(2)) {
         $InitializeCommonEvent(0, 90015040, 0);
@@ -44,5 +47,4 @@ $Event(46712200, Default, function(chrEntityId) {
     DisableCharacter(chrEntityId);
     DisableCharacterCollision(chrEntityId);
 });
-
 

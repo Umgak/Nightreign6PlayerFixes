@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -29,8 +29,8 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015163, 1045390851, 1045392900, 1045392901, 1045390850);
     $InitializeCommonEvent(0, 90015164, 1045390850, 1045392901);
     if (MissionActive(403)) {
-        $InitializeCommonEvent(0, 90085020, 403, 8411, 8412, 8410, 1045390270, 99850, 1045390270);
-        $InitializeCommonEvent(0, 90085021, 403, 8411, 1045392270, 1045390270);
+        $InitializeCommonEvent(0, 90085020, 403, 8411, 8412, 8410, 1045390270, 99850, 1045390270, Hero.Duchess);
+        $InitializeCommonEvent(0, 90085021, 403, 8411, 1045392270, 1045390270, Hero.Duchess);
         if (1 == 3) {
             $InitializeCommonEvent(0, 90085002, 403, 8412, 8411, 1045390270, 1045395270, 1045390271, 0, 0, 0, 20032);
         }
@@ -44,8 +44,8 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90085002, 403, 8412, 8411, 1045390270, 1045395270, 1045390271, 1045390272, 1045390273, 1045390274, 20032);
         }
         $InitializeCommonEvent(0, 90085016, 403, 8412, 8411, 1045390270, 1045395270, 1030, 3);
-        $InitializeCommonEvent(0, 90085022, 403, 8412, 1045392271, 1045390270, 503);
-        $InitializeCommonEvent(0, 90085023, 403, 8412, 8410, 1045390270, 6853, 1045390270);
+        $InitializeCommonEvent(0, 90085022, 403, 8412, 1045392271, 1045390270, 503, Hero.Duchess);
+        $InitializeCommonEvent(0, 90085023, 403, 8412, 8410, 1045390270, 6853, 1045390270, Hero.Duchess);
         if (1 == 3) {
             $InitializeCommonEvent(0, 90015000, 8411, 1045390271, 912000050, 30, 0, 8412);
         }
@@ -55,8 +55,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015030, 0, 1045395270, 30, 920930, 8412);
     }
     if (MissionActive(803)) {
-        $InitializeCommonEvent(0, 90085020, 803, 8511, 8512, 8510, 1045390280, 99852, 1045390280);
-        $InitializeCommonEvent(0, 90085021, 803, 8511, 1045392280, 1045390280);
+        $InitializeCommonEvent(0, 90085020, 803, 8511, 8512, 8510, 1045390280, 99852, 1045390280, Hero.Executor);
+        $InitializeCommonEvent(0, 90085021, 803, 8511, 1045392280, 1045390280, Hero.Executor);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085002, 803, 8512, 8511, 1045390280, 1045395280, 1045390281, 0, 0, 0, 20032);
         }
@@ -70,8 +70,8 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90085002, 803, 8512, 8511, 1045390280, 1045395280, 1045390281, 1045390282, 1045390283, 1045390284, 20032);
         }
         $InitializeCommonEvent(0, 90085016, 803, 8512, 8511, 1045390280, 1045395280, 1030, 3);
-        $InitializeCommonEvent(0, 90085022, 803, 8512, 1045392281, 1045390280, 504);
-        $InitializeCommonEvent(0, 90085037, 803, 8512, 8510, 1045391280, 9220);
+        $InitializeCommonEvent(0, 90085022, 803, 8512, 1045392281, 1045390280, 504, Hero.Executor);
+        $InitializeCommonEvent(0, 90085037, 803, 8512, 8510, 1045391280, 9220, Hero.Executor);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90015000, 8511, 1045390281, 912000060, 30, 0, 8512);
         }
@@ -81,8 +81,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015030, 0, 1045395280, 30, 920930, 8512);
     }
     if (MissionActive(701)) {
-        $InitializeCommonEvent(0, 90085020, 701, 8476, 8477, 8475, 1045390295, 99844, 1045390290);
-        $InitializeCommonEvent(0, 90085021, 701, 8476, 1045392290, 1045390290);
+        $InitializeCommonEvent(0, 90085020, 701, 8476, 8477, 8475, 1045390295, 99844, 1045390290, Hero.Recluse);
+        $InitializeCommonEvent(0, 90085021, 701, 8476, 1045392290, 1045390290, Hero.Recluse);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085002, 701, 8477, 8476, 1045390290, 1045395290, 1045390290, 0, 0, 0, 20026);
         }
@@ -139,5 +139,4 @@ $Event(1045392910, Restart, function() {
     WaitFor(SmallBaseAttached(1045392999, 30300000));
     EnableAsset(1045391900);
 });
-
 

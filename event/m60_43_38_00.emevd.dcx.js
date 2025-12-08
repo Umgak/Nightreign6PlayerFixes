@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -88,5 +88,4 @@ $Event(1043382950, Restart, function(areaEntityId, entityId, eventFlagId, eventF
     WaitFixedTimeFrames(1);
     RestartEvent();
 });
-
 

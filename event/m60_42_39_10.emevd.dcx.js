@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -39,11 +39,15 @@ S1:
     }
     $InitializeCommonEvent(0, 90015015, 1029100820);
     $InitializeCommonEvent(0, 90015016, 1029100820);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1029100820);
+        $InitializeCommonEvent(0, 90015468, 1029100820, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1029100820, 25, 0, 1029102820, 72463, 1029102820);
     $InitializeCommonEvent(0, 90015041, 0, 0, 0, 72495);
     if (MissionActive(802)) {
-        $InitializeCommonEvent(0, 90085020, 802, 8506, 8507, 8505, 1029100280, 99850, 1029100280);
-        $InitializeCommonEvent(0, 90085021, 802, 8506, 1029102280, 1029100280);
+        $InitializeCommonEvent(0, 90085020, 802, 8506, 8507, 8505, 1029100280, 99850, 1029100280, Hero.Executor);
+        $InitializeCommonEvent(0, 90085021, 802, 8506, 1029102280, 1029100280, Hero.Executor);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085002, 802, 8507, 8506, 1029100280, 1029105280, 1029100281, 0, 0, 0, 20032);
         }
@@ -57,8 +61,8 @@ S1:
             $InitializeCommonEvent(0, 90085002, 802, 8507, 8506, 1029100280, 1029105280, 1029100281, 1029100282, 1029100283, 1029100284, 20032);
         }
         $InitializeCommonEvent(0, 90085016, 802, 8507, 8506, 1029100280, 1029105280, 1020, 3);
-        $InitializeCommonEvent(0, 90085022, 802, 8507, 1029102281, 1029100280, 505);
-        $InitializeCommonEvent(0, 90085023, 802, 8507, 8505, 1029100280, 9000, 1029100280);
+        $InitializeCommonEvent(0, 90085022, 802, 8507, 1029102281, 1029100280, 505, Hero.Executor);
+        $InitializeCommonEvent(0, 90085023, 802, 8507, 8505, 1029100280, 9000, 1029100280, Hero.Executor);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90015000, 8506, 1029100281, 912000070, 30, 0, 8507);
         }
@@ -255,5 +259,4 @@ $Event(1029102910, Default, function() {
 $Event(1029102995, Restart, function() {
     CreateReferredDamagePair(1029100800, 1039100802);
 });
-
 
