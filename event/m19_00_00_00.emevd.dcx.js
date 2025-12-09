@@ -682,7 +682,7 @@ $Event(0, Default, function() {
         // P6
         $InitializeCommonEvent(0, 90015012, 19015847, 7511);
         $InitializeCommonEvent(0, 99075466, 19010840, 10007, 19010462, 118, 19011352, 19000352, 19000362);
-        $InitializeCommonEvent(0, 99075468, 19010840, 19010465, 120, 19011355, 19000352, 19000365);
+        $InitializeCommonEvent(0, 99075468, 19010840, 19010465, 121, 19011355, 19000352, 19000365);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010462, 19000362);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010465, 19000355);
         // End
@@ -1408,6 +1408,8 @@ $Event(19002862, Restart, function() {
     if (IsPlayerNo(3)) {
         SetSpEffect(20000, 46332);
     }
+    // TODO: Fulghor
+    // SpEffects referenced in AI scripts
 });
 
 $Event(19002870, Default, function(chrEntityId) {

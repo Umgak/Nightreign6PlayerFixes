@@ -198,6 +198,8 @@ $Event(48902830, Restart, function(chrEntityId) {
 });
 
 $Event(48902840, Restart, function() {
+    // TODO: Wormface.
+    // Totally unknown - effects don't do shit and aren't referenced by scripts. Get added here and removed in 90065101
     DisableNetworkSync();
     if (IsPlayerNo(1)) {
         SetSpEffect(20000, 42180);
