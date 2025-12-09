@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -48,7 +48,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035078, 1044380230, 1044386900);
     $InitializeCommonEvent(0, 90035079, 1044380230, 1044382700, 1044381200);
     $InitializeCommonEvent(0, 90035070, 0, 0, 1044385200, 1044380230);
-    $InitializeCommonEvent(0, 90035085, 1044380230, 1044382710);
+    $InitializeCommonEvent(0, 90035085, 1044380230, 1044382710, 6);
     $InitializeCommonEvent(0, 90035080, 1044380230, 1044385900, 1044382890);
     $InitializeCommonEvent(0, 90035081, 1044380230);
     $InitializeCommonEvent(0, 90035082, 1044380230, 1044380200, 1044380205, 1044380206, 1044380207, 1044380208, 1044380209); // NR6PF: new c0120 instances for 4-6, also edited in msb
@@ -132,5 +132,4 @@ $Event(1044382920, Restart, function() {
     WaitFor(SmallBaseAttached(1044382601, 30300000));
     EnableAsset(1044381900);
 });
-
 

@@ -4,13 +4,13 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015310, 30000050, 30000051, 1, 30000200, 30000202, 30000203, 0, 1, 2, 0, 1, 2, 30002415, 30002416, 30002417, 30002420, 30002421, 30002422, 30002400);
     $InitializeCommonEvent(0, 90015301, 30005300, 30000200, 30000201, 30000202, 30000203, 1);
-    $InitializeCommonEvent(0, 90015302, 30006500);
+    $InitializeCommonEvent(0, 90015306, 30006500);
     $InitializeCommonEvent(0, 90015303, 30002401);
     $InitializeCommonEvent(0, 90015305, 30002430, 30002431, 30002432, 30002433);
     $InitializeCommonEvent(0, 90015304, 30000050, 30000200, 30000202);
@@ -67,6 +67,20 @@ S5:
     }
     $InitializeEvent(0, 30002930, 30005210, 30002200);
     $InitializeEvent(1, 30002930, 30005211, 30002201);
+    $InitializeCommonEvent(0, 90035280, 30002491, 30000700, 30000701, 30000702, 8060, 0, 30000800, 30000810, 0, 0, 0);
+    $InitializeCommonEvent(0, 90035280, 30002491, 30000700, 30000701, 30000702, 80010, 0, 30000800, 30000810, 0, 0, 0);
+    if (!IsPlayerCount(1)) {
+        $InitializeCommonEvent(0, 90035280, 30002491, 30000700, 30000701, 30000702, 80011, 1, 30000800, 30000810, 0, 0, 0);
+    }
+    $InitializeCommonEvent(0, 90035281, 30002491, 30000700, 30000701, 30000702, 80011, 30000800, 30000810, 0, 0, 0);
+    $InitializeCommonEvent(0, 90035282, 30000490, 30002490, 30000700, 30000701, 30000702, 30000703);
+    $InitializeCommonEvent(0, 90035283, 30000490, 30002491, 30001690, 30000700, 30000701, 30000702, 30000704, 30000705, 30000706);
+    $InitializeCommonEvent(0, 90035284, 30005490, 30005491, 30000700, 30000702, 30000705, 30000706);
+    $InitializeCommonEvent(0, 90035285, 30000490, 30000700, 30000701, 30000702, 30000705, 30000706);
+    $InitializeCommonEvent(0, 90035286, 30000490, 30002491, 30000700, 30000701, 30000702, 30000705, 30000706);
+    $InitializeCommonEvent(0, 90035288, 30002491, 30000700, 30000702, 30000705, 30000706);
+    $InitializeCommonEvent(0, 90015000, 30000704, 30000490, 907640001, 50, 0, 30000706);
+    $InitializeCommonEvent(0, 90015025, 8081, 30000704, 30000705, 30000490, 1020, 0, -1, -1, 30000490, 0);
     $InitializeCommonEvent(0, 90015009, 30008000, 30001600, 0, 0);
     $InitializeCommonEvent(1, 90015009, 30008000, 30001600, 1, 0);
     $InitializeCommonEvent(0, 90085700, 701, 8475, 0, 30000800);
@@ -108,5 +122,4 @@ $Event(30002930, Restart, function(chrEntityId, areaEntityId) {
     WaitFor(!InArea(20000, areaEntityId));
     RestartEvent();
 });
-
 

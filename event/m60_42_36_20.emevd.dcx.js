@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -45,8 +45,8 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015163, 1042360851, 1042362900, 1042362901, 1042360850);
     $InitializeCommonEvent(0, 90015164, 1042360850, 1042362901);
     if (MissionActive(202)) {
-        $InitializeCommonEvent(0, 90085020, 202, 8356, 8357, 8355, 1042360270, 99850, 1042360270);
-        $InitializeCommonEvent(0, 90085035, 202, 8356, 1042360270, 6858, 1042360270);
+        $InitializeCommonEvent(0, 90085020, 202, 8356, 8357, 8355, 1042360270, 99850, 1042360270, Hero.Guardian);
+        $InitializeCommonEvent(0, 90085035, 202, 8356, 1042360270, 6858, 1042360270, Hero.Guardian);
         $InitializeCommonEvent(0, 90085034, 202, 8355, 8356, 1042360271);
         $InitializeCommonEvent(0, 90085016, 202, 8357, 8356, 1042360270, 1042360271, 1030, 3);
         $InitializeCommonEvent(0, 90015000, 8356, 1042360271, 912000020, 30, 0, 8357);
@@ -58,8 +58,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90085030, 202, 1042360277);
     }
     if (MissionActive(401)) {
-        $InitializeCommonEvent(0, 90085020, 401, 8401, 8402, 8400, 1042360280, 99852, 1042360280);
-        $InitializeCommonEvent(0, 90085021, 401, 8401, 1042362280, 1042360280);
+        $InitializeCommonEvent(0, 90085020, 401, 8401, 8402, 8400, 1042360280, 99852, 1042360280, Hero.Duchess);
+        $InitializeCommonEvent(0, 90085021, 401, 8401, 1042362280, 1042360280, Hero.Duchess);
         if (1 == 3) {
             $InitializeCommonEvent(0, 90085002, 401, 8402, 8401, 1042360280, 1042365280, 1042360281, 0, 0, 0, 20032);
         }
@@ -73,8 +73,8 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90085002, 401, 8402, 8401, 1042360280, 1042365280, 1042360281, 1042360282, 1042360283, 1042360284, 20032);
         }
         $InitializeCommonEvent(0, 90085016, 401, 8402, 8401, 1042360280, 1042365280, 1030, 3);
-        $InitializeCommonEvent(0, 90085022, 401, 8402, 1042362281, 1042360280, 502);
-        $InitializeCommonEvent(0, 90085037, 401, 8402, 8400, 1042361280, 9219);
+        $InitializeCommonEvent(0, 90085022, 401, 8402, 1042362281, 1042360280, 502, Hero.Duchess);
+        $InitializeCommonEvent(0, 90085037, 401, 8402, 8400, 1042361280, 9219, Hero.Duchess);
         if (1 == 3) {
             $InitializeCommonEvent(0, 90015000, 8401, 1042360281, 912000040, 30, 0, 8402);
         }
@@ -154,5 +154,4 @@ $Event(1042362930, Restart, function() {
     WaitFor(CharacterDead(1042360281) && CharacterDead(1042360282));
     SetEventFlagID(8400, ON);
 });
-
 

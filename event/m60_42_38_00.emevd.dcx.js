@@ -4,13 +4,13 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
     if (MissionActive(302)) {
-        $InitializeCommonEvent(0, 90085020, 302, 8381, 8382, 8380, 1042380295, 99842, 1042380290);
-        $InitializeCommonEvent(0, 90085021, 302, 8381, 1042382290, 1042380290);
+        $InitializeCommonEvent(0, 90085020, 302, 8381, 8382, 8380, 1042380295, 99842, 1042380290, Hero.Ironeye);
+        $InitializeCommonEvent(0, 90085021, 302, 8381, 1042382290, 1042380290, Hero.Ironeye);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085002, 302, 8382, 8381, 1042380290, 1042385290, 1042380290, 0, 0, 0, 63020);
         }
@@ -36,7 +36,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90085030, 302, 1042385900);
         $InitializeCommonEvent(0, 90085032, 302, 1042386295);
         $InitializeCommonEvent(0, 90015316, 1042382291);
-        $InitializeCommonEvent(0, 90085036, 8381, 11210);
+        $InitializeCommonEvent(0, 90085036, 8381, 11210, Hero.Ironeye, 302);
     }
     $InitializeCommonEvent(0, 91005506, 1042385200);
     $InitializeCommonEvent(0, 90005580, 1042381950, 1042380950, 7651);
@@ -62,6 +62,10 @@ S1:
     }
     $InitializeCommonEvent(0, 90015015, 42380800);
     $InitializeCommonEvent(0, 90015016, 42380800);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 42380800);
+        $InitializeCommonEvent(0, 90015468, 42380800, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015000, 0, 42380805, 903251600, 30, 0, 0);
     $InitializeCommonEvent(0, 90015030, 0, 42380805, 30, 0, 0);
     $InitializeCommonEvent(0, 90015002, 0, 0, 42380805, 42380805, 1020, 0, 11290, 903251600, 42380805);
@@ -78,6 +82,10 @@ S3:
     }
     $InitializeCommonEvent(0, 90015015, 42380805);
     $InitializeCommonEvent(0, 90015016, 42380805);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 42380805);
+        $InitializeCommonEvent(0, 90015468, 42380805, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90005910, 1042381800, 7676);
     $InitializeCommonEvent(0, 91005505, 1042382510, 7676);
     $InitializeCommonEvent(0, 90065901, 1042384890);
@@ -113,5 +121,4 @@ $Event(1042382900, Restart, function(eventFlagId, chrEntityId) {
     WaitFor(EventFlag(eventFlagId));
     ForceCharacterTreasure(chrEntityId);
 });
-
 

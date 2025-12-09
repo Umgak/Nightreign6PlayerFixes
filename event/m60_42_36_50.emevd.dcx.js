@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -31,6 +31,10 @@ S1:
     }
     $InitializeCommonEvent(0, 90015015, 1026500800);
     $InitializeCommonEvent(0, 90015016, 1026500800);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1026500800);
+        $InitializeCommonEvent(0, 90015468, 1026500800, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1026500800, 30, 0, 1026500800, 72449, 1026500800);
     $InitializeCommonEvent(0, 90005211, 1026500800, 30017, 20017, 1026502550, 30, 3, 0, 0, 0, 0);
     $InitializeCommonEvent(0, 9005811, 1026500800, 1026501800, 20, 0);
@@ -50,6 +54,10 @@ S3:
     }
     $InitializeCommonEvent(0, 90015015, 1026500810);
     $InitializeCommonEvent(0, 90015016, 1026500810);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1026500810);
+        $InitializeCommonEvent(0, 90015468, 1026500810, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1026500810, 15, 0, 1026500810, 72452, 1026500810);
     $InitializeCommonEvent(0, 90015041, 190, 0, 0, 72487);
     $InitializeCommonEvent(0, 90005201, 1026500810, 30000, 20000, 30, 2, 0, 0, 0, 0);
@@ -69,6 +77,10 @@ S5:
     }
     $InitializeCommonEvent(0, 90015015, 1026500850);
     $InitializeCommonEvent(0, 90015016, 1026500850);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1026500850);
+        $InitializeCommonEvent(0, 90015468, 1026500850, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1026500850, 15, 0, 1026500850, 72451, 1026500850);
     $InitializeCommonEvent(0, 90015041, 200, 0, 0, 72486);
     $InitializeCommonEvent(0, 90005201, 1026500850, 30000, 20000, 30, 2, 0, 0, 0, 0);
@@ -88,6 +100,10 @@ S7:
     }
     $InitializeCommonEvent(0, 90015015, 1026500820);
     $InitializeCommonEvent(0, 90015016, 1026500820);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1026500820);
+        $InitializeCommonEvent(0, 90015468, 1026500820, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1026500820, 15, 0, 1026500820, 72461, 1026500820);
     $InitializeCommonEvent(0, 90005201, 1026500820, 30000, 20000, 20, 2, 0, 0, 0, 0);
     $InitializeCommonEvent(0, 90015000, 0, 1026500860, 904020540, 30, 0, 0);
@@ -106,6 +122,10 @@ S9:
     }
     $InitializeCommonEvent(0, 90015015, 1026500860);
     $InitializeCommonEvent(0, 90015016, 1026500860);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1026500860);
+        $InitializeCommonEvent(0, 90015468, 1026500860, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1026500860, 0, 1026502530, 1026500860, 72466, 1026500860);
     $InitializeCommonEvent(0, 90015041, 60, 0, 0, 72472);
     $InitializeCommonEvent(0, 90005211, 1026500860, 30000, 20000, 1026502530, 5, 1, 0, 0, 0, 0);
@@ -125,6 +145,10 @@ S11:
     }
     $InitializeCommonEvent(0, 90015015, 1026500830);
     $InitializeCommonEvent(0, 90015016, 1026500830);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1026500830);
+        $InitializeCommonEvent(0, 90015468, 1026500830, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1026500830, 15, 0, 1026500830, 72464, 1026500830);
     $InitializeCommonEvent(0, 90015041, 0, 0, 0, 72470);
     $InitializeCommonEvent(0, 90005261, 1026500830, 1026502520, 20, 0, 0);
@@ -144,6 +168,10 @@ S13:
     }
     $InitializeCommonEvent(0, 90015015, 1026500840);
     $InitializeCommonEvent(0, 90015016, 1026500840);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015071, 1026500840);
+        $InitializeCommonEvent(0, 90015468, 1026500840, 8270, 8247);
+    }
     $InitializeCommonEvent(0, 90015017, 1026500840, 15, 0, 1026500840, 72465, 1026500840);
     $InitializeCommonEvent(0, 90015041, 10, 0, 0, 72471);
     $InitializeCommonEvent(0, 90005261, 1026500840, 1026502540, 20, 0, 0);
@@ -163,8 +191,8 @@ S13:
     $InitializeCommonEvent(0, 90015152, 1026500291, 74055);
     $InitializeEvent(0, 1026502215);
     if (MissionActive(102)) {
-        $InitializeCommonEvent(0, 90085020, 102, 8331, 8332, 8330, 1026500280, 99850, 1026500280);
-        $InitializeCommonEvent(0, 90085021, 102, 8331, 1026502280, 1026500280);
+        $InitializeCommonEvent(0, 90085020, 102, 8331, 8332, 8330, 1026500280, 99850, 1026500280, Hero.Wylder);
+        $InitializeCommonEvent(0, 90085021, 102, 8331, 1026502280, 1026500280, Hero.Wylder);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085002, 102, 8332, 8331, 1026500280, 1026505280, 1026500281, 0, 0, 0, 20032);
         }
@@ -178,8 +206,8 @@ S13:
             $InitializeCommonEvent(0, 90085002, 102, 8332, 8331, 1026500280, 1026505280, 1026500281, 1026500282, 1026500283, 1026500284, 20032);
         }
         $InitializeCommonEvent(0, 90085016, 102, 8332, 8331, 1026500280, 1026505280, 1030, 3);
-        $InitializeCommonEvent(0, 90085022, 102, 8332, 1026502281, 1026500280, 501);
-        $InitializeCommonEvent(0, 90085023, 102, 8332, 8330, 1026500280, 6851, 1026500280);
+        $InitializeCommonEvent(0, 90085022, 102, 8332, 1026502281, 1026500280, 501, Hero.Wylder);
+        $InitializeCommonEvent(0, 90085023, 102, 8332, 8330, 1026500280, 6851, 1026500280, Hero.Wylder);
         if (1 == 1) {
             $InitializeCommonEvent(0, 90015000, 8331, 1026500281, 912000010, 30, 0, 8332);
         }
@@ -230,5 +258,4 @@ $Event(1026502220, Default, function() {
     WaitFor(EventFlag(1026500800));
     RecordUserDispLog(11340, 20000, LogObjectType.None, -1);
 });
-
 

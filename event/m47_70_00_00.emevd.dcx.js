@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -21,11 +21,16 @@ $Event(0, Default, function() {
     if (IsMapVariation(1)) {
         $InitializeCommonEvent(0, 90035000, 47700200);
     }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015442, 47702200, 47700200);
+    }
     $InitializeCommonEvent(0, 90035001, 47705800);
     $InitializeCommonEvent(0, 90065000, 47700800, 47700805);
     $InitializeCommonEvent(0, 90065001, 47705800, 47700800, 47700840, 47705802, 47705803, 47700805, 47700210, 47700200, 47700800, 920100, 47700205);
     $InitializeCommonEvent(0, 90065002, 47700800, 47705801, 47700805, 47700830, 47700840, 47700200, 47700800);
-    $InitializeCommonEvent(0, 90065900, 47700800, 1, 0, 0, 1050, 920100, 904950600, 47700800);
+    if (!IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90065900, 47700800, 1, 0, 0, 1050, 920100, 904950600, 47700800);
+    }
     $InitializeCommonEvent(0, 90015008, 47700205, 47700800, 920100, 47700800, 15316, 0);
     $InitializeCommonEvent(0, 90015012, 47705800, 47700200);
     $InitializeCommonEvent(1, 90015012, 47705801, 47700200);
@@ -36,6 +41,16 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90065013, 47700800, 47700840, 47700200, 47700800);
     $InitializeCommonEvent(0, 90065014, 47700840, 47700200, 47700800);
     $InitializeCommonEvent(0, 90065015, 47700800, 47700805, 47700840, 47700210, 47700200, 47700800);
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015443, 47702200, 47700800);
+        $InitializeCommonEvent(0, 90015023, 47700200, 40, 0, 47705800, 47700800, 904950600, 47705801, 904950604, 0, 0);
+        $InitializeCommonEvent(0, 90015030, 47700200, 47705800, 40, 920100, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 47700200, 0, 47705800, 1020, 920100, -1, 904950600, 47700800);
+        $InitializeCommonEvent(0, 90015470, 47702200, 47700200, 47700800, 47705800, 47705801, 0);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015446, 47705800, 47700200, 47700800, 47702200);
+    }
     $InitializeCommonEvent(0, 90065003, 47700800, 15310, 47701811, 47700200, 47700800);
     $InitializeCommonEvent(0, 90065004, 47700800, 15310, 47701812, 47700200, 47700800);
     $InitializeCommonEvent(0, 90065005, 47700800, 15310, 47701813, 47700200, 47700800);
@@ -73,6 +88,30 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90065016, 47700805, 47700821, 12551, 12553, 12555, 47700241, 47700200, 47700800);
     $InitializeCommonEvent(1, 90065016, 47700805, 47700822, 12551, 12553, 12555, 47700242, 47700200, 47700800);
     $InitializeCommonEvent(1, 90065016, 47700805, 47700823, 12551, 12553, 12555, 47700243, 47700200, 47700800);
+    if (1 == 1) {
+        $InitializeCommonEvent(0, 90015070, 1056402601, 47700000, 47700300);
+        $InitializeCommonEvent(0, 90015070, 1028402600, 47700000, 47700300);
+    }
+    if (1 == 2) {
+        $InitializeCommonEvent(0, 90015070, 1056402602, 47700000, 47700300);
+        $InitializeCommonEvent(0, 90015070, 1028402601, 47700000, 47700300);
+    }
+    if (1 == 3) {
+        $InitializeCommonEvent(0, 90015070, 1056402603, 47700000, 47700300);
+        $InitializeCommonEvent(0, 90015070, 1028402602, 47700000, 47700300);
+    }
+    if (2 == 1) {
+        $InitializeCommonEvent(0, 90015070, 1056402601, 47700000, 47700301);
+        $InitializeCommonEvent(0, 90015070, 1028402600, 47700000, 47700301);
+    }
+    if (2 == 2) {
+        $InitializeCommonEvent(0, 90015070, 1056402602, 47700000, 47700301);
+        $InitializeCommonEvent(0, 90015070, 1028402601, 47700000, 47700301);
+    }
+    if (2 == 3) {
+        $InitializeCommonEvent(0, 90015070, 1056402603, 47700000, 47700301);
+        $InitializeCommonEvent(0, 90015070, 1028402602, 47700000, 47700301);
+    }
 });
 
 $Event(47702800, Default, function(chrEntityId, assetEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3) {
@@ -1126,5 +1165,4 @@ L0:
     WaitFixedTimeSeconds(1);
     RestartEvent();
 });
-
 

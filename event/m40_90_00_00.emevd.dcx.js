@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -369,6 +369,7 @@ $Event(40902670, Restart, function(mapVariationId, eventFlagId, chrEntityId) {
 L0:
     EnableCharacterInvincibility(chrEntityId);
     EnableLockOnPoint(chrEntityId, 220);
+    SetCharacterEnableDistance(chrEntityId, 110);
     WaitFor(EventFlag(eventFlagId));
     DisableCharacterAI(chrEntityId);
     DisableLockOnPoint(chrEntityId, 220);
@@ -403,5 +404,4 @@ L0:
     EndIf(IsMapVariation(8));
     DisableAsset(40901791);
 });
-
 

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -20,7 +20,10 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 1000002705);
     $InitializeEvent(0, 1000002706);
     $InitializeEvent(0, 1000002708);
+    $InitializeEvent(0, 1000002709);
+    $InitializeEvent(0, 1000002711);
     $InitializeEvent(0, 1000002707);
+    $InitializeEvent(0, 1000002712);
     $InitializeEvent(0, 100003000);
     $InitializeEvent(0, 100003002);
     $InitializeEvent(0, 100002690);
@@ -28,6 +31,7 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 100003001);
     $InitializeEvent(0, 100003003);
     $InitializeEvent(0, 100003004);
+    $InitializeEvent(0, 1000002710);
     $InitializeEvent(0, 1000002200);
     $InitializeEvent(0, 1000002201);
     $InitializeEvent(0, 1000002220, 10002220);
@@ -36,6 +40,7 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 1000002223, 10002221);
     $InitializeEvent(0, 1000002224, 10002221);
     $InitializeEvent(0, 1000002225);
+    $InitializeEvent(0, 1000002226);
     $InitializeEvent(0, 1000002230, 10000410, 10002950);
     $InitializeEvent(1, 1000002230, 10000412, 10002951);
     $InitializeEvent(2, 1000002230, 10000414, 10002952);
@@ -99,6 +104,8 @@ $Event(0, Default, function() {
     $InitializeEvent(13, 100002420, 12000, 114);
     $InitializeEvent(14, 100002420, 15000, 134);
     $InitializeEvent(15, 100002420, 15002, 136);
+    $InitializeEvent(16, 100002420, 19050, 150);
+    $InitializeEvent(17, 100002420, 19000, 154);
     $InitializeEvent(0, 100002450, 1119028, 10001831, 118);
     $InitializeEvent(1, 100002450, 1149002, 10001832, 119);
     $InitializeEvent(8, 100002450, 1149005, 10001838, 139);
@@ -114,6 +121,10 @@ $Event(0, Default, function() {
     $InitializeEvent(12, 100002450, 1119081, 10001845, 146);
     $InitializeEvent(13, 100002450, 1179131, 10001822, 108);
     $InitializeEvent(14, 100002450, 1179028, 10001846, 148);
+    $InitializeEvent(15, 100002450, 1029810, 10001847, 155);
+    $InitializeEvent(16, 100002450, 1029628, 10001848, 150);
+    $InitializeEvent(17, 100002450, 1029622, 10001849, 152);
+    $InitializeEvent(18, 100002450, 1029636, 10001855, 157);
     $InitializeEvent(0, 100002590);
     $InitializeEvent(0, 100002601, 1149047, 10001840, 138, 2.5);
     $InitializeEvent(1, 100002601, 1149029, 10001839, 137, 0);
@@ -125,6 +136,8 @@ $Event(0, Default, function() {
     $InitializeEvent(5, 100002610, 9617, 60270);
     $InitializeEvent(6, 100002610, 9620, 60320);
     $InitializeEvent(7, 100002610, 9623, 60370);
+    $InitializeEvent(8, 100002610, 9902, 60520);
+    $InitializeEvent(9, 100002610, 9912, 60570);
     $InitializeEvent(0, 100004000, Hero.Raider, 103000, 1159090, 1159100, 1009540);
     $InitializeEvent(1, 100004000, Hero.Raider, 103010, 1159091, 1159101, 1009540);
     $InitializeEvent(2, 100004000, Hero.Raider, 103030, 1159092, 1159102, 1009540);
@@ -150,6 +163,11 @@ $Event(0, Default, function() {
     $InitializeEvent(20, 100004000, Hero.Recluse, 105020, 1179122, 1179222, 1009760);
     $InitializeEvent(21, 100004000, Hero.Ironeye, 106000, 1139100, 1139220, 1009360);
     $InitializeEvent(22, 100004000, Hero.Ironeye, 106030, 1139101, 1139221, 1009360);
+    $InitializeEvent(23, 100004000, Hero.Scholar, 111000, 1029850, 1029860, 1029940);
+    $InitializeEvent(24, 100004000, Hero.Scholar, 111010, 1029851, 1029861, 1029940);
+    $InitializeEvent(25, 100004000, Hero.Scholar, 111020, 1029852, 1029862, 1029940);
+    $InitializeEvent(26, 100004000, Hero.Undertaker, 112000, 1029650, 1029700, 1019240);
+    $InitializeEvent(27, 100004000, Hero.Undertaker, 112010, 1029651, 1029701, 1019240);
     $InitializeEvent(0, 100003300);
     $InitializeEvent(0, 100003310);
     $InitializeEvent(0, 100007010);
@@ -184,6 +202,7 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 100002660);
     $InitializeEvent(0, 100002570);
     $InitializeEvent(0, 100002571);
+    $InitializeEvent(0, 100002572);
     $InitializeEvent(0, 100002580);
     $InitializeEvent(0, 1000001890);
     $InitializeEvent(0, 1000001000);
@@ -335,6 +354,9 @@ $Event(100000900, Restart, function() {
         WaitFor(EventFlag(10002014));
     }
     WaitFixedTimeFrames(1);
+    if (EventFlag(10003512)) {
+        WaitFor(EventFlag(136));
+    }
     SetEventFlagID(6020, OFF);
     ShowTutorialPopup(2040, true, true);
     DisplayPermanentBuffPopup(130);
@@ -358,6 +380,12 @@ $Event(100000900, Restart, function() {
                 RecordUserDispLog(12103, 10000, LogObjectType.None, -1);
             }
         }
+        if (EventFlag(10001904)) {
+            if (EventFlag(6074)) {
+                ShowTutorialPopup(3440, true, true);
+                RecordUserDispLog(121000, 10000, LogObjectType.None, -1);
+            }
+        }
     }
 L0:
     EndEvent();
@@ -379,6 +407,9 @@ $Event(100000910, Restart, function() {
             WaitFor(EventFlag(10002014));
         }
         WaitFixedTimeFrames(5);
+        if (EventFlag(10003512)) {
+            WaitFor(EventFlag(136));
+        }
         SetEventFlagID(130, ON);
         ShowTutorialPopup(1920, true, true);
         UnknownText200722(3500);
@@ -397,6 +428,9 @@ $Event(100000911, Restart, function() {
         WaitFor(EventFlag(10002014));
     }
     WaitFixedTimeFrames(5);
+    if (EventFlag(10003512)) {
+        WaitFor(EventFlag(136));
+    }
     ShowTutorialPopup(1950, true, true);
 });
 
@@ -448,6 +482,7 @@ $Event(1000001520, Restart, function() {
     ShowTutorialPopup(1970, true, true);
     AwardAchievement(5);
     SetEventFlagID(6040, OFF);
+    SetEventFlagID(10003511, ON);
     WaitFor(ElapsedFrames(30));
     PlaySE(10000, SoundType.MenuSE, 1100);
     EndEvent();
@@ -597,6 +632,20 @@ $Event(1000002225, Restart, function() {
     RestartEvent();
 });
 
+$Event(1000002226, Restart, function() {
+    WaitFor(
+        CharacterHasSpEffect(10000, 709000, GreaterOrEqual, 1)
+            || CharacterHasSpEffect(10000, 709010, GreaterOrEqual, 1));
+    SetSpEffect(10000, 603090);
+    WaitFixedTimeFrames(1);
+    WaitFor(
+        !(CharacterHasSpEffect(10000, 709000, GreaterOrEqual, 1)
+            || CharacterHasSpEffect(10000, 709010, GreaterOrEqual, 1)));
+    SetSpEffect(10000, 603091);
+    WaitFixedTimeFrames(1);
+    RestartEvent();
+});
+
 $Event(1000002230, Restart, function(chrEntityId, entityId) {
     IssueShortWarpRequest(chrEntityId, TargetEntityType.Area, entityId, -1);
     ForceAnimationPlayback(chrEntityId, 30000, false, false, false);
@@ -657,9 +706,13 @@ $Event(1000002300, Restart, function() {
         if (!flag2.Passed) {
             if (CurrentScenarioSection(ScenarioSection.None) && TalkNPCEnabled(10000780)) {
                 SetEventFlagID(10002405, ON);
+                SetEventFlagID(10003511, ON);
                 DisableCharacterFadeOnEnable(10000780);
                 FadeToBlack(0, 0, true, -1);
                 WaitFixedTimeFrames(3);
+                GotoIf(S0, !EventFlag(10003502));
+                Goto(L1);
+S0:
                 WaitFixedTimeSeconds(0.7);
                 SetEventFlagID(10002406, ON);
                 WaitFixedTimeSeconds(0.3);
@@ -768,7 +821,9 @@ $Event(100002552, Restart, function() {
             || CurrentScenarioSection(ScenarioSection.Raider)
             || CurrentScenarioSection(ScenarioSection.Revenant)
             || CurrentScenarioSection(ScenarioSection.Recluse)
-            || CurrentScenarioSection(ScenarioSection.Executor);
+            || CurrentScenarioSection(ScenarioSection.Executor)
+            || CurrentScenarioSection(ScenarioSection.Scholar)
+            || CurrentScenarioSection(ScenarioSection.Undertaker);
         RestartIf(EventFlag(10002050));
         WaitFor(area);
         DeactivateGparamOverride(2.5);
@@ -789,7 +844,9 @@ L0:
         || CurrentScenarioSection(ScenarioSection.Raider)
         || CurrentScenarioSection(ScenarioSection.Revenant)
         || CurrentScenarioSection(ScenarioSection.Recluse)
-        || CurrentScenarioSection(ScenarioSection.Executor);
+        || CurrentScenarioSection(ScenarioSection.Executor)
+        || CurrentScenarioSection(ScenarioSection.Scholar)
+        || CurrentScenarioSection(ScenarioSection.Undertaker);
     RestartIf(EventFlag(10002050));
     WaitFor(area);
     DeactivateGparamOverride(2.5);
@@ -827,6 +884,9 @@ $Event(100002557, Restart, function() {
 });
 
 $Event(100002560, Restart, function() {
+    if (EventFlag(102) && !EventFlag(1109145)) {
+        SetEventFlagID(10003506, ON);
+    }
     if ((EventFlag(3003) && !EventFlag(1109031)) || (EventFlag(3005) && !EventFlag(1109032))) {
         WaitFor(EventFlag(10002017));
     } else {
@@ -835,12 +895,17 @@ $Event(100002560, Restart, function() {
     }
 L0:
     ShowTutorialPopup(1940, true, true);
+    SetEventFlagID(1109145, ON);
 });
 
 $Event(100002561, Restart, function() {
+    if (EventFlag(106) && !EventFlag(1109146)) {
+        SetEventFlagID(10003507, ON);
+    }
     WaitFor(ElapsedFrames(15));
     WaitFor(EventFlag(106));
     ShowTutorialPopup(2070, true, true);
+    SetEventFlagID(1109146, ON);
 });
 
 $Event(100002570, Restart, function() {
@@ -856,6 +921,15 @@ $Event(100002571, Restart, function() {
     WaitFor(EventFlag(961) && !PlayerHasItem(ItemType.Antique, 11001) && IsHero(Hero.Wylder));
     WaitFor(ElapsedFrames(25));
     AwardItemLot(101000);
+});
+
+$Event(100002572, Restart, function() {
+    WaitFor(EventFlag(964) && !PlayerHasItem(ItemType.Antique, 19051) && IsHero(Hero.Undertaker));
+    ChangeHeroCharacter(10000, 50930);
+    ChangeHeroGarbMenuSelection(Hero.Undertaker, 50930);
+    SetEventFlagID(1029699, ON);
+    WaitFor(ElapsedFrames(25));
+    AwardItemLot(112020);
 });
 
 $Event(100002580, Restart, function() {
@@ -973,6 +1047,9 @@ $Event(100002691, Restart, function() {
         WaitFor(EventFlag(102));
     }
 L0:
+    if (EventFlag(10003512)) {
+        WaitFor(EventFlag(136));
+    }
     ShowTutorialPopup(2060, true, true);
 });
 
@@ -986,6 +1063,10 @@ $Event(1000002705, Default, function() {
     WaitFor(EventFlag(6031));
     WaitFor(EventFlag(110));
     SetEventFlagID(6045, ON);
+    if (EventFlag(6951)) {
+        SetEventFlagID(6064, ON);
+    }
+L0:
     WaitFor(EventFlag(6050));
     SetEventFlagID(6051, ON);
     WaitFor(EventFlag(160));
@@ -996,6 +1077,10 @@ $Event(1000002706, Default, function() {
     WaitFor(EventFlag(6037));
     WaitFor(EventFlag(110));
     SetEventFlagID(6046, ON);
+    if (EventFlag(6951)) {
+        SetEventFlagID(6065, ON);
+    }
+L0:
     WaitFor(EventFlag(6050));
     SetEventFlagID(6052, ON);
     WaitFor(EventFlag(160));
@@ -1011,6 +1096,47 @@ $Event(1000002707, Default, function() {
 $Event(1000002708, Default, function() {
     WaitFor(EventFlag(6050) && EventFlag(160));
     SetEventFlagID(6057, ON);
+});
+
+$Event(1000002709, Default, function() {
+    EndIf(EventFlag(6063));
+    WaitFor(EventFlag(6951) && EventFlag(110));
+    SetEventFlagID(6063, ON);
+});
+
+$Event(1000002710, Restart, function() {
+    if (!EventFlag(10001961)) {
+        WaitFor(!EventFlag(10001961));
+        SetEventFlagID(10001963, ON);
+        SetEventFlagID(10001964, OFF);
+    }
+    WaitFor(EventFlag(10001961) || EventFlag(10002070));
+    SetEventFlagID(10001963, OFF);
+    SetEventFlagID(10001964, ON);
+});
+
+$Event(1000002711, Default, function() {
+    SetEventFlagID(6066, OFF);
+    SetEventFlagID(6067, OFF);
+    SetEventFlagID(6068, OFF);
+    SetEventFlagID(6069, OFF);
+    if (!EventFlag(6951)) {
+        SetEventFlagID(6066, ON);
+        EndIf(!EventFlag(131));
+        SetEventFlagID(6067, ON);
+        EndEvent();
+    }
+L0:
+    SetEventFlagID(6068, ON);
+    EndIf(!EventFlag(131));
+    SetEventFlagID(6069, ON);
+    EndEvent();
+});
+
+$Event(1000002712, Default, function() {
+    EndIf(EventFlag(6044));
+    WaitFor(EventFlag(131) || (EventFlag(162) && EventFlag(6060)));
+    SetEventFlagID(6044, ON);
 });
 
 $Event(100002990, Restart, function() {
@@ -1029,7 +1155,11 @@ $Event(100002990, Restart, function() {
 
 $Event(100002991, Restart, function() {
     WaitFor(EventFlag(10001911));
+    if (EventFlag(10003625)) {
+        WaitFor(!EventFlag(10003625));
+    }
     SetEventFlagID(10001911, OFF);
+    EndIf(EventFlag(1109109));
     RecordUserDispLog(12201, 10000, LogObjectType.None, -1);
     ShowTutorialPopup(2020, true, true);
     WaitFixedTimeFrames(1);
@@ -1047,7 +1177,8 @@ $Event(100003400, Default, function(eventFlagId, hero) {
         WaitFor(EventFlag(10002018));
         WaitFixedTimeFrames(3);
     }
-    if (!CurrentScenarioSection(ScenarioSection.None)) {
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    if (!cond) {
         WaitFor(EventFlag(eventFlagId));
         WaitFor(CurrentScenarioSection(ScenarioSection.None));
         WaitFor(EventFlag(10009001) || EventFlag(10009002));
@@ -1063,7 +1194,18 @@ $Event(100003400, Default, function(eventFlagId, hero) {
         WaitFixedTimeFrames(60);
     }
     EndIf(!EventFlag(eventFlagId));
-    RestartIf(!CurrentScenarioSection(ScenarioSection.None));
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    RestartIf(!cond);
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+    }
     RecordUserDispLog(12200, 10000, LogObjectType.None, -1);
     ShowTutorialPopup(2000, true, true);
     SetEventFlagID(eventFlagId, OFF);
@@ -1075,7 +1217,8 @@ $Event(100003430, Default, function() {
         WaitFor(EventFlag(10002018));
         WaitFixedTimeFrames(3);
     }
-    if (!CurrentScenarioSection(ScenarioSection.None)) {
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    if (!cond) {
         WaitFor(EventFlag(1009460));
         WaitFor(CurrentScenarioSection(ScenarioSection.None));
         WaitFor(EventFlag(10009001) || EventFlag(10009002));
@@ -1094,7 +1237,18 @@ $Event(100003430, Default, function() {
         WaitFixedTimeFrames(60);
     }
     EndIf(!EventFlag(1009460));
-    RestartIf(!CurrentScenarioSection(ScenarioSection.None));
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    RestartIf(!cond);
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+    }
     RecordUserDispLog(12200, 10000, LogObjectType.None, -1);
     ShowTutorialPopup(2000, true, true);
     SetEventFlagID(1009460, OFF);
@@ -1106,7 +1260,8 @@ $Event(100003431, Default, function() {
         WaitFor(EventFlag(10002018));
         WaitFixedTimeFrames(3);
     }
-    if (!CurrentScenarioSection(ScenarioSection.None)) {
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    if (!cond) {
         WaitFor(EventFlag(1009660));
         WaitFor(CurrentScenarioSection(ScenarioSection.None));
         WaitFor(EventFlag(10009001) || EventFlag(10009002));
@@ -1124,7 +1279,18 @@ $Event(100003431, Default, function() {
         WaitFixedTimeFrames(60);
     }
     EndIf(!EventFlag(1009660));
-    RestartIf(!CurrentScenarioSection(ScenarioSection.None));
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    RestartIf(!cond);
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+    }
     RecordUserDispLog(12200, 10000, LogObjectType.None, -1);
     ShowTutorialPopup(2000, true, true);
     SetEventFlagID(1009660, OFF);
@@ -1136,7 +1302,8 @@ $Event(100003432, Default, function() {
         WaitFor(EventFlag(10002018));
         WaitFixedTimeFrames(3);
     }
-    if (!CurrentScenarioSection(ScenarioSection.None)) {
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    if (!cond) {
         WaitFor(EventFlag(1009140));
         WaitFor(CurrentScenarioSection(ScenarioSection.None));
         WaitFor(EventFlag(10009001) || EventFlag(10009002));
@@ -1154,7 +1321,18 @@ $Event(100003432, Default, function() {
         WaitFixedTimeFrames(60);
     }
     EndIf(!EventFlag(1009140));
-    RestartIf(!CurrentScenarioSection(ScenarioSection.None));
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    RestartIf(!cond);
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+    }
     RecordUserDispLog(12200, 10000, LogObjectType.None, -1);
     ShowTutorialPopup(2000, true, true);
     SetEventFlagID(1009140, OFF);
@@ -1166,7 +1344,8 @@ $Event(100003433, Default, function() {
         WaitFor(EventFlag(10002018));
         WaitFixedTimeFrames(3);
     }
-    if (!CurrentScenarioSection(ScenarioSection.None)) {
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    if (!cond) {
         WaitFor(EventFlag(1009260));
         WaitFor(CurrentScenarioSection(ScenarioSection.None));
         WaitFor(EventFlag(10009001) || EventFlag(10009002));
@@ -1184,7 +1363,18 @@ $Event(100003433, Default, function() {
         WaitFixedTimeFrames(60);
     }
     EndIf(!EventFlag(1009260));
-    RestartIf(!CurrentScenarioSection(ScenarioSection.None));
+    cond &= CurrentScenarioSection(ScenarioSection.None);
+    RestartIf(!cond);
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+    }
     RecordUserDispLog(12200, 10000, LogObjectType.None, -1);
     ShowTutorialPopup(2000, true, true);
     SetEventFlagID(1009260, OFF);
@@ -1193,6 +1383,9 @@ $Event(100003433, Default, function() {
 
 $Event(100002993, Restart, function() {
     WaitFor(EventFlag(10002040));
+    if (EventFlag(10003550) || EventFlag(10003556)) {
+        WaitFixedTimeSeconds(3);
+    }
     SetEventFlagID(10002040, OFF);
     RecordUserDispLog(12202, 10000, LogObjectType.None, -1);
     ShowTutorialPopup(2030, true, true);
@@ -1214,7 +1407,9 @@ $Event(100002994, Restart, function() {
             || CurrentScenarioSection(ScenarioSection.Raider)
             || CurrentScenarioSection(ScenarioSection.Revenant)
             || CurrentScenarioSection(ScenarioSection.Recluse)
-            || CurrentScenarioSection(ScenarioSection.Executor));
+            || CurrentScenarioSection(ScenarioSection.Executor)
+            || CurrentScenarioSection(ScenarioSection.Scholar)
+            || CurrentScenarioSection(ScenarioSection.Undertaker));
     SetSpEffect(10000, 9752);
     WaitFor(
         CurrentScenarioSection(ScenarioSection.None)
@@ -1263,6 +1458,16 @@ L2:
     if (flag3) {
         WaitFor(EventFlag(10002018));
     }
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+    }
     WaitFor(IsRequestGameMode(0));
     if (EventFlag(eventFlagId3)) {
         SetEventFlagID(eventFlagId3, OFF);
@@ -1279,6 +1484,16 @@ L1:
     flag3 |= flag4;
     if (flag3) {
         WaitFor(EventFlag(10002018));
+    }
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
     }
     WaitFor(IsRequestGameMode(0));
     if (EventFlag(eventFlagId3)) {
@@ -1333,6 +1548,16 @@ L2:
     if (flag3) {
         WaitFor(EventFlag(10002018));
     }
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+    }
     WaitFor(IsRequestGameMode(0));
     EndIf(!EventFlag(eventFlagId4));
     if (EventFlag(eventFlagId3)) {
@@ -1350,6 +1575,17 @@ L1:
     flag3 |= flag4;
     if (flag3) {
         WaitFor(EventFlag(10002018));
+    }
+    if (CurrentScenarioSection(ScenarioSection.None)
+        && EventFlag(6951)
+        && EventFlag(161)
+        && EventFlag(1109140)
+        && EventFlag(6038)
+        && EventFlag(6039)
+        && !EventFlag(136)
+        && !EventFlag(10001965)) {
+        WaitFor(EventFlag(136));
+        WaitFixedTimeSeconds(1);
     }
     WaitFor(IsRequestGameMode(0));
     EndIf(!EventFlag(eventFlagId4));
@@ -1396,7 +1632,7 @@ $Event(100003000, Default, function() {
         }
     }
 L0:
-    GotoIf(L2, !AnyBatchEventFlags(140, 143));
+    GotoIf(L2, !AnyBatchEventFlags(140, 144));
     GotoIf(S0, !EventFlag(6070));
     GotoIf(L2, EventFlag(10001900));
     SetEventFlagID(10001900, ON);
@@ -1408,6 +1644,7 @@ S0:
     if (!EventFlag(6020)) {
         ShowTutorialPopup(3420, true, true);
         RecordUserDispLog(12101, 10000, LogObjectType.None, -1);
+        SetEventFlagID(10003518, ON);
     }
     Goto(L1);
 S1:
@@ -1417,6 +1654,7 @@ S1:
     if (!EventFlag(6020)) {
         ShowTutorialPopup(3400, true, true);
         RecordUserDispLog(12102, 10000, LogObjectType.None, -1);
+        SetEventFlagID(10003518, ON);
     }
     Goto(L1);
 S2:
@@ -1426,9 +1664,20 @@ S2:
     if (!EventFlag(6020)) {
         ShowTutorialPopup(3410, true, true);
         RecordUserDispLog(12103, 10000, LogObjectType.None, -1);
+        SetEventFlagID(10003518, ON);
     }
     Goto(L1);
 S3:
+    GotoIf(S4, !EventFlag(6074));
+    GotoIf(L2, EventFlag(10001904));
+    SetEventFlagID(10001904, ON);
+    if (!EventFlag(6020)) {
+        ShowTutorialPopup(3440, true, true);
+        RecordUserDispLog(121000, 10000, LogObjectType.None, -1);
+        SetEventFlagID(10003518, ON);
+    }
+    Goto(L1);
+S4:
     Goto(L2);
 L1:
     BatchSetEventFlags(6085, 6088, OFF);
@@ -1436,6 +1685,7 @@ L1:
     SetEventFlagID(6091, OFF);
     SetEventFlagID(6092, OFF);
     SetEventFlagID(6093, OFF);
+    SetEventFlagID(6094, OFF);
     SetEventFlagID(6095, OFF);
     SetEventFlagID(6098, OFF);
     SetEventFlagID(6099, OFF);
@@ -1445,63 +1695,77 @@ L1:
     Goto(L17);
 L2:
     GotoIf(L20, AnyBatchEventFlags(6085, 6088));
-    GotoIf(L20, !AnyBatchEventFlags(6090, 6093));
-    GotoIf(L19, AnyBatchEventFlags(6070, 6073));
+    GotoIf(L20, !AnyBatchEventFlags(6090, 6094));
+    GotoIf(L19, AnyBatchEventFlags(6070, 6074));
     GotoIf(L3, EventFlag(6098));
     Goto(L20);
 L3:
-    GotoIf(S4, !EventFlag(6090));
+    GotoIf(S5, !EventFlag(6090));
     GotoIf(L20, !EventFlag(140));
     SetEventFlagID(6070, ON);
     Goto(L19);
-S4:
-    GotoIf(S5, !EventFlag(6091));
+S5:
+    GotoIf(S6, !EventFlag(6091));
     GotoIf(L20, !EventFlag(141));
     SetEventFlagID(6071, ON);
     Goto(L19);
-S5:
-    GotoIf(S6, !EventFlag(6092));
+S6:
+    GotoIf(S7, !EventFlag(6092));
     GotoIf(L20, !EventFlag(142));
     SetEventFlagID(6072, ON);
     Goto(L19);
-S6:
-    GotoIf(S7, !EventFlag(6093));
+S7:
+    GotoIf(S8, !EventFlag(6093));
     GotoIf(L20, !EventFlag(143));
     SetEventFlagID(6073, ON);
     Goto(L19);
-S7:
+S8:
+    GotoIf(S9, !EventFlag(6094));
+    GotoIf(L20, !EventFlag(144));
+    SetEventFlagID(6074, ON);
+    Goto(L19);
+S9:
     Goto(L20);
 L19:
-    GotoIf(L20, !AnyBatchEventFlags(6090, 6093));
+    GotoIf(L20, !AnyBatchEventFlags(6090, 6094));
     if ((EventFlag(6070) && EventFlag(6090))
         || (EventFlag(6071) && EventFlag(6091))
         || (EventFlag(6072) && EventFlag(6092))
-        || (EventFlag(6073) && EventFlag(6093))) {
+        || (EventFlag(6073) && EventFlag(6093))
+        || (EventFlag(6074) && EventFlag(6094))) {
         IncrementNetworkconnectedEventValue(6080, 4, 3);
-        GotoIf(S8, !EventFlag(6090));
+        GotoIf(S10, !EventFlag(6090));
     }
     if (EventFlag(10002405)) {
         SetEventFlagID(10002165, ON);
     } else {
         ShowTutorialPopup(3430, true, true);
     }
-S8:
+S10:
     Goto(L20);
 L20:
     SetEventFlagID(6090, OFF);
     SetEventFlagID(6091, OFF);
     SetEventFlagID(6092, OFF);
     SetEventFlagID(6093, OFF);
+    SetEventFlagID(6094, OFF);
     SetEventFlagID(6095, OFF);
     SetEventFlagID(6098, OFF);
     SetEventFlagID(6099, OFF);
-    EndIf(!AnyBatchEventFlags(6070, 6073));
+    EndIf(!AnyBatchEventFlags(6070, 6074));
     if (EventValue(6080, 4) < 3) {
         GotoIf(L17, EventFlag(3003) && !EventFlag(1109031));
         GotoIf(L17, EventFlag(3005) && !EventFlag(1109032));
+        GotoIf(L17, EventFlag(10003512) && !EventFlag(136));
+        flag &= EventFlag(1109109);
+        GotoIf(L17, flag);
+        flag2 &= EventFlag(10001970) && !EventFlag(10001801);
+        GotoIf(L17, flag2);
         GotoIf(L17, EventFlag(1159086));
         GotoIf(L17, EventFlag(1169070));
         GotoIf(L17, EventFlag(1189058));
+        GotoIf(L17, EventFlag(1029891));
+        GotoIf(L17, EventFlag(10001802));
         if (EventFlag(6070)) {
             RecordUserDispLog(12100, 10000, LogObjectType.None, -1);
         }
@@ -1511,18 +1775,25 @@ L20:
         if (EventFlag(6072)) {
             RecordUserDispLog(12102, 10000, LogObjectType.None, -1);
         }
-        GotoIf(S9, !EventFlag(6073));
-        RecordUserDispLog(12103, 10000, LogObjectType.None, -1);
-S9:
+        if (EventFlag(6073)) {
+            RecordUserDispLog(12103, 10000, LogObjectType.None, -1);
+        }
+        GotoIf(S11, !EventFlag(6074));
+        RecordUserDispLog(121000, 10000, LogObjectType.None, -1);
+S11:
 L17:
         WaitFor(EventFlag(10002160));
         EndEvent();
     }
 L18:
-    flag = EventFlag(3005) && !EventFlag(1109032);
+    flag3 = EventFlag(3005) && !EventFlag(1109032);
+    flag2 &= EventFlag(10001970) && !EventFlag(10001801);
+    flag4 = EventFlag(10003512) && !EventFlag(136);
+    flag &= EventFlag(1109109);
+    flag5 = flag3 || flag2 || flag4 || flag;
     if (EventFlag(6070)) {
         SetEventFlagID(6070, OFF);
-        if (flag) {
+        if (flag5) {
             SetEventFlagID(10002161, ON);
         } else {
             RecordUserDispLog(12110, 10000, LogObjectType.None, -1);
@@ -1530,7 +1801,7 @@ L18:
     }
     if (EventFlag(6071)) {
         SetEventFlagID(6071, OFF);
-        if (flag) {
+        if (flag5) {
             SetEventFlagID(10002162, ON);
         } else {
             RecordUserDispLog(12111, 10000, LogObjectType.None, -1);
@@ -1538,7 +1809,7 @@ L18:
     }
     if (EventFlag(6072)) {
         SetEventFlagID(6072, OFF);
-        if (flag) {
+        if (flag5) {
             SetEventFlagID(10002163, ON);
         } else {
             RecordUserDispLog(12112, 10000, LogObjectType.None, -1);
@@ -1546,10 +1817,18 @@ L18:
     }
     if (EventFlag(6073)) {
         SetEventFlagID(6073, OFF);
-        if (flag) {
+        if (flag5) {
             SetEventFlagID(10002164, ON);
         } else {
             RecordUserDispLog(12113, 10000, LogObjectType.None, -1);
+        }
+    }
+    if (EventFlag(6074)) {
+        SetEventFlagID(6074, OFF);
+        if (flag5) {
+            SetEventFlagID(10002169, ON);
+        } else {
+            RecordUserDispLog(121010, 10000, LogObjectType.None, -1);
         }
     }
     ClearEventValue(6080, 4);
@@ -1572,6 +1851,9 @@ $Event(100003001, Restart, function() {
             }
             if (EventFlag(6073)) {
                 RecordUserDispLog(12103, 10000, LogObjectType.None, -1);
+            }
+            if (EventFlag(6074)) {
+                RecordUserDispLog(121000, 10000, LogObjectType.None, -1);
             }
             SetEventFlagID(10002170, OFF);
             SetEventFlagID(10002171, ON);
@@ -1603,6 +1885,10 @@ L10:
     if (EventFlag(6073)) {
         SetEventFlagID(6073, OFF);
         RecordUserDispLog(12113, 10000, LogObjectType.None, -1);
+    }
+    if (EventFlag(6074)) {
+        SetEventFlagID(6074, OFF);
+        RecordUserDispLog(121010, 10000, LogObjectType.None, -1);
     }
     ClearEventValue(6080, 4);
     SetEventFlagID(6085, ON);
@@ -1839,7 +2125,9 @@ $Event(100007302, Restart, function() {
             || CurrentScenarioSection(ScenarioSection.Duchess)
             || CurrentScenarioSection(ScenarioSection.Revenant)
             || CurrentScenarioSection(ScenarioSection.Recluse)
-            || CurrentScenarioSection(ScenarioSection.Executor));
+            || CurrentScenarioSection(ScenarioSection.Executor)
+            || CurrentScenarioSection(ScenarioSection.Scholar)
+            || CurrentScenarioSection(ScenarioSection.Undertaker));
     GotoIf(L11, CurrentScenarioSection(ScenarioSection.None));
     GotoIf(L12, IsHero(Hero.Raider) && CurrentScenarioSection(ScenarioSection.Raider));
 L10:
@@ -2086,6 +2374,9 @@ L0:
 L20:
     SetEventFlagID(1109032, ON);
     SetEventFlagID(10002012, ON);
+    if ((HasMissionState(901, 2) || HasMissionState(901, 3)) && !EventFlag(1029840)) {
+        SetEventFlagID(1029842, ON);
+    }
     if (!IsHero(Hero.Duchess)) {
         WaitFor(EventFlag(10003005));
     }
@@ -2100,6 +2391,9 @@ L20:
     }
     if (EventFlag(6073)) {
         RecordUserDispLog(12103, 10000, LogObjectType.None, -1);
+    }
+    if (EventFlag(6074)) {
+        RecordUserDispLog(121000, 10000, LogObjectType.None, -1);
     }
     if (EventFlag(10002161)) {
         SetEventFlagID(10002161, OFF);
@@ -2116,6 +2410,10 @@ L20:
     if (EventFlag(10002164)) {
         SetEventFlagID(10002164, OFF);
         RecordUserDispLog(12113, 10000, LogObjectType.None, -1);
+    }
+    if (EventFlag(10002169)) {
+        SetEventFlagID(10002169, OFF);
+        RecordUserDispLog(121010, 10000, LogObjectType.None, -1);
     }
     SetEventFlagID(10002014, ON);
     WaitFixedTimeFrames(3);
@@ -3247,9 +3545,17 @@ L11:
 $Event(100009304, Restart, function() {
     WaitFor(EventFlag(10002100));
     WaitFixedTimeFrames(1);
+    if (!IsHero(Hero.Undertaker)) {
+        SetEventFlagID(10002100, OFF);
+        WaitFixedTimeFrames(1);
+        WarpPlayer(10, 0, 0, 0, 10003411, 0);
+        EndEvent();
+    }
+L0:
     SetEventFlagID(10002100, OFF);
     WaitFixedTimeFrames(1);
-    WarpPlayer(10, 0, 0, 0, 10003411, 0);
+    WarpPlayer(10, 0, 0, 0, 10002970, 0);
+    EndEvent();
 });
 
 $Event(10009305, Restart, function() {
@@ -3660,6 +3966,11 @@ $Event(10009391, Restart, function() {
         IsHero(Hero.Recluse)
             && CurrentScenarioSection(ScenarioSection.Recluse)
             && AnyBatchEventFlags(3707, 3710));
+    GotoIf(L3, 
+        IsHero(Hero.Undertaker)
+            && CurrentScenarioSection(ScenarioSection.Undertaker)
+            && AnyBatchEventFlags(4300, 4306));
+    GotoIf(L3, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003512));
     BatchSetEventFlags(10003450, 10003454, OFF);
     RandomlySetEventFlagInRange(10003450, 10003454, ON);
     WaitFixedTimeFrames(1);
@@ -3704,6 +4015,7 @@ $Event(10009392, Restart, function() {
     GotoIf(L2, EventFlag(10000911));
     GotoIf(L3, EventFlag(10000912));
     GotoIf(L3, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10002405));
+    GotoIf(L3, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003502));
     GotoIf(L2, 
         IsHero(Hero.Wylder)
             && CurrentScenarioSection(ScenarioSection.Wylder)
@@ -3738,6 +4050,7 @@ $Event(10009392, Restart, function() {
         IsHero(Hero.Recluse)
             && CurrentScenarioSection(ScenarioSection.Recluse)
             && AnyBatchEventFlags(3707, 3710));
+    GotoIf(L3, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003512));
     BatchSetEventFlags(10003455, 10003459, OFF);
     RandomlySetEventFlagInRange(10003455, 10003459, ON);
     WaitFixedTimeFrames(1);
@@ -3809,6 +4122,10 @@ $Event(10009393, Restart, function() {
         IsHero(Hero.Recluse)
             && CurrentScenarioSection(ScenarioSection.Recluse)
             && AnyBatchEventFlags(3707, 3710));
+    GotoIf(L1, 
+        IsHero(Hero.Undertaker)
+            && CurrentScenarioSection(ScenarioSection.Undertaker)
+            && AnyBatchEventFlags(4300, 4306));
     BatchSetEventFlags(10003460, 10003464, OFF);
     RandomlySetEventFlagInRange(10003460, 10003464, ON);
     WaitFixedTimeFrames(1);
@@ -3904,6 +4221,7 @@ L10:
         IsHero(Hero.Recluse)
             && CurrentScenarioSection(ScenarioSection.Recluse)
             && (AnyBatchEventFlags(3700, 3704) || AnyBatchEventFlags(3707, 3710)));
+    GotoIf(L11, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003512));
     BatchSetEventFlags(10003465, 10003469, OFF);
     RandomlySetEventFlagInRange(10003465, 10003469, ON);
     WaitFixedTimeFrames(1);
@@ -3942,23 +4260,23 @@ L15:
         IsHero(Hero.Guardian)
             && CurrentScenarioSection(ScenarioSection.Guardian)
             && AnyBatchEventFlags(3215, 3219));
-    if (!(IsHero(Hero.Guardian)
-        && CurrentScenarioSection(ScenarioSection.Guardian)
-        && AnyBatchEventFlags(3223, 3232))) {
-        chrFlag &= IsHero(Hero.Recluse) && CurrentScenarioSection(ScenarioSection.Recluse);
-        chrFlag &= AnyBatchEventFlags(3700, 3704) || AnyBatchEventFlags(3707, 3710);
-        if (!chrFlag) {
-            BatchSetEventFlags(10003465, 10003469, OFF);
-            RandomlySetEventFlagInRange(10003465, 10003469, ON);
-            WaitFixedTimeFrames(1);
-            if (!AnyBatchEventFlags(10003468, 10003469)) {
-                IssueShortWarpRequest(10000711, TargetEntityType.Area, 10003941, -1);
-                SetSpEffect(10000711, 9678);
-                ClearSpEffect(10000711, 9940);
-                EndEvent();
-            }
-        }
-    }
+    GotoIf(L16, 
+        IsHero(Hero.Guardian)
+            && CurrentScenarioSection(ScenarioSection.Guardian)
+            && AnyBatchEventFlags(3223, 3232));
+    GotoIf(L16, 
+        IsHero(Hero.Recluse)
+            && CurrentScenarioSection(ScenarioSection.Recluse)
+            && (AnyBatchEventFlags(3700, 3704) || AnyBatchEventFlags(3707, 3710)));
+    GotoIf(L17, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003512));
+    BatchSetEventFlags(10003465, 10003469, OFF);
+    RandomlySetEventFlagInRange(10003465, 10003469, ON);
+    WaitFixedTimeFrames(1);
+    GotoIf(L16, AnyBatchEventFlags(10003468, 10003469));
+    IssueShortWarpRequest(10000711, TargetEntityType.Area, 10003941, -1);
+    SetSpEffect(10000711, 9678);
+    ClearSpEffect(10000711, 9940);
+    EndEvent();
 L16:
     IssueShortWarpRequest(10000711, TargetEntityType.Area, 10003945, -1);
     SetSpEffect(10000711, 9679);
@@ -3973,10 +4291,11 @@ L17:
     WaitFixedTimeFrames(1);
     ForceAnimationPlayback(10000711, 90302, false, false, false);
     ClearSpEffect(10000711, 9940);
-    chrFlag &= IsHero(Hero.Guardian)
-        && CurrentScenarioSection(ScenarioSection.Guardian)
-        && AnyBatchEventFlags(3205, 3213);
-    GotoIf(L18, chrFlag);
+    GotoIf(L18, 
+        IsHero(Hero.Guardian)
+            && CurrentScenarioSection(ScenarioSection.Guardian)
+            && AnyBatchEventFlags(3205, 3213));
+    GotoIf(L18, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003512));
     EndEvent();
 L18:
     IssueShortWarpRequest(10000711, TargetEntityType.Area, 10003999, -1);
@@ -4095,6 +4414,10 @@ $Event(10009396, Restart, function() {
         IsHero(Hero.Raider)
             && CurrentScenarioSection(ScenarioSection.Raider)
             && AnyBatchEventFlags(3500, 3521));
+    GotoIf(L2, 
+        IsHero(Hero.Undertaker)
+            && CurrentScenarioSection(ScenarioSection.Undertaker)
+            && AnyBatchEventFlags(4300, 4306));
     BatchSetEventFlags(10003475, 10003479, OFF);
     RandomlySetEventFlagInRange(10003475, 10003479, ON);
     WaitFixedTimeFrames(1);
@@ -4239,6 +4562,10 @@ $Event(10009398, Restart, function() {
         IsHero(Hero.Recluse)
             && CurrentScenarioSection(ScenarioSection.Recluse)
             && (AnyBatchEventFlags(3700, 3704) || AnyBatchEventFlags(3707, 3710)));
+    GotoIf(L1, 
+        IsHero(Hero.Undertaker)
+            && CurrentScenarioSection(ScenarioSection.Undertaker)
+            && AnyBatchEventFlags(4300, 4306));
     flag2 &= !EventFlag(6037) && CurrentScenarioSection(ScenarioSection.None);
     GotoIf(L3, flag2);
     BatchSetEventFlags(10003485, 10003489, OFF);
@@ -4282,6 +4609,8 @@ $Event(10009401, Restart, function() {
     GotoIf(L2, EventFlag(10000911));
     GotoIf(L3, EventFlag(10000912));
     GotoIf(L10, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10002405));
+    GotoIf(L10, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003502));
+    GotoIf(L2, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003505));
     GotoIf(L2, 
         IsHero(Hero.Duchess)
             && CurrentScenarioSection(ScenarioSection.Duchess)
@@ -4379,7 +4708,9 @@ $Event(10009404, Restart, function() {
         CurrentScenarioSection(ScenarioSection.Guardian)
             || CurrentScenarioSection(ScenarioSection.Raider)
             || CurrentScenarioSection(ScenarioSection.Revenant)
-            || CurrentScenarioSection(ScenarioSection.Executor));
+            || CurrentScenarioSection(ScenarioSection.Executor)
+            || CurrentScenarioSection(ScenarioSection.Scholar)
+            || CurrentScenarioSection(ScenarioSection.Undertaker));
     EndEvent();
 L1:
     DisableAsset(10002021);
@@ -4409,6 +4740,8 @@ $Event(10009405, Restart, function() {
     GotoIf(L6, IsHero(Hero.Revenant) && CurrentScenarioSection(ScenarioSection.Revenant));
     GotoIf(L7, IsHero(Hero.Recluse) && CurrentScenarioSection(ScenarioSection.Recluse));
     GotoIf(L8, IsHero(Hero.Executor) && CurrentScenarioSection(ScenarioSection.Executor));
+    GotoIf(L9, IsHero(Hero.Scholar) && CurrentScenarioSection(ScenarioSection.Scholar));
+    GotoIf(L10, IsHero(Hero.Undertaker) && CurrentScenarioSection(ScenarioSection.Undertaker));
     EndEvent();
 L1:
     ClearSpEffect(10000, 9821);
@@ -4418,6 +4751,8 @@ L1:
     ClearSpEffect(10000, 9825);
     ClearSpEffect(10000, 9826);
     ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9820);
     EndEvent();
@@ -4429,6 +4764,8 @@ L2:
     ClearSpEffect(10000, 9825);
     ClearSpEffect(10000, 9826);
     ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9821);
     EndEvent();
@@ -4440,6 +4777,8 @@ L3:
     ClearSpEffect(10000, 9825);
     ClearSpEffect(10000, 9826);
     ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9822);
     EndEvent();
@@ -4451,6 +4790,8 @@ L4:
     ClearSpEffect(10000, 9825);
     ClearSpEffect(10000, 9826);
     ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9823);
     EndEvent();
@@ -4462,6 +4803,8 @@ L5:
     ClearSpEffect(10000, 9825);
     ClearSpEffect(10000, 9826);
     ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9824);
     EndEvent();
@@ -4473,6 +4816,8 @@ L6:
     ClearSpEffect(10000, 9824);
     ClearSpEffect(10000, 9826);
     ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9825);
     EndEvent();
@@ -4484,6 +4829,8 @@ L7:
     ClearSpEffect(10000, 9824);
     ClearSpEffect(10000, 9825);
     ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9826);
     EndEvent();
@@ -4495,8 +4842,36 @@ L8:
     ClearSpEffect(10000, 9824);
     ClearSpEffect(10000, 9825);
     ClearSpEffect(10000, 9826);
+    ClearSpEffect(10000, 9828);
+    ClearSpEffect(10000, 9829);
     WaitFixedTimeFrames(1);
     SetSpEffect(10000, 9827);
+    EndEvent();
+L9:
+    ClearSpEffect(10000, 9820);
+    ClearSpEffect(10000, 9821);
+    ClearSpEffect(10000, 9822);
+    ClearSpEffect(10000, 9823);
+    ClearSpEffect(10000, 9824);
+    ClearSpEffect(10000, 9825);
+    ClearSpEffect(10000, 9826);
+    ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9829);
+    WaitFixedTimeFrames(1);
+    SetSpEffect(10000, 9828);
+    EndEvent();
+L10:
+    ClearSpEffect(10000, 9820);
+    ClearSpEffect(10000, 9821);
+    ClearSpEffect(10000, 9822);
+    ClearSpEffect(10000, 9823);
+    ClearSpEffect(10000, 9824);
+    ClearSpEffect(10000, 9825);
+    ClearSpEffect(10000, 9826);
+    ClearSpEffect(10000, 9827);
+    ClearSpEffect(10000, 9828);
+    WaitFixedTimeFrames(1);
+    SetSpEffect(10000, 9829);
     EndEvent();
 });
 
@@ -5482,5 +5857,4 @@ $Event(100006006, Restart, function() {
         IssueShortWarpRequest(10001608, TargetEntityType.Area, 10003604, -1);
     }
 });
-
 

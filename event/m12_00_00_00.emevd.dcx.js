@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -48,28 +48,48 @@ $Event(12002001, Default, function() {
     DisableCharacterDefaultBackread(12000200);
     DisableCharacterDefaultBackread(12000201);
     WaitFixedTimeSeconds(1);
-    GotoIf(L0, IsPlayMode(0));
-    GotoIf(L1, IsPlayMode(1));
-    GotoIf(L1, IsPlayMode(2) && TargetingBoss(TargetBoss.Heolstor));
-    GotoIf(L0, IsPlayMode(2));
+    GotoIf(L0, TargetingBoss(TargetBoss.Heolstor));
+    GotoIf(L1, TargetingBoss(TargetBoss.Harmonia));
+    GotoIf(L2, TargetingBoss(TargetBoss.Straghess));
+    Goto(L3);
     WaitFixedTimeSeconds(0.1);
     RestartEvent();
 L0:
     if (!EventFlag(7523)) {
-        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 19002200, 19000000, 20000, 0, false, true);
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 18002200, 18000000, 20000, 0, false, true);
     }
     if (EventFlag(7523)) {
-        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 19002200, 19000000, 20000, 0, false, true);
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 18002200, 18000000, 20000, 0, false, true);
     }
     ChangeCamera(-1);
     SetNetworkconnectedEventFlagID(7510, ON);
     EndEvent();
 L1:
     if (!EventFlag(7523)) {
-        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 18002200, 18000000, 20000, 0, false, true);
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 16002200, 16000000, 20000, 0, false, true);
     }
     if (EventFlag(7523)) {
-        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 18002200, 18000000, 20000, 0, false, true);
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 16002200, 16000000, 20000, 0, false, true);
+    }
+    ChangeCamera(-1);
+    SetNetworkconnectedEventFlagID(7510, ON);
+    EndEvent();
+L2:
+    if (!EventFlag(7523)) {
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 16102200, 16100000, 20000, 0, false, true);
+    }
+    if (EventFlag(7523)) {
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 16102200, 16100000, 20000, 0, false, true);
+    }
+    ChangeCamera(-1);
+    SetNetworkconnectedEventFlagID(7510, ON);
+    EndEvent();
+L3:
+    if (!EventFlag(7523)) {
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 19002200, 19000000, 20000, 0, false, true);
+    }
+    if (EventFlag(7523)) {
+        PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 19002200, 19000000, 20000, 0, false, true);
     }
     ChangeCamera(-1);
     SetNetworkconnectedEventFlagID(7510, ON);
@@ -133,18 +153,23 @@ $Event(12002099, Default, function() {
     EndIf(!EventFlag(7510));
     WaitFor(InArea(10000, 12002200));
     WaitFixedTimeSeconds(1);
-    GotoIf(L0, IsPlayMode(0));
-    GotoIf(L1, IsPlayMode(1));
-    GotoIf(L1, IsPlayMode(2) && TargetingBoss(TargetBoss.Heolstor));
-    GotoIf(L0, IsPlayMode(2));
+    GotoIf(L0, TargetingBoss(TargetBoss.Heolstor));
+    GotoIf(L1, TargetingBoss(TargetBoss.Harmonia));
+    GotoIf(L2, TargetingBoss(TargetBoss.Straghess));
+    Goto(L3);
     WaitFixedTimeSeconds(0.1);
     RestartEvent();
 L0:
-    WarpPlayerWithPlayerNo(19, 0, 0, 0, 19002200);
-    EndEvent();
-L1:
     WarpPlayerWithPlayerNo(18, 0, 0, 0, 18002200);
     EndEvent();
+L1:
+    WarpPlayerWithPlayerNo(16, 0, 0, 0, 16002200);
+    EndEvent();
+L2:
+    WarpPlayerWithPlayerNo(16, 10, 0, 0, 16102200);
+    EndEvent();
+L3:
+    WarpPlayerWithPlayerNo(19, 0, 0, 0, 19002200);
+    EndEvent();
 });
-
 

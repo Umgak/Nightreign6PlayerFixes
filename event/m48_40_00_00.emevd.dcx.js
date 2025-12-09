@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -21,14 +21,56 @@ $Event(0, Default, function() {
     if (IsMapVariation(1)) {
         $InitializeCommonEvent(0, 90035000, 48400200);
     }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015442, 48402200, 48400200);
+    }
     $InitializeCommonEvent(0, 90065910, 48400200, 48402205, 48400800, 213001, 690047, 48400800, 48400800, 902130002, 0, 0, 0, 0);
     $InitializeCommonEvent(0, 90065911, 48400200, 48400800, 213001, 48400800, 48400800, 902130002, 0, 0, 0, 0, 0);
-    $InitializeCommonEvent(0, 90065900, 48400800, 2, 0, 0, 1050, 213001, 902130002, 48400800);
+    if (!IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90065900, 48400800, 2, 0, 0, 1050, 213001, 902130002, 48400800);
+    }
     $InitializeCommonEvent(0, 90015012, 48400800, 48400200);
     $InitializeCommonEvent(0, 90015020, 48400200, 48400800);
     $InitializeCommonEvent(0, 90015008, 48402205, 48400800, 213001, 48400800, 16230, 0);
     $InitializeCommonEvent(0, 90065920, 48400800, 7315);
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015443, 48402200, 48400800);
+        $InitializeCommonEvent(0, 90015023, 48400200, 40, 0, 48400800, 48400800, 902130002, 0, 0, 0, 0);
+        $InitializeCommonEvent(0, 90015030, 48400200, 48400800, 40, 213001, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 48400200, 0, 48400800, 1020, 213001, -1, 902130002, 48400800);
+        $InitializeCommonEvent(0, 90015470, 48402200, 48400200, 48400800, 48400800, 0, 0);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015446, 48400800, 48400200, 48400800, 48402200);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015460, 48402200, 48400800);
+    }
     $InitializeCommonEvent(0, 90035001, 48400800);
+    if (2 == 1) {
+        $InitializeCommonEvent(0, 90015070, 1056402601, 48400000, 48400300);
+        $InitializeCommonEvent(0, 90015070, 1028402600, 48400000, 48400300);
+    }
+    if (2 == 2) {
+        $InitializeCommonEvent(0, 90015070, 1056402602, 48400000, 48400300);
+        $InitializeCommonEvent(0, 90015070, 1028402601, 48400000, 48400300);
+    }
+    if (2 == 3) {
+        $InitializeCommonEvent(0, 90015070, 1056402603, 48400000, 48400300);
+        $InitializeCommonEvent(0, 90015070, 1028402602, 48400000, 48400300);
+    }
+    if (3 == 1) {
+        $InitializeCommonEvent(0, 90015070, 1056402601, 48400000, 48400301);
+        $InitializeCommonEvent(0, 90015070, 1028402600, 48400000, 48400301);
+    }
+    if (3 == 2) {
+        $InitializeCommonEvent(0, 90015070, 1056402602, 48400000, 48400301);
+        $InitializeCommonEvent(0, 90015070, 1028402601, 48400000, 48400301);
+    }
+    if (3 == 3) {
+        $InitializeCommonEvent(0, 90015070, 1056402603, 48400000, 48400301);
+        $InitializeCommonEvent(0, 90015070, 1028402602, 48400000, 48400301);
+    }
 });
 
 $Event(48402800, Default, function(chrEntityId, assetEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3) {
@@ -79,5 +121,4 @@ L0:
     SetNetworkUpdateRate(48400800, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
 });
-
 

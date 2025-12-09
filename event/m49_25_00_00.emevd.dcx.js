@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -21,15 +21,60 @@ $Event(0, Default, function() {
     if (IsMapVariation(1)) {
         $InitializeCommonEvent(0, 90035000, 49250200);
     }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015442, 49252200, 49250200);
+    }
     $InitializeCommonEvent(0, 90065121, 49250200, 49250205, 49250800, 920200, 690047, 49255210, 49250800, 902500300, 49250810, 905011000, 0, 0);
     $InitializeCommonEvent(0, 90065911, 49250200, 49250800, 920200, 49255210, 49250800, 902500300, 49250810, 905011000, 0, 0, 0);
-    $InitializeCommonEvent(0, 90065900, 49250800, 2, 0, 0, 1050, 920200, 902500300, 49250800);
+    if (!IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90065900, 49250800, 2, 0, 0, 1050, 920200, 902500300, 49250800);
+    }
     $InitializeCommonEvent(0, 90015012, 49255210, 49250200);
     $InitializeCommonEvent(1, 90015012, 0, 49250200);
     $InitializeCommonEvent(0, 90015020, 49250200, 49250800);
     $InitializeCommonEvent(0, 90015008, 49250205, 49250800, 920200, 49255210, 14601, 0);
-    $InitializeCommonEvent(0, 90065120, 49250800, 49250810, 49250200, 49250800, 905011000);
+    $InitializeCommonEvent(0, 90065120, 49250800, 49250810, 49250200, 49250800, 905011000, 49250206);
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015443, 49252200, 49250800);
+        $InitializeCommonEvent(0, 90015023, 49250200, 40, 0, 49255210, 49250800, 902500300, 0, 0, 0, 0);
+        $InitializeCommonEvent(0, 90015026, 49250206, 40, 0, 49255210, 49250810, 905011000);
+        $InitializeCommonEvent(0, 90015030, 49250200, 49255210, 40, 920200, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 49250200, 0, 49255210, 1020, 920200, -1, 902500300, 49250800);
+        $InitializeCommonEvent(0, 90015470, 49252200, 49250200, 49250800, 49255210, 0, 0);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015446, 49255210, 49250200, 49250800, 49252200);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015460, 49252200, 49250800);
+        $InitializeCommonEvent(0, 90015460, 49252200, 49250810);
+        $InitializeCommonEvent(0, 90015460, 49252200, 0);
+    }
     $InitializeCommonEvent(0, 90035001, 49250800);
+    if (2 == 1) {
+        $InitializeCommonEvent(0, 90015070, 1056402601, 49250000, 49250300);
+        $InitializeCommonEvent(0, 90015070, 1028402600, 49250000, 49250300);
+    }
+    if (2 == 2) {
+        $InitializeCommonEvent(0, 90015070, 1056402602, 49250000, 49250300);
+        $InitializeCommonEvent(0, 90015070, 1028402601, 49250000, 49250300);
+    }
+    if (2 == 3) {
+        $InitializeCommonEvent(0, 90015070, 1056402603, 49250000, 49250300);
+        $InitializeCommonEvent(0, 90015070, 1028402602, 49250000, 49250300);
+    }
+    if (3 == 1) {
+        $InitializeCommonEvent(0, 90015070, 1056402601, 49250000, 49250301);
+        $InitializeCommonEvent(0, 90015070, 1028402600, 49250000, 49250301);
+    }
+    if (3 == 2) {
+        $InitializeCommonEvent(0, 90015070, 1056402602, 49250000, 49250301);
+        $InitializeCommonEvent(0, 90015070, 1028402601, 49250000, 49250301);
+    }
+    if (3 == 3) {
+        $InitializeCommonEvent(0, 90015070, 1056402603, 49250000, 49250301);
+        $InitializeCommonEvent(0, 90015070, 1028402602, 49250000, 49250301);
+    }
 });
 
 $Event(49252800, Default, function(chrEntityId, assetEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3, chrEntityId3) {
@@ -92,5 +137,4 @@ L0:
     DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
     DisplayBossHealthBar(Enabled, chrEntityId2, 0, nameId);
 });
-
 
