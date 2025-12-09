@@ -40,6 +40,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90065247, 52110800, 10002, 52110200, 52110800);
     $InitializeCommonEvent(1, 90065247, 52110800, 10003, 52110200, 52110800);
     $InitializeCommonEvent(2, 90065247, 52110800, 10004, 52110200, 52110800);
+    // TODO: New something
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015443, 52115200, 52110800);
         $InitializeCommonEvent(0, 90015023, 52110200, 40, 0, 52115210, 52110800, 905210600, 0, 0, 0, 0);

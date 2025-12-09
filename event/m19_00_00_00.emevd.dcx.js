@@ -65,6 +65,9 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90075230, 19000822, 10002, 1);
             $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
             $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
             $InitializeCommonEvent(0, 90075231, 19000822);
             $InitializeCommonEvent(0, 90075232, 19000822);
             $InitializeCommonEvent(0, 90075233, 19000822);
@@ -74,6 +77,9 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
             $InitializeCommonEvent(0, 90075230, 19000823, 10003, 1);
             $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
             $InitializeCommonEvent(0, 90075231, 19000823);
             $InitializeCommonEvent(0, 90075232, 19000823);
             $InitializeCommonEvent(0, 90075233, 19000823);
@@ -83,6 +89,9 @@ $Event(0, Default, function() {
             $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
             $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
             $InitializeCommonEvent(0, 90075230, 19000824, 10004, 1);
+            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
+            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
+            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
             $InitializeCommonEvent(0, 90075231, 19000824);
             $InitializeCommonEvent(0, 90075232, 19000824);
             $InitializeCommonEvent(0, 90075233, 19000824);

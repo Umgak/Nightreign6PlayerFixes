@@ -2027,6 +2027,7 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
         || CharacterRatioHasSpEffect(chrEntityId, 98288, NotEqual, 0)
         || CharacterRatioHasSpEffect(chrEntityId, 98289, NotEqual, 0))) {
         WaitFor(EventFlag(eventFlagId));
+        // TODO: this entire fucking event, wtf is this shit
         if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
             areaSp &= InArea(10002, 1028402550);
             areaSp2 &= InArea(10003, 1028402550);
@@ -5732,6 +5733,7 @@ $Event(90035227, Default, function(chrEntityId, chrEntityId2, targetDistance, pl
         if (!IsPlayerNo(3)) {
             area |= EntityInRadiusOfEntity(10004, chrEntityId, targetDistance2, 1);
         }
+        // TODO
         spFlagArea &= !area
             && (CharacterHasSpEffect(51225, -1)
                 || (CharacterHasSpEffect(chrEntityId, 51220)
@@ -5801,6 +5803,7 @@ $Event(90035228, Default, function(eventFlagId, entityId, eventFlagId2, eventFla
 });
 
 $Event(90035229, Default, function(chrEntityId, chrEntityId2, eventFlagId, generatorEntityId, chrEntityId3, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10, value) {
+    // TODO: Big event
     EndIf(!EventFlag(8077));
     EndIf(EventFlag(8062));
     if (!EventFlag(eventFlagId10)) {
@@ -6907,6 +6910,7 @@ $Event(90035253, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
 });
 
 $Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
+    // TODO: New invader
     DisableNetworkSync();
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8061));
@@ -6957,6 +6961,7 @@ $Event(90035261, Default, function(entityId, eventFlagId, eventFlagId2) {
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
     }
+    // TODO: New invader
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {
         EndIf(
@@ -7003,6 +7008,7 @@ $Event(90035262, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
             SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
             DisableCharacterFadeOnEnable(chrEntityId4);
         }
+        // TODO: New invader
         DisableCharacterCollision(chrEntityId2);
         DisableCharacterCollision(chrEntityId3);
         DisableCharacterCollision(chrEntityId4);
@@ -8600,6 +8606,7 @@ $Event(90035268, Default, function(chrEntityId, eventFlagId) {
 });
 
 $Event(90035270, Default, function(chrEntityId, eventFlagId) {
+    // TODO: New invader
     DisableNetworkSync();
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -8685,6 +8692,7 @@ L0:
 });
 
 $Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, value, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
+    // TODO: New invader
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061));
@@ -8783,6 +8791,7 @@ L0:
 });
 
 $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    // TODO: New invader
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8062));
@@ -8837,6 +8846,7 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
 });
 
 $Event(90035283, Default, function(chrEntityId, areaEntityId, assetEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
+    // TODO: New invader
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId3));
     if (EventFlag(eventFlagId5) || EventFlag(eventFlagId6)) {
@@ -9713,6 +9723,7 @@ $Event(90065002, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
     }
     ForceCharacterDeath(chrEntityId4, false);
     ForceCharacterDeath(chrEntityId5, false);
+    // 11 player nightreign confirmed :fatcat:
     SetSpEffect(10000, 509);
     SetSpEffect(10001, 509);
     SetSpEffect(10002, 509);
@@ -15983,6 +15994,7 @@ $Event(90075760, Restart, function(chrEntityId) {
 });
 
 $Event(90075770, Restart, function(chrEntityId, entityId, entityId2, entityId3, entityId4, eventFlagId) {
+    // TODO: New boss I think
     EndIf(EventFlag(eventFlagId));
     EndIf(EventFlag(7512));
     WaitFor(CharacterHasSpEffect(chrEntityId, 60507) || CharacterHasSpEffect(chrEntityId, 60505));
@@ -16996,6 +17008,7 @@ $Event(90085004, Default, function(missionId, hero, eventFlagId, eventFlagId2, c
 });
 
 $Event(90085005, Default, function(missionId, hero, eventFlagId, eventFlagId2) {
+    // TODO: New missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -17706,6 +17719,7 @@ $Event(90085036, Default, function(eventFlagId, userDispLogParamId, hero, missio
             RecordUserDispLog(userDispLogParamId, 10004, LogObjectType.None, -1);
         }
     }
+    // NR6PF: Check new players
     if (IsPlayerNo(4)) {
         if (EventFlag(7018)) {
             RecordUserDispLog(userDispLogParamId, 10005, LogObjectType.None, -1);
@@ -17773,6 +17787,7 @@ $Event(90085040, Default, function(missionId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90085041, Default, function(missionId, eventFlagId, eventFlagId2, hero) {
+    // TODO: New mission
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -18215,6 +18230,7 @@ $Event(90085950, Default, function(missionId, assetEntityId, chrEntityId, eventF
 });
 
 $Event(90085951, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    // TODO: New mission
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {

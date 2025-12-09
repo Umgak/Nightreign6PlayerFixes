@@ -24,12 +24,14 @@ $Event(0, Default, function() {
     if (IsPlayerNo(3)) {
         $InitializeCommonEvent(0, 90035265, 53050812, 53050200);
     }
+    // TODO: New something
     $InitializeCommonEvent(0, 90035266, 53052200, 150, 53050200);
     $InitializeCommonEvent(0, 90035267, 53050200);
     $InitializeCommonEvent(0, 90035268, 53050800, 53050200);
 });
 
 $Event(53052200, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
+    // TODO: New something
     DisableNetworkSync();
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8061));
