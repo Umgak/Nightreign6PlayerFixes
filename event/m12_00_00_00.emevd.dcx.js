@@ -14,6 +14,7 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 12002001);
     $InitializeEvent(0, 12002099);
     $InitializeEvent(0, 12002010, 120);
+    // these are camera ids. ignore.
     $InitializeEvent(0, 12002020, 0, 12002500, 12002501, 0, 10002, 10003);
     $InitializeEvent(1, 12002020, 12002500, 12002501, 12002502, 10002, 10003, 10004);
     $InitializeEvent(2, 12002020, 12002501, 12002502, 12002503, 10003, 10004, 10005);

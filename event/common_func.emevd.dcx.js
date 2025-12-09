@@ -3838,7 +3838,8 @@ L0:
     DisableAsset(assetEntityId);
 });
 
-$Event(90035214, Default, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+$Event(90035214, Default, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId4) { // another horrible definition, thanks lily
+    // Maris invasion
     EndIf(!EventFlag(8076));
     EndIf(EventFlag(8062));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId4));
@@ -3851,12 +3852,12 @@ $Event(90035214, Default, function(chrEntityId, eventFlagId, eventFlagId2, event
 L0:
     EnableCharacterAI(chrEntityId);
     WaitFor(
-        (EventFlag(eventFlagId) || EventFlag(eventFlagId2) || EventFlag(eventFlagId3))
+        (EventFlag(eventFlagId) || EventFlag(eventFlagId2) || EventFlag(eventFlagId3)) || EventFlag(eventFlagId5) || EventFlag(eventFlagId6) || EventFlag(eventFlagId7) // NR6PF: Check new flags
             || EventFlag(8062));
     DisableCharacterAI(chrEntityId);
     EndIf(EventFlag(8062));
     WaitFor(
-        (!EventFlag(eventFlagId) && !EventFlag(eventFlagId2) && !EventFlag(eventFlagId3))
+        (!EventFlag(eventFlagId) && !EventFlag(eventFlagId2) && !EventFlag(eventFlagId3) && !EventFlag(eventFlagId5) && !EventFlag(eventFlagId6) && !EventFlag(eventFlagId7)) // NR6PF: Check new
             || EventFlag(8062));
     EndIf(EventFlag(8062));
     RestartEvent();
