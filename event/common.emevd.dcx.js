@@ -1584,6 +1584,7 @@ $Event(1200, Default, function() {
     EndIf(EventFlag(7523));
     WaitFor(EventFlag(7523));
     SetNetworkconnectedEventFlagID(9052, ON);
+    // TODO: Spirit Shelter warp points
     WarpPlayerWithPlayerNo(12, 0, 0, 0, 12002310);
 });
 

@@ -150,6 +150,9 @@ $Event(12002050, Default, function() {
 });
 
 $Event(12002099, Default, function() {
+    // TODO: No actual script edits here
+    // WarpPlayerWithPlayerNo(area, block, region, idx, initialAreaBase) adds PlayerNo-1 to the initialAreaBase and then warps you there
+    // Meaning in 18_00_00_00 (Heolstor) (Done), 16_00_00_00 (Harmonia), 16_10_00_00 (Straghess), and 19_00_00_00 (all other Nightlords) I have to add those warp targets
     EndIf(!EventFlag(7510));
     WaitFor(InArea(10000, 12002200));
     WaitFixedTimeSeconds(1);
