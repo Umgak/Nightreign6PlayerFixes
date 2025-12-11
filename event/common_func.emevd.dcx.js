@@ -2015,8 +2015,9 @@ L0:
 });
 
 $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entityId) {
+    // TODO: This entire event, wtf
     EndIf(EventFlag(eventFlagId2));
-    if (!(CharacterRatioHasSpEffect(chrEntityId, 98280, NotEqual, 0)
+    sp = CharacterRatioHasSpEffect(chrEntityId, 98280, NotEqual, 0)
         || CharacterRatioHasSpEffect(chrEntityId, 98281, NotEqual, 0)
         || CharacterRatioHasSpEffect(chrEntityId, 98282, NotEqual, 0)
         || CharacterRatioHasSpEffect(chrEntityId, 98283, NotEqual, 0)
@@ -2025,40 +2026,46 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
         || CharacterRatioHasSpEffect(chrEntityId, 98286, NotEqual, 0)
         || CharacterRatioHasSpEffect(chrEntityId, 98287, NotEqual, 0)
         || CharacterRatioHasSpEffect(chrEntityId, 98288, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98289, NotEqual, 0))) {
+        || CharacterRatioHasSpEffect(chrEntityId, 98289, NotEqual, 0);
+    if (!sp) {
         WaitFor(EventFlag(eventFlagId));
-        // TODO: this entire fucking event, wtf is this shit
-        if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
+        area &= EntityInRadiusOfEntity(1028402600, entityId, 15, 1);
+        if (area) {
             areaSp &= InArea(10002, 1028402550);
             areaSp2 &= InArea(10003, 1028402550);
             areaSp3 &= InArea(10004, 1028402550);
         }
-        if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
+        area2 &= EntityInRadiusOfEntity(1028402601, entityId, 15, 1);
+        if (area2) {
             areaSp &= InArea(10002, 1028402551);
             areaSp2 &= InArea(10003, 1028402551);
             areaSp3 &= InArea(10004, 1028402551);
         }
-        if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
+        area3 &= EntityInRadiusOfEntity(1028402602, entityId, 15, 1);
+        if (area3) {
             areaSp &= InArea(10002, 1028402552);
             areaSp2 &= InArea(10003, 1028402552);
             areaSp3 &= InArea(10004, 1028402552);
         }
-        if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
+        area4 &= EntityInRadiusOfEntity(1056402601, entityId, 15, 1);
+        if (area4) {
             areaSp &= InArea(10002, 1056402550);
             areaSp2 &= InArea(10003, 1056402550);
             areaSp3 &= InArea(10004, 1056402550);
         }
-        if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
+        area5 &= EntityInRadiusOfEntity(1056402602, entityId, 15, 1);
+        if (area5) {
             areaSp &= InArea(10002, 1056402551);
             areaSp2 &= InArea(10003, 1056402551);
             areaSp3 &= InArea(10004, 1056402551);
         }
-        if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
+        area6 &= EntityInRadiusOfEntity(1056402603, entityId, 15, 1);
+        if (area6) {
             areaSp &= InArea(10002, 1056402552);
             areaSp2 &= InArea(10003, 1056402552);
             areaSp3 &= InArea(10004, 1056402552);
         }
-        areaSp &= CharacterHasSpEffect(10002, 98260, NotEqual, 0)
+        sp2 = CharacterHasSpEffect(10002, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98262, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98263, NotEqual, 0)
@@ -2068,7 +2075,8 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             || CharacterHasSpEffect(10002, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98269, NotEqual, 0);
-        areaSp2 &= CharacterHasSpEffect(10003, 98260, NotEqual, 0)
+        areaSp &= sp2;
+        sp3 = CharacterHasSpEffect(10003, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98262, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98263, NotEqual, 0)
@@ -2078,7 +2086,8 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             || CharacterHasSpEffect(10003, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98269, NotEqual, 0);
-        areaSp3 &= CharacterHasSpEffect(10004, 98260, NotEqual, 0)
+        areaSp2 &= sp3;
+        sp4 = CharacterHasSpEffect(10004, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98262, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98263, NotEqual, 0)
@@ -2088,7 +2097,9 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             || CharacterHasSpEffect(10004, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98269, NotEqual, 0);
-        WaitFor(areaSp || areaSp2 || areaSp3);
+        areaSp3 &= sp4;
+        areaSp4 = areaSp || areaSp2 || areaSp3;
+        WaitFor(areaSp4);
         if (areaSp.Passed) {
             if (!CharacterHasSpEffect(10002, 98260, Equal, 0)) {
                 SetSpEffect(chrEntityId, 98280);
@@ -2187,61 +2198,69 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
     }
 L0:
     WaitFixedTimeSeconds(0.5);
-    if (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)) {
-        area &= InArea(10002, 1028402570);
-        area2 |= !area || !InArea(10002, 1028402550);
-        area3 &= InArea(10003, 1028402570);
-        area4 |= !area3 || !InArea(10003, 1028402550);
-        area5 &= InArea(10004, 1028402570);
-        area6 |= !area5 || !InArea(10004, 1028402550);
+    area &= EntityInRadiusOfEntity(1028402600, entityId, 15, 1);
+    if (area) {
+        area7 &= InArea(10002, 1028402570);
+        area8 |= !area7 || !InArea(10002, 1028402550);
+        area9 &= InArea(10003, 1028402570);
+        area10 |= !area9 || !InArea(10003, 1028402550);
+        area11 &= InArea(10004, 1028402570);
+        area12 |= !area11 || !InArea(10004, 1028402550);
     }
 L1:
-    if (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)) {
-        area &= InArea(10002, 1028402570);
-        area2 |= !area || !InArea(10002, 1028402551);
-        area3 &= InArea(10003, 1028402570);
-        area4 |= !area3 || !InArea(10003, 1028402551);
-        area5 &= InArea(10004, 1028402570);
-        area6 |= !area5 || !InArea(10004, 1028402551);
+    area2 &= EntityInRadiusOfEntity(1028402601, entityId, 15, 1);
+    if (area2) {
+        area7 &= InArea(10002, 1028402570);
+        area8 |= !area7 || !InArea(10002, 1028402551);
+        area9 &= InArea(10003, 1028402570);
+        area10 |= !area9 || !InArea(10003, 1028402551);
+        area11 &= InArea(10004, 1028402570);
+        area12 |= !area11 || !InArea(10004, 1028402551);
     }
 L2:
-    if (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)) {
-        area &= InArea(10002, 1028402570);
-        area2 |= !area || !InArea(10002, 1028402552);
-        area3 &= InArea(10003, 1028402570);
-        area4 |= !area3 || !InArea(10003, 1028402552);
-        area5 &= InArea(10004, 1028402570);
-        area6 |= !area5 || !InArea(10004, 1028402552);
+    area3 &= EntityInRadiusOfEntity(1028402602, entityId, 15, 1);
+    if (area3) {
+        area7 &= InArea(10002, 1028402570);
+        area8 |= !area7 || !InArea(10002, 1028402552);
+        area9 &= InArea(10003, 1028402570);
+        area10 |= !area9 || !InArea(10003, 1028402552);
+        area11 &= InArea(10004, 1028402570);
+        area12 |= !area11 || !InArea(10004, 1028402552);
     }
 L3:
-    if (EntityInRadiusOfEntity(1056402601, entityId, 15, 1)) {
-        area &= InArea(10002, 1056402570);
-        area2 |= !area || !InArea(10002, 1056402550);
-        area3 &= InArea(10003, 1056402570);
-        area4 |= !area3 || !InArea(10003, 1056402550);
-        area5 &= InArea(10004, 1056402570);
-        area6 |= !area5 || !InArea(10004, 1056402550);
+    area4 &= EntityInRadiusOfEntity(1056402601, entityId, 15, 1);
+    if (area4) {
+        area7 &= InArea(10002, 1056402570);
+        area8 |= !area7 || !InArea(10002, 1056402550);
+        area9 &= InArea(10003, 1056402570);
+        area10 |= !area9 || !InArea(10003, 1056402550);
+        area11 &= InArea(10004, 1056402570);
+        area12 |= !area11 || !InArea(10004, 1056402550);
     }
 L4:
-    if (EntityInRadiusOfEntity(1056402602, entityId, 15, 1)) {
-        area &= InArea(10002, 1056402570);
-        area2 |= !area || !InArea(10002, 1056402551);
-        area3 &= InArea(10003, 1056402570);
-        area4 |= !area3 || !InArea(10003, 1056402551);
-        area5 &= InArea(10004, 1056402570);
-        area6 |= !area5 || !InArea(10004, 1056402551);
+    area5 &= EntityInRadiusOfEntity(1056402602, entityId, 15, 1);
+    if (area5) {
+        area7 &= InArea(10002, 1056402570);
+        area8 |= !area7 || !InArea(10002, 1056402551);
+        area9 &= InArea(10003, 1056402570);
+        area10 |= !area9 || !InArea(10003, 1056402551);
+        area11 &= InArea(10004, 1056402570);
+        area12 |= !area11 || !InArea(10004, 1056402551);
     }
 L5:
-    if (EntityInRadiusOfEntity(1056402603, entityId, 15, 1)) {
-        area &= InArea(10002, 1056402570);
-        area2 |= !area || !InArea(10002, 1056402552);
-        area3 &= InArea(10003, 1056402570);
-        area4 |= !area3 || !InArea(10003, 1056402552);
-        area5 &= InArea(10004, 1056402570);
-        area6 |= !area5 || !InArea(10004, 1056402552);
+    area6 &= EntityInRadiusOfEntity(1056402603, entityId, 15, 1);
+    if (area6) {
+        area7 &= InArea(10002, 1056402570);
+        area8 |= !area7 || !InArea(10002, 1056402552);
+        area9 &= InArea(10003, 1056402570);
+        area10 |= !area9 || !InArea(10003, 1056402552);
+        area11 &= InArea(10004, 1056402570);
+        area12 |= !area11 || !InArea(10004, 1056402552);
     }
 L6:
-    WaitFor((area2 && area4 && area6) || EventFlag(eventFlagId2));
+    area13 = area8 && area10 && area12;
+    areaFlag = area13 || EventFlag(eventFlagId2);
+    WaitFor(areaFlag);
     SetSpEffect(chrEntityId, 98279);
     WaitFixedTimeSeconds(0.5);
     RestartEvent();
@@ -8625,7 +8644,7 @@ $Event(90035270, Default, function(chrEntityId, eventFlagId) {
     areaChr |= EntityInRadiusOfEntity(10002, chrEntityId, 330, 1)
         || EntityInRadiusOfEntity(10003, chrEntityId, 330, 1)
         || EntityInRadiusOfEntity(10004, chrEntityId, 330, 1);
-    area &= areaChr && IsStableMap(0, 0, 0, 0);
+    area &= areaChr && IsEventMapStable();
     if (area) {
         EnableCharacterGravity(chrEntityId);
     } else {
@@ -8640,7 +8659,7 @@ $Event(90035270, Default, function(chrEntityId, eventFlagId) {
         area &= (EntityInRadiusOfEntity(10002, chrEntityId, 300, 1)
             || EntityInRadiusOfEntity(10003, chrEntityId, 300, 1)
             || EntityInRadiusOfEntity(10004, chrEntityId, 300, 1))
-            && IsStableMap(0, 0, 0, 0);
+            && IsEventMapStable();
         areaChr |= area;
         WaitFor(areaChr);
         RestartIf(!chr.Passed);
@@ -8835,7 +8854,7 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
         UnknownTalk2003121();
         Unknown2003128(false);
     }
-    UnknownCamera200805(0);
+    ResetCameraAngle();
     WaitFor(ElapsedSeconds(2));
     SetSpEffect(20000, 63106);
     WaitFixedTimeFrames(1);
@@ -20606,4 +20625,5 @@ $Event(90005934, Default, function(eventFlagId, tutorialParamId) {
     WaitFor(flag);
     ShowTutorialPopup(tutorialParamId, false, true);
 });
+
 

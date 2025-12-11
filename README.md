@@ -13,9 +13,10 @@ The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when
 * Maris'... something... (i dont know i dont actually play nightreign sorry)
 * Heolstor teleports all players during phase change, instead of extra players awkwardly standing around where they were.
 * Duke's Dear Freyja night boss applies its slow effect to everyone
+* Defeat event will not trigger until ALL players are dead
+* Wending Grace/Blessing of Noklateo will revive ALL players
 
 ## Known issues:
 * Wormface night boss
 * Fulghor
-* Defeat event
-* Wending Grace/Blessing of Noklateo
+* DLC

@@ -246,3 +246,4 @@ $Event(48502821, Restart, function(chrEntityId, spEffectId) {
     ForceCharacterDeath(48500821, true);
 });
 
+

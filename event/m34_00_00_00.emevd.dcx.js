@@ -195,3 +195,4 @@ $Event(34002803, Restart, function(chrEntityId) {
     PlaySE(chrEntityId, SoundType.SFX, 888880000);
 });
 
+

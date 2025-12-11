@@ -103,3 +103,4 @@ $Event(52462815, Restart, function(chrEntityId, chrEntityId2, eventFlagId) {
     ForceCharacterDeath(chrEntityId2, true);
 });
 
+

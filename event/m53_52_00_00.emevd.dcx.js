@@ -21,3 +21,4 @@ $Event(53502500, Restart, function(chrEntityId, areaEntityId, spEffectId) {
     RestartEvent();
 });
 
+

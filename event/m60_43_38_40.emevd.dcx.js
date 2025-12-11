@@ -77,7 +77,7 @@ $Event(1038402510, Restart, function(entityId, chrEntityId) {
     UnknownTalk2003121();
     if (!chr) {
         Unknown2003128(true);
-        WaitFor(CharacterBackreadStatus(chrEntityId) && IsStableMap(60, 44, 37, 40));
+        WaitFor(CharacterBackreadStatus(chrEntityId) && IsMapStable(60, 44, 37, 40));
         EnableCharacterGravity(chrEntityId);
         WaitFor(ElapsedFrames(1));
         WarpCharacterAndCopyFloorUnknown200489(10000, TargetEntityType.Area, 1047402501, -1, chrEntityId, 1, 2);
@@ -96,4 +96,5 @@ $Event(1038402510, Restart, function(entityId, chrEntityId) {
 $Event(200, Default, function() {
     $InitializeEvent(0, 1038402510, 1038402510, 1047400500);
 });
+
 

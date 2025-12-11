@@ -63,3 +63,4 @@ $Event(46782500, Restart, function(chrEntityId, spEffectId, eventFlagId) {
     SetEventFlagID(eventFlagId, ON);
 });
 
+
