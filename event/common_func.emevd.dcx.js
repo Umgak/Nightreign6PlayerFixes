@@ -2662,6 +2662,7 @@ $Event(90015468, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
 $Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffectId3) {
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
+    // TODO: Check what this does
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
             SetSpEffect(10000, spEffectId);
@@ -7121,6 +7122,7 @@ L0:
     SetNetworkconnectedEventFlagID(8025, ON);
     DisplayTextEffectId(2200);
     RecordUserDispLog(110201, chrEntityId, LogObjectType.None, -1);
+    // TODO: Fix this. Looks like another mission code block?
     if (!IsPlayerCount(1)) {
         if (!IsPlayerCount(2)) {
             SetSpEffect(10000, 98800);
@@ -8934,6 +8936,7 @@ $Event(90035285, Default, function(chrEntityId, eventFlagId, eventFlagId2, event
     EndIf(EventFlag(eventFlagId5));
     if (CharacterHPValue(chrEntityId) <= 0) {
         WaitFor(EventFlag(eventFlagId4));
+        // TODO: Check on this
         if (!IsPlayerCount(2)) {
             GotoIf(S0, IsPlayerCount(3));
             if (CountEventFlags(TargetEventFlagType.EventFlag, 80018, 80020) < 1) {
