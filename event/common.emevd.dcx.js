@@ -334,12 +334,6 @@ S29:
     $InitializeEvent(0, 1140);
     $InitializeEvent(0, 1150);
     $InitializeEvent(0, 1151);
-<<<<<<< HEAD
-    // NR6PF: <fuck>
-    // at least there's a massive valid unused block of flags going all the way up to 700172. I can keep the pattern the devs used going forward and not clobber anything or have to take a bite out of 11_00 again
-    // anyway, this is ED Libra's clone initialization stuff.
-    // Vanilla: record player character choices
-=======
     if (EventFlag(7604)) {
         $InitializeCommonEvent(0, 90025000, 1027402800, 9026, 26);
         $InitializeCommonEvent(1, 90025000, 1036402800, 9027, 27);
@@ -348,7 +342,10 @@ S29:
         $InitializeCommonEvent(0, 90015472);
         $InitializeCommonEvent(0, 90015473);
     }
->>>>>>> base_game
+    // NR6PF: <fuck>
+    // at least there's a massive valid unused block of flags going all the way up to 700172. I can keep the pattern the devs used going forward and not clobber anything or have to take a bite out of 11_00 again
+    // anyway, this is ED Libra's clone initialization stuff.
+    // Vanilla: record player character choices
     $InitializeCommonEvent(0, 99075460, 1, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009);
     $InitializeCommonEvent(0, 99075460, 2, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039);
     $InitializeCommonEvent(0, 99075460, 3, 70060, 70061, 70062, 70063, 70064, 70065, 70066, 70067, 70068, 70069);
