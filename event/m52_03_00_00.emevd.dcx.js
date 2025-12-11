@@ -63,3 +63,4 @@ L0:
     ClearSpEffect(chrEntityId2, 60826);
 });
 
+

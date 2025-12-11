@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "W:\\CL\\data\\Param\\event\\common_func.emevd\u0000W:\\CL\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -12,226 +12,280 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 1601);
     $InitializeEvent(0, 1610);
     if (MissionActive(101)) {
-        $InitializeCommonEvent(0, 90085010, 101, 8325, 12030);
+        $InitializeCommonEvent(0, 90085010, 101, 8325, 12030, Hero.Wylder);
         if (12210 != 0) {
-            $InitializeCommonEvent(0, 90085028, 101, 8325, 8327, 12210);
+            $InitializeCommonEvent(0, 90085028, 101, 8325, 8327, 12210, Hero.Wylder);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 101, 8327, 8325);
         }
         GotoIf(S1, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 101, 9206, 8325);
+        $InitializeCommonEvent(0, 90085025, 101, 9206, 8325, Hero.Wylder);
         GotoIf(S0, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 101, 8325, 1);
+        $InitializeCommonEvent(0, 90085026, 101, 8325, 1, Hero.Wylder);
     }
 S0:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 101, 8325, 0);
+        $InitializeCommonEvent(0, 90085026, 101, 8325, 0, Hero.Wylder);
     }
 S1:
     if (MissionActive(102)) {
-        $InitializeCommonEvent(0, 90085010, 102, 8330, 12030);
+        $InitializeCommonEvent(0, 90085010, 102, 8330, 12030, Hero.Wylder);
         if (12211 != 0) {
-            $InitializeCommonEvent(0, 90085028, 102, 8330, 8332, 12211);
+            $InitializeCommonEvent(0, 90085028, 102, 8330, 8332, 12211, Hero.Wylder);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 102, 8332, 8330);
         }
         GotoIf(S3, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 102, 9207, 8330);
+        $InitializeCommonEvent(0, 90085025, 102, 9207, 8330, Hero.Wylder);
         GotoIf(S2, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 102, 8330, 1);
+        $InitializeCommonEvent(0, 90085026, 102, 8330, 1, Hero.Wylder);
     }
 S2:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 102, 8330, 0);
+        $InitializeCommonEvent(0, 90085026, 102, 8330, 0, Hero.Wylder);
     }
 S3:
     if (MissionActive(202)) {
-        $InitializeCommonEvent(0, 90085010, 202, 8355, 12035);
+        $InitializeCommonEvent(0, 90085010, 202, 8355, 12035, Hero.Guardian);
         if (0 != 0) {
-            $InitializeCommonEvent(0, 90085028, 202, 8355, 8357, 0);
+            $InitializeCommonEvent(0, 90085028, 202, 8355, 8357, 0, Hero.Guardian);
         }
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085024, 202, 8357, 8355);
         }
         GotoIf(S5, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 202, 9208, 8355);
+        $InitializeCommonEvent(0, 90085025, 202, 9208, 8355, Hero.Guardian);
         GotoIf(S4, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 202, 8355, 1);
+        $InitializeCommonEvent(0, 90085026, 202, 8355, 1, Hero.Guardian);
     }
 S4:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 202, 8355, 0);
+        $InitializeCommonEvent(0, 90085026, 202, 8355, 0, Hero.Guardian);
     }
 S5:
     if (MissionActive(203)) {
-        $InitializeCommonEvent(0, 90085010, 203, 8360, 12035);
+        $InitializeCommonEvent(0, 90085010, 203, 8360, 12035, Hero.Guardian);
         if (0 != 0) {
-            $InitializeCommonEvent(0, 90085028, 203, 8360, 0, 0);
+            $InitializeCommonEvent(0, 90085028, 203, 8360, 0, 0, Hero.Guardian);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 203, 0, 8360);
         }
         GotoIf(S7, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 203, 9200, 8360);
+        $InitializeCommonEvent(0, 90085025, 203, 9200, 8360, Hero.Guardian);
         GotoIf(S6, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 203, 8360, 1);
+        $InitializeCommonEvent(0, 90085026, 203, 8360, 1, Hero.Guardian);
     }
 S6:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 203, 8360, 0);
+        $InitializeCommonEvent(0, 90085026, 203, 8360, 0, Hero.Guardian);
     }
 S7:
     if (MissionActive(302)) {
-        $InitializeCommonEvent(0, 90085010, 302, 8380, 12040);
+        $InitializeCommonEvent(0, 90085010, 302, 8380, 12040, Hero.Ironeye);
         if (0 != 0) {
-            $InitializeCommonEvent(0, 90085028, 302, 8380, 8382, 0);
+            $InitializeCommonEvent(0, 90085028, 302, 8380, 8382, 0, Hero.Ironeye);
         }
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085024, 302, 8382, 8380);
         }
         GotoIf(S9, 2 == 0);
-        $InitializeCommonEvent(0, 90085025, 302, 9209, 8380);
+        $InitializeCommonEvent(0, 90085025, 302, 9209, 8380, Hero.Ironeye);
         GotoIf(S8, 2 != 1);
-        $InitializeCommonEvent(0, 90085026, 302, 8380, 1);
+        $InitializeCommonEvent(0, 90085026, 302, 8380, 1, Hero.Ironeye);
     }
 S8:
     if (2 == 2) {
-        $InitializeCommonEvent(0, 90085026, 302, 8380, 0);
+        $InitializeCommonEvent(0, 90085026, 302, 8380, 0, Hero.Ironeye);
     }
 S9:
     if (MissionActive(303)) {
-        $InitializeCommonEvent(0, 90085010, 303, 8385, 12040);
+        $InitializeCommonEvent(0, 90085010, 303, 8385, 12040, Hero.Ironeye);
         if (0 != 0) {
-            $InitializeCommonEvent(0, 90085028, 303, 8385, 0, 0);
+            $InitializeCommonEvent(0, 90085028, 303, 8385, 0, 0, Hero.Ironeye);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 303, 0, 8385);
         }
         GotoIf(S11, 0 == 0);
-        $InitializeCommonEvent(0, 90085025, 303, 9211, 8385);
+        $InitializeCommonEvent(0, 90085025, 303, 9211, 8385, Hero.Ironeye);
         GotoIf(S10, 0 != 1);
-        $InitializeCommonEvent(0, 90085026, 303, 8385, 1);
+        $InitializeCommonEvent(0, 90085026, 303, 8385, 1, Hero.Ironeye);
     }
 S10:
     if (0 == 2) {
-        $InitializeCommonEvent(0, 90085026, 303, 8385, 0);
+        $InitializeCommonEvent(0, 90085026, 303, 8385, 0, Hero.Ironeye);
     }
 S11:
     if (MissionActive(401)) {
-        $InitializeCommonEvent(0, 90085010, 401, 8400, 12045);
+        $InitializeCommonEvent(0, 90085010, 401, 8400, 12045, Hero.Duchess);
         if (12212 != 0) {
-            $InitializeCommonEvent(0, 90085028, 401, 8400, 8402, 12212);
+            $InitializeCommonEvent(0, 90085028, 401, 8400, 8402, 12212, Hero.Duchess);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 401, 8402, 8400);
         }
         GotoIf(S13, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 401, 9212, 8400);
+        $InitializeCommonEvent(0, 90085025, 401, 9212, 8400, Hero.Duchess);
         GotoIf(S12, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 401, 8400, 1);
+        $InitializeCommonEvent(0, 90085026, 401, 8400, 1, Hero.Duchess);
     }
 S12:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 401, 8400, 0);
+        $InitializeCommonEvent(0, 90085026, 401, 8400, 0, Hero.Duchess);
     }
 S13:
     if (MissionActive(403)) {
-        $InitializeCommonEvent(0, 90085010, 403, 8410, 12045);
+        $InitializeCommonEvent(0, 90085010, 403, 8410, 12045, Hero.Duchess);
         if (12213 != 0) {
-            $InitializeCommonEvent(0, 90085028, 403, 8410, 8412, 12213);
+            $InitializeCommonEvent(0, 90085028, 403, 8410, 8412, 12213, Hero.Duchess);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 403, 8412, 8410);
         }
         GotoIf(S15, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 403, 9213, 8410);
+        $InitializeCommonEvent(0, 90085025, 403, 9213, 8410, Hero.Duchess);
         GotoIf(S14, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 403, 8410, 1);
+        $InitializeCommonEvent(0, 90085026, 403, 8410, 1, Hero.Duchess);
     }
 S14:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 403, 8410, 0);
+        $InitializeCommonEvent(0, 90085026, 403, 8410, 0, Hero.Duchess);
     }
 S15:
     if (MissionActive(601)) {
-        $InitializeCommonEvent(0, 90085010, 601, 8450, 12055);
+        $InitializeCommonEvent(0, 90085010, 601, 8450, 12055, Hero.Revenant);
         if (0 != 0) {
-            $InitializeCommonEvent(0, 90085028, 601, 8450, 0, 0);
+            $InitializeCommonEvent(0, 90085028, 601, 8450, 0, 0, Hero.Revenant);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 601, 0, 8450);
         }
         GotoIf(S17, 0 == 0);
-        $InitializeCommonEvent(0, 90085025, 601, 9214, 8450);
+        $InitializeCommonEvent(0, 90085025, 601, 9214, 8450, Hero.Revenant);
         GotoIf(S16, 0 != 1);
-        $InitializeCommonEvent(0, 90085026, 601, 8450, 1);
+        $InitializeCommonEvent(0, 90085026, 601, 8450, 1, Hero.Revenant);
     }
 S16:
     if (0 == 2) {
-        $InitializeCommonEvent(0, 90085026, 601, 8450, 0);
+        $InitializeCommonEvent(0, 90085026, 601, 8450, 0, Hero.Revenant);
     }
 S17:
     if (MissionActive(701)) {
-        $InitializeCommonEvent(0, 90085010, 701, 8475, 12060);
+        $InitializeCommonEvent(0, 90085010, 701, 8475, 12060, Hero.Recluse);
         if (0 != 0) {
-            $InitializeCommonEvent(0, 90085028, 701, 8475, 8477, 0);
+            $InitializeCommonEvent(0, 90085028, 701, 8475, 8477, 0, Hero.Recluse);
         }
         if (1 == 1) {
             $InitializeCommonEvent(0, 90085024, 701, 8477, 8475);
         }
         GotoIf(S19, 2 == 0);
-        $InitializeCommonEvent(0, 90085025, 701, 9216, 8475);
+        $InitializeCommonEvent(0, 90085025, 701, 9216, 8475, Hero.Recluse);
         GotoIf(S18, 2 != 1);
-        $InitializeCommonEvent(0, 90085026, 701, 8475, 1);
+        $InitializeCommonEvent(0, 90085026, 701, 8475, 1, Hero.Recluse);
     }
 S18:
     if (2 == 2) {
-        $InitializeCommonEvent(0, 90085026, 701, 8475, 0);
+        $InitializeCommonEvent(0, 90085026, 701, 8475, 0, Hero.Recluse);
     }
 S19:
     if (MissionActive(802)) {
-        $InitializeCommonEvent(0, 90085010, 802, 8505, 12065);
+        $InitializeCommonEvent(0, 90085010, 802, 8505, 12065, Hero.Executor);
         if (12215 != 0) {
-            $InitializeCommonEvent(0, 90085028, 802, 8505, 8507, 12215);
+            $InitializeCommonEvent(0, 90085028, 802, 8505, 8507, 12215, Hero.Executor);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 802, 8507, 8505);
         }
         GotoIf(S21, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 802, 9217, 8505);
+        $InitializeCommonEvent(0, 90085025, 802, 9217, 8505, Hero.Executor);
         GotoIf(S20, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 802, 8505, 1);
+        $InitializeCommonEvent(0, 90085026, 802, 8505, 1, Hero.Executor);
     }
 S20:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 802, 8505, 0);
+        $InitializeCommonEvent(0, 90085026, 802, 8505, 0, Hero.Executor);
     }
 S21:
     if (MissionActive(803)) {
-        $InitializeCommonEvent(0, 90085010, 803, 8510, 12065);
+        $InitializeCommonEvent(0, 90085010, 803, 8510, 12065, Hero.Executor);
         if (12214 != 0) {
-            $InitializeCommonEvent(0, 90085028, 803, 8510, 8512, 12214);
+            $InitializeCommonEvent(0, 90085028, 803, 8510, 8512, 12214, Hero.Executor);
         }
         if (0 == 1) {
             $InitializeCommonEvent(0, 90085024, 803, 8512, 8510);
         }
         GotoIf(S23, 1 == 0);
-        $InitializeCommonEvent(0, 90085025, 803, 9218, 8510);
+        $InitializeCommonEvent(0, 90085025, 803, 9218, 8510, Hero.Executor);
         GotoIf(S22, 1 != 1);
-        $InitializeCommonEvent(0, 90085026, 803, 8510, 1);
+        $InitializeCommonEvent(0, 90085026, 803, 8510, 1, Hero.Executor);
     }
 S22:
     if (1 == 2) {
-        $InitializeCommonEvent(0, 90085026, 803, 8510, 0);
+        $InitializeCommonEvent(0, 90085026, 803, 8510, 0, Hero.Executor);
     }
 S23:
+    if (MissionActive(901)) {
+        $InitializeCommonEvent(0, 90085010, 901, 8525, 120000, Hero.Scholar);
+        if (0 != 0) {
+            $InitializeCommonEvent(0, 90085028, 901, 8525, 0, 0, Hero.Scholar);
+        }
+        if (0 == 1) {
+            $InitializeCommonEvent(0, 90085024, 901, 0, 8525);
+        }
+        GotoIf(S25, 1 == 0);
+        $InitializeCommonEvent(0, 90085025, 901, 9280, 8525, Hero.Scholar);
+        GotoIf(S24, 1 != 1);
+        $InitializeCommonEvent(0, 90085026, 901, 8525, 1, Hero.Scholar);
+    }
+S24:
+    if (1 == 2) {
+        $InitializeCommonEvent(0, 90085026, 901, 8525, 0, Hero.Scholar);
+    }
+S25:
+    if (MissionActive(902)) {
+        $InitializeCommonEvent(0, 90085010, 902, 8530, 120000, Hero.Scholar);
+        if (0 != 0) {
+            $InitializeCommonEvent(0, 90085028, 902, 8530, 0, 0, Hero.Scholar);
+        }
+        if (0 == 1) {
+            $InitializeCommonEvent(0, 90085024, 902, 0, 8530);
+        }
+        GotoIf(S27, 0 == 0);
+        $InitializeCommonEvent(0, 90085025, 902, 9281, 8530, Hero.Scholar);
+        GotoIf(S26, 0 != 1);
+        $InitializeCommonEvent(0, 90085026, 902, 8530, 1, Hero.Scholar);
+    }
+S26:
+    if (0 == 2) {
+        $InitializeCommonEvent(0, 90085026, 902, 8530, 0, Hero.Scholar);
+    }
+S27:
+    if (MissionActive(1001)) {
+        $InitializeCommonEvent(0, 90085010, 1001, 8535, 120005, Hero.Undertaker);
+        if (120006 != 0) {
+            $InitializeCommonEvent(0, 90085028, 1001, 8535, 0, 120006, Hero.Undertaker);
+        }
+        if (0 == 1) {
+            $InitializeCommonEvent(0, 90085024, 1001, 0, 8535);
+        }
+        GotoIf(S29, 1 == 0);
+        $InitializeCommonEvent(0, 90085025, 1001, 9282, 8535, Hero.Undertaker);
+        GotoIf(S28, 1 != 1);
+        $InitializeCommonEvent(0, 90085026, 1001, 8535, 1, Hero.Undertaker);
+    }
+S28:
+    if (1 == 2) {
+        $InitializeCommonEvent(0, 90085026, 1001, 8535, 0, Hero.Undertaker);
+    }
+S29:
     if (MissionActive(302)) {
         SetNetworkconnectedEventFlagID(74017, ON);
     }
     if (MissionActive(203)) {
-        $InitializeCommonEvent(0, 90085222, 203, 8360, 9201, 9202, 8361);
+        $InitializeCommonEvent(0, 90085222, 203, 8360, 9201, 9202, 8361, Hero.Guardian);
     }
     $InitializeEvent(0, 1100);
     $InitializeEvent(0, 1101);
@@ -243,8 +297,6 @@ S23:
     $InitializeEvent(0, 1105);
     $InitializeEvent(0, 1106);
     $InitializeEvent(0, 1116);
-    $InitializeEvent(0, 1190);
-    $InitializeEvent(0, 1191);
     $InitializeEvent(0, 1160);
     $InitializeEvent(0, 1161);
     $InitializeEvent(0, 1107);
@@ -260,12 +312,36 @@ S23:
     $InitializeEvent(0, 1132);
     $InitializeEvent(0, 1133);
     $InitializeEvent(0, 1134);
+    $InitializeEvent(0, 1143);
+    $InitializeEvent(0, 1144);
+    $InitializeEvent(0, 1138);
+    $InitializeEvent(0, 1141);
+    $InitializeEvent(0, 1142);
+    $InitializeEvent(0, 1137);
+    $InitializeEvent(0, 1149, 55, 5);
+    $InitializeEvent(0, 1152);
+    $InitializeEvent(0, 1155);
+    $InitializeEvent(0, 1154, 98170, 98171, 98160, 98161, 98175);
+    $InitializeEvent(0, 1145);
+    $InitializeEvent(0, 1146, 80015, 80018, 95001);
+    $InitializeEvent(1, 1146, 80016, 80019, 95002);
+    $InitializeEvent(2, 1146, 80017, 80020, 95003);
+    $InitializeEvent(0, 1148);
+    $InitializeCommonEvent(0, 90035287);
     $InitializeEvent(0, 1135);
     $InitializeEvent(0, 1136);
     $InitializeEvent(0, 1139);
     $InitializeEvent(0, 1140);
     $InitializeEvent(0, 1150);
     $InitializeEvent(0, 1151);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90025000, 1027402800, 9026, 26);
+        $InitializeCommonEvent(1, 90025000, 1036402800, 9027, 27);
+        $InitializeCommonEvent(2, 90025000, 1056402800, 9028, 29);
+        $InitializeCommonEvent(3, 90025000, 1058402800, 9029, 30);
+        $InitializeCommonEvent(0, 90015472);
+        $InitializeCommonEvent(0, 90015473);
+    }
     $InitializeCommonEvent(0, 99075460, 1, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009);
     $InitializeCommonEvent(0, 99075460, 2, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039);
     $InitializeCommonEvent(0, 99075460, 3, 70060, 70061, 70062, 70063, 70064, 70065, 70066, 70067, 70068, 70069);
@@ -308,18 +384,33 @@ S23:
     $InitializeEvent(1, 1330, 1044382791);
     $InitializeEvent(2, 1330, 1044362790);
     $InitializeEvent(3, 1330, 1043382790);
+    $InitializeEvent(0, 1350, 52422465);
+    $InitializeEvent(1, 1350, 52402465);
+    $InitializeEvent(2, 1350, 1039402745);
+    $InitializeEvent(3, 1350, 1029402745);
+    $InitializeEvent(4, 1350, 50002705);
+    $InitializeEvent(5, 1350, 1046402745);
+    $InitializeEvent(6, 1350, 50022705);
+    $InitializeEvent(7, 1350, 50042705);
+    $InitializeEvent(8, 1350, 50032705);
+    $InitializeEvent(9, 1350, 50052705);
+    $InitializeEvent(10, 1350, 50062705);
+    $InitializeEvent(11, 1350, 50012705);
+    $InitializeEvent(0, 1370, 1058402745, 1057402745);
+    $InitializeEvent(0, 1340);
     $InitializeEvent(0, 1304);
     $InitializeCommonEvent(0, 90015208, 9328, 9051, 9040);
     $InitializeEvent(0, 1170);
-    $InitializeEvent(1, 1520, 102, 8330, 97120);
-    $InitializeEvent(2, 1520, 202, 8355, 97220);
-    $InitializeEvent(3, 1520, 302, 8380, 97320);
-    $InitializeEvent(4, 1520, 401, 8400, 97410);
-    $InitializeEvent(5, 1520, 403, 8410, 97430);
-    $InitializeEvent(6, 1520, 701, 8475, 97710);
-    $InitializeEvent(7, 1520, 802, 8505, 97820);
-    $InitializeEvent(8, 1520, 803, 8510, 97830);
-    $InitializeEvent(0, 1592, 97112, 97110, 9204);
+    $InitializeEvent(1, 1520, 102, 8330, 97120, Hero.Wylder);
+    $InitializeEvent(2, 1520, 202, 8355, 97220, Hero.Guardian);
+    $InitializeEvent(3, 1520, 302, 8380, 97320, Hero.Ironeye);
+    $InitializeEvent(4, 1520, 401, 8400, 97410, Hero.Duchess);
+    $InitializeEvent(5, 1520, 403, 8410, 97430, Hero.Duchess);
+    $InitializeEvent(6, 1520, 701, 8475, 97710, Hero.Recluse);
+    $InitializeEvent(7, 1520, 802, 8505, 97820, Hero.Executor);
+    $InitializeEvent(8, 1520, 803, 8510, 97830, Hero.Executor);
+    $InitializeEvent(9, 1520, 1001, 8535, 97629, Hero.Undertaker);
+    $InitializeEvent(0, 1592, 97112, 97110, 9204, Hero.Wylder, 101);
     $InitializeCommonEvent(0, 90015014, 7602, 72447);
     $InitializeCommonEvent(0, 90015014, 7602, 72448);
     $InitializeCommonEvent(0, 90015014, 7605, 72451);
@@ -372,6 +463,56 @@ S23:
     $InitializeCommonEvent(33, 90015100, 8011, 9111, 7070001, 8131);
     $InitializeCommonEvent(34, 90015100, 8011, 9100, 7070001, 8120);
     $InitializeCommonEvent(35, 90015100, 8011, 9105, 7070001, 8125);
+    if (EventFlag(7604)) {
+        if (EventFlag(8000)) {
+            $InitializeCommonEvent(40, 90015100, 8000, 9112, 0, 0);
+            $InitializeCommonEvent(41, 90015100, 8000, 9113, 0, 0);
+        }
+        if (EventFlag(8001)) {
+            $InitializeCommonEvent(42, 90015100, 8001, 9114, 0, 0);
+            $InitializeCommonEvent(43, 90015100, 8001, 9115, 0, 0);
+        }
+        if (EventFlag(8002)) {
+            $InitializeCommonEvent(44, 90015100, 8002, 9116, 0, 0);
+            $InitializeCommonEvent(45, 90015100, 8002, 9117, 0, 0);
+        }
+        if (EventFlag(8003)) {
+            $InitializeCommonEvent(46, 90015100, 8003, 9118, 0, 0);
+            $InitializeCommonEvent(47, 90015100, 8003, 9119, 0, 0);
+        }
+        if (EventFlag(8004)) {
+            $InitializeCommonEvent(48, 90015100, 8004, 9112, 0, 0);
+            $InitializeCommonEvent(49, 90015100, 8004, 9114, 0, 0);
+        }
+        if (EventFlag(8005)) {
+            $InitializeCommonEvent(50, 90015100, 8005, 9113, 0, 0);
+            $InitializeCommonEvent(51, 90015100, 8005, 9115, 0, 0);
+        }
+        if (EventFlag(8006)) {
+            $InitializeCommonEvent(52, 90015100, 8006, 9116, 0, 0);
+            $InitializeCommonEvent(53, 90015100, 8006, 9118, 0, 0);
+        }
+        if (EventFlag(8007)) {
+            $InitializeCommonEvent(54, 90015100, 8007, 9117, 0, 0);
+            $InitializeCommonEvent(55, 90015100, 8007, 9119, 0, 0);
+        }
+        if (EventFlag(8008)) {
+            $InitializeCommonEvent(56, 90015100, 8008, 9112, 0, 0);
+            $InitializeCommonEvent(57, 90015100, 8008, 9116, 0, 0);
+        }
+        if (EventFlag(8009)) {
+            $InitializeCommonEvent(58, 90015100, 8009, 9113, 0, 0);
+            $InitializeCommonEvent(59, 90015100, 8009, 9117, 0, 0);
+        }
+        if (EventFlag(8010)) {
+            $InitializeCommonEvent(60, 90015100, 8010, 9114, 0, 0);
+            $InitializeCommonEvent(61, 90015100, 8010, 9118, 0, 0);
+        }
+        if (EventFlag(8011)) {
+            $InitializeCommonEvent(62, 90015100, 8011, 9115, 0, 0);
+            $InitializeCommonEvent(63, 90015100, 8011, 9119, 0, 0);
+        }
+    }
     $InitializeEvent(0, 1400, 7060001, 7060000);
     $InitializeEvent(0, 1402, 7060201, 7060200);
     $InitializeEvent(0, 1403, 7060101, 7060100);
@@ -385,11 +526,14 @@ S23:
     $InitializeCommonEvent(0, 90015003, 6999400, 8075, 0, 9056, 0, 5, 2.5);
     $InitializeCommonEvent(0, 90015003, 8970020, 8076, 0, 8025, 0, 8970020, 2.5);
     $InitializeCommonEvent(0, 90015003, 6999400, 8076, 0, 9056, 0, 5, 2.5);
-    $InitializeCommonEvent(0, 90015003, 6999000, 8077, 0, 8025, 0, 1, 2.5);
+    $InitializeCommonEvent(0, 90015003, 8970050, 8077, 0, 8025, 0, 8970050, 6);
     $InitializeCommonEvent(0, 90015003, 8970010, 8078, 0, 8025, 0, 8970010, 2.5);
     $InitializeCommonEvent(0, 90015003, 8970030, 8079, 0, 8025, 0, 8970030, 2.5);
+    $InitializeCommonEvent(0, 90015024, 8970040, 8080, 0, 8025, 0, 95005, 8970040, 2.5);
+    $InitializeCommonEvent(0, 90015003, 8970060, 8081, 0, 8025, 0, 8970060, 2.5);
     $InitializeCommonEvent(0, 90015003, 6999200, 7603, 0, 9192, 0, 3, 2.5);
     $InitializeCommonEvent(0, 90015003, 6999300, 7601, 0, 9193, 0, 4, 2.5);
+    $InitializeCommonEvent(0, 90015003, 6999610, 7604, 0, 9195, 0, 13, 2.5);
     $InitializeCommonEvent(0, 90015003, 9700, 0, 0, 9206, 0, 100, 0);
     $InitializeCommonEvent(0, 90015003, 9701, 0, 0, 9207, 0, 101, 0);
     $InitializeCommonEvent(0, 90015003, 9713, 0, 0, 9208, 0, 113, 0);
@@ -402,10 +546,29 @@ S23:
     $InitializeCommonEvent(0, 90015003, 9707, 0, 0, 9216, 0, 107, 0);
     $InitializeCommonEvent(0, 90015003, 9704, 0, 0, 9218, 0, 104, 0);
     $InitializeCommonEvent(0, 90015003, 9706, 0, 0, 9217, 0, 106, 0);
+    $InitializeCommonEvent(0, 90015003, 9803, 0, 0, 9280, 0, 153, 0);
+    $InitializeCommonEvent(0, 90015003, 9806, 0, 0, 9281, 0, 156, 0);
+    $InitializeCommonEvent(0, 90015003, 9801, 0, 0, 9282, 0, 151, 0);
+    $InitializeCommonEvent(0, 90015024, 98290, 7604, 0, 1028404010, 0, 1028404011, 500, 2.5);
+    $InitializeCommonEvent(0, 90015024, 98290, 7604, 0, 1056404010, 0, 1056404011, 500, 2.5);
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015461, 8240, 0.08, 8243, 8270, 8275);
+        $InitializeCommonEvent(0, 90015464, 8240, 8241);
+    }
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015461, 8250, 0.08, 8253, 8280, 8285);
+        $InitializeCommonEvent(0, 90015464, 8250, 8251);
+    }
+    if (EventFlag(7604)) {
+        $InitializeCommonEvent(0, 90015461, 8260, 0.08, 8263, 8290, 8295);
+        $InitializeCommonEvent(0, 90015464, 8260, 8261);
+    }
     $InitializeEvent(0, 1200);
     $InitializeEvent(0, 1201);
     $InitializeEvent(0, 1202);
     $InitializeEvent(0, 1210);
+    $InitializeEvent(0, 1211);
+    $InitializeEvent(0, 1212);
     $InitializeCommonEvent(0, 90005595, 1042360950, 0);
     $InitializeCommonEvent(0, 90005595, 1042370950, 0);
     $InitializeCommonEvent(0, 90005595, 1042370952, 0);
@@ -527,6 +690,7 @@ $Event(50, Default, function() {
         $InitializeEvent(1, 1184, 10003, 7006, 7011);
         $InitializeEvent(2, 1184, 10004, 7007, 7012);
     }
+    $InitializeEvent(0, 1188);
     $InitializeEvent(0, 1900);
     $InitializeEvent(0, 1901);
     $InitializeEvent(0, 1902);
@@ -628,7 +792,12 @@ $Event(1103, Default, function() {
         SetNetworkconnectedEventFlagID(7520, ON);
     }
 L0:
-    PlaySE(20000, SoundType.EnvironmentalSound, 600010100);
+    if (!EventFlag(7604)) {
+        PlaySE(20000, SoundType.EnvironmentalSound, 600010100);
+    }
+    if (EventFlag(7604)) {
+        PlaySE(20000, SoundType.EnvironmentalSound, 600010101);
+    }
     WaitFixedTimeSeconds(2);
     SpawnOneshotSFX(TargetEntityType.Character, 10000, -1, 807070);
     WaitFor(ElapsedSeconds(2));
@@ -863,22 +1032,49 @@ $Event(1129, Default, function() {
     EndIf(EventFlag(9013));
     if (AnyBatchEventFlags(7700, 7719)) {
         WaitFor(EventFlag(7500));
+        Goto(L0);
     }
     if (AnyBatchEventFlags(7720, 7739)) {
         WaitFor(EventFlag(7505));
-    }
-    if (EventFlag(7725) && !EventFlag(7600)) {
-        time |= RandomElapsedSeconds(120, 180) || PlayAreaCurrentTimeInRange(10, 38, 42, 23, 59, 59);
-        WaitFor(time);
-    } else if (AnyBatchEventFlags(7700, 7719)) {
-        time |= RandomElapsedSeconds(360, 480) || PlayAreaCurrentTimeInRange(16, 43, 12, 23, 59, 59);
-        WaitFor(time);
-    } else if (AnyBatchEventFlags(7720, 7739)) {
-        time |= RandomElapsedSeconds(120, 480) || PlayAreaCurrentTimeInRange(16, 43, 12, 23, 59, 59);
-        WaitFor(time);
-        Goto(L0);
+        Goto(L1);
     }
 L0:
+    if (EventFlag(8077) || EventFlag(8080) || EventFlag(8081)) {
+        WaitFor(PlayAreaCurrentTimeInRange(13, 4, 30, 23, 59, 59));
+    } else {
+        WaitFor(
+            RandomElapsedSeconds(360, 480) || PlayAreaCurrentTimeInRange(16, 43, 12, 23, 59, 59));
+        Goto(L2);
+L1:
+        if (EventFlag(7725) && EventFlag(8077) && EventFlag(7604)) {
+            WaitFor(
+                RandomElapsedSeconds(60, 120) || PlayAreaCurrentTimeInRange(9, 25, 48, 23, 59, 59));
+        } else {
+            if (EventFlag(7725) && EventFlag(8077)) {
+                WaitFor(ElapsedSeconds(2));
+                if (EventFlag(8211)) {
+                    WaitFor(
+                        ElapsedSeconds(118) || PlayAreaCurrentTimeInRange(9, 25, 48, 23, 59, 59));
+                    Goto(L2);
+                }
+            }
+            if (EventFlag(7725) && !EventFlag(7600)) {
+                WaitFor(
+                    RandomElapsedSeconds(120, 180)
+                        || PlayAreaCurrentTimeInRange(10, 38, 42, 23, 59, 59));
+            } else if (EventFlag(8077) || EventFlag(8080) || EventFlag(8081)) {
+                WaitFor(
+                    RandomElapsedSeconds(120, 360)
+                        || PlayAreaCurrentTimeInRange(14, 17, 24, 23, 59, 59));
+            } else {
+                WaitFor(
+                    RandomElapsedSeconds(120, 480)
+                        || PlayAreaCurrentTimeInRange(16, 43, 12, 23, 59, 59));
+                Goto(L2);
+            }
+        }
+    }
+L2:
     SetEventFlagID(9013, ON);
 });
 
@@ -978,21 +1174,54 @@ $Event(1134, Default, function() {
 
 $Event(1135, Default, function() {
     EndIf(!EventFlag(7705) && !EventFlag(7725));
-    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8080));
+    EndIf(EventFlag(8077));
+    if (EventFlag(8062)) {
+        SetEventFlagID(9024, OFF);
+        EndEvent();
+    }
     if (EventFlag(8061)) {
-        ActivateGparamOverride(2, 3);
+        SetEventFlagID(9024, ON);
+        GotoIf(S0, !EventFlag(8081));
+        ActivateGparamOverride(13, 3);
+        SetSpEffect(20000, 63100);
+        Goto(L0);
+S0:
+        if (!EventFlag(7604)) {
+            ActivateGparamOverride(2, 3);
+        }
+        if (EventFlag(7604)) {
+            ActivateGparamOverride(34, 3);
+        }
         SetSpEffect(20000, 99160);
     } else {
         WaitFor(EventFlag(8061));
+        SetEventFlagID(9024, ON);
         PlaySE(20000, SoundType.EnvironmentalSound, 600080000);
-        ActivateGparamOverride(2, 3);
-        SetSpEffect(20000, 99160);
+        if (EventFlag(8081)) {
+            ActivateGparamOverride(13, 3);
+            SetSpEffect(20000, 63100);
+        } else {
+            if (!EventFlag(7604)) {
+                ActivateGparamOverride(2, 3);
+            }
+            if (EventFlag(7604)) {
+                ActivateGparamOverride(34, 3);
+            }
+            SetSpEffect(20000, 99160);
+        }
     }
 L0:
     WaitFor(EventFlag(8062));
     PlaySE(20000, SoundType.EnvironmentalSound, 600080010);
     DeactivateGparamOverride(2);
-    SetSpEffect(20000, 99161);
+    if (EventFlag(8081)) {
+        SetSpEffect(20000, 63102);
+    } else {
+        SetSpEffect(20000, 99161);
+    }
+    WaitFixedTimeFrames(1);
+    SetEventFlagID(9024, OFF);
 });
 
 $Event(1136, Default, function() {
@@ -1000,9 +1229,49 @@ $Event(1136, Default, function() {
     EndIf(EventFlag(8062));
     EndIf(EventFlag(8061) && PlayAreaCurrentTimeInRange(20, 24, 0, 23, 59, 0));
     WaitFor(EventFlag(8061));
-    UnknownSound201013(2);
+    if (EventFlag(8081)) {
+        UnknownSound201013(3);
+    } else {
+        UnknownSound201013(2);
+    }
     WaitFor(PlayAreaCurrentTimeInRange(20, 24, 0, 23, 59, 0) || EventFlag(8062));
     UnknownSound201013(0);
+});
+
+$Event(1137, Default, function() {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8077));
+    if (EventFlag(8062)) {
+        SetEventFlagID(9024, OFF);
+        EndEvent();
+    }
+    WaitFor(EventFlag(8061));
+    SetEventFlagID(9024, ON);
+    if (!EventFlag(7604)) {
+        ActivateGparamOverride(9, 3);
+    }
+    if (EventFlag(7604)) {
+        ActivateGparamOverride(35, 3);
+    }
+    WaitFor(EventFlag(8062));
+    DeactivateGparamOverride(2);
+    WaitFixedTimeFrames(1);
+    SetEventFlagID(9024, OFF);
+});
+
+$Event(1138, Default, function() {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8061));
+    WaitFor(
+        ((EventFlag(7705) && EventFlag(7500)) || (EventFlag(7725) && EventFlag(7505)))
+            && PlayerIsInOwnWorld());
+    EndIf(EventFlag(8214));
+    SetNetworkconnectedEventFlagID(8210, ON);
+    WaitFor(ElapsedSeconds(1));
+    EndIf(EventFlag(8214));
+    EndIf(EventFlag(7705));
+    SetNetworkconnectedEventFlagID(8211, ON);
 });
 
 $Event(1139, Default, function() {
@@ -1027,6 +1296,15 @@ $Event(1139, Default, function() {
         }
         if (EventFlag(8079)) {
             DisplayTextEffectId(6030);
+        }
+        if (EventFlag(8077)) {
+            DisplayTextEffectId(6090);
+        }
+        if (EventFlag(8080)) {
+            DisplayTextEffectId(7010);
+        }
+        if (EventFlag(8081)) {
+            DisplayTextEffectId(7000);
         }
         EndEvent();
     }
@@ -1080,6 +1358,177 @@ $Event(1140, Restart, function() {
     SetNetworkconnectedEventFlagID(7518, OFF);
 });
 
+$Event(1141, Default, function() {
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8061));
+    WaitFor(EventFlag(8214) && EventFlag(8060));
+    SetNetworkconnectedEventFlagID(8061, ON);
+    PlaySE(20000, SoundType.EnvironmentalSound, 600081000);
+});
+
+$Event(1142, Default, function() {
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8062));
+    WaitFor(EventFlag(8062) || AllBatchEventFlags(8215, 8217));
+    if (!EventFlag(8062)) {
+        SetNetworkconnectedEventFlagID(8025, ON);
+        SetNetworkconnectedEventFlagID(8062, ON);
+        RecordUserDispLog(110001, 0, LogObjectType.None, -1);
+        WaitFor(ElapsedSeconds(3.2));
+        DisplayTextEffectId(2200);
+        EndEvent();
+    }
+L0:
+    RecordUserDispLog(110002, 0, LogObjectType.None, -1);
+});
+
+$Event(1143, Default, function() {
+    EndIf(!EventFlag(8080));
+    EndIf(EventFlag(8061));
+    WaitFor(EventFlag(8060));
+    WaitFor(ElapsedSeconds(5));
+    EndIf(EventFlag(8061));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(80000, ON);
+    }
+    WaitFor(ElapsedSeconds(5));
+    EndIf(EventFlag(8061));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(80001, ON);
+    }
+    EndEvent();
+});
+
+$Event(1144, Default, function() {
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(8061));
+    WaitFor(EventFlag(8060));
+    WaitFor(ElapsedSeconds(15));
+    EndIf(EventFlag(8061));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(80010, ON);
+    }
+    WaitFor(ElapsedSeconds(15));
+    EndIf(EventFlag(8061));
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(80011, ON);
+    }
+    EndEvent();
+});
+
+$Event(1145, Default, function() {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(95000));
+    WaitFor(EventFlag(8060));
+    if (!IsPlayerCount(1)) {
+        WaitFor(AllBatchEventFlags(80012, 80014));
+    }
+    if (!IsPlayerCount(2)) {
+        if (!IsPlayerCount(3)) {
+            WaitFor(AllBatchEventFlags(80012, 80013));
+        }
+    }
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkconnectedEventFlagID(8061, ON);
+    }
+    WaitFor(ElapsedSeconds(3));
+    RemoveEstusCharge();
+    RemoveEstusCharge();
+    if (!IsPlayerCount(1)) {
+        RemoveEstusCharge();
+    }
+    SetSpEffect(20000, 448);
+    if (!IsPlayerCount(1)) {
+        if (!AllBatchEventFlags(80018, 80020)) {
+            RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
+        }
+    }
+    if (!IsPlayerCount(2)) {
+        if (!IsPlayerCount(3)) {
+            if (!AllBatchEventFlags(80018, 80019)) {
+                RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
+            }
+        }
+    }
+    SetEventFlagID(95000, ON);
+    SaveRequest();
+});
+
+$Event(1146, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    if (EventFlag(eventFlagId2) && !EventFlag(eventFlagId3)) {
+        AddEstusCharge();
+        SetEventFlagID(eventFlagId3, ON);
+        SetEventFlagID(9040, ON);
+        SaveRequest();
+        EndEvent();
+    }
+    WaitFor(EventFlag(8061));
+    WaitFor(EventFlag(eventFlagId) || EventFlag(eventFlagId2));
+    EndIf(EventFlag(eventFlagId));
+    if (EventFlag(eventFlagId2) && !EventFlag(eventFlagId3)) {
+        AddEstusCharge();
+        RefillEstus();
+        SetEventFlagID(eventFlagId3, ON);
+        SetEventFlagID(9040, ON);
+        SaveRequest();
+    }
+});
+
+$Event(1148, Default, function() {
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(8062));
+    WaitFor(EventFlag(8061));
+    flag &= (EventFlag(80015) || EventFlag(80018)) && (EventFlag(80016) || EventFlag(80019));
+    if (!IsPlayerCount(1)) {
+        flag &= EventFlag(80017) || EventFlag(80020);
+    }
+    WaitFor(flag);
+    if (!IsPlayerCount(2)) {
+        if (!IsPlayerCount(3)) {
+            if (!AllBatchEventFlags(80018, 80019)) {
+                SetNetworkconnectedEventFlagID(8062, ON);
+                RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
+                EndEvent();
+            }
+        }
+    }
+L0:
+    if (!IsPlayerCount(1)) {
+        if (!AllBatchEventFlags(80018, 80020)) {
+            SetNetworkconnectedEventFlagID(8062, ON);
+            RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
+            EndEvent();
+        }
+    }
+L1:
+    SetNetworkconnectedEventFlagID(8062, ON);
+    SetNetworkconnectedEventFlagID(8025, ON);
+    DisplayTextEffectId(2200);
+    RecordUserDispLog(110053, 10000, LogObjectType.None, -1);
+});
+
+$Event(1149, Default, function(targetTimeSeconds, targetTimeSeconds2) {
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8062));
+    GotoIf(L2, !EventFlag(8222));
+    GotoIf(L0, EventFlag(8221));
+    GotoIf(L1, !EventFlag(8221));
+L2:
+    WaitFor(EventFlag(8223) && !EventFlag(8229));
+    SetNetworkconnectedEventFlagID(8222, ON);
+    SetNetworkconnectedEventFlagID(8221, ON);
+L0:
+    WaitFor(ElapsedSeconds(targetTimeSeconds2) || !EventFlag(8221) || EventFlag(8229));
+    SetNetworkconnectedEventFlagID(8221, OFF);
+L1:
+    WaitFor((ElapsedSeconds(targetTimeSeconds) || EventFlag(8221)) && !EventFlag(8229));
+    SetNetworkconnectedEventFlagID(8221, ON);
+    RestartEvent();
+});
+
 $Event(1150, Default, function() {
     EndIf(!EventFlag(7602));
     EndIf(AnyBatchEventFlags(8192, 8194));
@@ -1120,6 +1569,75 @@ L2:
     }
 L3:
     SetNetworkconnectedEventFlagID(8190, ON);
+});
+
+$Event(1152, Default, function() {
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8223));
+    EndIf(EventFlag(8062));
+    if (!EventFlag(8061)) {
+        WaitFor(EventFlag(8061));
+        RecordUserDispLog(110000, 20000, LogObjectType.None, -1);
+    }
+L0:
+    WaitFor(EventFlag(8215) || EventFlag(8216) || EventFlag(8217));
+    RecordUserDispLog(110003, 20000, LogObjectType.None, -1);
+    WaitFor(ElapsedSeconds(4) || EventFlag(8062));
+    SetNetworkconnectedEventFlagID(8223, ON);
+    PlaySE(20000, SoundType.CharacterMotion, 750026001);
+    WaitFor(ElapsedSeconds(3));
+    EndIf(EventFlag(8062));
+    RecordUserDispLog(110006, 20000, LogObjectType.None, -1);
+});
+
+$Event(1154, Default, function(spEffectId, spEffectId2, spEffectId3, spEffectId4, spEffectId5) {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8077));
+    if (!EventFlag(8062)) {
+        if (!EventFlag(8224)) {
+            WaitFor(EventFlag(8061));
+            WaitFor(ElapsedSeconds(2));
+            if (!EventFlag(203)) {
+                SetSpEffect(20000, spEffectId);
+            }
+            if (EventFlag(203)) {
+                SetSpEffect(20000, spEffectId3);
+            }
+            WaitFor(EventFlag(8224) || EventFlag(8062));
+            GotoIf(L0, EventFlag(8062));
+            WaitFor(ElapsedSeconds(2));
+        }
+L1:
+        if (!EventFlag(203)) {
+            SetSpEffect(20000, spEffectId2);
+        }
+        if (EventFlag(203)) {
+            SetSpEffect(20000, spEffectId4);
+        }
+        WaitFor(EventFlag(8062));
+    }
+L0:
+    SetSpEffect(20000, spEffectId5);
+});
+
+$Event(1155, Default, function() {
+    EndIf(!EventFlag(8077));
+    EndIf(EventFlag(8062));
+    EndIf(EventFlag(8224));
+    WaitFor(
+        (EventFlag(8215) && EventFlag(8216))
+            || (EventFlag(8216) && EventFlag(8217))
+            || (EventFlag(8215) && EventFlag(8217)));
+    RecordUserDispLog(110005, 20000, LogObjectType.None, -1);
+    WaitFor(ElapsedSeconds(4) || EventFlag(8062));
+    SetNetworkconnectedEventFlagID(8224, ON);
+    SetNetworkconnectedEventFlagID(8229, ON);
+    PlaySE(20000, SoundType.CharacterMotion, 750026001);
+    WaitFor(ElapsedSeconds(4));
+    EndIf(EventFlag(8062));
+    RecordUserDispLog(110006, 20000, LogObjectType.None, -1);
+    WaitFor(ElapsedSeconds(11));
+    SetNetworkconnectedEventFlagID(8229, OFF);
 });
 
 $Event(1160, Default, function() {
@@ -1365,6 +1883,22 @@ $Event(1187, Default, function() {
     RestartEvent();
 });
 
+$Event(1188, Restart, function() {
+    DisableNetworkSync();
+    EndIf(!EventFlag(8081));
+    EndIf(EventFlag(8062) && !EventFlag(8025));
+    WaitFor(EventFlag(8062) || CharacterHasSpEffect(20000, 8970060));
+    WaitFor(EventFlag(8025) || CharacterHasSpEffect(20000, 8970060) || ElapsedSeconds(5));
+    EndIf(!(EventFlag(8025) || CharacterHasSpEffect(20000, 8970060)));
+    WaitFor(CharacterHasSpEffect(20000, 8970060));
+    WaitFor(!CharacterHasSpEffect(20000, 8970063));
+    if (EventFlagAndRandomCondition(6001, 0.3)) {
+        SetSpEffect(20000, 8970061);
+    }
+    WaitFor(CharacterHasSpEffect(20000, 8970063));
+    RestartEvent();
+});
+
 $Event(1190, Default, function() {
     WaitFor(
         EventFlag(47000800)
@@ -1471,6 +2005,68 @@ $Event(1210, Default, function() {
     SetEventFlagID(1056304581, ON);
 });
 
+$Event(1211, Default, function() {
+    EndIf(EventFlag(8230));
+    if (!SmallBaseAttached(1036402601, 52100000)) {
+        if (!SmallBaseAttached(1038402600, 52100000)) {
+            if (!SmallBaseAttached(1047402602, 52100000)) {
+                if (!SmallBaseAttached(1049402600, 52100000)) {
+                    if (!SmallBaseAttached(1042362990, 52100000)) {
+                        if (!SmallBaseAttached(1042382990, 52100000)) {
+                            if (!SmallBaseAttached(1043362990, 52100000)) {
+                                if (!SmallBaseAttached(1043362991, 52100000)) {
+                                    if (!SmallBaseAttached(1043372990, 52100000)) {
+                                        if (!SmallBaseAttached(1043382991, 52100000)) {
+                                            if (!SmallBaseAttached(1044372990, 52100000)) {
+                                                if (!SmallBaseAttached(1044392990, 52100000)) {
+                                                    if (!SmallBaseAttached(1037502990, 52100000)) {
+                                                        if (!SmallBaseAttached(1045392990, 52100000)) {
+                                                            if (!SmallBaseAttached(1045362998, 52100000)) {
+                                                                if (!SmallBaseAttached(1045372998, 52100000)) {
+                                                                    if (!SmallBaseAttached(1046302989, 52100000)) {
+                                                                        if (!SmallBaseAttached(1057302989, 52100000)) {
+                                                                            if (!SmallBaseAttached(1038102990, 52100000)) {
+                                                                                if (!SmallBaseAttached(1039202910, 52100000)) {
+                                                                                    if (!SmallBaseAttached(1042392989, 52100000)) {
+                                                                                        if (!SmallBaseAttached(1047502990, 52100000)) {
+                                                                                            EndEvent();
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+L0:
+    SetNetworkconnectedEventFlagID(8230, ON);
+});
+
+$Event(1212, Default, function() {
+    if (EventFlag(8231)) {
+        SetNetworkconnectedEventFlagID(8232, OFF);
+        EndEvent();
+    }
+    WaitFor(EventFlag(8230));
+    SetNetworkconnectedEventFlagID(8232, ON);
+    WaitFor(EventFlag(8231));
+    SetNetworkconnectedEventFlagID(8232, OFF);
+});
+
 $Event(1300, Default, function() {
     DisableNetworkSync();
     EndIf(PlayerInMap(18, 0, 0, 0));
@@ -1558,11 +2154,13 @@ $Event(1305, Default, function() {
     SetEventFlagID(6091, OFF);
     SetEventFlagID(6092, OFF);
     SetEventFlagID(6093, OFF);
+    SetEventFlagID(6094, OFF);
     SetEventFlagID(6095, OFF);
     GotoIf(L1, EventFlag(7602));
     GotoIf(L2, EventFlag(7601));
     GotoIf(L3, EventFlag(7603));
     GotoIf(L4, EventFlag(7605));
+    GotoIf(L5, EventFlag(7604));
     SetEventFlagID(6095, ON);
     EndEvent();
 L1:
@@ -1576,6 +2174,9 @@ L3:
     EndEvent();
 L4:
     SetEventFlagID(6093, ON);
+    EndEvent();
+L5:
+    SetEventFlagID(6094, ON);
     EndEvent();
 });
 
@@ -1689,6 +2290,8 @@ $Event(1312, Default, function() {
     SetEventFlagID(9095, OFF);
     SetEventFlagID(9096, OFF);
     SetEventFlagID(9097, OFF);
+    SetEventFlagID(9098, OFF);
+    SetEventFlagID(9099, OFF);
     if (IsCampaignSession()) {
         SetEventFlagID(9089, ON);
     }
@@ -1701,6 +2304,8 @@ L0:
     GotoIf(L6, TargetingBoss(TargetBoss.Fulghor));
     GotoIf(L7, TargetingBoss(TargetBoss.Caligo));
     GotoIf(L8, TargetingBoss(TargetBoss.Heolstor));
+    GotoIf(L9, TargetingBoss(TargetBoss.Harmonia));
+    GotoIf(L10, TargetingBoss(TargetBoss.Straghess));
     EndEvent();
 L1:
     SetEventFlagID(9090, ON);
@@ -1725,6 +2330,12 @@ L7:
     EndEvent();
 L8:
     SetEventFlagID(9097, ON);
+    EndEvent();
+L9:
+    SetEventFlagID(9098, ON);
+    EndEvent();
+L10:
+    SetEventFlagID(9099, ON);
     EndEvent();
 });
 
@@ -1770,6 +2381,36 @@ $Event(1330, Restart, function(areaEntityId) {
     WaitFor(InArea(20000, areaEntityId));
     SetSpEffect(20000, 16166);
     WaitFor(!InArea(20000, areaEntityId));
+    SetSpEffect(20000, 16167);
+    RestartEvent();
+});
+
+$Event(1340, Restart, function() {
+    DisableNetworkSync();
+    EndIf(!IsGameMode(2));
+    EndIf(EventFlag(6302));
+    WaitFor(EventFlag(7500));
+    WaitFor(EventFlag(8230) || ElapsedSeconds(5));
+    EndIf(!EventFlag(8230));
+    WaitFor(PlayerHasItem(ItemType.Goods, 11027));
+    SetEventFlagID(6302, ON);
+    SaveRequest();
+});
+
+$Event(1350, Restart, function(areaEntityId) {
+    DisableNetworkSync();
+    WaitFor(InArea(20000, areaEntityId));
+    SetSpEffect(20000, 16166);
+    WaitFor(!InArea(20000, areaEntityId));
+    SetSpEffect(20000, 16167);
+    RestartEvent();
+});
+
+$Event(1370, Restart, function(areaEntityId, areaEntityId2) {
+    DisableNetworkSync();
+    WaitFor(InArea(20000, areaEntityId) || InArea(20000, areaEntityId2));
+    SetSpEffect(20000, 16166);
+    WaitFor(!InArea(20000, areaEntityId) && !InArea(20000, areaEntityId2));
     SetSpEffect(20000, 16167);
     RestartEvent();
 });
@@ -2232,7 +2873,7 @@ $Event(1519, Restart, function(eventFlagId, eventFlagId2) {
     EndEvent();
 });
 
-$Event(1520, Restart, function(missionId, eventFlagId, eventFlagId2) {
+$Event(1520, Restart, function(missionId, eventFlagId, eventFlagId2, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -2244,6 +2885,8 @@ $Event(1520, Restart, function(missionId, eventFlagId, eventFlagId2) {
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
@@ -2276,7 +2919,7 @@ $Event(1591, Default, function() {
     SetNetworkconnectedEventFlagID(9267, ON);
 });
 
-$Event(1592, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
+$Event(1592, Default, function(eventFlagId, eventFlagId2, eventFlagId3, hero, missionId) {
     DisableNetworkSync();
     EndIf(!MissionActive(101));
     if (IsPlayerNo(1)) {
@@ -2288,6 +2931,8 @@ $Event(1592, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
     }
+    EndIf(!IsHero(hero));
+    EndIf(!HasMissionState(missionId, 1));
     EndIf(EventFlag(8325));
     SetEventFlagID(eventFlagId, ON);
     SetEventFlagID(eventFlagId2, OFF);

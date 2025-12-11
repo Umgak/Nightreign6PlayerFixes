@@ -145,3 +145,4 @@ $Event(52132890, Restart, function(eventFlagId, eventFlagId2, bgmBossConvParamId
     EndEvent();
 });
 
+

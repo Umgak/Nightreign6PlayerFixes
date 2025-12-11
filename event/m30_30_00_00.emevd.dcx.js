@@ -237,3 +237,4 @@ $Event(30302910, Default, function(chrEntityId) {
     EnableCharacterAI(chrEntityId);
 });
 
+

@@ -159,3 +159,4 @@ $Event(9992851, Restart, function(chrEntityId, spEffectId) {
     ForceAnimationPlayback(47800800, 20000, true, false, false);
 });
 
+

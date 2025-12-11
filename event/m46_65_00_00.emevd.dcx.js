@@ -49,3 +49,4 @@ $Event(46652200, Default, function(chrEntityId) {
     DisableCharacterCollision(chrEntityId);
 });
 
+
