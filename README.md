@@ -10,7 +10,6 @@ The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when
 * Libra invasion event won't spawn on top of extra players, but will be able to spawn near the extra players even if they're separated from the group, like it can for the original 3
 * Everdark Libra will spawn clones of all six players. This will be chaos. I know.
 * Gnoster boss fight has tracking balls to target all players
-* Maris'... something... (i dont know i dont actually play nightreign sorry)
 * Heolstor teleports all players during phase change, instead of extra players awkwardly standing around where they were.
 * Duke's Dear Freyja night boss applies its slow effect to everyone
 * Defeat event will not trigger until ALL players are dead
