@@ -13977,13 +13977,18 @@ $Event(99075440, Restart, function(eventFlagId, eventFlagId2, spEffectId, chrEnt
     SetSpEffect(0, spEffectId);
 });
 
-$Event(90075450, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9, chrEntityId10, chrEntityId11, chrEntityId12, chrEntityId13) {
+$Event(90075450, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9, chrEntityId10, chrEntityId11, chrEntityId12, chrEntityId13, chrEntityId14, chrEntityId15, chrEntityId16) {
+    // Everdark Libra: Setup controller entities
     DisableNetworkSync();
     EnableCharacterDefaultBackread(chrEntityId);
     EnableCharacterDefaultBackread(chrEntityId2);
     EnableCharacterDefaultBackread(chrEntityId11);
     EnableCharacterDefaultBackread(chrEntityId12);
     EnableCharacterDefaultBackread(chrEntityId13);
+    // NR6PF: Everdark Libra: Enable new groups for p4-6 clones
+    EnableCharacterDefaultBackread(chrEntityId14);
+    EnableCharacterDefaultBackread(chrEntityId15);
+    EnableCharacterDefaultBackread(chrEntityId16);
     SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
     SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisableCharacterHPBarDisplay(chrEntityId);
@@ -16718,7 +16723,8 @@ $Event(90075901, Restart, function(chrEntityId, bgmBossConvParamId, logObjectId)
     SetSpEffect(20000, 102121);
 });
 
-$Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3) {
+$Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, nr6pf_chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6) {
+    // ED Libra: manage network authority for clones
     DisableNetworkSync();
     EndIf(EventFlag(7512));
     EndIf(EventFlag(18002800));
@@ -16732,6 +16738,15 @@ $Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3) {
         if (chrEntityId3 != 0) {
             SetNetworkUpdateAuthority(chrEntityId3, AuthorityLevel.Normal);
         }
+        if (nr6pf_chrEntityId4 != 0) {
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId4, AuthorityLevel.Normal);
+        }
+        if (nr6pf_chrEntityId5 != 0) {
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Normal);
+        }
+        if (nr6pf_chrEntityId6 != 0) {
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Normal);
+        }
     }
     WaitFor(PlayerIsInOwnWorld());
     if (PlayerIsInOwnWorld()) {
@@ -16743,6 +16758,15 @@ $Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3) {
         }
         if (chrEntityId3 != 0) {
             SetNetworkUpdateAuthority(chrEntityId3, AuthorityLevel.Forced);
+        }
+        if (nr6pf_chrEntityId4 != 0) {
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId4, AuthorityLevel.Forced);
+        }
+        if (nr6pf_chrEntityId5 != 0) {
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Forced);
+        }
+        if (nr6pf_chrEntityId6 != 0) {
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Forced);
         }
     }
     WaitFor(!PlayerIsInOwnWorld());
