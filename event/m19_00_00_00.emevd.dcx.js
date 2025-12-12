@@ -287,7 +287,7 @@ $Event(0, Default, function() {
         if (IsPlayerNo(3)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000245, 19004744, 19000248);
         }
-        // Maris
+        // Libra (Why did I think this was Maris?)
         // Added flags with +100 for other players
         if (IsPlayerNo(4)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000343, 19004744, 19000346);
@@ -607,7 +607,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075302, 19010830, 19010276);
     }
     if (IsMapVariation(14)) {
-        $InitializeCommonEvent(0, 90075450, 19010840, 19010849, 19010440, 19010441, 19010442, 19010443, 19010444, 19010445, 19010446, 19010447, 19015842, 19015843, 19015844);
+        $InitializeCommonEvent(0, 90075450, 19010840, 19010849, 19010440, 19010441, 19010442, 19010443, 19010444, 19010445, 19010446, 19010447, 19015842, 19015843, 19015844, 19015845, 19015846, 19015847); // NR6PF: Added entity group IDs for bonus players
         $InitializeCommonEvent(0, 90075401, 19010849, 19000240, 19000241, 19000242);
         $InitializeCommonEvent(0, 90075452, 19010849, 19010840, 19000240, 19000241, 19000242);
         $InitializeCommonEvent(0, 90075403, 19010849, 19004740, 19004741, 19004742, 19000240, 19000242);
@@ -620,7 +620,7 @@ $Event(0, Default, function() {
         if (IsPlayerNo(3)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000245, 19004744, 19000248);
         }
-        // ED Maris
+        // ED Libra (Why did I think this was Maris?)
         // Added flags with +100 for other players
         if (IsPlayerNo(4)) {
             $InitializeCommonEvent(0, 90075404, 19000240, 19004743, 19000343, 19004744, 19000346);
@@ -639,11 +639,15 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 99075422, 19010840, 19002740, 19002741, 19002742, 19002743, 19002744, 19002745, 19002746, 19002747, 19010440, 19010441, 19010442, 19010443, 19010444, 19010445, 19010446, 19010447);
         $InitializeCommonEvent(0, 90075901, 19010840, 756000, 907550000);
         $InitializeCommonEvent(0, 90075902, 19015840, 0, 0);
-        $InitializeCommonEvent(0, 90075902, 19015842, 19015843, 19015844);
+        $InitializeCommonEvent(0, 90075902, 19015842, 19015843, 19015844, 19015845, 19015846, 19015847); // NR6PF: set up ED Libra clone update authorities
         $InitializeCommonEvent(0, 90015012, 19015840, 7511);
         $InitializeCommonEvent(0, 90015022, 19015842, 7511);
         $InitializeCommonEvent(0, 90015022, 19015843, 7511);
         $InitializeCommonEvent(0, 90015022, 19015844, 7511);
+        // NR6PF: Set up ED Libra MP dependent buffs
+        $InitializeCommonEvent(0, 90015022, 19015845, 7511);
+        $InitializeCommonEvent(0, 90015022, 19015846, 7511);
+        $InitializeCommonEvent(0, 90015022, 19015847, 7511);
         $InitializeCommonEvent(0, 90015020, 7511, 7512);
         $InitializeCommonEvent(0, 99075485, 19010840, 19000270);
         $InitializeCommonEvent(0, 99075486, 19010840);
@@ -658,8 +662,8 @@ $Event(0, Default, function() {
         // Why did I think I would be done with the clones, that other thing in common was just the initializer
         // This is generators for them
         // P1
-        $InitializeCommonEvent(0, 90015012, 19015842, 7511); // not sure - used by other boss too? Entity ID isn't something I can find any references to
-        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260); // clone generator
+        $InitializeCommonEvent(0, 90015012, 19015842, 7511); // entity group ID
+        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260); // colone generator
         $InitializeCommonEvent(0, 99075468, 19010840, 19010453, 113, 19011253, 19000250, 19000263); // Alt clone generator
         $InitializeCommonEvent(0, 99075467, 19010840, 19010450, 19000260); // clone tracker
         $InitializeCommonEvent(0, 99075467, 19010840, 19010453, 19000253); // alt clone tracker
