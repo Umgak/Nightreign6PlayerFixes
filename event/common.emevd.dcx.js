@@ -395,7 +395,7 @@ S29:
     if (IsPlayerNo(3)) {
         $InitializeEvent(0, 1310, 7012);
     }
-    // NR6PF: Setup wending graces
+    // NR6PF: Boss Battle Death Prohibition
     if (IsPlayerNo(4)) {
         $InitializeEvent(0, 1310, 11007010);
     }

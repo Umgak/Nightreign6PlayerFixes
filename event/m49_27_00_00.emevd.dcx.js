@@ -178,12 +178,3 @@ L0:
     DisplayBossHealthBar(Enabled, chrEntityId2, 0, 903010000);
     DisplayBossHealthBar(Enabled, chrEntityId3, 0, 903010000);
 });
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> base_game
-=======
-
->>>>>>> base_game

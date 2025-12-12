@@ -3981,25 +3981,25 @@ $Event(90035081, Default, function(eventFlagId) {
     SetNetworkconnectedEventFlagID(8071, ON);
 });
 
-$Event(90035082, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6) {
+$Event(90035082, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3, nr6pf_chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6) {
     // Frenzied Flame invasion
     if (!((EventFlag(7707) || EventFlag(7727)) && EventFlag(eventFlagId) && !EventFlag(8027))) {
         SetCharacterBackreadState(chrEntityId, true);
         SetCharacterBackreadState(chrEntityId2, true);
         SetCharacterBackreadState(chrEntityId3, true);
         // Set state for new entities which interact with extra players
-        SetCharacterBackreadState(chrEntityId4, true);
-        SetCharacterBackreadState(chrEntityId5, true);
-        SetCharacterBackreadState(chrEntityId6, true);
+        SetCharacterBackreadState(nr6pf_chrEntityId4, true);
+        SetCharacterBackreadState(nr6pf_chrEntityId5, true);
+        SetCharacterBackreadState(nr6pf_chrEntityId6, true);
         EndEvent();
     }
     SetCharacterBackreadState(chrEntityId, false);
     SetCharacterBackreadState(chrEntityId2, false);
     SetCharacterBackreadState(chrEntityId3, false);
     // Ditto
-    SetCharacterBackreadState(chrEntityId4, false);
-    SetCharacterBackreadState(chrEntityId5, false);
-    SetCharacterBackreadState(chrEntityId6, false);
+    SetCharacterBackreadState(nr6pf_chrEntityId4, false);
+    SetCharacterBackreadState(nr6pf_chrEntityId5, false);
+    SetCharacterBackreadState(nr6pf_chrEntityId6, false);
     SetCharacterEventTarget(chrEntityId, 10002);
     CreateBulletOwner(chrEntityId);
     SetCharacterEventTarget(chrEntityId2, 10003);
@@ -4007,12 +4007,12 @@ $Event(90035082, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEn
     SetCharacterEventTarget(chrEntityId3, 10004);
     CreateBulletOwner(chrEntityId3);
     // Ditto
-    SetCharacterEventTarget(chrEntityId4, 10005);
-    CreateBulletOwner(chrEntityId4);
-    SetCharacterEventTarget(chrEntityId5, 10006);
-    CreateBulletOwner(chrEntityId5);
-    SetCharacterEventTarget(chrEntityId6, 10007);
-    CreateBulletOwner(chrEntityId6);
+    SetCharacterEventTarget(nr6pf_chrEntityId4, 10005);
+    CreateBulletOwner(nr6pf_chrEntityId4);
+    SetCharacterEventTarget(nr6pf_chrEntityId5, 10006);
+    CreateBulletOwner(nr6pf_chrEntityId5);
+    SetCharacterEventTarget(nr6pf_chrEntityId6, 10007);
+    CreateBulletOwner(nr6pf_chrEntityId6);
 });
 
 $Event(90035083, Default, function(eventFlagId, playerNo) {
@@ -5258,7 +5258,7 @@ $Event(90035212, Default, function(chrEntityId, assetEntityId, eventFlagId) {
     ForceAnimationPlayback(assetEntityId, 110, true, false, false);
 });
 
-$Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, assetEntityId2, assetEntityId3, assetEntityId4, assetEntityId5, assetEntityId6, assetEntityId7, areaEntityId, eventFlagId) {
+$Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chrEntityId3, chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, assetEntityId2, assetEntityId3, assetEntityId4, nr6pf_assetEntityId5, nr6pf_assetEntityId6, nr6pf_assetEntityId7, areaEntityId, eventFlagId) {
     // Maris invasion
     if (!EventFlag(8076)) {
         DisableCharacter(chrEntityId);
@@ -5283,9 +5283,9 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         AttachAssetToCharacter(chrEntityId3, 220, assetEntityId3);
         AttachAssetToCharacter(chrEntityId4, 220, assetEntityId4);
         // Attach bubble vfx to extra player's entity
-        AttachAssetToCharacter(chrEntityId5, 220, assetEntityId5);
-        AttachAssetToCharacter(chrEntityId6, 220, assetEntityId6);
-        AttachAssetToCharacter(chrEntityId7, 220, assetEntityId7);
+        AttachAssetToCharacter(nr6pf_chrEntityId5, 220, nr6pf_assetEntityId5);
+        AttachAssetToCharacter(nr6pf_chrEntityId6, 220, nr6pf_assetEntityId6);
+        AttachAssetToCharacter(nr6pf_chrEntityId7, 220, nr6pf_assetEntityId7);
     } else {
         DisableCharacter(chrEntityId);
         DisableAsset(assetEntityId);
@@ -5301,12 +5301,12 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         SetCharacterEnableDistance(chrEntityId4, 1200);
         DisableCharacterDisableOnHitUnload(chrEntityId4);
         //NR6PF: Setup extra flags for extra bubbles
-        SetCharacterEnableDistance(chrEntityId5, 1200);
-        DisableCharacterDisableOnHitUnload(chrEntityId5);
-        SetCharacterEnableDistance(chrEntityId6, 1200);
-        DisableCharacterDisableOnHitUnload(chrEntityId6);
-        SetCharacterEnableDistance(chrEntityId7, 1200);
-        DisableCharacterDisableOnHitUnload(chrEntityId7);
+        SetCharacterEnableDistance(nr6pf_chrEntityId5, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId5);
+        SetCharacterEnableDistance(nr6pf_chrEntityId6, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId6);
+        SetCharacterEnableDistance(nr6pf_chrEntityId7, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId7);
         if (IsPlayerNo(1)) {
             SetNetworkUpdateAuthority(chrEntityId2, AuthorityLevel.Forced);
         }
@@ -5318,21 +5318,21 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         }
         // NR6PF: Give extra players update authority of their bubble
         if (IsPlayerNo(4)) {
-            SetNetworkUpdateAuthority(chrEntityId5, AuthorityLevel.Forced);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Forced);
         }
         if (IsPlayerNo(5)) {
-            SetNetworkUpdateAuthority(chrEntityId6, AuthorityLevel.Forced);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Forced);
         }
         if (IsPlayerNo(6)) {
-            SetNetworkUpdateAuthority(chrEntityId7, AuthorityLevel.Forced);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId7, AuthorityLevel.Forced);
         }
         AttachAssetToCharacter(chrEntityId2, 220, assetEntityId2);
         AttachAssetToCharacter(chrEntityId3, 220, assetEntityId3);
         AttachAssetToCharacter(chrEntityId4, 220, assetEntityId4);
         // NR6PF: Attach assets to extra bubbles (again)
-        AttachAssetToCharacter(chrEntityId5, 220, assetEntityId5);
-        AttachAssetToCharacter(chrEntityId6, 220, assetEntityId6);
-        AttachAssetToCharacter(chrEntityId7, 220, assetEntityId7);
+        AttachAssetToCharacter(nr6pf_chrEntityId5, 220, nr6pf_assetEntityId5);
+        AttachAssetToCharacter(nr6pf_chrEntityId6, 220, nr6pf_assetEntityId6);
+        AttachAssetToCharacter(nr6pf_chrEntityId7, 220, nr6pf_assetEntityId7);
         if (IsPlayerNo(1)) {
             WaitFor(CharacterBackreadStatus(chrEntityId2));
         }
@@ -5344,13 +5344,13 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         }
         // NR6PF: Backread for extra players' bubbles
         if (IsPlayerNo(4)) {
-            WaitFor(CharacterBackreadStatus(chrEntityId5));
+            WaitFor(CharacterBackreadStatus(nr6pf_chrEntityId5));
         }
         if (IsPlayerNo(5)) {
-            WaitFor(CharacterBackreadStatus(chrEntityId6));
+            WaitFor(CharacterBackreadStatus(nr6pf_chrEntityId6));
         }
         if (IsPlayerNo(6)) {
-            WaitFor(CharacterBackreadStatus(chrEntityId7));
+            WaitFor(CharacterBackreadStatus(nr6pf_chrEntityId7));
         }
         WaitFor(ElapsedSeconds(3));
         if (!InArea(10002, areaEntityId)) {
@@ -5364,13 +5364,13 @@ $Event(90035213, Default, function(chrEntityId, assetEntityId, chrEntityId2, chr
         }
         // NR6PF: Warp extra players' bubbles too
         if (!InArea(10005, areaEntityId)) {
-            WarpCharacterAndCopyFloor(chrEntityId5, TargetEntityType.Character, 10005, 220, 10005);
+            WarpCharacterAndCopyFloor(nr6pf_chrEntityId5, TargetEntityType.Character, 10005, 220, 10005);
         }
         if (!InArea(10006, areaEntityId)) {
-            WarpCharacterAndCopyFloor(chrEntityId6, TargetEntityType.Character, 10006, 220, 10006);
+            WarpCharacterAndCopyFloor(nr6pf_chrEntityId6, TargetEntityType.Character, 10006, 220, 10006);
         }
         if (!InArea(10007, areaEntityId)) {
-            WarpCharacterAndCopyFloor(chrEntityId7, TargetEntityType.Character, 10007, 220, 10007);
+            WarpCharacterAndCopyFloor(nr6pf_chrEntityId7, TargetEntityType.Character, 10007, 220, 10007);
         }
         EnableCharacter(chrEntityId);
         EnableAsset(assetEntityId);
@@ -5396,12 +5396,12 @@ L0:
     SetCharacterEnableDistance(chrEntityId4, -1);
     EnableCharacterDisableOnHitUnload(chrEntityId4);
     // NR6PF: Setup bubbles again
-    SetCharacterEnableDistance(chrEntityId5, -1);
-    EnableCharacterDisableOnHitUnload(chrEntityId5);
-    SetCharacterEnableDistance(chrEntityId6, -1);
-    EnableCharacterDisableOnHitUnload(chrEntityId6);
-    SetCharacterEnableDistance(chrEntityId7, -1);
-    EnableCharacterDisableOnHitUnload(chrEntityId7);
+    SetCharacterEnableDistance(nr6pf_chrEntityId5, -1);
+    EnableCharacterDisableOnHitUnload(nr6pf_chrEntityId5);
+    SetCharacterEnableDistance(nr6pf_chrEntityId6, -1);
+    EnableCharacterDisableOnHitUnload(nr6pf_chrEntityId6);
+    SetCharacterEnableDistance(nr6pf_chrEntityId7, -1);
+    EnableCharacterDisableOnHitUnload(nr6pf_chrEntityId7);
     DisableCharacter(chrEntityId);
     DisableAsset(assetEntityId);
 });
@@ -6048,7 +6048,7 @@ $Event(90035231, Default, function(entityId, eventFlagId, eventFlagId2) {
     RecordUserDispLog(11140, entityId, LogObjectType.None, -1);
 });
 
-$Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, eventFlagId) {
+$Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, nr6pf_chrEntityId8, eventFlagId) {
     // Appears to be an unused portion of Gnoster's invasion script - there's no initialization for it and it has the wrong map prefix of 4678 which is Margit's
     // Edited for consistency - this is supposed to be 90035232, but Fromsoft screwed up again LOL
     if (!EventFlag(8078)) {
@@ -6101,25 +6101,25 @@ $Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         }
         // NR6PF: Edits for consistency, despite this being seemingly unused
         if (IsPlayerNo(4)) {
-            EnableCharacterDefaultBackread(chrEntityId6);
-            SetCharacterEnableDistance(chrEntityId6, 1200);
-            DisableCharacterDisableOnHitUnload(chrEntityId6);
-            SetNetworkUpdateAuthority(chrEntityId6, AuthorityLevel.Forced);
-            DisableCharacterFadeOnEnable(chrEntityId6);
+            EnableCharacterDefaultBackread(nr6pf_chrEntityId6);
+            SetCharacterEnableDistance(nr6pf_chrEntityId6, 1200);
+            DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId6);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(nr6pf_chrEntityId6);
         }
         if (IsPlayerNo(5)) {
-            EnableCharacterDefaultBackread(chrEntityId7);
-            SetCharacterEnableDistance(chrEntityId7, 1200);
-            DisableCharacterDisableOnHitUnload(chrEntityId7);
-            SetNetworkUpdateAuthority(chrEntityId7, AuthorityLevel.Forced);
-            DisableCharacterFadeOnEnable(chrEntityId7);
+            EnableCharacterDefaultBackread(nr6pf_chrEntityId7);
+            SetCharacterEnableDistance(nr6pf_chrEntityId7, 1200);
+            DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId7);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId7, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(nr6pf_chrEntityId7);
         }
         if (IsPlayerNo(6)) {
-            EnableCharacterDefaultBackread(chrEntityId8);
-            SetCharacterEnableDistance(chrEntityId8, 1200);
-            DisableCharacterDisableOnHitUnload(chrEntityId8);
-            SetNetworkUpdateAuthority(chrEntityId8, AuthorityLevel.Forced);
-            DisableCharacterFadeOnEnable(chrEntityId8);
+            EnableCharacterDefaultBackread(nr6pf_chrEntityId8);
+            SetCharacterEnableDistance(nr6pf_chrEntityId8, 1200);
+            DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId8);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId8, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(nr6pf_chrEntityId8);
         }
         ForceAnimationPlayback(chrEntityId, 30005, true, false, false);
         EndEvent();
@@ -6188,7 +6188,7 @@ L10:
     ForceAnimationPlayback(chrEntityId, 30005, true, false, false);
 });
 
-$Event(90035233, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, eventFlagId) {
+$Event(90035233, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, eventFlagId) {
     // Actually-used portion of Gnoster's invasion event
     EndIf(!EventFlag(8078));
     EndIf(EventFlag(8062));
@@ -6209,9 +6209,9 @@ L0:
         ShootBullet(chrEntityId3, 10003, -1, 201200099, 0, 0, 0);
         ShootBullet(chrEntityId4, 10004, -1, 201200099, 0, 0, 0);
         // NR6PF: Extra entities functions
-        ShootBullet(chrEntityId5, 10005, -1, 201200099, 0, 0, 0);
-        ShootBullet(chrEntityId6, 10006, -1, 201200099, 0, 0, 0);
-        ShootBullet(chrEntityId7, 10007, -1, 201200099, 0, 0 ,0);
+        ShootBullet(nr6pf_chrEntityId5, 10005, -1, 201200099, 0, 0, 0);
+        ShootBullet(nr6pf_chrEntityId6, 10006, -1, 201200099, 0, 0, 0);
+        ShootBullet(nr6pf_chrEntityId7, 10007, -1, 201200099, 0, 0 ,0);
     }
     EndIf(hp);
     if (IsPlayerNo(1)) {
@@ -6234,22 +6234,22 @@ L0:
     }
     // NR6PF: Extra entities functions
     if (IsPlayerNo(4)) {
-        SetCharacterEventTarget(chrEntityId5, chrEntityId);
-        IssueShortWarpRequest(chrEntityId5, TargetEntityType.Character, 10005, 210);
-        WaitFor(CharacterBackreadStatus(chrEntityId5));
-        SetSpEffect(chrEntityId5, 16641);
+        SetCharacterEventTarget(nr6pf_chrEntityId5, chrEntityId);
+        IssueShortWarpRequest(nr6pf_chrEntityId5, TargetEntityType.Character, 10005, 210);
+        WaitFor(CharacterBackreadStatus(nr6pf_chrEntityId5));
+        SetSpEffect(nr6pf_chrEntityId5, 16641);
     }
     if (IsPlayerNo(5)) {
-        SetCharacterEventTarget(chrEntityId6, chrEntityId);
-        IssueShortWarpRequest(chrEntityId6, TargetEntityType.Character, 10006, 210);
-        WaitFor(CharacterBackreadStatus(chrEntityId6));
-        SetSpEffect(chrEntityId6, 16641);
+        SetCharacterEventTarget(nr6pf_chrEntityId6, chrEntityId);
+        IssueShortWarpRequest(nr6pf_chrEntityId6, TargetEntityType.Character, 10006, 210);
+        WaitFor(CharacterBackreadStatus(nr6pf_chrEntityId6));
+        SetSpEffect(nr6pf_chrEntityId6, 16641);
     }
     if (IsPlayerNo(6)) {
-        SetCharacterEventTarget(chrEntityId7, chrEntityId);
-        IssueShortWarpRequest(chrEntityId7, TargetEntityType.Character, 10007, 210);
-        WaitFor(CharacterBackreadStatus(chrEntityId7));
-        SetSpEffect(chrEntityId7, 16641);
+        SetCharacterEventTarget(nr6pf_chrEntityId7, chrEntityId);
+        IssueShortWarpRequest(nr6pf_chrEntityId7, TargetEntityType.Character, 10007, 210);
+        WaitFor(CharacterBackreadStatus(nr6pf_chrEntityId7));
+        SetSpEffect(nr6pf_chrEntityId7, 16641);
     }
     WaitFor(ElapsedSeconds(10));
     RestartEvent();
@@ -6383,7 +6383,7 @@ $Event(90035237, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
     SpawnOneshotSFX(TargetEntityType.Character, 20000, 220, 43);
 });
 
-$Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7) {
+$Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7) {
     // How did I miss this?
     // Gnoster invasion
     EndIf(!EventFlag(8078));
@@ -6396,9 +6396,9 @@ $Event(90035238, Default, function(eventFlagId, chrEntityId, chrEntityId2, chrEn
     ShootBullet(chrEntityId3, 10003, 220, 201200099, 0, 0, 0);
     ShootBullet(chrEntityId4, 10004, 220, 201200099, 0, 0, 0);
     // NR6PF: Gnoster extra entities targeting extra players
-    ShootBullet(chrEntityId5, 10005, 220, 201200099, 0, 0, 0);
-    ShootBullet(chrEntityId6, 10006, 220, 201200099, 0, 0, 0);
-    ShootBullet(chrEntityId7, 10007, 220, 201200099, 0, 0, 0);
+    ShootBullet(nr6pf_chrEntityId5, 10005, 220, 201200099, 0, 0, 0);
+    ShootBullet(nr6pf_chrEntityId6, 10006, 220, 201200099, 0, 0, 0);
+    ShootBullet(nr6pf_chrEntityId7, 10007, 220, 201200099, 0, 0, 0);
 });
 
 $Event(90035240, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
@@ -6503,7 +6503,7 @@ L0:
     RestartEvent();
 });
 
-$Event(90035242, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
+$Event(90035242, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, nr6pf_eventFlagId6, nr6pf_eventFlagId7, nr6pf_eventFlagId8) {
     // Libra 
     DisableNetworkSync();
     EndIf(!EventFlag(8079));
@@ -6524,26 +6524,26 @@ $Event(90035242, Default, function(eventFlagId, eventFlagId2, eventFlagId3, even
         }
         // NR6PF: track extra player events
         if (IsPlayerNo(4)) {
-            SetNetworkconnectedEventFlagID(eventFlagId6, ON);
+            SetNetworkconnectedEventFlagID(nr6pf_eventFlagId6, ON);
         }
         if (IsPlayerNo(5)) {
-            SetNetworkconnectedEventFlagID(eventFlagId6, ON);
+            SetNetworkconnectedEventFlagID(nr6pf_eventFlagId7, ON);
         }
         if (IsPlayerNo(6)) {
-            SetNetworkconnectedEventFlagID(eventFlagId7, ON);
+            SetNetworkconnectedEventFlagID(nr6pf_eventFlagId8, ON);
         }
         RecordUserDispLog(11131, eventFlagId, LogObjectType.None, -1);
     }
 });
 
-$Event(90035243, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7) {
+$Event(90035243, Default, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, nr6pf_eventFlagId5, nr6pf_eventFlagId6, nr6pf_eventFlagId7) {
     // Libra cleanse curses
     EndIf(!EventFlag(8079));
     EndIf(EventFlag(8106));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     WaitFor(EventFlag(8061));
     EndIf(!EventFlag(eventFlagId));
-    flag = EventFlag(eventFlagId2) || EventFlag(eventFlagId3) || EventFlag(eventFlagId4) || EventFlag(eventFlagId5) || EventFlag(eventFlagId6) || EventFlag(eventFlagId7); // NR6PF: Check extra player flag IDs which were added
+    flag = EventFlag(eventFlagId2) || EventFlag(eventFlagId3) || EventFlag(eventFlagId4) || EventFlag(nr6pf_eventFlagId5) || EventFlag(nr6pf_eventFlagId6) || EventFlag(nr6pf_eventFlagId7); // NR6PF: Check extra player flag IDs which were added
     WaitFor(flag || EventFlag(8106) || EventFlag(8062));
     if (flag.Passed) {
         SetNetworkconnectedEventFlagID(8106, ON);
@@ -7141,7 +7141,7 @@ L0:
     SetNetworkconnectedEventFlagID(8025, ON);
     DisplayTextEffectId(2200);
     RecordUserDispLog(110201, chrEntityId, LogObjectType.None, -1);
-    // TODO: Fix this. Looks like another mission code block?
+    // TODO: Caligo invasion event
     if (!IsPlayerCount(1)) {
         if (!IsPlayerCount(2)) {
             SetSpEffect(10000, 98800);
@@ -13790,8 +13790,8 @@ $Event(90075404, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, even
     SetNetworkconnectedEventFlagID(eventFlagId5, ON);
 });
 
-$Event(90075405, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
-    // Maris/ED Maris
+$Event(90075405, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, nr6pf_eventFlagId6, nr6pf_eventFlagId7, nr6pf_eventFlagId8) {
+    // Libra/ED Libra
     EndIf(EventFlag(7512));
     EndIf(EventFlag(7511));
     EndIf(EventFlag(eventFlagId));
@@ -13808,13 +13808,13 @@ $Event(90075405, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, even
             // NR6PF: Check extra players for this
             && (!(CharacterHasTeamType(10005, TeamType.Human)
                 || CharacterHasTeamType(10005, TeamType.WhitePhantom))
-                || EventFlag(eventFlagId6))
+                || EventFlag(nr6pf_eventFlagId6))
             && (!(CharacterHasTeamType(10006, TeamType.Human)
                 || CharacterHasTeamType(10006, TeamType.WhitePhantom))
-                || EventFlag(eventFlagId7))
+                || EventFlag(nr6pf_eventFlagId7))
             && (!(CharacterHasTeamType(10007, TeamType.Human)
                 || CharacterHasTeamType(10007, TeamType.WhitePhantom))
-                || EventFlag(eventFlagId8)))
+                || EventFlag(nr6pf_eventFlagId8)))
             || EventFlag(eventFlagId));
     EndIf(EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
@@ -15101,7 +15101,7 @@ L0:
     RestartEvent();
 });
 
-$Event(99075471, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10, eventFlagId11, eventFlagId12) {
+$Event(99075471, Restart, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, nr6pf_eventFlagId7, nr6pf_eventFlagId8, nr6pf_eventFlagId9, nr6pf_eventFlagId10, nr6pf_eventFlagId11, nr6pf_eventFlagId12) {
     // ED Libra
     DisableNetworkSync();
     EndIf(CharacterHPValue(chrEntityId) <= 0);
@@ -15122,14 +15122,14 @@ L0:
         flag |= !EventFlag(eventFlagId6);
     }
     // NR6PF: extra checks
-    if (EventFlag(eventFlagId7)) {
-        flag |= !EventFlag(eventFlagId8);
+    if (EventFlag(nr6pf_eventFlagId7)) {
+        flag |= !EventFlag(nr6pf_eventFlagId8);
     }
-    if (EventFlag(eventFlagId9)) {
-        flag |= !EventFlag(eventFlagId10);
+    if (EventFlag(nr6pf_eventFlagId9)) {
+        flag |= !EventFlag(nr6pf_eventFlagId10);
     }
-    if (EventFlag(eventFlagId11)) {
-        flag |= !EventFlag(eventFlagId12)
+    if (EventFlag(nr6pf_eventFlagId11)) {
+        flag |= !EventFlag(nr6pf_eventFlagId12)
     }
     if (flag) {
         DisplayTextEffectId(8000);
