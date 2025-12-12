@@ -61,42 +61,6 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075210, 19000827, 19000820, 19000220);
         $InitializeCommonEvent(0, 90075211, 19000821, 19000820, 19000221);
         $InitializeCommonEvent(0, 90075212, 19000821, 19000825, 19000826, 19000220, 19000221, 19000222, 0);
-        if (IsPlayerNo(1)) {
-            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 1);
-            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
-            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
-            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
-            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
-            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
-            $InitializeCommonEvent(0, 90075231, 19000822);
-            $InitializeCommonEvent(0, 90075232, 19000822);
-            $InitializeCommonEvent(0, 90075233, 19000822);
-            $InitializeCommonEvent(0, 90075234, 19000822);
-        }
-        if (IsPlayerNo(2)) {
-            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
-            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 1);
-            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 0);
-            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
-            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
-            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
-            $InitializeCommonEvent(0, 90075231, 19000823);
-            $InitializeCommonEvent(0, 90075232, 19000823);
-            $InitializeCommonEvent(0, 90075233, 19000823);
-            $InitializeCommonEvent(0, 90075234, 19000823);
-        }
-        if (IsPlayerNo(3)) {
-            $InitializeCommonEvent(0, 90075230, 19000822, 10002, 0);
-            $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
-            $InitializeCommonEvent(0, 90075230, 19000824, 10004, 1);
-            $InitializeCommonEvent(0, 90075230, 19000832, 10005, 0);
-            $InitializeCommonEvent(0, 90075230, 19000833, 10006, 0);
-            $InitializeCommonEvent(0, 90075230, 19000834, 10007, 0);
-            $InitializeCommonEvent(0, 90075231, 19000824);
-            $InitializeCommonEvent(0, 90075232, 19000824);
-            $InitializeCommonEvent(0, 90075233, 19000824);
-            $InitializeCommonEvent(0, 90075234, 19000824);
-        }
         // why did they do it like this, this is terrible
         // Gnoster balls
         if (IsPlayerNo(1)) {
@@ -662,8 +626,8 @@ $Event(0, Default, function() {
         // Why did I think I would be done with the clones, that other thing in common was just the initializer
         // This is generators for them
         // P1
-        $InitializeCommonEvent(0, 90015012, 19015842, 7511); // entity group ID
-        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260); // colone generator
+        $InitializeCommonEvent(0, 90015012, 19015842, 7511); // activate clone's MP dependent buffs
+        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260); // clone generator
         $InitializeCommonEvent(0, 99075468, 19010840, 19010453, 113, 19011253, 19000250, 19000263); // Alt clone generator
         $InitializeCommonEvent(0, 99075467, 19010840, 19010450, 19000260); // clone tracker
         $InitializeCommonEvent(0, 99075467, 19010840, 19010453, 19000253); // alt clone tracker
