@@ -16021,7 +16021,7 @@ $Event(90075760, Restart, function(chrEntityId) {
 });
 
 $Event(90075770, Restart, function(chrEntityId, entityId, entityId2, entityId3, entityId4, eventFlagId) {
-    // TODO: New boss I think
+    // Dreglord
     EndIf(EventFlag(eventFlagId));
     EndIf(EventFlag(7512));
     WaitFor(CharacterHasSpEffect(chrEntityId, 60507) || CharacterHasSpEffect(chrEntityId, 60505));
@@ -17054,7 +17054,7 @@ $Event(90085004, Default, function(missionId, hero, eventFlagId, eventFlagId2, c
 });
 
 $Event(90085005, Default, function(missionId, hero, eventFlagId, eventFlagId2) {
-    // TODO: New missions
+    // NR6PF: DLC Mission
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -17065,6 +17065,16 @@ $Event(90085005, Default, function(missionId, hero, eventFlagId, eventFlagId2) {
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // NR6PF: Add new players checks
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(!HasMissionState(missionId, 1));
     EndIf(!IsHero(hero));
@@ -17833,7 +17843,7 @@ $Event(90085040, Default, function(missionId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90085041, Default, function(missionId, eventFlagId, eventFlagId2, hero) {
-    // TODO: New mission
+    // NR6PF: DLC Mission
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -17844,6 +17854,16 @@ $Event(90085041, Default, function(missionId, eventFlagId, eventFlagId2, hero) {
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // NR6PF: Add new players checks
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(!(IsHero(hero) && HasMissionState(missionId, 1)));
     if (EventFlag(eventFlagId)) {
@@ -18276,7 +18296,7 @@ $Event(90085950, Default, function(missionId, assetEntityId, chrEntityId, eventF
 });
 
 $Event(90085951, Default, function(missionId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
-    // TODO: New mission
+    // NR6PF: DLC Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
@@ -18287,6 +18307,16 @@ $Event(90085951, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
     }
     if (IsPlayerNo(3)) {
         EndIf(!EventFlag(7017));
+    }
+    // NR6PF: Add new players checks
+    if (IsPlayerNo(4)) {
+        EndIf(!EventFlag(7018));
+    }
+    if (IsPlayerNo(5)) {
+        EndIf(!EventFlag(7019));
+    }
+    if (IsPlayerNo(6)) {
+        EndIf(!EventFlag(7020));
     }
     EndIf(!IsHero(Hero.Undertaker));
     EndIf(!HasMissionState(missionId, 1));
