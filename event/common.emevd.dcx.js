@@ -2326,6 +2326,7 @@ $Event(1306, Default, function() {
 });
 
 $Event(1307, Restart, function() {
+    // Rune generation buff in SP
     DisableNetworkSync();
     EndIf(!IsGameMode(2));
     WaitFor(
@@ -2338,9 +2339,9 @@ $Event(1307, Restart, function() {
 });
 
 $Event(1308, Restart, function() {
+    // Remove rune generation buff in MP
     DisableNetworkSync();
     EndIf(!IsGameMode(2));
-    // TODO: wat
     WaitFor(IsPlayerCount(2) || CharacterHasSpEffect(20000, 99241));
     SetSpEffect(20000, 99241);
     WaitFor(!IsPlayerCount(2) || !CharacterHasSpEffect(20000, 99241));
