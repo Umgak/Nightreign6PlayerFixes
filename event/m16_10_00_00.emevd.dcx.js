@@ -28,7 +28,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90075756, 16100800, 16103822, 16100822, 16103832, 16100832, 0.2, 16100212, 16100220);
     $InitializeCommonEvent(0, 90075757, 16100800, 16105810, 16100220);
     $InitializeCommonEvent(0, 90075760, 16100800);
-    $InitializeCommonEvent(0, 90075770, 16100800, 16102810, 16102820, 16102821, 16102822, 16100220);
+    $InitializeCommonEvent(0, 90075770, 16100800, 16102810, 16102820, 16102821, 16102822, 16102823, 16102824, 16102825, 16100220); // NR6PF: This function teleports players during phase transition, added warp points for extras
     $InitializeCommonEvent(0, 90075771, 16100800, 16106800, 16100220);
     $InitializeCommonEvent(0, 90075780, 16100800, 16100220);
     $InitializeCommonEvent(0, 90075772, 16100800, 16105810, 16100220);

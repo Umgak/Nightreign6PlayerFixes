@@ -16020,7 +16020,7 @@ $Event(90075760, Restart, function(chrEntityId) {
     ChangeWeather(Weather.Type21, -1, false);
 });
 
-$Event(90075770, Restart, function(chrEntityId, entityId, entityId2, entityId3, entityId4, eventFlagId) {
+$Event(90075770, Restart, function(chrEntityId, entityId, entityId2, entityId3, entityId4, nr6pf_entityId5, nr6pf_entityId6, nr6pf_entityId7, eventFlagId) {
     // Dreglord
     EndIf(EventFlag(eventFlagId));
     EndIf(EventFlag(7512));
@@ -16040,6 +16040,16 @@ $Event(90075770, Restart, function(chrEntityId, entityId, entityId2, entityId3, 
     }
     if (IsPlayerNo(3)) {
         WarpCharacterAndCopyFloorUnknown200489(10004, TargetEntityType.Area, entityId4, -1, 10004, -1, -1);
+    }
+    // NR6PF: Teleport players during phase change
+    if (IsPlayerNo(4)) {
+        WarpCharacterAndCopyFloorUnknown200489(10005, TargetEntityType.Area, nr6pf_entityId5, -1, 10005, -1, -1);
+    }
+    if (IsPlayerNo(5)) {
+        WarpCharacterAndCopyFloorUnknown200489(10006, TargetEntityType.Area, nr6pf_entityId6, -1, 10006, -1, -1);
+    }
+    if (IsPlayerNo(6)) {
+        WarpCharacterAndCopyFloorUnknown200489(10007, TargetEntityType.Area, nr6pf_entityId7, -1, 10007, -1, -1);
     }
     SetCameraAngle(0, 0);
     WaitFor(ElapsedSeconds(4));
