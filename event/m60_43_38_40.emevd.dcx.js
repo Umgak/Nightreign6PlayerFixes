@@ -38,16 +38,24 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035085, 1038400230, 1038402710, 33);
     $InitializeCommonEvent(0, 90035080, 1038400230, 1038405900, 1038402890);
     $InitializeCommonEvent(0, 90035081, 1038400230);
-    $InitializeCommonEvent(0, 90035082, 1038400230, 1038400208, 1038400205, 1038400206);
+    $InitializeCommonEvent(0, 90035082, 1038400230, 1038400208, 1038400205, 1038400206, 1038400218, 1038400215, 1038400216); // NR6PF: new c0120 instances for extra players, also edited in msb
     $InitializeCommonEvent(0, 90035083, 1038400230, 1);
     $InitializeCommonEvent(0, 90035083, 1038400230, 2);
     $InitializeCommonEvent(0, 90035083, 1038400230, 3);
-    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400208, 1);
-    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400205, 2);
-    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400206, 3);
+    // NR6PF: New instances of these events for new players
+    $InitializeCommonEvent(0, 90035083, 1038400230, 4);
+    $InitializeCommonEvent(0, 90035083, 1038400230, 5);
+    $InitializeCommonEvent(0, 90035083, 1038400230, 6);
+    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400208, 1); // river water in the socks of whoever at fromsoft decided to number these things like this
+    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400205, 2); // 8 5 6
+    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400206, 3); // why
+    // Ditto
+    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400218, 4);
+    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400215, 5);
+    $InitializeCommonEvent(0, 90035084, 1038400230, 1038401260, 1038400216, 6);
     $InitializeCommonEvent(0, 90035087, 1038400230, 1038401260);
-    $InitializeCommonEvent(0, 90035088, 1038400230, 1038400204);
-    $InitializeCommonEvent(0, 90035088, 1038400230, 1038400207);
+    $InitializeCommonEvent(0, 90035088, 1038400230, 1038400204); // because 4 is in use here
+    $InitializeCommonEvent(0, 90035088, 1038400230, 1038400207); // and 7 is in use here
 });
 
 $Event(1038402200, Restart, function(assetEntityId, chrEntityId, attachPointEntityId) {

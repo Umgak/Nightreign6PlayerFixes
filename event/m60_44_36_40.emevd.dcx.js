@@ -37,13 +37,21 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035085, 1046400230, 1046402710, 33);
     $InitializeCommonEvent(0, 90035080, 1046400230, 1046405900, 1046402890);
     $InitializeCommonEvent(0, 90035081, 1046400230);
-    $InitializeCommonEvent(0, 90035082, 1046400230, 1046400208, 1046400205, 1046400206);
+    $InitializeCommonEvent(0, 90035082, 1046400230, 1046400208, 1046400205, 1046400206, 1046400218, 1046400215, 1046400216); // NR6PF: new c0120 instances for extra players, also edited in msb
     $InitializeCommonEvent(0, 90035083, 1046400230, 1);
     $InitializeCommonEvent(0, 90035083, 1046400230, 2);
     $InitializeCommonEvent(0, 90035083, 1046400230, 3);
+    // New instances of these events for new players
+    $InitializeCommonEvent(0, 90035083, 1046400230, 4);
+    $InitializeCommonEvent(0, 90035083, 1046400230, 5);
+    $InitializeCommonEvent(0, 90035083, 1046400230, 6);
     $InitializeCommonEvent(0, 90035084, 1046400230, 1046401250, 1046400208, 1);
     $InitializeCommonEvent(0, 90035084, 1046400230, 1046401250, 1046400205, 2);
     $InitializeCommonEvent(0, 90035084, 1046400230, 1046401250, 1046400206, 3);
+    // Ditto
+    $InitializeCommonEvent(0, 90035084, 1046400230, 1046401250, 1046400218, 4);
+    $InitializeCommonEvent(0, 90035084, 1046400230, 1046401250, 1046400215, 5);
+    $InitializeCommonEvent(0, 90035084, 1046400230, 1046401250, 1046400216, 6);
     $InitializeCommonEvent(0, 90035087, 1046400230, 1046401250);
     $InitializeCommonEvent(0, 90035088, 1046400230, 1046400204);
     $InitializeCommonEvent(0, 90035088, 1046400230, 1046400207);
