@@ -8,6 +8,10 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
+    // Gladius invasion event
+    // He does *something* with PlayerNo, and frankly I don't care what.
+    // This event is a goddamn disaster and nobody likes it anyway
+    // Players would celebrate if I patched it out of the game.
     $InitializeEvent(0, 53005220, 8210, 1, 53002600, 53000200, 53000201, 53000202);
     $InitializeEvent(1, 53005220, 8211, 2, 53002600, 53000200, 53000201, 53000202);
     $InitializeEvent(0, 53005230, 53000200, 8215);
@@ -61,7 +65,6 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035228, 53000202, 53000820, 8217, 9372, 100, 200);
     $InitializeCommonEvent(0, 90035229, 53000202, 53000821, 53000212, 53002820, 10004, 53000261, 53000262, 53000263, 53000260, 53000266, 53000267, 53000268, 53000265, 53004821, 1);
     $InitializeCommonEvent(0, 90035229, 53000202, 53000822, 53000212, 53002821, 10004, 53000271, 53000272, 53000273, 53000270, 53000276, 53000277, 53000278, 53000275, 53004822, 2);
-    // TODO: New something
     $InitializeCommonEvent(0, 90035270, 53000820, 53000202);
     $InitializeCommonEvent(0, 90035272, 53000202, 53000820, 8228);
     $InitializeCommonEvent(0, 90035273, 53000202, 8228);

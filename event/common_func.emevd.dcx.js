@@ -6027,7 +6027,9 @@ $Event(90035228, Default, function(eventFlagId, entityId, eventFlagId2, eventFla
 });
 
 $Event(90035229, Default, function(chrEntityId, chrEntityId2, eventFlagId, generatorEntityId, chrEntityId3, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10, value) {
-    // TODO: Big event
+    // Hell
+    // If I ever figure out how this precisely works, I'll maybe "fix" it.
+    // as-is, this event is a mess and nobody likes it anyway so I don't care.
     EndIf(!EventFlag(8077));
     EndIf(EventFlag(8062));
     if (!EventFlag(eventFlagId10)) {
@@ -8831,7 +8833,7 @@ $Event(90035268, Default, function(chrEntityId, eventFlagId) {
 });
 
 $Event(90035270, Default, function(chrEntityId, eventFlagId) {
-    // TODO: New invader
+    // Gladius Invasion
     DisableNetworkSync();
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -8847,7 +8849,11 @@ $Event(90035270, Default, function(chrEntityId, eventFlagId) {
     DisableCharacterGravity(chrEntityId);
     areaChr |= EntityInRadiusOfEntity(10002, chrEntityId, 330, 1)
         || EntityInRadiusOfEntity(10003, chrEntityId, 330, 1)
-        || EntityInRadiusOfEntity(10004, chrEntityId, 330, 1);
+        || EntityInRadiusOfEntity(10004, chrEntityId, 330, 1)
+        // NR6PF: Check for extra players in radius
+        || EntityInRadiusOfEntity(10005, chrEntityId, 330, 1)
+        || EntityInRadiusOfEntity(10006, chrEntityId, 330, 1)
+        || EntityInRadiusOfEntity(10007, chrEntityId, 330, 1);
     area &= areaChr && IsEventMapStable();
     if (area) {
         EnableCharacterGravity(chrEntityId);
@@ -8862,7 +8868,11 @@ $Event(90035270, Default, function(chrEntityId, eventFlagId) {
         areaChr |= !chr;
         area &= (EntityInRadiusOfEntity(10002, chrEntityId, 300, 1)
             || EntityInRadiusOfEntity(10003, chrEntityId, 300, 1)
-            || EntityInRadiusOfEntity(10004, chrEntityId, 300, 1))
+            || EntityInRadiusOfEntity(10004, chrEntityId, 300, 1)
+            // NR6PF: Check for extra players in radius
+            || EntityInRadiusOfEntity(10005, chrEntityId, 300, 1)
+            || EntityInRadiusOfEntity(10006, chrEntityId, 300, 1)
+            || EntityInRadiusOfEntity(10007, chrEntityId, 300, 1))
             && IsEventMapStable();
         areaChr |= area;
         WaitFor(areaChr);
@@ -8880,7 +8890,11 @@ L0:
             || CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget))
             || !(EntityInRadiusOfEntity(10002, chrEntityId, 330, 1)
                 || EntityInRadiusOfEntity(10003, chrEntityId, 330, 1)
-                || EntityInRadiusOfEntity(10004, chrEntityId, 330, 1)));
+                || EntityInRadiusOfEntity(10004, chrEntityId, 330, 1)
+                // NR6PF: Check for extra players in radius
+                || EntityInRadiusOfEntity(10005, chrEntityId, 330, 1)
+                || EntityInRadiusOfEntity(10006, chrEntityId, 330, 1)
+                || EntityInRadiusOfEntity(10007, chrEntityId, 330, 1)));
     RestartEvent();
 });
 
@@ -8917,7 +8931,7 @@ L0:
 });
 
 $Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, value, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
-    // TODO: New invader
+    // TODO: Balancers Raid (oh god)
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061));
