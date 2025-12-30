@@ -700,6 +700,10 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 99075480, 19010840, 19010450, 49693, 49731, 0, 49733, 1);
         $InitializeCommonEvent(0, 99075480, 19010840, 19010451, 49693, 49731, 0, 49733, 1);
         $InitializeCommonEvent(0, 99075480, 19010840, 19010452, 49693, 49731, 0, 49733, 1);
+        // NR6PF: Propagate Libra's "Fruitless Trial" to new clones
+        $InitializeCommonEvent(0, 99075480, 19010840, 19010460, 49693, 49731, 0, 49733, 1);
+        $InitializeCommonEvent(0, 99075480, 19010840, 19010461, 49693, 49731, 0, 49733, 1);
+        $InitializeCommonEvent(0, 99075480, 19010840, 19010462, 49693, 49731, 0, 49733, 1);        
         $InitializeCommonEvent(0, 99075470, 19010840, 49693, 8004);
     }
     if (IsMapVariation(14)) {
@@ -708,6 +712,10 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 99075480, 19010840, 19010450, 49694, 49741, 0, 49749, 1);
         $InitializeCommonEvent(0, 99075480, 19010840, 19010451, 49694, 49741, 0, 49749, 1);
         $InitializeCommonEvent(0, 99075480, 19010840, 19010452, 49694, 49741, 0, 49749, 1);
+        // NR6PF: Propagate Libra's "Demon's Madness" to new clones
+        $InitializeCommonEvent(0, 99075480, 19010840, 19010460, 49694, 49741, 0, 49749, 1);
+        $InitializeCommonEvent(0, 99075480, 19010840, 19010461, 49694, 49741, 0, 49749, 1);
+        $InitializeCommonEvent(0, 99075480, 19010840, 19010462, 49694, 49741, 0, 49749, 1);
         $InitializeCommonEvent(0, 99075470, 19010840, 49694, 8005);
     }
     if (IsMapVariation(14)) {
