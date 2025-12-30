@@ -5934,6 +5934,7 @@ $Event(90035225, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90035227, Default, function(chrEntityId, chrEntityId2, targetDistance, playerNo, targetDistance2, eventFlagId, eventFlagId2, value) {
+    // Gladius invasion
     if (!EventFlag(eventFlagId2)) {
         WaitFor(EventFlag(8061));
         EndIf(!IsPlayerNo(playerNo));
@@ -5947,7 +5948,16 @@ $Event(90035227, Default, function(chrEntityId, chrEntityId2, targetDistance, pl
         if (!IsPlayerNo(3)) {
             area |= EntityInRadiusOfEntity(10004, chrEntityId, targetDistance2, 1);
         }
-        // TODO
+        // NR6PF: Check players for Gladius invasion event
+        if (!IsPlayerNo(4)) {
+            area |= EntityInRadiusOfEntity(10005, chrEntityId, targetDistance2, 1);
+        }
+        if (!IsPlayerNo(5)) {
+            area |= EntityInRadiusOfEntity(10006, chrEntityId, targetDistance2, 1);
+        }
+        if (!IsPlayerNo(6)) {
+            area |= EntityInRadiusOfEntity(10007, chrEntityId, targetDistance2, 1);
+        }
         spFlagArea &= !area
             && (CharacterHasSpEffect(51225, -1)
                 || (CharacterHasSpEffect(chrEntityId, 51220)
