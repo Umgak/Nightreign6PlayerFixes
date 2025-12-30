@@ -345,6 +345,7 @@ S29:
     // NR6PF: <fuck>
     // at least there's a massive valid unused block of flags going all the way up to 700172. I can keep the pattern the devs used going forward and not clobber anything or have to take a bite out of 11_00 again
     // anyway, this is ED Libra's clone initialization stuff.
+    // Requires LibraPatch
     // Vanilla: record player character choices
     $InitializeCommonEvent(0, 99075460, 1, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009);
     $InitializeCommonEvent(0, 99075460, 2, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039);
