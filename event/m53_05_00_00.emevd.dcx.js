@@ -77,10 +77,18 @@ $Event(53052200, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     EndIf(
         !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
-            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1))
+            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
+            // NR6PF: Fix end conditions
+            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10005, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10006, targetDistance, 1))
             && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
-                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1))));
+                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1)
+            // NR6PF: Fix end conditions
+                || EntityInRadiusOfEntity(entityId, 10005, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10006, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10007, targetDistance2, 1))));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
     RecordUserDispLog(11140, entityId, LogObjectType.None, -1);
