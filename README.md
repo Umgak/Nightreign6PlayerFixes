@@ -24,3 +24,4 @@ The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when
 * Balancers invasion
 * Gladius invasion (wontfix for now)
 * Battle towers give the wrong rune quantities (needs a Seamless update)
+* Caligo raid gives the wrong rune quantities (needs a Seamless update)

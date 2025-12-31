@@ -7208,7 +7208,8 @@ $Event(90035261, Default, function(entityId, eventFlagId, eventFlagId2) {
     RecordUserDispLog(110200, entityId, LogObjectType.None, -1);
 });
 
-$Event(90035262, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, eventFlagId) {
+$Event(90035262, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, eventFlagId) {
+    // Caligo raid
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8062));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
@@ -7236,13 +7237,42 @@ $Event(90035262, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
             SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
             DisableCharacterFadeOnEnable(chrEntityId4);
         }
-        // TODO: New invader
+        // NR6PF: Handle new for new players
+        if (IsPlayerNo(4)) {
+            EnableCharacterDefaultBackread(nr6pf_chrEntityId5);
+            SetCharacterEnableDistance(nr6pf_chrEntityId5, 1200);
+            DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId5);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(nr6pf_chrEntityId5);
+        }
+        if (IsPlayerNo(5)) {
+            EnableCharacterDefaultBackread(nr6pf_chrEntityId6);
+            SetCharacterEnableDistance(nr6pf_chrEntityId6, 1200);
+            DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId6);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(nr6pf_chrEntityId6);
+        }
+        if (IsPlayerNo(6)) {
+            EnableCharacterDefaultBackread(nr6pf_chrEntityId7);
+            SetCharacterEnableDistance(nr6pf_chrEntityId7, 1200);
+            DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId7);
+            SetNetworkUpdateAuthority(nr6pf_chrEntityId7, AuthorityLevel.Forced);
+            DisableCharacterFadeOnEnable(nr6pf_chrEntityId7);
+        }
         DisableCharacterCollision(chrEntityId2);
         DisableCharacterCollision(chrEntityId3);
         DisableCharacterCollision(chrEntityId4);
+        // NR6PF: Handle new emitters
+        DisableCharacterCollision(nr6pf_chrEntityId5);
+        DisableCharacterCollision(nr6pf_chrEntityId6);
+        DisableCharacterCollision(nr6pf_chrEntityId7);
         DisableCharacterGravity(chrEntityId2);
         DisableCharacterGravity(chrEntityId3);
         DisableCharacterGravity(chrEntityId4);
+        // NR6PF: Handle new emitters
+        DisableCharacterGravity(nr6pf_chrEntityId5);
+        DisableCharacterGravity(nr6pf_chrEntityId6);
+        DisableCharacterGravity(nr6pf_chrEntityId7);
         if (HPRatio(chrEntityId) < 1) {
             WaitFor(CharacterBackreadStatus(chrEntityId));
             ForceAnimationPlayback(chrEntityId, 30020, false, false, false);
@@ -7254,6 +7284,10 @@ L10:
     DisableCharacter(chrEntityId2);
     DisableCharacter(chrEntityId3);
     DisableCharacter(chrEntityId4);
+    // NR6PF: Handle new emitters
+    DisableCharacter(nr6pf_chrEntityId5);
+    DisableCharacter(nr6pf_chrEntityId6);
+    DisableCharacter(nr6pf_chrEntityId7);
     WaitFor(EventFlag(8061));
     EndIf(!EventFlag(eventFlagId));
     WaitFor(ElapsedSeconds(3));
@@ -7284,17 +7318,48 @@ L10:
         SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
         DisableCharacterFadeOnEnable(chrEntityId4);
     }
+    // NR6PF: Do it all again but less indented
+    if (IsPlayerNo(4)) {
+        EnableCharacterDefaultBackread(nr6pf_chrEntityId5);
+        SetCharacterEnableDistance(nr6pf_chrEntityId5, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId5);
+        SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(nr6pf_chrEntityId5);
+    }
+    if (IsPlayerNo(5)) {
+        EnableCharacterDefaultBackread(nr6pf_chrEntityId6);
+        SetCharacterEnableDistance(nr6pf_chrEntityId6, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId6);
+        SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(nr6pf_chrEntityId6);
+    }
+    if (IsPlayerNo(6)) {
+        EnableCharacterDefaultBackread(nr6pf_chrEntityId7);
+        SetCharacterEnableDistance(nr6pf_chrEntityId7, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId7);
+        SetNetworkUpdateAuthority(nr6pf_chrEntityId7, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(nr6pf_chrEntityId7);
+    }
     DisableCharacterCollision(chrEntityId2);
     DisableCharacterCollision(chrEntityId3);
     DisableCharacterCollision(chrEntityId4);
+    // NR6PF: Handle new emitters
+    DisableCharacterCollision(nr6pf_chrEntityId5);
+    DisableCharacterCollision(nr6pf_chrEntityId6);
+    DisableCharacterCollision(nr6pf_chrEntityId7);
     DisableCharacterGravity(chrEntityId2);
     DisableCharacterGravity(chrEntityId3);
     DisableCharacterGravity(chrEntityId4);
+    // NR6PF: Handle new emitters
+    DisableCharacterGravity(nr6pf_chrEntityId5);
+    DisableCharacterGravity(nr6pf_chrEntityId6);
+    DisableCharacterGravity(nr6pf_chrEntityId7);
     WaitFor(CharacterBackreadStatus(chrEntityId));
     ForceAnimationPlayback(chrEntityId, 30020, false, false, false);
 });
 
-$Event(90035263, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, eventFlagId) {
+$Event(90035263, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, eventFlagId) {
+    // Caligo raid
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8062));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
@@ -7321,6 +7386,19 @@ $Event(90035263, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
     SetCharacterEnableDistance(chrEntityId4, -1);
     EnableCharacterDisableOnHitUnload(chrEntityId4);
     SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Normal);
+    // NR6PF: Handle new emitters
+    DisableCharacterDefaultBackread(nr6pf_chrEntityId5);
+    SetCharacterEnableDistance(nr6pf_chrEntityId5, -1);
+    EnableCharacterDisableOnHitUnload(nr6pf_chrEntityId5);
+    SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Normal);
+    DisableCharacterDefaultBackread(nr6pf_chrEntityId6);
+    SetCharacterEnableDistance(nr6pf_chrEntityId6, -1);
+    EnableCharacterDisableOnHitUnload(nr6pf_chrEntityId6);
+    SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Normal);
+    DisableCharacterDefaultBackread(nr6pf_chrEntityId7);
+    SetCharacterEnableDistance(nr6pf_chrEntityId7, -1);
+    EnableCharacterDisableOnHitUnload(nr6pf_chrEntityId7);
+    SetNetworkUpdateAuthority(nr6pf_chrEntityId7, AuthorityLevel.Normal);
     if (!hp.Passed) {
         SetNetworkconnectedEventFlagID(8062, ON);
         ForceAnimationPlayback(chrEntityId, 20021, false, false, false);
@@ -7329,10 +7407,18 @@ $Event(90035263, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
         DisableCharacter(chrEntityId2);
         DisableCharacter(chrEntityId3);
         DisableCharacter(chrEntityId4);
+        // NR6PF: Handle new emitters
+        DisableCharacter(nr6pf_chrEntityId5);
+        DisableCharacter(nr6pf_chrEntityId6);
+        DisableCharacter(nr6pf_chrEntityId7);
         SetCharacterBackreadState(chrEntityId, true);
         SetCharacterBackreadState(chrEntityId2, true);
         SetCharacterBackreadState(chrEntityId3, true);
         SetCharacterBackreadState(chrEntityId4, true);
+        // NR6PF: Handle new emitters
+        SetCharacterBackreadState(nr6pf_chrEntityId5, true);
+        SetCharacterBackreadState(nr6pf_chrEntityId6, true);
+        SetCharacterBackreadState(nr6pf_chrEntityId7, true);
         RecordUserDispLog(110202, chrEntityId, LogObjectType.None, -1);
         SetWorldMapPointFlag(0, OFF);
         SetWorldMapPointFlag(4, OFF);

@@ -12,8 +12,8 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035260, 53052200, 53050200, 80000, 200, 800);
     $InitializeCommonEvent(0, 90035260, 53052200, 53050200, 80001, 100, 900);
     $InitializeCommonEvent(0, 90035261, 53052200, 53050200, 80001);
-    $InitializeCommonEvent(0, 90035262, 53050800, 53050810, 53050811, 53050812, 53050200);
-    $InitializeCommonEvent(0, 90035263, 53050800, 53050810, 53050811, 53050812, 53050200);
+    $InitializeCommonEvent(0, 90035262, 53050800, 53050810, 53050811, 53050812, 53050813, 53050814, 53050815, 53050200); // NR6PF: Pass new emitters to call
+    $InitializeCommonEvent(0, 90035263, 53050800, 53050810, 53050811, 53050812, 53050813, 53050814, 53050815, 53050200); // NR6PF: Pass new emitters to call
     $InitializeCommonEvent(0, 90035264, 53050200);
     if (IsPlayerNo(1)) {
         $InitializeCommonEvent(0, 90035265, 53050810, 53050200);
