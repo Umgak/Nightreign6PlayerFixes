@@ -2873,9 +2873,11 @@ $Event(90015468, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffectId3) {
+    // DLC Battle tower rune distribution
+    // TODO: This will require a code hook, but I need Seamless to be updated to do that code hook
+    // Can't fix for now
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
-    // TODO: Check what this does
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
             SetSpEffect(10000, spEffectId);
@@ -7347,7 +7349,8 @@ L0:
     SetNetworkconnectedEventFlagID(8025, ON);
     DisplayTextEffectId(2200);
     RecordUserDispLog(110201, chrEntityId, LogObjectType.None, -1);
-    // TODO: Caligo invasion event
+    // TODO: Caligo invasion event rune reward
+    // Needs a Seamless update for the same reasons as the towers
     if (!IsPlayerCount(1)) {
         if (!IsPlayerCount(2)) {
             SetSpEffect(10000, 98800);
@@ -7398,6 +7401,9 @@ L0:
 });
 
 $Event(90035265, Default, function(chrEntityId, eventFlagId) {
+    // Caligo Raid
+    // What the fuck, fromsoft
+    // I'm glad I don't have to touch this beyond new initializers
     DisableNetworkSync();
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8062));

@@ -24,14 +24,23 @@ $Event(0, Default, function() {
     if (IsPlayerNo(3)) {
         $InitializeCommonEvent(0, 90035265, 53050812, 53050200);
     }
-    // TODO: New something
+    // NR6PF: Initialize new emitters for Caligo raid
+    if (IsPlayerNo(4)) {
+        $InitializeCommonEvent(0, 90035265, 53050813, 53050200);
+    }
+    if (IsPlayerNo(5)) {
+        $InitializeCommonEvent(0, 90035265, 53050814, 53050200);
+    }
+    if (IsPlayerNo(6)) {
+        $InitializeCommonEvent(0, 90035265, 53050815, 53050200);
+    }
     $InitializeCommonEvent(0, 90035266, 53052200, 150, 53050200);
     $InitializeCommonEvent(0, 90035267, 53050200);
     $InitializeCommonEvent(0, 90035268, 53050800, 53050200);
 });
 
 $Event(53052200, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
-    // TODO: New something
+    // Caligo Raid
     DisableNetworkSync();
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8061));
@@ -44,6 +53,16 @@ $Event(53052200, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: Sleep longer for more players, all raids do this for some reason
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     if (EventFlag(9999)) {
         WaitFixedTimeFrames(1);
@@ -79,6 +98,16 @@ $Event(53052205, Default, function(entityId, eventFlagId) {
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: Sleep longer for more players, all raids do this for some reason
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {
