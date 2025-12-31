@@ -53,6 +53,9 @@ $Event(0, Default, function() {
 });
 
 $Event(200, Default, function() {
+    // TODO
+    // DLC Battle tower rune distribution
+    // Can't fix without a code patch, code patch requires Seamless update
     $InitializeCommonEvent(0, 90015469, 1056400201, 98360, 98363, 98366);
     $InitializeCommonEvent(1, 90015469, 1056400206, 98361, 98364, 98367);
     $InitializeCommonEvent(2, 90015469, 1056400211, 98362, 98365, 98368);
