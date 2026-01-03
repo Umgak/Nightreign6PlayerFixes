@@ -37,14 +37,18 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 52012200, 52010800);
         $InitializeCommonEvent(0, 90015023, 52010200, 40, 0, 52015210, 52010800, 905820600, 0, 0, 0, 0);
         $InitializeCommonEvent(0, 90015030, 52010200, 52015210, 40, 931000, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 52010200, 0, 52015210, 1020, 931000, -1, 905820600, 52010800);
-        $InitializeCommonEvent(0, 90015470, 52012200, 52010200, 52010800, 52015210, 0, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 52010200, 0, 52015210, 1020, 931000, 110320, 905820600, 52010800);
+        $InitializeCommonEvent(0, 90015470, 52012200, 52010200, 52010800, 52015210, 0, 0, 52015210);
         $InitializeCommonEvent(0, 90015446, 52015210, 52010200, 52010800, 52012200);
         $InitializeCommonEvent(0, 90015460, 52012200, 52010800);
         $InitializeCommonEvent(0, 90015460, 52012200, 0);
         $InitializeCommonEvent(0, 90015460, 52012200, 0);
     }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015475, 52012200, 52010800);
+        $InitializeCommonEvent(0, 90015475, 52012200, 0);
+        $InitializeCommonEvent(0, 90015475, 52012200, 0);
+    }
     $InitializeCommonEvent(0, 90035001, 52010800);
 });
-
 

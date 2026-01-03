@@ -20,4 +20,3 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90085005, 203, Hero.Guardian, 9200, 0);
 });
 
-

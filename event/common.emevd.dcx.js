@@ -347,6 +347,7 @@ S29:
     // anyway, this is ED Libra's clone initialization stuff.
     // Requires LibraPatch
     // Vanilla: record player character choices
+    $InitializeCommonEvent(0, 90015477);
     $InitializeCommonEvent(0, 99075460, 1, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009);
     $InitializeCommonEvent(0, 99075460, 2, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039);
     $InitializeCommonEvent(0, 99075460, 3, 70060, 70061, 70062, 70063, 70064, 70065, 70066, 70067, 70068, 70069);
@@ -419,6 +420,7 @@ S29:
     $InitializeEvent(0, 1320, 99874, 99810);
     $InitializeEvent(1, 1320, 99879, 99811);
     $InitializeEvent(0, 1325);
+    $InitializeEvent(0, 1203);
     $InitializeEvent(0, 1330, 1044382790);
     $InitializeEvent(1, 1330, 1044382791);
     $InitializeEvent(2, 1330, 1044362790);
@@ -427,14 +429,7 @@ S29:
     $InitializeEvent(1, 1350, 52402465);
     $InitializeEvent(2, 1350, 1039402745);
     $InitializeEvent(3, 1350, 1029402745);
-    $InitializeEvent(4, 1350, 50002705);
     $InitializeEvent(5, 1350, 1046402745);
-    $InitializeEvent(6, 1350, 50022705);
-    $InitializeEvent(7, 1350, 50042705);
-    $InitializeEvent(8, 1350, 50032705);
-    $InitializeEvent(9, 1350, 50052705);
-    $InitializeEvent(10, 1350, 50062705);
-    $InitializeEvent(11, 1350, 50012705);
     $InitializeEvent(0, 1370, 1058402745, 1057402745);
     $InitializeEvent(0, 1340);
     $InitializeEvent(0, 1304);
@@ -1414,7 +1409,7 @@ L4:
 });
 
 $Event(1140, Restart, function() {
-    if (!(EventFlag(7700) || EventFlag(7720))) {
+    if (!EventFlag(7700)) {
         SetNetworkconnectedEventFlagID(7518, OFF);
         EndEvent();
     }
@@ -1422,7 +1417,11 @@ $Event(1140, Restart, function() {
         SetNetworkconnectedEventFlagID(7518, OFF);
         EndEvent();
     }
-    WaitFor(EventFlag(8035));
+    WaitFor(EventFlag(7501) || EventFlag(8020));
+    if (EventFlag(8020)) {
+        SetNetworkconnectedEventFlagID(7518, OFF);
+        EndEvent();
+    }
     SetNetworkconnectedEventFlagID(7518, ON);
     WaitFor(EventFlag(8020));
     SetNetworkconnectedEventFlagID(7518, OFF);
@@ -1508,16 +1507,21 @@ $Event(1145, Default, function() {
     if (!IsPlayerCount(1)) {
         RemoveEstusCharge();
     }
-    SetSpEffect(20000, 448);
     if (!IsPlayerCount(1)) {
         if (!AllBatchEventFlags(80018, 80020)) {
             RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
+            if (!EventFlag(8062)) {
+                SetSpEffect(20000, 448);
+            }
         }
     }
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
             if (!AllBatchEventFlags(80018, 80019)) {
                 RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
+                if (!EventFlag(8062)) {
+                    SetSpEffect(20000, 448);
+                }
             }
         }
     }
@@ -1560,7 +1564,11 @@ $Event(1148, Default, function() {
         if (!IsPlayerCount(3)) {
             if (!AllBatchEventFlags(80018, 80019)) {
                 SetNetworkconnectedEventFlagID(8062, ON);
-                RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
+                if (CountEventFlags(TargetEventFlagType.EventFlag, 80015, 80016) >= 2) {
+                    RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
+                } else {
+                    RecordUserDispLog(110054, 10000, LogObjectType.None, -1);
+                }
                 EndEvent();
             }
         }
@@ -1569,7 +1577,11 @@ L0:
     if (!IsPlayerCount(1)) {
         if (!AllBatchEventFlags(80018, 80020)) {
             SetNetworkconnectedEventFlagID(8062, ON);
-            RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
+            if (CountEventFlags(TargetEventFlagType.EventFlag, 80015, 80017) >= 2) {
+                RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
+            } else {
+                RecordUserDispLog(110054, 10000, LogObjectType.None, -1);
+            }
             EndEvent();
         }
     }
@@ -1910,6 +1922,12 @@ $Event(1181, Restart, function() {
             || CharacterHPValue(10000) <= 0
             || CharacterHasTeamType(10000, TeamType.Unknown77));
     RestartIf(!EventFlag(7515) && !EventFlag(7510));
+    if (CharacterHasSpEffect(20000, 8970061)) {
+        WaitFor(
+            (CharacterHPValue(20000) != 0 && !CharacterHasTeamType(10000, TeamType.Unknown77))
+                || ElapsedSeconds(20));
+        RestartEvent();
+    }
     if (CharacterHasSpEffect(20000, 6999500)) {
         WaitFor(CharacterHasSpEffect(20000, 540157));
         SetSpEffect(20000, 6999505);
@@ -2136,6 +2154,20 @@ $Event(1202, Default, function() {
     DisableAsset(1060001500);
     DisableAsset(1060001510);
     EnableAsset(1060001502);
+});
+
+$Event(1203, Default, function() {
+    DisableNetworkSync();
+    EndIf(!EventFlag(7604));
+    if (InsidePlayArea(20000, 0)) {
+        SetSpEffect(20000, 98222);
+    }
+    WaitFor(!InsidePlayArea(20000, 0));
+    SetSpEffect(20000, 98220);
+    WaitFor(!CharacterHasSpEffect(20000, 98220) || InsidePlayArea(20000, 0));
+    SetSpEffect(20000, 98222);
+    WaitFixedTimeSeconds(0.5);
+    RestartEvent();
 });
 
 $Event(1210, Default, function() {
@@ -2886,78 +2918,118 @@ L10:
 
 $Event(1450, Default, function(spEffectId, spEffectId2) {
     DisableNetworkSync();
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
+    ClearSpEffect(20000, spEffectId2);
     WaitFor(CharacterHasSpEffect(20000, spEffectId));
     if (EventValue(9130, 4) < 1) {
         WaitFor(TeamOpenedBonfires() >= 1);
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L1:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 2) {
-        WaitFor(TeamOpenedBonfires() >= 2);
+        WaitFor(
+            TeamOpenedBonfires() >= 2
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L2:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 3) {
-        WaitFor(TeamOpenedBonfires() >= 3);
+        WaitFor(
+            TeamOpenedBonfires() >= 3
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L3:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 4) {
-        WaitFor(TeamOpenedBonfires() >= 4);
+        WaitFor(
+            TeamOpenedBonfires() >= 4
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L4:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 5) {
-        WaitFor(TeamOpenedBonfires() >= 5);
+        WaitFor(
+            TeamOpenedBonfires() >= 5
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L5:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 6) {
-        WaitFor(TeamOpenedBonfires() >= 6);
+        WaitFor(
+            TeamOpenedBonfires() >= 6
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L6:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 7) {
-        WaitFor(TeamOpenedBonfires() >= 7);
+        WaitFor(
+            TeamOpenedBonfires() >= 7
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L7:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 8) {
-        WaitFor(TeamOpenedBonfires() >= 8);
+        WaitFor(
+            TeamOpenedBonfires() >= 8
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L8:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 9) {
-        WaitFor(TeamOpenedBonfires() >= 9);
+        WaitFor(
+            TeamOpenedBonfires() >= 9
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L9:
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
     if (EventValue(9130, 4) < 10) {
-        WaitFor(TeamOpenedBonfires() >= 10);
+        WaitFor(
+            TeamOpenedBonfires() >= 10
+                || !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+        GotoIf(L20, !CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
         IncrementEventValue(9130, 4, 10);
-        SetSpEffect(20000, spEffectId2);
-        WaitFixedTimeFrames(1);
     }
 L10:
-    NoOp();
+    SetSpEffect(20000, spEffectId2);
+    WaitFixedTimeFrames(1);
+    WaitFor(!CharacterHasSpEffect(20000, spEffectId2, GreaterOrEqual, 1));
+L20:
+    WaitFixedTimeSeconds(3);
+    RestartEvent();
 });
 
 $Event(1500, Restart, function() {
@@ -3481,5 +3553,4 @@ L2:
     WaitFixedTimeFrames(1);
     RestartEvent();
 });
-
 

@@ -25,6 +25,7 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 1029404703);
     $InitializeEvent(0, 1029404704);
     $InitializeEvent(0, 1029404705);
+    $InitializeEvent(0, 1029404706, 1001, 1029401800);
     $InitializeCommonEvent(0, 90085020, 1001, 8536, 8536, 8537, 1029400720, 99854, 8536, Hero.Undertaker);
     $InitializeCommonEvent(0, 90085023, 1001, 8536, 8537, 1029400720, 6870, 8536, Hero.Undertaker);
     $InitializeCommonEvent(0, 90085950, 1001, 1029401720, 1029400720, 8536);
@@ -154,4 +155,13 @@ $Event(1029404705, Default, function() {
     HideFloatingMessage(560, 1029402720);
 });
 
+$Event(1029404706, Default, function(missionId, entityId) {
+    DisableNetworkSync();
+    EndIf(IsRequestGameMode(3));
+    EndIf(MissionActive(missionId));
+    WaitFor(ActionButtonInArea(9391, entityId));
+    DisplayGenericDialog(71100, PromptType.OKCANCEL, NumberofOptions.NoButtons, entityId, 10);
+    WaitFixedTimeSeconds(3);
+    RestartEvent();
+});
 

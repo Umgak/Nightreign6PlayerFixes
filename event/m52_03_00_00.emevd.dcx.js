@@ -33,7 +33,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015008, 52030205, 52030800, 793000, 52035210, -1, 0);
     $InitializeCommonEvent(0, 90065205, 52030800, 52030210, 52030211, 52030205);
     $InitializeCommonEvent(0, 90065205, 52030801, 52030211, 52030210, 52030205);
-    $InitializeCommonEvent(0, 90065206, 52030800, 52030801, 52030210, 52030211, 52030205, 52030800);
+    $InitializeCommonEvent(0, 90065206, 52030800, 52030801, 52030205, 52030800);
     $InitializeCommonEvent(0, 90065207, 52030800, 52030801, 52030800, 52030205);
     $InitializeCommonEvent(0, 90035001, 52030800);
 });
@@ -62,5 +62,4 @@ L0:
     ClearSpEffect(chrEntityId2, 60840);
     ClearSpEffect(chrEntityId2, 60826);
 });
-
 

@@ -22,7 +22,12 @@ $Event(200, Default, function() {
 $Event(1059402200, Restart, function() {
     if (!AnyBatchEventFlags(8000, 8003)) {
         DisableCharacter(1059400210);
+        DisableCharacter(1059400550);
         SetCharacterBackreadState(1059400210, true);
+        SetCharacterBackreadState(1059400550, true);
+        ChangeAssetEnableStateUnknown200510(1059401500, Disabled, 1);
+        ChangeAssetEnableStateUnknown200510(1059401501, Disabled, 1);
+        DisableAsset(1059401502);
         EndEvent();
     }
     if (EventFlag(7505)) {
@@ -48,5 +53,4 @@ $Event(1059402201, Restart, function() {
     WaitFor(EventFlag(7505));
     SetNetworkconnectedEventFlagID(73999, ON);
 });
-
 

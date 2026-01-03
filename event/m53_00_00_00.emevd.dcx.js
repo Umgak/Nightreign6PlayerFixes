@@ -122,4 +122,3 @@ S1:
     SetWorldMapPointFlag(0, OFF);
 });
 
-

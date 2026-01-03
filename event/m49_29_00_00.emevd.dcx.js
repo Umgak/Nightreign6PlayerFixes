@@ -42,8 +42,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 49292200, 49290800);
         $InitializeCommonEvent(0, 90015023, 49290200, 40, 0, 49295220, 49290800, 904130700, 49290810, 905810000, 0, 0);
         $InitializeCommonEvent(0, 90015030, 49290200, 49295220, 40, 931000, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 49290200, 0, 49290800, 1020, 931000, -1, 49290800, 904130700);
-        $InitializeCommonEvent(0, 90015470, 49292200, 49290200, 49290800, 49295220, 49295210, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 49290200, 0, 49295220, 1020, 931000, 110320, 904130700, 49290800);
+        $InitializeCommonEvent(0, 90015470, 49292200, 49290200, 49290800, 49295220, 49295210, 0, 49295220);
     }
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015446, 49295220, 49290200, 49290800, 49292200);
@@ -60,6 +60,19 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015460, 49292200, 49290816);
         $InitializeCommonEvent(0, 90015460, 49292200, 49290821);
         $InitializeCommonEvent(0, 90015460, 49292200, 49290822);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290800);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290810);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290810);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290811);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290812);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290813);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290814);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290815);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290816);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290821);
+        $InitializeCommonEvent(0, 90015475, 49292200, 49290822);
     }
     if (1 == 1) {
         $InitializeCommonEvent(0, 90015070, 1056402601, 49290000, 49290300);
@@ -248,5 +261,4 @@ $Event(49292920, Restart, function(eventFlagId) {
     WaitFor(EventFlag(8035));
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
 });
-
 

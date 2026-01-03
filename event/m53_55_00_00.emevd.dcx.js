@@ -38,4 +38,3 @@ $Event(53552510, Restart, function(chrEntityId, areaEntityId) {
     ClearSpEffect(chrEntityId, 8081);
 });
 
-

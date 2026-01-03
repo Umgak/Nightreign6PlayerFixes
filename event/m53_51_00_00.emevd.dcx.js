@@ -31,9 +31,9 @@ S2:
     $InitializeEvent(0, 53512000);
     $InitializeCommonEvent(0, 90015462, 8240, 8241, 8242, 53510810);
     $InitializeCommonEvent(0, 90015463, 8240, 8241, 53512200);
-    $InitializeCommonEvent(0, 90015000, 8241, 53510810, 904770000, 30, 0, 8242);
+    $InitializeCommonEvent(0, 90015000, 8241, 53510810, 904770001, 30, 0, 8242);
     $InitializeCommonEvent(0, 90015030, 8241, 53510810, 30, 931010, 8242);
-    $InitializeCommonEvent(0, 90015002, 0, 0, 53510810, 53510810, 1020, 931010, 110221, 904770000, 53510810);
+    $InitializeCommonEvent(0, 90015002, 0, 0, 53510810, 53510810, 1020, 931010, 110221, 904770001, 53510810);
     $InitializeCommonEvent(0, 9005810, 53510810, 53510510, 53511510, 5);
     $InitializeCommonEvent(0, 90015005, 53511510, 53512810, 53510810);
     $InitializeCommonEvent(0, 90015466, 53510810, 8242);
@@ -51,5 +51,4 @@ $Event(53512000, Default, function() {
             || CharacterRatioDead(53515800));
     SetEventFlagID(75101, ON);
 });
-
 

@@ -54,4 +54,3 @@ $Event(1027502200, Restart, function(areaEntityId) {
     RestartEvent();
 });
 
-

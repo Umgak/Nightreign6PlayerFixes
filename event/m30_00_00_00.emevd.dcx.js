@@ -123,4 +123,3 @@ $Event(30002930, Restart, function(chrEntityId, areaEntityId) {
     RestartEvent();
 });
 
-

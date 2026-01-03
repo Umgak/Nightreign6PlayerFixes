@@ -37,7 +37,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 52122200, 52120800);
         $InitializeCommonEvent(0, 90015023, 52120200, 40, 0, 52125210, 52120800, 907720600, 0, 0, 0, 0);
         $InitializeCommonEvent(0, 90015030, 52120200, 52125210, 40, 772000, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 52120200, 0, 52120800, 1070, 772000, -1, 907720600, 52120800);
+        $InitializeCommonEvent(0, 90015002, 0, 52120200, 0, 52120800, 1070, 772000, 110320, 907720600, 52120800);
         $InitializeCommonEvent(0, 90015446, 52125210, 52120200, 52120800, 52122200);
         $InitializeCommonEvent(0, 90015460, 52122200, 52120800);
     }
@@ -231,5 +231,4 @@ L0:
     WaitFor(CharacterHPValue(chrEntityId) <= 0);
     DeactivateGparamOverride(3);
 });
-
 

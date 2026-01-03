@@ -45,8 +45,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 47702200, 47700800);
         $InitializeCommonEvent(0, 90015023, 47700200, 40, 0, 47705800, 47700800, 904950600, 47705801, 904950604, 0, 0);
         $InitializeCommonEvent(0, 90015030, 47700200, 47705800, 40, 920100, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 47700200, 0, 47705800, 1020, 920100, -1, 904950600, 47700800);
-        $InitializeCommonEvent(0, 90015470, 47702200, 47700200, 47700800, 47705800, 47705801, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 47700200, 0, 47705800, 1020, 920100, 110320, 904950600, 47700800);
+        $InitializeCommonEvent(0, 90015470, 47702200, 47700200, 47700800, 47705800, 47705801, 0, 0);
     }
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015446, 47705800, 47700200, 47700800, 47702200);
@@ -1165,5 +1165,4 @@ L0:
     WaitFixedTimeSeconds(1);
     RestartEvent();
 });
-
 

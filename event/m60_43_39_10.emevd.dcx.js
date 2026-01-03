@@ -595,4 +595,3 @@ $Event(1039103050, Default, function(entityId) {
     SetNetworkconnectedEventFlagID(1028100204, ON);
 });
 
-

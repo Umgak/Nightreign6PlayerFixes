@@ -62,6 +62,7 @@ S2:
     $InitializeEvent(0, 50022700);
     $InitializeEvent(0, 50022720);
     $InitializeEvent(0, 50022710);
+    $InitializeCommonEvent(0, 90015060, 50022705);
     $InitializeEvent(0, 50022500, 50020800);
     $InitializeCommonEvent(0, 90045030, 50022500, 98210, 98211);
     $InitializeEvent(0, 50022550, 50022550, 98200, 98201);
@@ -121,5 +122,4 @@ $Event(50022720, End, function() {
     WaitFor(EventFlag(50022711));
     ForceAnimationPlayback(50021200, 1, false, false, false);
 });
-
 

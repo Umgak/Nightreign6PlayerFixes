@@ -140,4 +140,3 @@ L0:
     RegisterBonfire(assetEntityId, 0, distance);
 });
 
-

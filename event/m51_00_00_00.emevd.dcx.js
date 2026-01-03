@@ -30,4 +30,3 @@ $Event(51002520, Default, function() {
     SetSpEffect(20000, 99270);
 });
 
-

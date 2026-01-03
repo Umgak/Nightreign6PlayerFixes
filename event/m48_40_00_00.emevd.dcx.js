@@ -37,14 +37,21 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 48402200, 48400800);
         $InitializeCommonEvent(0, 90015023, 48400200, 40, 0, 48400800, 48400800, 902130002, 0, 0, 0, 0);
         $InitializeCommonEvent(0, 90015030, 48400200, 48400800, 40, 213001, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 48400200, 0, 48400800, 1020, 213001, -1, 902130002, 48400800);
-        $InitializeCommonEvent(0, 90015470, 48402200, 48400200, 48400800, 48400800, 0, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 48400200, 0, 48400800, 1020, 213001, 110320, 902130002, 48400800);
+        $InitializeCommonEvent(0, 90015470, 48402200, 48400200, 48400800, 48400800, 0, 0, 0);
+        $InitializeCommonEvent(0, 90015476, 10002, 48402200);
+        $InitializeCommonEvent(0, 90015476, 10003, 48402200);
+        $InitializeCommonEvent(0, 90015476, 10004, 48402200);
+        $InitializeCommonEvent(0, 90065140, 48400800);
     }
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015446, 48400800, 48400200, 48400800, 48402200);
     }
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015460, 48402200, 48400800);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015475, 48402200, 48400800);
     }
     $InitializeCommonEvent(0, 90035001, 48400800);
     if (2 == 1) {
@@ -121,5 +128,4 @@ L0:
     SetNetworkUpdateRate(48400800, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Enabled, chrEntityId, 0, nameId);
 });
-
 

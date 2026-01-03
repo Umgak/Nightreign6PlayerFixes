@@ -66,8 +66,13 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 48602200, 48600800);
         $InitializeCommonEvent(0, 90015023, 48600200, 40, 0, 48605800, 48600800, 903251600, 48600810, 904351000, 48600820, 904351000);
         $InitializeCommonEvent(0, 90015030, 48600200, 48605800, 40, 920200, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 48600200, 0, 48605800, 1020, 920200, -1, 903251600, 48600800);
-        $InitializeCommonEvent(0, 90015470, 48602200, 48600200, 48600800, 48605899, 0, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 48600200, 0, 48605800, 1020, 920200, 110320, 903251600, 48600800);
+        $InitializeCommonEvent(0, 90015470, 48602200, 48600200, 48600800, 48605899, 0, 0, 48605800);
+        $InitializeCommonEvent(0, 90065057, 48600800, 48600800);
+        $InitializeCommonEvent(0, 90065057, 48600810, 48600800);
+        $InitializeCommonEvent(0, 90065057, 48600811, 48600800);
+        $InitializeCommonEvent(0, 90065057, 48600820, 48600800);
+        $InitializeCommonEvent(0, 90065057, 48600821, 48600800);
     }
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015446, 48605899, 48600200, 48600800, 48602200);
@@ -82,6 +87,17 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015460, 48602200, 48600805);
         $InitializeCommonEvent(0, 90015460, 48602200, 48600802);
         $InitializeCommonEvent(0, 90015460, 48602200, 48600806);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600800);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600810);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600811);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600820);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600821);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600801);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600805);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600802);
+        $InitializeCommonEvent(0, 90015475, 48602200, 48600806);
     }
     $InitializeCommonEvent(0, 90035001, 48600800);
     if (2 == 1) {
@@ -244,5 +260,4 @@ $Event(48602821, Restart, function(chrEntityId, spEffectId) {
     WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId));
     ForceCharacterDeath(48600821, true);
 });
-
 

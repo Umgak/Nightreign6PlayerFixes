@@ -15,7 +15,6 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015007, 52460210, 52465810, 52462810, 30, 903320110, 0, 0);
         $InitializeCommonEvent(0, 90015031, 52460210, 52465810, 52462810, 30, 940000, 0);
     }
-    $InitializeCommonEvent(0, 90015002, 0, 0, 52460810, 52465810, 1030, 940000, 11200, 903320110, 52460510);
     $InitializeCommonEvent(0, 90015025, 0, 0, 52460810, 52465810, 1030, 940000, 11200, 903320110, 52460510, 3);
     $InitializeCommonEvent(0, 90015006, 52461510, 52460510, 52460810, 5);
     $InitializeCommonEvent(0, 90015005, 52461510, 52462810, 52460810);
@@ -102,5 +101,4 @@ $Event(52462815, Restart, function(chrEntityId, chrEntityId2, eventFlagId) {
     WaitFor(CharacterDead(chrEntityId) && ElapsedSeconds(2));
     ForceCharacterDeath(chrEntityId2, true);
 });
-
 

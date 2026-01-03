@@ -57,7 +57,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 47802200, 47800800);
         $InitializeCommonEvent(0, 90015023, 47800200, 40, 0, 47800800, 47800800, 907700000, 0, 0, 0, 0);
         $InitializeCommonEvent(0, 90015030, 47800200, 47800800, 40, 770000, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 47800200, 0, 47800800, 1070, 770000, -1, 907700000, 47800800);
+        $InitializeCommonEvent(0, 90015002, 0, 47800200, 0, 47800800, 1070, 770000, 110320, 907700000, 47800800);
         $InitializeCommonEvent(0, 90015471, 47802200, 47800200, 47800800, 47800800, 0, 0, 46550, 0, 0, 0);
     }
     if (IsMapVariation(2)) {
@@ -66,6 +66,10 @@ $Event(0, Default, function() {
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015460, 47802200, 47800800);
         $InitializeCommonEvent(0, 90015460, 47802200, 47800810);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015475, 47802200, 47800800);
+        $InitializeCommonEvent(0, 90015475, 47802200, 47800810);
     }
     $InitializeCommonEvent(0, 90035001, 47800800);
     if (1 == 1) {
@@ -176,5 +180,4 @@ $Event(9992851, Restart, function(chrEntityId, spEffectId) {
     WaitFor(CharacterHasSpEffect(chrEntityId, spEffectId));
     ForceAnimationPlayback(47800800, 20000, true, false, false);
 });
-
 

@@ -1116,4 +1116,3 @@ $Event(46502840, Default, function() {
     ClearSpEffect(0, 0);
 });
 
-
