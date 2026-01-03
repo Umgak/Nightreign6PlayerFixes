@@ -7138,7 +7138,7 @@ $Event(90035253, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
 });
 
 $Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
-    // TODO: New invader
+    // TODO: Caligo raid
     DisableNetworkSync();
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8061));
@@ -7189,7 +7189,7 @@ $Event(90035261, Default, function(entityId, eventFlagId, eventFlagId2) {
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
     }
-    // TODO: New invader
+    // TODO: Caligo raid
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {
         EndIf(
@@ -9122,7 +9122,7 @@ L0:
 });
 
 $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
-    // TODO: New invader
+    // TODO: Balancers raid
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8062));
@@ -9177,7 +9177,7 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
 });
 
 $Event(90035283, Default, function(chrEntityId, areaEntityId, assetEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
-    // TODO: New invader
+    // TODO: Balancers raid
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId3));
     if (EventFlag(eventFlagId5) || EventFlag(eventFlagId6)) {
@@ -9265,7 +9265,8 @@ $Event(90035285, Default, function(chrEntityId, eventFlagId, eventFlagId2, event
     EndIf(EventFlag(eventFlagId5));
     if (CharacterHPValue(chrEntityId) <= 0) {
         WaitFor(EventFlag(eventFlagId4));
-        // TODO: Check on this
+        // TODO: Balancers raid
+        // Code hook required, same as Caligo and the towers
         if (!IsPlayerCount(2)) {
             GotoIf(S0, IsPlayerCount(3));
             if (CountEventFlags(TargetEventFlagType.EventFlag, 80018, 80020) < 1) {
