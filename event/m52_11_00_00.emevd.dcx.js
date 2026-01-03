@@ -32,7 +32,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015012, 52115210, 52110200);
     $InitializeCommonEvent(1, 90015012, 0, 52110200);
     $InitializeCommonEvent(0, 90015020, 52110200, 52110800);
-    $InitializeCommonEvent(0, 90015008, 52110205, 52110800, 521000, 52110800, 60245, 0);
+    $InitializeCommonEvent(0, 90015008, 52110205, 52110800, 521000, 52110800, 60239, 0);
     $InitializeCommonEvent(0, 90065245, 52110800, 60210, Weather.Type82, 60260, 28, 39, 52110210, 52110200, 52110800);
     $InitializeCommonEvent(0, 90065245, 52110800, 60211, Weather.Type41, 60261, 31, 40, 52110211, 52110200, 52110800);
     $InitializeCommonEvent(0, 90065245, 52110800, 60212, Weather.Type11, 60262, 28, 39, 52110212, 52110200, 52110800);
@@ -44,12 +44,11 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 52115200, 52110800);
         $InitializeCommonEvent(0, 90015023, 52110200, 40, 0, 52115210, 52110800, 905210600, 0, 0, 0, 0);
         $InitializeCommonEvent(0, 90015030, 52110200, 52115210, 40, 521000, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 52110200, 0, 52110800, 1020, 521000, -1, 905210600, 52110800);
-        $InitializeCommonEvent(0, 90015470, 52115200, 52110200, 52110800, 52110800, 0, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 52110200, 0, 52110800, 1020, 521000, 110320, 905210600, 52110800);
+        $InitializeCommonEvent(0, 90015470, 52115200, 52110200, 52110800, 52110800, 0, 0, 0);
         $InitializeCommonEvent(0, 90015446, 52115210, 52110200, 52110800, 52115200);
         $InitializeCommonEvent(0, 90015460, 52115200, 52110800);
     }
     $InitializeCommonEvent(0, 90035001, 52110800);
 });
-
 

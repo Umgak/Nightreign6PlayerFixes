@@ -1378,4 +1378,3 @@ $Event(19004500, Restart, function(eventFlagId, chrEntityId) {
     SetSpEffect(20000, 9731);
 });
 
-

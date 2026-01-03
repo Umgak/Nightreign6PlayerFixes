@@ -37,4 +37,3 @@ $Event(50, Default, function() {
     $InitializeCommonEvent(0, 90005201, 53830401, 30000, 20000, 5, 0.5, 0, 0, 0, 0);
 });
 
-

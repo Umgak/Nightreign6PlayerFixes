@@ -21,4 +21,3 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035048, 46020100, 46020200, 46022290);
 });
 
-

@@ -37,12 +37,17 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 48302200, 48300800);
         $InitializeCommonEvent(0, 90015023, 48300200, 40, 0, 48305210, 48300800, 907920000, 0, 0, 0, 0);
         $InitializeCommonEvent(0, 90015030, 48300200, 48305210, 40, 792000, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 48300200, 0, 48305210, 1080, 792000, -1, 907920000, 48300800);
-        $InitializeCommonEvent(0, 90015470, 48302200, 48300200, 48300800, 48305210, 0, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 48300200, 0, 48305210, 1080, 792000, 110320, 907920000, 48300800);
+        $InitializeCommonEvent(0, 90015470, 48302200, 48300200, 48300800, 48305210, 0, 0, 48305210);
         $InitializeCommonEvent(0, 90015446, 48305210, 48300200, 48300800, 48302200);
         $InitializeCommonEvent(0, 90015460, 48302200, 48300800);
         $InitializeCommonEvent(0, 90015460, 48302200, 0);
         $InitializeCommonEvent(0, 90015460, 48302200, 0);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015475, 48302200, 48300800);
+        $InitializeCommonEvent(0, 90015475, 48302200, 0);
+        $InitializeCommonEvent(0, 90015475, 48302200, 0);
     }
     $InitializeCommonEvent(0, 90035001, 48300800);
     if (1 == 1) {
@@ -136,5 +141,4 @@ $Event(48302830, Restart, function(chrEntityId) {
     WaitFixedTimeSeconds(5);
     RestartEvent();
 });
-
 

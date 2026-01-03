@@ -34,4 +34,3 @@ $Event(1045382910, Restart, function(eventFlagId, chrEntityId) {
     ForceCharacterTreasure(chrEntityId);
 });
 
-

@@ -260,4 +260,3 @@ $Event(1029102995, Restart, function() {
     CreateReferredDamagePair(1029100800, 1039100802);
 });
 
-

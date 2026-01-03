@@ -48,8 +48,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015443, 49272200, 49270800);
         $InitializeCommonEvent(0, 90015023, 49270200, 40, 0, 49270800, 49270800, 903050600, 0, 0, 0, 0);
         $InitializeCommonEvent(0, 90015030, 49270200, 49270800, 40, 950000, 0);
-        $InitializeCommonEvent(0, 90015002, 0, 49270200, 0, 49270800, 1020, 950000, -1, 903050600, 49270800);
-        $InitializeCommonEvent(0, 90015470, 49272200, 49270200, 49270800, 49270800, 49275801, 0);
+        $InitializeCommonEvent(0, 90015002, 0, 49270200, 0, 49270800, 1020, 950000, 110320, 903050600, 49270800);
+        $InitializeCommonEvent(0, 90015470, 49272200, 49270200, 49270800, 49270800, 49275801, 0, 0);
     }
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90065064, 49270800, 49270810, 20015, 179, 11130, 49272290, 49272291, 49270210, 49270200, 49270800);
@@ -75,6 +75,17 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90015460, 49272200, 49270820);
         $InitializeCommonEvent(0, 90015460, 49272200, 49270821);
         $InitializeCommonEvent(0, 90015460, 49272200, 49270822);
+    }
+    if (IsMapVariation(2)) {
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270800);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270810);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270811);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270812);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270813);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270814);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270820);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270821);
+        $InitializeCommonEvent(0, 90015475, 49272200, 49270822);
     }
     $InitializeCommonEvent(0, 90035001, 49275800);
     if (1 == 1) {
@@ -178,5 +189,4 @@ L0:
     DisplayBossHealthBar(Enabled, chrEntityId2, 0, 903010000);
     DisplayBossHealthBar(Enabled, chrEntityId3, 0, 903010000);
 });
-
 

@@ -185,4 +185,3 @@ $Event(1047302840, Restart, function() {
     DeleteAssetfollowingSFX(1047301585, true);
 });
 
-

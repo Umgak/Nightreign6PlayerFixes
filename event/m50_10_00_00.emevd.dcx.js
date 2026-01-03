@@ -195,7 +195,7 @@ S11:
     $InitializeCommonEvent(0, 90045022, 50101603, 50100303, 50100353, 50100310);
     $InitializeCommonEvent(0, 90045022, 50101604, 50100304, 50100354, 50100310);
     $InitializeCommonEvent(0, 90045023, 50100310, 50100300, 50100304, 50101610);
-    $InitializeCommonEvent(0, 90045024, 50101610, 50100310, 50100311, 50100312);
+    $InitializeCommonEvent(0, 90045024, 50101610, 50100310, 50104311, 50104312);
     $InitializeCommonEvent(0, 90045025, 50100310, 50102500);
 });
 
@@ -248,5 +248,4 @@ $Event(50102500, Restart, function(chrEntityId, areaEntityId, timeSeconds, anima
 L1:
     EnableCharacterAI(chrEntityId);
 });
-
 

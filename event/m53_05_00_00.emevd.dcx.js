@@ -219,4 +219,3 @@ $Event(53052230, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
     SetCharacterBackreadState(chrEntityId2, true);
 });
 
-

@@ -19,7 +19,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015151, 1036400301, 76016);
     $InitializeCommonEvent(0, 90015152, 1036400301, 76016);
     $InitializeCommonEvent(0, 90005931, 1036400390, 1036401201, 0, 1036401202);
-    $InitializeCommonEvent(0, 90005915, 1036401600, 1036408000, 90040, 300);
+    $InitializeCommonEvent(0, 90005915, 1036401600, 1036408000, 90040, 400);
     $InitializeCommonEvent(0, 90015009, 1036408000, 1036401600, 0, 0);
     $InitializeEvent(0, 1036402500, 1036402501);
     $InitializeCommonEvent(0, 91005503, 1036401250);
@@ -35,5 +35,4 @@ $Event(1036402500, Restart, function(areaEntityId) {
     SetSpEffect(20000, 99215);
     RestartEvent();
 });
-
 

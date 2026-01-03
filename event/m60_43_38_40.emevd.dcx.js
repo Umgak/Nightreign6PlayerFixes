@@ -65,7 +65,7 @@ $Event(1038402510, Restart, function(entityId, chrEntityId) {
     DisableCharacterDefaultBackread(chrEntityId);
     WaitFor(ActionButtonInArea(109211, entityId));
     EnableCharacterDefaultBackread(chrEntityId);
-    RotateCharacter(20000, entityId, -1, true);
+    IssueShortWarpRequest(20000, TargetEntityType.Area, 1038402511, -1);
     ForceAnimationPlayback(20000, 60491, false, false, false);
     EnableCharacterInvincibility(20000);
     WaitFixedTimeSeconds(3);
@@ -73,6 +73,7 @@ $Event(1038402510, Restart, function(entityId, chrEntityId) {
     WaitFor(ElapsedSeconds(1));
     chr = CharacterBackreadStatus(chrEntityId);
     DisableCharacterGravity(20000);
+    ForceAnimationPlayback(20000, 60492, false, false, false);
     WarpCharacterAndCopyFloorUnknown200489(10000, TargetEntityType.Area, 1047402501, -1, chrEntityId, 1, 2);
     UnknownTalk2003121();
     if (!chr) {
@@ -85,7 +86,7 @@ $Event(1038402510, Restart, function(entityId, chrEntityId) {
         PlaySE(20000, SoundType.CharacterMotion, 754009520);
         Unknown2003128(false);
     }
-    WaitFor(ElapsedSeconds(2));
+    ResetCameraAngle();
     FadeToBlack(0, 1, false, -1);
     WaitFor(ElapsedSeconds(2));
     EnableCharacterGravity(20000);
@@ -96,5 +97,4 @@ $Event(1038402510, Restart, function(entityId, chrEntityId) {
 $Event(200, Default, function() {
     $InitializeEvent(0, 1038402510, 1038402510, 1047400500);
 });
-
 

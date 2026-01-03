@@ -140,4 +140,3 @@ $Event(1044362940, Default, function(eventFlagId, areaEntityId) {
     RestartEvent();
 });
 
-

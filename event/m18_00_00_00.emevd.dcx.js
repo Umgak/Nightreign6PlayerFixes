@@ -8,6 +8,7 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
+    SetNPCPartHP(0, 0, 0, false);
     $InitializeCommonEvent(0, 90075700, 18005800, 18000810);
     $InitializeCommonEvent(0, 90075701, 18000801, 18002800);
     $InitializeCommonEvent(0, 90075704, 18000800, 18002800);
@@ -19,6 +20,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015020, 18000201, 18002800);
     $InitializeCommonEvent(0, 90075702, 18000801, 18000201, 18002800);
     $InitializeCommonEvent(0, 90075703, 18000801, 18000800, 18000810, 18002820, 18002821, 18002822, 18002810, 18000200, 18000201, 18002800);
+    $InitializeCommonEvent(0, 90075710, 18000800);
     $InitializeCommonEvent(0, 90075705, 18000800, 18002830, 18000202, 46093, Weather.Type88, 18002400, 18002401, 18002800);
     $InitializeCommonEvent(0, 90075705, 18000800, 18002830, 18000203, 46094, Weather.Type20, 18002410, 18002411, 18002800);
     $InitializeCommonEvent(0, 90075705, 18000800, 18002830, 18000204, 46095, Weather.Type01, 18002420, 18002421, 18002800);
@@ -26,6 +28,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90075705, 18000800, 18002830, 18000206, 46097, Weather.Type30, 18002440, 18002441, 18002800);
     $InitializeCommonEvent(0, 90075705, 18000800, 18002830, 18000207, 46098, Weather.Type11, 18002450, 18002451, 18002800);
     $InitializeCommonEvent(0, 90075705, 18000800, 18002830, 18000208, 46099, Weather.Type40, 18002460, 18002461, 18002800);
+    $InitializeCommonEvent(0, 90075705, 18000800, 18002830, 18000209, 46105, Weather.Type51, 18002470, 18002471, 18002800);
     $InitializeCommonEvent(0, 90075706, 18000801, 18000800, 18000201, 18002800);
     $InitializeEvent(0, 18002890);
     $InitializeEvent(0, 18002590);
@@ -277,5 +280,4 @@ $Event(18002890, Restart, function() {
     SetNetworkconnectedEventFlagID(18000800, ON);
     SetNetworkconnectedEventFlagID(18002800, ON);
 });
-
 

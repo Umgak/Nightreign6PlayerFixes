@@ -21,6 +21,10 @@ $Event(0, Default, function() {
     $InitializeEvent(4, 12002020, 12002503, 12002504, 0, 10005, 10006, 10007);
 });
 
+$Event(50, Default, function() {
+    $InitializeEvent(0, 12002011);
+});
+
 $Event(12002000, Default, function() {
     EndIf(EventFlag(7523));
     DisableNetworkSync();
@@ -58,6 +62,7 @@ L0:
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 18002200, 18000000, 20000, 0, false, true);
     }
     if (EventFlag(7523)) {
+        FadeToBlack(0, 1, false, -1);
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 18002200, 18000000, 20000, 0, false, true);
     }
     ChangeCamera(-1);
@@ -68,6 +73,7 @@ L1:
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 16002200, 16000000, 20000, 0, false, true);
     }
     if (EventFlag(7523)) {
+        FadeToBlack(0, 1, false, -1);
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 16002200, 16000000, 20000, 0, false, true);
     }
     ChangeCamera(-1);
@@ -78,6 +84,7 @@ L2:
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 16102200, 16100000, 20000, 0, false, true);
     }
     if (EventFlag(7523)) {
+        FadeToBlack(0, 1, false, -1);
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 16102200, 16100000, 20000, 0, false, true);
     }
     ChangeCamera(-1);
@@ -88,6 +95,7 @@ L3:
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.Skippable, 19002200, 19000000, 20000, 0, false, true);
     }
     if (EventFlag(7523)) {
+        FadeToBlack(0, 1, false, -1);
         PlayCutsceneToPlayerAndWarp(12000010, CutscenePlayMode.SkippableWithFadeOutSkip, 19002200, 19000000, 20000, 0, false, true);
     }
     ChangeCamera(-1);
@@ -115,6 +123,8 @@ $Event(12002011, Default, function() {
     DisableNetworkSync();
     EndIf(!EventFlag(7523));
     FadeToBlack(1, 0, true, -1);
+    WaitFixedTimeSeconds(1);
+    FadeToBlack(0, 1, false, -1);
 });
 
 $Event(12002020, Default, function(areaEntityId, areaEntityId2, areaEntityId3, cameraId, cameraId2, cameraId3) {
@@ -152,6 +162,7 @@ $Event(12002099, Default, function() {
     EndIf(!EventFlag(7510));
     WaitFor(InArea(10000, 12002200));
     WaitFixedTimeSeconds(1);
+    FadeToBlack(0, 1, false, -1);
     GotoIf(L0, TargetingBoss(TargetBoss.Heolstor));
     GotoIf(L1, TargetingBoss(TargetBoss.Harmonia));
     GotoIf(L2, TargetingBoss(TargetBoss.Straghess));
@@ -171,5 +182,4 @@ L3:
     WarpPlayerWithPlayerNo(19, 0, 0, 0, 19002200);
     EndEvent();
 });
-
 

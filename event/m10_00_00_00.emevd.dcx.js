@@ -24,6 +24,7 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 1000002711);
     $InitializeEvent(0, 1000002707);
     $InitializeEvent(0, 1000002712);
+    $InitializeEvent(0, 1000002713);
     $InitializeEvent(0, 100003000);
     $InitializeEvent(0, 100003002);
     $InitializeEvent(0, 100002690);
@@ -561,6 +562,15 @@ $Event(1000002220, Restart, function(areaEntityId) {
     SetSpEffect(10000, 604014);
     SetSpEffect(10000, 604015);
     SetSpEffect(10000, 604016);
+    SetSpEffect(10000, 708032);
+    SetSpEffect(10000, 708042);
+    SetSpEffect(10000, 511100);
+    if (CharacterHasSpEffect(10000, 709000)) {
+        SetSpEffect(10000, 709001);
+    }
+    if (CharacterHasSpEffect(10000, 709010)) {
+        SetSpEffect(10000, 709011);
+    }
     WaitFixedTimeFrames(1);
     RestartEvent();
 });
@@ -1137,6 +1147,12 @@ $Event(1000002712, Default, function() {
     EndIf(EventFlag(6044));
     WaitFor(EventFlag(131) || (EventFlag(162) && EventFlag(6060)));
     SetEventFlagID(6044, ON);
+});
+
+$Event(1000002713, Default, function() {
+    EndIf(EventFlag(6043));
+    WaitFor(EventFlag(131) || EventFlag(6951));
+    SetEventFlagID(6043, ON);
 });
 
 $Event(100002990, Restart, function() {
@@ -4295,12 +4311,22 @@ L17:
         IsHero(Hero.Guardian)
             && CurrentScenarioSection(ScenarioSection.Guardian)
             && AnyBatchEventFlags(3205, 3213));
-    GotoIf(L18, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003512));
+    GotoIf(L19, CurrentScenarioSection(ScenarioSection.None) && EventFlag(10003512));
     EndEvent();
 L18:
     IssueShortWarpRequest(10000711, TargetEntityType.Area, 10003999, -1);
     SetSpEffect(10000711, 9678);
     ClearSpEffect(10000711, 9940);
+    EndEvent();
+L19:
+    WaitFixedTimeFrames(2);
+    ForceAnimationPlayback(10000711, 0, false, false, false);
+    WaitFixedTimeFrames(2);
+    IssueShortWarpRequest(10000711, TargetEntityType.Area, 10003056, -1);
+    SetSpEffect(10000711, 9678);
+    ClearSpEffect(10000711, 9940);
+    WaitFixedTimeFrames(2);
+    ForceAnimationPlayback(10000711, 90302, false, false, false);
     EndEvent();
 });
 
@@ -5857,5 +5883,4 @@ $Event(100006006, Restart, function() {
         IssueShortWarpRequest(10001608, TargetEntityType.Area, 10003604, -1);
     }
 });
-
 

@@ -30,9 +30,9 @@ S1:
 S2:
     $InitializeCommonEvent(0, 90015462, 8260, 8261, 8262, 53670820);
     $InitializeCommonEvent(0, 90015463, 8260, 8261, 53672200);
-    $InitializeCommonEvent(0, 90015000, 8261, 53670820, 904640000, 30, 0, 8262);
+    $InitializeCommonEvent(0, 90015000, 8261, 53670820, 904640100, 30, 0, 8262);
     $InitializeCommonEvent(0, 90015030, 8261, 53670820, 30, 920610, 8262);
-    $InitializeCommonEvent(0, 90015002, 0, 0, 53670820, 53670820, 1020, 920610, 110221, 904640000, 53670820);
+    $InitializeCommonEvent(0, 90015002, 0, 0, 53670820, 53670820, 1020, 920610, 110221, 904640100, 53670820);
     $InitializeCommonEvent(0, 9005810, 53670820, 53670520, 53671520, 5);
     $InitializeCommonEvent(0, 90015005, 53671520, 53672820, 53670820);
     $InitializeCommonEvent(0, 90015466, 53670820, 8262);
@@ -41,5 +41,4 @@ S2:
     $InitializeCommonEvent(0, 90015465, 53670201, 0, 8290, 53670208);
     $InitializeCommonEvent(0, 90015465, 53670202, 0, 8290, 53670209);
 });
-
 

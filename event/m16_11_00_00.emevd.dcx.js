@@ -71,4 +71,3 @@ $Event(16112810, Restart, function() {
     WarpPlayer(10, 0, 0, 0, 0, 0);
 });
 
-

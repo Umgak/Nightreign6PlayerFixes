@@ -70,6 +70,7 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 10009410);
     $InitializeEvent(0, 10009411);
     $InitializeEvent(0, 10009412);
+    $InitializeEvent(0, 10009413);
     $InitializeEvent(0, 100003150, 1029710, ScenarioSection.Undertaker, 10001056, 10001058);
     $InitializeEvent(1, 100003150, 1029711, ScenarioSection.Undertaker, 10001057, 10001059);
     $InitializeEvent(2, 100003150, 1029870, ScenarioSection.Scholar, 10001067, 10001064);
@@ -331,7 +332,6 @@ $Event(100009500, Restart, function() {
         SetEventFlagID(10002215, OFF);
         SetEventFlagID(10002265, OFF);
         WaitFixedTimeSeconds(3);
-        SetSpEffect(10000301, 9940);
         hp2 = CharacterHPValue(10000302) <= 0
             && CharacterHPValue(10000303) <= 0
             && CharacterHPValue(10000304) <= 0
@@ -442,6 +442,8 @@ L0:
 L1:
     DisableCharacter(10000300);
     SetEventFlagID(10002310, ON);
+    RequestAssetRestoration(10002019);
+    EnableAssetInvunerability(10002019);
     EndEvent();
 });
 
@@ -546,14 +548,19 @@ L10:
         GotoIf(L11, !EventFlag(10003517));
         Goto(L13);
 L11:
+        EnableCharacterDefaultBackread(10000317);
         WaitFor(EntityInRadiusOfEntity(10000, 10003030, 40, 1));
-        WaitFixedTimeFrames(1);
+        WaitFixedTimeFrames(3);
+        EnableCharacter(10000317);
+        WaitFixedTimeFrames(5);
         ForceAnimationPlayback(10000331, 20010, false, false, false);
         ForceAnimationPlayback(10002033, 10, false, false, false);
         WarpAssetToCharacter(10002038, 10000317, 705);
         CreateAssetfollowingSFX(10002038, 90, 807451);
         WaitFixedTimeFrames(3);
         DisableCharacter(10000317);
+        WaitFixedTimeFrames(3);
+        SetCharacterBackreadState(10000317, true);
         Goto(L13);
     }
 L12:
@@ -1065,6 +1072,9 @@ $Event(100009601, Restart, function() {
     DisableCharacterCollision(10000331);
     SetCharacterMaphit(10000331, false);
     DisableCharacterGravity(10000331);
+    EnableCharacterDefaultBackread(10000805);
+    EnableCharacterDefaultBackread(10000806);
+    WaitFixedTimeFrames(1);
     if (AnyBatchEventFlags(4210, 4211)) {
         DisableCharacter(10000806);
         EnableCharacterFadeOnEnable(10000806);
@@ -1237,8 +1247,42 @@ L10:
     FadeToBlack(1, 0, true, 0);
     UnknownTalk2003121();
     UnknownTalk2003120(9999);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
     SetEventFlagID(1029842, OFF);
-    WaitFixedTimeSeconds(4);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
+    FadeToBlack(1, 0, true, 0);
+    WaitFixedTimeSeconds(0.25);
     IssueShortWarpRequest(10000, TargetEntityType.Area, 10004000, -1);
     SetCameraAngle(0, -180);
     FadeToBlack(0, 1.8, true, 0);
@@ -1312,7 +1356,7 @@ L9:
     SetEventFlagID(10003585, OFF);
     WaitFixedTimeFrames(1);
     WaitFor(EventFlag(10003588));
-    ForceAnimationPlayback(10000815, 90330, false, false, false);
+    ForceAnimationPlayback(10000815, 90340, false, false, false);
     SetSpEffect(10000815, 9969);
     WaitFixedTimeSeconds(1.5);
     SetEventFlagID(10003588, OFF);
@@ -1321,7 +1365,7 @@ L9:
     UnknownTalk2003120(0);
     DisableCharacter(10000816);
     SetEventFlagID(10003569, ON);
-    ForceAnimationPlayback(10000815, 90332, true, false, false);
+    ForceAnimationPlayback(10000815, 90342, true, false, false);
     EndEvent();
 });
 
@@ -1782,7 +1826,10 @@ $Event(1000002312, Restart, function() {
     WaitFixedTimeSeconds(1.5);
     DisableAsset(10002025);
     if (CharacterBackreadStatus(10001003)) {
-        WarpCharacterAndSetFloor(10001003, TargetEntityType.Area, 10003999, -1, 0, false);
+        WarpCharacterAndSetFloor(10001003, TargetEntityType.Area, 10003056, -1, 0, false);
+    }
+    if (CharacterBackreadStatus(10001002)) {
+        WarpCharacterAndSetFloor(10001002, TargetEntityType.Area, 10003056, -1, 0, false);
     }
     WaitFixedTimeSeconds(3);
     if (!IsHero(Hero.Scholar)) {
@@ -2020,6 +2067,7 @@ L2:
         IssueShortWarpRequest(10000790, TargetEntityType.Area, 10003964, -1);
         ClearSpEffect(10000790, 9940);
         DisableCharacterAI(10000790);
+        EnableCharacterDefaultBackread(10000790);
         EndEvent();
     }
     if (chr2.Passed) {
@@ -2030,6 +2078,7 @@ L2:
         IssueShortWarpRequest(10001040, TargetEntityType.Area, 10003964, -1);
         ClearSpEffect(10001040, 9940);
         DisableCharacterAI(10001040);
+        EnableCharacterDefaultBackread(10001040);
         EndEvent();
     }
     if (chr3.Passed) {
@@ -2040,6 +2089,7 @@ L2:
         IssueShortWarpRequest(10001041, TargetEntityType.Area, 10003964, -1);
         ClearSpEffect(10001041, 9940);
         DisableCharacterAI(10001041);
+        EnableCharacterDefaultBackread(10001041);
         EndEvent();
     }
     if (chr4.Passed) {
@@ -2050,6 +2100,7 @@ L2:
         IssueShortWarpRequest(10001042, TargetEntityType.Area, 10003964, -1);
         ClearSpEffect(10001042, 9940);
         DisableCharacterAI(10001042);
+        EnableCharacterDefaultBackread(10001042);
         EndEvent();
     }
     GotoIf(S1, !chr5.Passed);
@@ -2060,6 +2111,7 @@ L2:
     IssueShortWarpRequest(10001043, TargetEntityType.Area, 10003964, -1);
     ClearSpEffect(10001043, 9940);
     DisableCharacterAI(10001043);
+    EnableCharacterDefaultBackread(10001043);
     EndEvent();
 S1:
 L3:
@@ -2493,6 +2545,7 @@ S7:
 L12:
     flagChr2 &= TalkNPCEnabled(10001050) && CharacterBackreadStatus(10001050);
     WaitFor(flagChr2);
+    WaitFixedTimeFrames(5);
     IssueShortWarpRequest(10001050, TargetEntityType.Area, 10003072, -1);
     WaitFixedTimeFrames(5);
     ForceAnimationPlayback(10001050, 90109, true, false, false);
@@ -2503,6 +2556,7 @@ L12:
 L13:
     flagChr2 &= TalkNPCEnabled(10001051) && CharacterBackreadStatus(10001051);
     WaitFor(flagChr2);
+    WaitFixedTimeFrames(5);
     IssueShortWarpRequest(10001051, TargetEntityType.Area, 10003072, -1);
     WaitFixedTimeFrames(5);
     ForceAnimationPlayback(10001051, 90109, true, false, false);
@@ -2513,6 +2567,7 @@ L13:
 L14:
     flagChr2 &= TalkNPCEnabled(10001052) && CharacterBackreadStatus(10001052);
     WaitFor(flagChr2);
+    WaitFixedTimeFrames(5);
     IssueShortWarpRequest(10001052, TargetEntityType.Area, 10003072, -1);
     WaitFixedTimeFrames(5);
     ForceAnimationPlayback(10001052, 90109, true, false, false);
@@ -2523,6 +2578,7 @@ L14:
 L15:
     flagChr2 &= TalkNPCEnabled(10001053) && CharacterBackreadStatus(10001053);
     WaitFor(flagChr2);
+    WaitFixedTimeFrames(5);
     IssueShortWarpRequest(10001053, TargetEntityType.Area, 10003072, -1);
     WaitFixedTimeFrames(5);
     ForceAnimationPlayback(10001053, 90109, true, false, false);
@@ -2581,6 +2637,46 @@ L1:
     RestartEvent();
 });
 
+$Event(10009413, Restart, function() {
+    WaitFixedTimeFrames(3);
+    WaitFor(CurrentScenarioSection(ScenarioSection.None) && EventFlag(1029852));
+    WaitFixedTimeFrames(1);
+    area = EntityInRadiusOfEntity(10000, 10001073, 10, 1);
+    area2 = EntityInRadiusOfEntity(10000, 10001074, 10, 1);
+    area3 = EntityInRadiusOfEntity(10000, 10001075, 10, 1);
+    area4 = EntityInRadiusOfEntity(10000, 10001076, 10, 1);
+    WaitFor(area || area2 || area3 || area4);
+    GotoIf(L1, area.Passed);
+    GotoIf(L2, area2.Passed);
+    GotoIf(L3, area3.Passed);
+    GotoIf(L4, area4.Passed);
+    EndEvent();
+L1:
+    SetCharacterMaphit(10001073, false);
+    DisableCharacterGravity(10001073);
+    DisableCharacterCollision(10001073);
+    ResetCharacterPosition(10001073);
+    EndEvent();
+L2:
+    SetCharacterMaphit(10001074, false);
+    DisableCharacterGravity(10001074);
+    DisableCharacterCollision(10001074);
+    ResetCharacterPosition(10001074);
+    EndEvent();
+L3:
+    SetCharacterMaphit(10001075, false);
+    DisableCharacterGravity(10001075);
+    DisableCharacterCollision(10001075);
+    ResetCharacterPosition(10001075);
+    EndEvent();
+L4:
+    SetCharacterMaphit(10001076, false);
+    DisableCharacterGravity(10001076);
+    DisableCharacterCollision(10001076);
+    ResetCharacterPosition(10001076);
+    EndEvent();
+});
+
 $Event(100003435, Default, function(eventFlagId) {
     if ((EventFlag(3003) && !EventFlag(1109031)) || (EventFlag(3005) && !EventFlag(1109032))) {
         WaitFor(EventFlag(10002018));
@@ -2621,5 +2717,4 @@ $Event(100003435, Default, function(eventFlagId) {
     SetEventFlagID(eventFlagId, OFF);
     RestartEvent();
 });
-
 
