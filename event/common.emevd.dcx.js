@@ -413,8 +413,13 @@ S29:
     $InitializeEvent(0, 1313);
     $InitializeEvent(0, 1312);
     $InitializeEvent(0, 1306);
-    $InitializeEvent(0, 1307);
-    $InitializeEvent(0, 1308);
+    $InitializeEvent(0, 1307); // Vanilla solo buff: 1.5x
+    // $InitializeEvent(0, 1308); // vanilla duo buff: 1.3x
+    $InitializeEvent(0, 1308, 2, 98241); // NR6PF: Duo buff: 1.3x
+    // NR6PF: trio doesn't get either a buff or debuff, so it doesn't need a line here
+    $InitializeEvent(1, 1308, 4, 98440); // NR6PF: 4p debuff: 0.9x
+    $InitializeEvent(2, 1308, 5, 98441); // NR6PF: 5p debuff: 0.8x
+    $InitializeEvent(3, 1308, 6, 98442); // NR6PF: 6p debuff: 0.7x
     $InitializeEvent(0, 1309);
     $InitializeEvent(0, 1314);
     $InitializeEvent(0, 1320, 99874, 99810);
@@ -1486,6 +1491,7 @@ $Event(1144, Default, function() {
 });
 
 $Event(1145, Default, function() {
+    // TODO: I think this is Balancers
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(95000));
@@ -1552,6 +1558,7 @@ $Event(1146, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
 });
 
 $Event(1148, Default, function() {
+    // TODO: Also balancers
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -2359,7 +2366,8 @@ $Event(1306, Default, function() {
 });
 
 $Event(1307, Restart, function() {
-    // Rune generation buff in SP
+    // PLAYER COUNT BASED GLOBAL RUNE MULTIPLIER
+    // This one only handles singleplayer or not singleplayer - it doesn't need a patch
     DisableNetworkSync();
     EndIf(!IsGameMode(2));
     WaitFor(
@@ -2371,14 +2379,31 @@ $Event(1307, Restart, function() {
     RestartEvent();
 });
 
+/*
 $Event(1308, Restart, function() {
-    // Remove rune generation buff in MP
+    // PLAYER COUNT BASED GLOBAL RUNE MULTIPLIER
+    // New param rows:
+    //  98440 NR6PF_4p Rune Penalty
+    //  98441 NR6PF_5p Rune Penalty
+    //  98442 NR6PF_6p Rune Penalty
     DisableNetworkSync();
     EndIf(!IsGameMode(2));
     WaitFor(IsPlayerCount(2) || CharacterHasSpEffect(20000, 99241));
     SetSpEffect(20000, 99241);
     WaitFor(!IsPlayerCount(2) || !CharacterHasSpEffect(20000, 99241));
     ClearSpEffect(20000, 99241);
+    RestartEvent();
+});*/
+
+$Event(1308, Restart, function(nr6pf_playerCount, nr6pf_spEffectId) {
+    // NR6PF: Player count based global rune multiplier rewrite
+    // vanilla code isn't extensible at all
+    DisableNetworkSync();
+    EndIf(!IsGameMode(2));
+    WaitFor(IsPlayerCount(nr6pf_playerCount) || CharacterHasSpEffect(20000, nr6pf_spEffectId));
+    SetSpEffect(20000, nr6pf_spEffectId);
+    WaitFor(!IsPlayerCount(nr6pf_playerCount) || !CharacterHasSpEffect(20000, nr6pf_spEffectId));
+    ClearSpEffect(20000, nr6pf_spEffectId);
     RestartEvent();
 });
 

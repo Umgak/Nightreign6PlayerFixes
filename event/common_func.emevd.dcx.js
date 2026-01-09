@@ -7678,7 +7678,7 @@ $Event(90035253, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
 });
 
 $Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDistance, targetDistance2) {
-    // TODO: Caligo raid
+    // Caligo raid
     DisableNetworkSync();
     EndIf(!EventFlag(8080));
     EndIf(EventFlag(8061));
@@ -7691,6 +7691,17 @@ $Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
+    }
+    // NR6PF: add more stupid elapsedseconds for the new players
+    // I don't know why the game does this but every single boss raid does it
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
     }
     if (EventFlag(9999)) {
         WaitFixedTimeFrames(1);
@@ -7705,10 +7716,18 @@ $Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     EndIf(
         !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
-            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1))
+            && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
+            // NR6PF: Player distance checks for 6 players
+            && !EntityInRadiusOfEntity(entityId, 10005, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10006, targetDistance, 1)
+            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1))
             && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
-                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1))));
+                || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1)
+                // NR6PF: Player distance checks for 6 players
+                || EntityInRadiusOfEntity(entityId, 10005, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10006, targetDistance2, 1)
+                || EntityInRadiusOfEntity(entityId, 10007, targetDistance2, 1))));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
     SetWorldMapPointFlag(0, ON);
@@ -7717,6 +7736,7 @@ $Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
 });
 
 $Event(90035261, Default, function(entityId, eventFlagId, eventFlagId2) {
+    // Caligo raid
     DisableNetworkSync();
     WaitFor(EventFlag(eventFlagId2) || EventFlag(8061));
     WaitFor(ElapsedSeconds(5));
@@ -7729,7 +7749,17 @@ $Event(90035261, Default, function(entityId, eventFlagId, eventFlagId2) {
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(3));
     }
-    // TODO: Caligo raid
+    // NR6PF: add more stupid elapsedseconds for the new players
+    // I don't know why the game does this but every single boss raid does it
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(4.5));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(6));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(7.5));
+    }
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {
         EndIf(
@@ -7991,22 +8021,29 @@ L0:
     SetNetworkconnectedEventFlagID(8025, ON);
     DisplayTextEffectId(2200);
     RecordUserDispLog(110201, chrEntityId, LogObjectType.None, -1);
-    // TODO: Caligo invasion event rune reward
-    // Needs a Seamless update for the same reasons as the towers
-    if (!IsPlayerCount(1)) {
-        if (!IsPlayerCount(2)) {
-            SetSpEffect(20000, 98800);
-        }
+    // Caligo Raid Rune rewards
+    // Same ugly ass fromslop code as the boss rush
+    // fuck off, rewritten
+    // also the params are in reversed order for some reason here, but not for the boss rush
+    // I don't know why
+    if (IsPlayerCount(1)) {
+        SetSpEffect(20000, 98802); // 78000
     }
-    if (!IsPlayerCount(1)) {
-        if (!IsPlayerCount(3)) {
-            SetSpEffect(20000, 98801);
-        }
+    if (IsPlayerCount(2)) {
+        SetSpEffect(20000, 98801); // 67600
     }
-    if (!IsPlayerCount(2)) {
-        if (!IsPlayerCount(3)) {
-            SetSpEffect(20000, 98802);
-        }
+    if (IsPlayerCount(3)) {
+        SetSpEffect(20000, 98800); // 52000
+    }
+    // NR6PF: New speffect rows
+    if (IsPlayerCount(4)) {
+        SetSpEffect(20000, 98799); // 46800
+    }
+    if (IsPlayerCount(5)) {
+        SetSpEffect(20000, 98798); // 41600
+    }
+    if (IsPlayerCount(6)) {
+        SetSpEffect(20000, 98797); // 36400
     }
     WaitFor(ElapsedSeconds(10));
     DisableCharacter(chrEntityId);

@@ -3,6 +3,7 @@ A collection of fixes for Elden Ring: Nightreign, for modded playthroughs where 
 The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when using a mod such as Seamless Co-op, many things do not correctly apply for extra players. This mod attempts to fix the game's maps and event scripts to be able to account for the expanded playercount.
 
 ## Current changes/fixes:
+* Rune multipliers scale all the way up to 6 players
 * Margit boss invasion can target all players
 * Maris boss invasion will target all players 
 * Frenzied Flame invasion event will target extra players for frenzy buildup.
@@ -18,10 +19,10 @@ The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when
 * DLC Boss Rush Tower rune rewards scale for up to 6 players
 * Divine Beast Dancing Lion can steal heals from anyone, not just players 1-3
 * Caligo raid event is able to target all 6 players
+* Caligo raid event rune rewards scale for up to 6 players
 
 ## Known issues:
 * Wormface night boss
 * Fulghor
 * Balancers invasion (84 event flags in 28 maps)
 * Gladius invasion (wontfix for now)
-* Caligo raid gives the wrong rune quantities (needs a lilyhook update)
