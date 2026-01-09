@@ -53,12 +53,10 @@ $Event(0, Default, function() {
 });
 
 $Event(200, Default, function() {
-    // TODO
-    // DLC Battle tower rune distribution
-    // Can't fix without a code patch, code patch requires Seamless update
-    $InitializeCommonEvent(0, 90015469, 1056400201, 98360, 98363, 98366);
-    $InitializeCommonEvent(1, 90015469, 1056400206, 98361, 98364, 98367);
-    $InitializeCommonEvent(2, 90015469, 1056400211, 98362, 98365, 98368);
+    // DLC Boss rush tower rune distribution
+    $InitializeCommonEvent(0, 90015469, 1056400201, 98360, 98363, 98366, 98460, 98463, 98466); // NR6PF: new speffectparam rows
+    $InitializeCommonEvent(1, 90015469, 1056400206, 98361, 98364, 98367, 98461, 98464, 98467); // NR6PF: new speffectparam rows
+    $InitializeCommonEvent(2, 90015469, 1056400211, 98362, 98365, 98368, 98462, 98465, 98468); // NR6PF: new speffectparam rows
 });
 
 $Event(1056402200, Default, function(sfxId, eventFlagId) {

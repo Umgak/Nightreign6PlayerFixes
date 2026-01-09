@@ -15,13 +15,13 @@ The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when
 * Defeat event will not trigger until ALL players are dead
 * Wending Grace/Blessing of Noklateo will revive ALL players
 * DLC Boss Rush Tower effects work when players 1-3 are not present
+* DLC Boss Rush Tower rune rewards scale for up to 6 players
 * Divine Beast Dancing Lion can steal heals from anyone, not just players 1-3
 * Caligo raid event is able to target all 6 players
 
 ## Known issues:
 * Wormface night boss
 * Fulghor
-* Balancers invasion
+* Balancers invasion (84 event flags in 28 maps)
 * Gladius invasion (wontfix for now)
-* Battle towers give the wrong rune quantities (needs a Seamless update)
-* Caligo raid gives the wrong rune quantities (needs a Seamless update)
+* Caligo raid gives the wrong rune quantities (needs a lilyhook update)

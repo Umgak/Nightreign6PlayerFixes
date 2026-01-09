@@ -2906,27 +2906,38 @@ $Event(90015468, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
 
-$Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffectId3) {
-    // DLC Battle tower rune distribution
-    // TODO: This will require a code hook, but I need Seamless to be updated to do that code hook
-    // Can't fix for now
+$Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffectId3, nr6pf_spEffectId4, nr6pf_spEffectId5, nr6pf_spEffectId6) {
+    // NR6PF: DLC boss rush tower rune distribution
+    // fuck how fromsoft wrote this, ugly
+    // rewritten entirely
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
-    if (!IsPlayerCount(2)) {
-        if (!IsPlayerCount(3)) {
-            SetSpEffect(20000, spEffectId);
-        }
+    if (IsPlayerCount(1)) {
+        SetSpEffect(20000, spEffectId);
+        EndEvent();
     }
-    if (!IsPlayerCount(1)) {
-        if (!IsPlayerCount(3)) {
-            SetSpEffect(20000, spEffectId2);
-        }
+    if (IsPlayerCount(2)) {
+        SetSpEffect(20000, spEffectId2);
+        EndEvent();
     }
-    if (!IsPlayerCount(1)) {
-        if (!IsPlayerCount(2)) {
-            SetSpEffect(20000, spEffectId3);
-        }
+    if (IsPlayerCount(3)) {
+        SetSpEffect(20000, spEffectId3);
+        EndEvent();
     }
+    if (IsPlayerCount(4)) {
+        SetSpEffect(20000, nr6pf_spEffectId4);
+        EndEvent();
+    }
+    if (IsPlayerCount(5)) {
+        SetSpEffect(20000, nr6pf_spEffectId5);
+        EndEvent();
+    }
+    if (IsPlayerCount(6)) {
+        SetSpEffect(20000, nr6pf_spEffectId6);
+        EndEvent();
+    }
+    // Default case if IsPlayerCount returns junk
+    SetSpEffect(20000, spEffectId3);
 });
 
 $Event(90015470, Restart, function(entityId, eventFlagId, eventFlagId2, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4) {
