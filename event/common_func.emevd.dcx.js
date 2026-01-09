@@ -4788,7 +4788,7 @@ $Event(90035088, Default, function(eventFlagId, chrEntityId) {
 });
 
 $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targetDistance) {
-    // Margit
+    // Morgott
     DisableNetworkSync();
     EndIf(!EventFlag(8075));
     EndIf(AnyBatchEventFlags(8085, 8087 || AnyBatchEventFlags(11008085, 11008087))); // extra flags for players 3-6 are stashed in the Spirit Shelter range
@@ -4874,7 +4874,7 @@ L0:
 });
 
 $Event(90035201, Default, function(eventFlagId) {
-    // Margit
+    // Morgott
     EndIf(!EventFlag(8075));
     EndIf(AnyBatchEventFlags(8085, 8087) || AnyBatchEventFlags(11008085, 11008087)); // extra flags for players 3-6 are stashed in the Spirit Shelter range
     WaitFor(EventFlag(8060));
@@ -4912,25 +4912,25 @@ $Event(90035201, Default, function(eventFlagId) {
             }
         }
         // NR6PF: add checks for players 4-6
-        chr4 = CharacterHasTeamType(10005, TeamType.Human)
+        nr6pf_chr4 = CharacterHasTeamType(10005, TeamType.Human)
             || CharacterHasTeamType(10005, TeamType.WhitePhantom);
-        if (chr4) {
+        if (nr6pf_chr4) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
                 SetNetworkconnectedEventFlagID(11008085, ON);
                 Goto(L0);
             }
         }
-        chr5 = CharacterHasTeamType(10006, TeamType.Human)
+        nr6pf_chr5 = CharacterHasTeamType(10006, TeamType.Human)
             || CharacterHasTeamType(10006, TeamType.WhitePhantom);
-        if (chr5) {
+        if (nr6pf_chr5) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
                 SetNetworkconnectedEventFlagID(11008086, ON);
                 Goto(L0);
             }
         }
-        chr6 = CharacterHasTeamType(10007, TeamType.Human)
+        nr6pf_chr6 = CharacterHasTeamType(10007, TeamType.Human)
             || CharacterHasTeamType(10007, TeamType.WhitePhantom);
-        if (chr6) {
+        if (nr6pf_chr6) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
                 SetNetworkconnectedEventFlagID(11008087, ON);
                 Goto(L0);
@@ -4943,11 +4943,11 @@ $Event(90035201, Default, function(eventFlagId) {
         } else if (chr3) {
             SetNetworkconnectedEventFlagID(8087, ON);
         // NR6PF: extra conditions for players 4-6
-        } else if (chr4) {
+        } else if (nr6pf_chr4) {
             SetNetworkconnectedEventFlagID(11008085, ON);
-        } else if (chr5) {
+        } else if (nr6pf_chr5) {
             SetNetworkconnectedEventFlagID(11008086, ON);
-        } else if (chr6) {
+        } else if (nr6pf_chr6) {
             SetNetworkconnectedEventFlagID(11008087, ON);
             Goto(L0);
         }
@@ -4960,7 +4960,7 @@ L0:
 });
 
 $Event(90035202, Default, function(chrEntityId, eventFlagId) {
-    // Yet another Margit event
+    // Yet another Morgott event
     if (!EventFlag(8075)) {
         DisableCharacter(chrEntityId);
         EndEvent();
@@ -5044,8 +5044,8 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
             EnableCharacterDisableOnHitUnload(chrEntityId);
         }
     }
-    // NR6PF: I hate Margit. There are so many checks.
-        if (EventFlag(11008085)) {
+    // NR6PF: I hate Morgott. There are so many checks.
+    if (EventFlag(11008085)) {
         if (!IsPlayerNo(4)) {
             DisableCharacterDefaultBackread(chrEntityId);
             SetCharacterEnableDistance(chrEntityId, -1);
@@ -5082,7 +5082,7 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
         }
     }
     // NR6PF: Seriously, why does this guy have a check EVERY SINGLE LINE
-        if (EventFlag(11008085)) {
+    if (EventFlag(11008085)) {
         if (IsPlayerNo(4)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
@@ -5184,7 +5184,7 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
 });
 
 $Event(90035203, Default, function(eventFlagId) {
-    // Margit player victory
+    // Morgott player victory
     EndIf(!EventFlag(8075));
     if (EventFlag(8062)) {
         SetSpEffect(10000, 99156);
@@ -5265,7 +5265,7 @@ $Event(90035203, Default, function(eventFlagId) {
 });
 
 $Event(90035204, Default, function(chrEntityId, eventFlagId) {
-    // Margit delaying his attack
+    // Morgott delaying his attack
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -5514,7 +5514,7 @@ L5:
 });
 
 $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
-    // Margit won his invasion, ripbozo L players
+    // Morgott won his invasion, ripbozo L players
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -5601,7 +5601,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
-    // Margit teleporting in, if the player target is dead already
+    // Morgott teleporting in, if the player target is dead already
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
@@ -5709,7 +5709,7 @@ $Event(90035208, Default, function(eventFlagId, eventFlagId2) {
 });
 
 $Event(90035209, Default, function(eventFlagId) {
-    // Margit music control
+    // Morgott music control
     DisableNetworkSync();
     EndIf(!EventFlag(8075));
     EndIf(EventFlag(8062));
@@ -6797,7 +6797,7 @@ $Event(90035231, Default, function(entityId, eventFlagId, eventFlagId2) {
 });
 
 $Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, nr6pf_chrEntityId8, eventFlagId) {
-    // Appears to be an unused portion of Gnoster's invasion script - there's no initialization for it and it has the wrong map prefix of 4678 which is Margit's
+    // Appears to be an unused portion of Gnoster's invasion script - there's no initialization for it and it has the wrong map prefix of 4678 which is Morgott's
     // Edited for consistency - this is supposed to be 90035232, but Fromsoft screwed up again LOL
     if (!EventFlag(8078)) {
         DisableCharacter(chrEntityId);
@@ -16397,7 +16397,18 @@ $Event(90075510, Restart, function(chrEntityId) {
     if (IsPlayerNo(3)) {
         SetSpEffect(20000, 46332);
     }
-    // TODO: Figure out wtf this actually does.
+    // NR6PF: Appears to be related to AI script
+    // Used by Fulghor to target when he's "Interupted"
+    // New SpEffects are at +52100
+    if (IsPlayerNo(4)) {
+        SetSpEffect(20000, 98430);
+    }
+    if (IsPlayerNo(5)) {
+        SetSpEffect(20000, 98431);
+    }
+    if (IsPlayerNo(6)) {
+        SetSpEffect(20000, 98432);
+    }
     WaitFor(
         CharacterHasSpEffect(chrEntityId, 46305)
             && !CharacterHasSpEffect(chrEntityId, 46306)

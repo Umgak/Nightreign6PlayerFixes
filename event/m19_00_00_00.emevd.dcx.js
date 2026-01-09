@@ -1394,8 +1394,18 @@ $Event(19002862, Restart, function() {
     if (IsPlayerNo(3)) {
         SetSpEffect(20000, 46332);
     }
-    // TODO: Fulghor
-    // SpEffects referenced in AI scripts
+    // NR6PF: Appears to be related to AI script
+    // Used by Fulghor to target when he's "Interupted"
+    // New SpEffects are at +52100
+    if (IsPlayerNo(4)) {
+        SetSpEffect(20000, 98430);
+    }
+    if (IsPlayerNo(5)) {
+        SetSpEffect(20000, 98431);
+    }
+    if (IsPlayerNo(6)) {
+        SetSpEffect(20000, 98432);
+    }
 });
 
 $Event(19002870, Default, function(chrEntityId) {

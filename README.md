@@ -4,17 +4,18 @@ The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when
 
 ## Current changes/fixes:
 * Rune multipliers scale all the way up to 6 players
-* Margit boss invasion can target all players
-* Maris boss invasion will target all players 
-* Frenzied Flame invasion event will target extra players for frenzy buildup.
-* Gnoster boss invasion will target all players
-* Libra invasion event won't spawn on top of extra players, but will be able to spawn near the extra players even if they're separated from the group, like it can for the original 3
+* Morgott boss raid can target all players
+* Maris boss raid will target all players 
+* Frenzied Flame raid event will target extra players for frenzy buildup.
+* Gnoster boss raid will target all players
+* Libra raid event bounds checks against all players
 * Everdark Libra will spawn clones of all six players. This will be chaos. I know.
 * Gnoster boss fight has tracking balls to target all players
 * Heolstor teleports all players during phase change, instead of extra players awkwardly standing around where they were.
 * Duke's Dear Freyja night boss applies its slow effect to everyone
 * Defeat event will not trigger until ALL players are dead
 * Wending Grace/Blessing of Noklateo will revive ALL players
+* Fulghor, Champion of Nightglow should target players 4-6 more consistently when interrupted by them
 * DLC Boss Rush Tower effects work when players 1-3 are not present
 * DLC Boss Rush Tower rune rewards scale for up to 6 players
 * Divine Beast Dancing Lion can steal heals from anyone, not just players 1-3
@@ -23,6 +24,5 @@ The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when
 
 ## Known issues:
 * Wormface night boss
-* Fulghor
-* Balancers invasion (84 event flags in 28 maps)
-* Gladius invasion (wontfix for now)
+* Balancers raid (84 event flags in 28 maps)
+* Gladius raid (wontfix for now)
