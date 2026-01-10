@@ -603,7 +603,8 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 99075422, 19010840, 19002740, 19002741, 19002742, 19002743, 19002744, 19002745, 19002746, 19002747, 19010440, 19010441, 19010442, 19010443, 19010444, 19010445, 19010446, 19010447);
         $InitializeCommonEvent(0, 90075901, 19010840, 756000, 907550000);
         $InitializeCommonEvent(0, 90075902, 19015840, 0, 0);
-        $InitializeCommonEvent(0, 90075902, 19015842, 19015843, 19015844, 19015845, 19015846, 19015847); // NR6PF: set up ED Libra clone update authorities
+        $InitializeCommonEvent(0, 90075902, 19015842, 19015843, 19015844); 
+        $InitializeCommonEvent(0, 90075902, 19015845, 19015846, 19015847); // NR6PF: set up ED Libra clone update authorities
         $InitializeCommonEvent(0, 90015012, 19015840, 7511);
         $InitializeCommonEvent(0, 90015022, 19015842, 7511);
         $InitializeCommonEvent(0, 90015022, 19015843, 7511);

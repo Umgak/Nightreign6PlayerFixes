@@ -6912,25 +6912,25 @@ L10:
     }
     // NR6PF: Edits for consistency, despite this being seemingly unused
     if (IsPlayerNo(4)) {
-        EnableCharacterDefaultBackread(chrEntityId6);
-        SetCharacterEnableDistance(chrEntityId6, 1200);
-        DisableCharacterDisableOnHitUnload(chrEntityId6);
-        SetNetworkUpdateAuthority(chrEntityId6, AuthorityLevel.Forced);
-        DisableCharacterFadeOnEnable(chrEntityId6);
+        EnableCharacterDefaultBackread(nr6pf_chrEntityId6);
+        SetCharacterEnableDistance(nr6pf_chrEntityId6, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId6);
+        SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(nr6pf_chrEntityId6);
     }
     if (IsPlayerNo(5)) {
-        EnableCharacterDefaultBackread(chrEntityId7);
-        SetCharacterEnableDistance(chrEntityId7, 1200);
-        DisableCharacterDisableOnHitUnload(chrEntityId7);
-        SetNetworkUpdateAuthority(chrEntityId7, AuthorityLevel.Forced);
-        DisableCharacterFadeOnEnable(chrEntityId7);
+        EnableCharacterDefaultBackread(nr6pf_chrEntityId7);
+        SetCharacterEnableDistance(nr6pf_chrEntityId7, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId7);
+        SetNetworkUpdateAuthority(nr6pf_chrEntityId7, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(nr6pf_chrEntityId7);
     }
     if (IsPlayerNo(6)) {
-        EnableCharacterDefaultBackread(chrEntityId8);
-        SetCharacterEnableDistance(chrEntityId8, 1200);
-        DisableCharacterDisableOnHitUnload(chrEntityId8);
-        SetNetworkUpdateAuthority(chrEntityId8, AuthorityLevel.Forced);
-        DisableCharacterFadeOnEnable(chrEntityId8);
+        EnableCharacterDefaultBackread(nr6pf_chrEntityId8);
+        SetCharacterEnableDistance(nr6pf_chrEntityId8, 1200);
+        DisableCharacterDisableOnHitUnload(nr6pf_chrEntityId8);
+        SetNetworkUpdateAuthority(nr6pf_chrEntityId8, AuthorityLevel.Forced);
+        DisableCharacterFadeOnEnable(nr6pf_chrEntityId8);
     }
     ForceAnimationPlayback(chrEntityId, 20003, false, true, false);
     ForceAnimationPlayback(chrEntityId, 30005, true, false, false);
@@ -18526,8 +18526,7 @@ $Event(90075901, Restart, function(chrEntityId, bgmBossConvParamId, logObjectId)
     SetSpEffect(20000, 102121);
 });
 
-$Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, nr6pf_chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6) {
-    // ED Libra: manage network authority for clones
+$Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3) {
     DisableNetworkSync();
     EndIf(EventFlag(7512));
     EndIf(EventFlag(18002800));
@@ -18541,15 +18540,6 @@ $Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, nr6p
         if (chrEntityId3 != 0) {
             SetNetworkUpdateAuthority(chrEntityId3, AuthorityLevel.Normal);
         }
-        if (nr6pf_chrEntityId4 != 0) {
-            SetNetworkUpdateAuthority(nr6pf_chrEntityId4, AuthorityLevel.Normal);
-        }
-        if (nr6pf_chrEntityId5 != 0) {
-            SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Normal);
-        }
-        if (nr6pf_chrEntityId6 != 0) {
-            SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Normal);
-        }
     }
     WaitFor(PlayerIsInOwnWorld());
     if (PlayerIsInOwnWorld()) {
@@ -18561,15 +18551,6 @@ $Event(90075902, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, nr6p
         }
         if (chrEntityId3 != 0) {
             SetNetworkUpdateAuthority(chrEntityId3, AuthorityLevel.Forced);
-        }
-        if (nr6pf_chrEntityId4 != 0) {
-            SetNetworkUpdateAuthority(nr6pf_chrEntityId4, AuthorityLevel.Forced);
-        }
-        if (nr6pf_chrEntityId5 != 0) {
-            SetNetworkUpdateAuthority(nr6pf_chrEntityId5, AuthorityLevel.Forced);
-        }
-        if (nr6pf_chrEntityId6 != 0) {
-            SetNetworkUpdateAuthority(nr6pf_chrEntityId6, AuthorityLevel.Forced);
         }
     }
     WaitFor(!PlayerIsInOwnWorld());

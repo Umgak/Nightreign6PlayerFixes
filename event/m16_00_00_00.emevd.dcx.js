@@ -12,7 +12,7 @@ $Event(0, Default, function() {
     if (!IsMapVariation(18)) {
         $InitializeCommonEvent(0, 90075801, 16005800);
         $InitializeCommonEvent(0, 90075901, 16000807, 762000, 907640000);
-        $InitializeCommonEvent(0, 90075902, 16005800, 16000807, 0);
+        $InitializeCommonEvent(0, 90075902, 16005800, 16000807);
         $InitializeCommonEvent(0, 90015012, 16005800, 7511);
         $InitializeCommonEvent(0, 90015012, 16000807, 7511);
         $InitializeCommonEvent(0, 90015020, 7511, 7512);

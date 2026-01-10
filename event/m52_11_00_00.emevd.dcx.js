@@ -41,9 +41,9 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(1, 90065247, 52110800, 10003, 52110200, 52110800);
     $InitializeCommonEvent(2, 90065247, 52110800, 10004, 52110200, 52110800);
     // NR6PF: Divine Beast Dancing Lion flask steal effect
-    $InitializeCommonEvent(0, 90065247, 52110800, 10005, 52110200, 52110800);
-    $InitializeCommonEvent(1, 90065247, 52110800, 10006, 52110200, 52110800);
-    $InitializeCommonEvent(2, 90065247, 52110800, 10007, 52110200, 52110800);
+    $InitializeCommonEvent(3, 90065247, 52110800, 10005, 52110200, 52110800);
+    $InitializeCommonEvent(4, 90065247, 52110800, 10006, 52110200, 52110800);
+    $InitializeCommonEvent(5, 90065247, 52110800, 10007, 52110200, 52110800);
     if (IsMapVariation(2)) {
         $InitializeCommonEvent(0, 90015443, 52115200, 52110800);
         $InitializeCommonEvent(0, 90015023, 52110200, 40, 0, 52115210, 52110800, 905210600, 0, 0, 0, 0);
