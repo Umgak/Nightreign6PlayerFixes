@@ -6794,9 +6794,8 @@ $Event(90035231, Default, function(entityId, eventFlagId, eventFlagId2) {
     RecordUserDispLog(11140, entityId, LogObjectType.None, -1);
 });
 
-$Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, nr6pf_chrEntityId8, eventFlagId) {
-    // Appears to be an unused portion of Gnoster's invasion script - there's no initialization for it and it has the wrong map prefix of 4678 which is Morgott's
-    // Edited for consistency - this is supposed to be 90035232, but Fromsoft screwed up again LOL
+$Event(90035232, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, nr6pf_chrEntityId8, eventFlagId) {
+    // Gnoster invasion
     if (!EventFlag(8078)) {
         DisableCharacter(chrEntityId);
         DisableCharacter(chrEntityId2);
@@ -6845,7 +6844,7 @@ $Event(46780810, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
             SetNetworkUpdateAuthority(chrEntityId5, AuthorityLevel.Forced);
             DisableCharacterFadeOnEnable(chrEntityId5);
         }
-        // NR6PF: Edits for consistency, despite this being seemingly unused
+        // NR6PF: Initializers for extra entities
         if (IsPlayerNo(4)) {
             EnableCharacterDefaultBackread(nr6pf_chrEntityId6);
             SetCharacterEnableDistance(nr6pf_chrEntityId6, 1200);
@@ -6908,7 +6907,7 @@ L10:
         SetNetworkUpdateAuthority(chrEntityId4, AuthorityLevel.Forced);
         DisableCharacterFadeOnEnable(chrEntityId5);
     }
-    // NR6PF: Edits for consistency, despite this being seemingly unused
+    // NR6PF: Initializers for extra entities
     if (IsPlayerNo(4)) {
         EnableCharacterDefaultBackread(nr6pf_chrEntityId6);
         SetCharacterEnableDistance(nr6pf_chrEntityId6, 1200);
@@ -6935,7 +6934,7 @@ L10:
 });
 
 $Event(90035233, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, nr6pf_chrEntityId5, nr6pf_chrEntityId6, nr6pf_chrEntityId7, eventFlagId) {
-    // Actually-used portion of Gnoster's invasion event
+    // Gnoster raid
     EndIf(!EventFlag(8078));
     EndIf(EventFlag(8062));
     EndIf(HPRatio(chrEntityId) <= 0);

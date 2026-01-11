@@ -14,7 +14,7 @@ $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90035230, 45530800, 45530200, 8060, 150, 300);
     $InitializeCommonEvent(0, 90035230, 45530800, 45530200, 8100, 150, 500);
     $InitializeCommonEvent(0, 90035231, 45530800, 45530200, 8101);
-    // $InitializeCommonEvent(0, 90035232, 45530800, 45535810, 45530810, 45530811, 45530812, 45530813, 45530814, 45530815, 45530200); // This initialization targets an event which doesn't exist - maybe it's the 46780810 initialization?
+    $InitializeCommonEvent(0, 90035232, 45530800, 45535810, 45530810, 45530811, 45530812, 45530813, 45530814, 45530815, 45530200); // NR6PF: Add entities to target extra players
     $InitializeCommonEvent(0, 90035233, 45530800, 45530810, 45530811, 45530812, 45530813, 45530814, 45530815, 45530200); // NR6PF: Add entities to target extra players
     $InitializeCommonEvent(0, 90035234, 45530800, 45535810, 45530200);
     $InitializeCommonEvent(0, 90035235, 45534200, 45530200);
