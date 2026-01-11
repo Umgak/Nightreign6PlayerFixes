@@ -2041,6 +2041,8 @@ L0:
 
 $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entityId) {
     // Boss rush towers
+    // This event is so complex that there are no more condition groups to modify it.
+    // I'll probably end up storing the state as an array of event flags.
     EndIf(EventFlag(eventFlagId2));
     sp = CharacterRatioHasSpEffect(chrEntityId, 98280, NotEqual, 0)
         || CharacterRatioHasSpEffect(chrEntityId, 98281, NotEqual, 0)
@@ -2060,9 +2062,9 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             areaSp2 &= InArea(10003, 1028402550);
             areaSp3 &= InArea(10004, 1028402550);
             // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp3 &= InArea(10005, 1028402550);
-            nr6pf_areaSp4 &= InArea(10006, 1028402550);
-            nr6pf_areaSp5 &= InArea(10007, 1028402550);
+            nr6pf_areaSp4 &= InArea(10005, 1028402550);
+            nr6pf_areaSp5 &= InArea(10006, 1028402550);
+            nr6pf_areaSp6 &= InArea(10007, 1028402550);
         }
         area2 &= EntityInRadiusOfEntity(1028402601, entityId, 15, 1);
         if (area2) {
@@ -2070,9 +2072,9 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             areaSp2 &= InArea(10003, 1028402551);
             areaSp3 &= InArea(10004, 1028402551);
             // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp3 &= InArea(10005, 1028402551);
-            nr6pf_areaSp4 &= InArea(10006, 1028402551);
-            nr6pf_areaSp5 &= InArea(10007, 1028402551);
+            nr6pf_areaSp4 &= InArea(10005, 1028402551);
+            nr6pf_areaSp5 &= InArea(10006, 1028402551);
+            nr6pf_areaSp6 &= InArea(10007, 1028402551);
         }
         area3 &= EntityInRadiusOfEntity(1028402602, entityId, 15, 1);
         if (area3) {
@@ -2080,9 +2082,9 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             areaSp2 &= InArea(10003, 1028402552);
             areaSp3 &= InArea(10004, 1028402552);
             // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp3 &= InArea(10005, 1028402552);
-            nr6pf_areaSp4 &= InArea(10006, 1028402552);
-            nr6pf_areaSp5 &= InArea(10007, 1028402552);
+            nr6pf_areaSp4 &= InArea(10005, 1028402552);
+            nr6pf_areaSp5 &= InArea(10006, 1028402552);
+            nr6pf_areaSp6 &= InArea(10007, 1028402552);
         }
         area4 &= EntityInRadiusOfEntity(1056402601, entityId, 15, 1);
         if (area4) {
@@ -2090,9 +2092,9 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             areaSp2 &= InArea(10003, 1056402550);
             areaSp3 &= InArea(10004, 1056402550);
             // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp3 &= InArea(10005, 1056402550);
-            nr6pf_areaSp4 &= InArea(10006, 1056402550);
-            nr6pf_areaSp5 &= InArea(10007, 1056402550);
+            nr6pf_areaSp4 &= InArea(10005, 1056402550);
+            nr6pf_areaSp5 &= InArea(10006, 1056402550);
+            nr6pf_areaSp6 &= InArea(10007, 1056402550);
         }
         area5 &= EntityInRadiusOfEntity(1056402602, entityId, 15, 1);
         if (area5) {
@@ -2100,9 +2102,9 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             areaSp2 &= InArea(10003, 1056402551);
             areaSp3 &= InArea(10004, 1056402551);
             // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp3 &= InArea(10005, 1056402551);
-            nr6pf_areaSp4 &= InArea(10006, 1056402551);
-            nr6pf_areaSp5 &= InArea(10007, 1056402551);
+            nr6pf_areaSp4 &= InArea(10005, 1056402551);
+            nr6pf_areaSp5 &= InArea(10006, 1056402551);
+            nr6pf_areaSp6 &= InArea(10007, 1056402551);
         }
         area6 &= EntityInRadiusOfEntity(1056402603, entityId, 15, 1);
         if (area6) {
@@ -2110,9 +2112,9 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             areaSp2 &= InArea(10003, 1056402552);
             areaSp3 &= InArea(10004, 1056402552);
             // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp3 &= InArea(10005, 1056402552);
-            nr6pf_areaSp4 &= InArea(10006, 1056402552);
-            nr6pf_areaSp5 &= InArea(10007, 1056402552);
+            nr6pf_areaSp4 &= InArea(10005, 1056402552);
+            nr6pf_areaSp5 &= InArea(10006, 1056402552);
+            nr6pf_areaSp6 &= InArea(10007, 1056402552);
         }
         sp2 = CharacterHasSpEffect(10002, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98261, NotEqual, 0)
@@ -2181,7 +2183,7 @@ $Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entit
             || CharacterHasSpEffect(10007, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10007, 98269, NotEqual, 0);
         nr6pf_areaSp6 &= nr6pf_sp7;
-        areaSp4 = areaSp || areaSp2 || areaSp3 || nr6pf_areaSp3 || nr6pf_areaSp4 || nr6pf_areaSp5; // NR6PF: Test areaSp for bonus players
+        areaSp4 = areaSp || areaSp2 || areaSp3 || nr6pf_areaSp4 || nr6pf_areaSp5 || nr6pf_areaSp6; // NR6PF: Test areaSp for bonus players
         WaitFor(areaSp4);
         if (areaSp.Passed) {
             if (!CharacterHasSpEffect(10002, 98260, Equal, 0)) {
