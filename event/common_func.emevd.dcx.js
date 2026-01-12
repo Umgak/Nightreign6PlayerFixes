@@ -2039,7 +2039,7 @@ L0:
     RestartEvent();
 });
 
-$Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entityId) {
+/*$Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entityId) {
     // Boss rush towers
     // This event is so complex that there are no more condition groups to modify it.
     // I'll probably end up storing the state as an array of event flags.
@@ -2485,7 +2485,258 @@ L6:
     SetSpEffect(chrEntityId, 98279);
     WaitFixedTimeSeconds(0.5);
     RestartEvent();
+});*/
+$Event(90015446, Restart, function(bossEntityId, bossSpawned, bossDead, bossMapCylinder) {
+    EndIf(EventFlag(bossDead));
+    sp = CharacterRatioHasSpEffect(bossEntityId, 98280, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98281, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98282, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98283, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98284, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98285, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98286, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98287, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98288, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98289, NotEqual, 0);
+    if (!sp) {
+        WaitFor(EventFlag(bossSpawned));
+        area &= EntityInRadiusOfEntity(1028402600, bossMapCylinder, 15, 1);
+        if (area) {
+            areaSp &= InArea(10002, 1028402550);
+            areaSp2 &= InArea(10003, 1028402550);
+            areaSp3 &= InArea(10004, 1028402550);
+        }
+        area2 &= EntityInRadiusOfEntity(1028402601, bossMapCylinder, 15, 1);
+        if (area2) {
+            areaSp &= InArea(10002, 1028402551);
+            areaSp2 &= InArea(10003, 1028402551);
+            areaSp3 &= InArea(10004, 1028402551);
+        }
+        area3 &= EntityInRadiusOfEntity(1028402602, bossMapCylinder, 15, 1);
+        if (area3) {
+            areaSp &= InArea(10002, 1028402552);
+            areaSp2 &= InArea(10003, 1028402552);
+            areaSp3 &= InArea(10004, 1028402552);
+        }
+        area4 &= EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
+        if (area4) {
+            areaSp &= InArea(10002, 1056402550);
+            areaSp2 &= InArea(10003, 1056402550);
+            areaSp3 &= InArea(10004, 1056402550);
+        }
+        area5 &= EntityInRadiusOfEntity(1056402602, bossMapCylinder, 15, 1);
+        if (area5) {
+            areaSp &= InArea(10002, 1056402551);
+            areaSp2 &= InArea(10003, 1056402551);
+            areaSp3 &= InArea(10004, 1056402551);
+        }
+        area6 &= EntityInRadiusOfEntity(1056402603, bossMapCylinder, 15, 1);
+        if (area6) {
+            areaSp &= InArea(10002, 1056402552);
+            areaSp2 &= InArea(10003, 1056402552);
+            areaSp3 &= InArea(10004, 1056402552);
+        }
+        sp2 = CharacterHasSpEffect(10002, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98269, NotEqual, 0);
+        areaSp &= sp2;
+        sp3 = CharacterHasSpEffect(10003, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98269, NotEqual, 0);
+        areaSp2 &= sp3;
+        sp4 = CharacterHasSpEffect(10004, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98269, NotEqual, 0);
+        areaSp3 &= sp4;
+        areaSp4 = areaSp || areaSp2 || areaSp3;
+        WaitFor(areaSp4);
+        if (areaSp.Passed) {
+            if (!CharacterHasSpEffect(10002, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10002, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10002, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10002, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10002, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10002, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10002, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10002, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10002, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10002, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+        } else if (areaSp2.Passed) {
+            if (!CharacterHasSpEffect(10003, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10003, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10003, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10003, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10003, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10003, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10003, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10003, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10003, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10003, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+        } else if (areaSp3.Passed) {
+            if (!CharacterHasSpEffect(10004, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10004, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10004, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10004, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10004, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10004, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10004, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10004, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10004, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10004, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+            Goto(L0);
+        }
+    }
+L0:
+    WaitFixedTimeSeconds(0.5);
+    area &= EntityInRadiusOfEntity(1028402600, bossMapCylinder, 15, 1);
+    if (area) {
+        area7 &= InArea(10002, 1028402570);
+        area8 |= !area7 || !InArea(10002, 1028402550);
+        area9 &= InArea(10003, 1028402570);
+        area10 |= !area9 || !InArea(10003, 1028402550);
+        area11 &= InArea(10004, 1028402570);
+        area12 |= !area11 || !InArea(10004, 1028402550);
+    }
+L1:
+    area2 &= EntityInRadiusOfEntity(1028402601, bossMapCylinder, 15, 1);
+    if (area2) {
+        area7 &= InArea(10002, 1028402570);
+        area8 |= !area7 || !InArea(10002, 1028402551);
+        area9 &= InArea(10003, 1028402570);
+        area10 |= !area9 || !InArea(10003, 1028402551);
+        area11 &= InArea(10004, 1028402570);
+        area12 |= !area11 || !InArea(10004, 1028402551);
+    }
+L2:
+    area3 &= EntityInRadiusOfEntity(1028402602, bossMapCylinder, 15, 1);
+    if (area3) {
+        area7 &= InArea(10002, 1028402570);
+        area8 |= !area7 || !InArea(10002, 1028402552);
+        area9 &= InArea(10003, 1028402570);
+        area10 |= !area9 || !InArea(10003, 1028402552);
+        area11 &= InArea(10004, 1028402570);
+        area12 |= !area11 || !InArea(10004, 1028402552);
+    }
+L3:
+    area4 &= EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
+    if (area4) {
+        area7 &= InArea(10002, 1056402570);
+        area8 |= !area7 || !InArea(10002, 1056402550);
+        area9 &= InArea(10003, 1056402570);
+        area10 |= !area9 || !InArea(10003, 1056402550);
+        area11 &= InArea(10004, 1056402570);
+        area12 |= !area11 || !InArea(10004, 1056402550);
+    }
+L4:
+    area5 &= EntityInRadiusOfEntity(1056402602, bossMapCylinder, 15, 1);
+    if (area5) {
+        area7 &= InArea(10002, 1056402570);
+        area8 |= !area7 || !InArea(10002, 1056402551);
+        area9 &= InArea(10003, 1056402570);
+        area10 |= !area9 || !InArea(10003, 1056402551);
+        area11 &= InArea(10004, 1056402570);
+        area12 |= !area11 || !InArea(10004, 1056402551);
+    }
+L5:
+    area6 &= EntityInRadiusOfEntity(1056402603, bossMapCylinder, 15, 1);
+    if (area6) {
+        area7 &= InArea(10002, 1056402570);
+        area8 |= !area7 || !InArea(10002, 1056402552);
+        area9 &= InArea(10003, 1056402570);
+        area10 |= !area9 || !InArea(10003, 1056402552);
+        area11 &= InArea(10004, 1056402570);
+        area12 |= !area11 || !InArea(10004, 1056402552);
+    }
+L6:
+    area13 = area8 && area10 && area12;
+    areaFlag = area13 || EventFlag(bossDead);
+    WaitFor(areaFlag);
+    SetSpEffect(bossEntityId, 98279);
+    WaitFixedTimeSeconds(0.5);
+    RestartEvent();
 });
+
 
 $Event(90015447, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
     SetNetworkconnectedEventFlagID(eventFlagId4, OFF);
@@ -2909,6 +3160,44 @@ $Event(90015468, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
 });
 
 $Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffectId3, nr6pf_spEffectId4, nr6pf_spEffectId5, nr6pf_spEffectId6) {
+    /*  NR6PF: DLC Divine Tower rune rewards
+        Rewritten to use 0 condition groups
+        Original version I made uses 6
+        (out of 30, so who cares, this was mostly proof of concept)
+        Original version is below for reference 
+    */
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(EventFlag(eventFlagId));
+    GotoIf(L1, IsPlayerCount(1));
+    GotoIf(L2, IsPlayerCount(2));
+    GotoIf(L3, IsPlayerCount(3)); // safe to remove, since 3 is the default reward
+    GotoIf(L4, IsPlayerCount(4));
+    GotoIf(L5, IsPlayerCount(5));
+    GotoIf(L6, IsPlayerCount(6));
+    // some shit went terribly wrong, player count is 0 or something
+    SetSpEffect(10000, spEffectId3); // 3 player reward
+    EndEvent();
+L1:
+    SetSpEffect(10000, spEffectId);
+    EndEvent();
+L2:
+    SetSpEffect(10000, spEffectId2);
+    EndEvent();
+L3: // safe to remove, since 3 is the default above
+    SetSpEffect(10000, spEffectId3);
+    EndEvent();
+L4:
+    SetSpEffect(10000, nr6pf_spEffectId4);
+    EndEvent();
+L5:
+    SetSpEffect(10000, nr6pf_spEffectId5);
+    EndEvent();
+L6:
+    SetSpEffect(10000, nr6pf_spEffectId6);
+    EndEvent();
+});
+
+/*$Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffectId3, nr6pf_spEffectId4, nr6pf_spEffectId5, nr6pf_spEffectId6) {
     // NR6PF: DLC boss rush tower rune distribution
     EndIf(EventFlag(eventFlagId));
     WaitFor(EventFlag(eventFlagId));
@@ -2937,8 +3226,8 @@ $Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffec
         EndEvent();
     }
     // Default case if IsPlayerCount returns junk
-    SetSpEffect(20000, spEffectId3);
-});
+    SetSpEffect(10000, spEffectId3);
+});*/
 
 $Event(90015470, Restart, function(entityId, eventFlagId, eventFlagId2, chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4) {
     DisableNetworkSync();
@@ -8025,25 +8314,66 @@ L0:
     // fuck off, rewritten
     // also the params are in reversed order for some reason here, but not for the boss rush
     // I don't know why
+    GotoIf(L1, IsPlayerCount(1));
+    GotoIf(L2, IsPlayerCount(2));
+    GotoIf(L3, IsPlayerCount(3)); // safe to remove, since 3 is default
+    GotoIf(L4, IsPlayerCount(4));
+    GotoIf(L5, IsPlayerCount(5));
+    GotoIf(L6, IsPlayerCount(6));
+    // player count is something fucky, just use 3 player
+    SetSpEffect(20000, 98800); // 52000
+    Goto(L7);
+L1:
+    SetSpEffect(20000, 98802); // 78000
+    Goto(L7);
+L2:
+    SetSpEffect(20000, 98801); // 67600
+    Goto(L7);
+L3: // safe to remove, since 3 is default
+    SetSpEffect(20000, 98800); // 52000
+    Goto(L7);
+L4:
+    SetSpEffect(20000, 98799); // 46800
+    Goto(L7);
+L5:
+    SetSpEffect(20000, 98798); // 41600
+    Goto(L7);
+L6:
+    SetSpEffect(20000, 98797); // 36400
+    Goto(L7);
+L7:
+/*
+    Old version of above.
+    This wastes 6 condition groups for the sake of readability.
+    The new version (above) uses 0.
     if (IsPlayerCount(1)) {
         SetSpEffect(20000, 98802); // 78000
+        Goto(L1);
     }
     if (IsPlayerCount(2)) {
         SetSpEffect(20000, 98801); // 67600
+        Goto(L1);
     }
     if (IsPlayerCount(3)) {
         SetSpEffect(20000, 98800); // 52000
+        Goto(L1);
     }
     // NR6PF: New speffect rows
     if (IsPlayerCount(4)) {
         SetSpEffect(20000, 98799); // 46800
+        Goto(L1);
     }
     if (IsPlayerCount(5)) {
         SetSpEffect(20000, 98798); // 41600
+        Goto(L1);
     }
     if (IsPlayerCount(6)) {
         SetSpEffect(20000, 98797); // 36400
+        Goto(L1);
     }
+    SetSpEffect(20000, 98800); // 52000
+L1:
+*/
     WaitFor(ElapsedSeconds(10));
     DisableCharacter(chrEntityId);
     DisableCharacter(chrEntityId2);
