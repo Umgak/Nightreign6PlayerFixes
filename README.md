@@ -1,6 +1,6 @@
 # Nightreign 6 Player Fixes
 A collection of fixes for Elden Ring: Nightreign, for modded playthroughs where the player count is greater than the default 3.
-The vanilla scripts repeatedly explicitly refernece players 1, 2, and 3, so when using a mod such as Seamless Co-op, many things do not correctly apply for extra players. This mod attempts to fix the game's maps and event scripts to be able to account for the expanded playercount.
+The vanilla scripts repeatedly explicitly reference players 1, 2, and 3, so when using a mod such as Seamless Co-op, many things do not correctly apply for extra players. This mod attempts to fix the game's maps and event scripts to be able to account for the expanded playercount.
 
 ## Current changes/fixes:
 * Rune multipliers scale all the way up to 6 players
