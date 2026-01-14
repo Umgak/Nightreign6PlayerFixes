@@ -3154,25 +3154,25 @@ $Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffec
     GotoIf(L5, IsPlayerCount(5));
     GotoIf(L6, IsPlayerCount(6));
     // some shit went terribly wrong, player count is 0 or something
-    SetSpEffect(10000, spEffectId3); // 3 player reward
+    SetSpEffect(20000, spEffectId3); // 3 player reward
     EndEvent();
 L1:
-    SetSpEffect(10000, spEffectId);
+    SetSpEffect(20000, spEffectId);
     EndEvent();
 L2:
-    SetSpEffect(10000, spEffectId2);
+    SetSpEffect(20000, spEffectId2);
     EndEvent();
 L3: // safe to remove, since 3 is the default above
-    SetSpEffect(10000, spEffectId3);
+    SetSpEffect(20000, spEffectId3);
     EndEvent();
 L4:
-    SetSpEffect(10000, nr6pf_spEffectId4);
+    SetSpEffect(20000, nr6pf_spEffectId4);
     EndEvent();
 L5:
-    SetSpEffect(10000, nr6pf_spEffectId5);
+    SetSpEffect(20000, nr6pf_spEffectId5);
     EndEvent();
 L6:
-    SetSpEffect(10000, nr6pf_spEffectId6);
+    SetSpEffect(20000, nr6pf_spEffectId6);
     EndEvent();
 });
 
