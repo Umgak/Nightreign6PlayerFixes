@@ -17069,7 +17069,7 @@ $Event(90075702, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
     LinkToBossHealthBar(Enabled, 907580000, chrEntityId);
 });
 
-$Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, entityId, entityId2, entityId3,/* did this to myself lol*/ entityId5, entityId6, entityId7, entityId4, eventFlagId, eventFlagId2, eventFlagId3) {
+$Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, entityId, entityId2, entityId3,/* did this to myself lol*/ nr6pf_entityId5, nr6pf_entityId6, nr6pf_entityId7, entityId4, eventFlagId, eventFlagId2, eventFlagId3) {
     // Heolstor the Nightlord
     if (EventFlag(eventFlagId3)) {
         ForceCharacterDeath(chrEntityId2, false);
@@ -17101,13 +17101,13 @@ $Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, enti
     }
     // NR6PF: Warp extra players to conveniently-added new targets!
     if (IsPlayerNo(4)) {
-        WarpCharacterAndCopyFloorUnknown200489(10005, TargetEntityType.Area, entityId5, -1, 10005, -1, -1);
+        WarpCharacterAndCopyFloorUnknown200489(10005, TargetEntityType.Area, nr6pf_entityId5, -1, 10005, -1, -1);
     }
     if (IsPlayerNo(5)) {
-        WarpCharacterAndCopyFloorUnknown200489(10006, TargetEntityType.Area, entityId6, -1, 10006, -1, -1);
+        WarpCharacterAndCopyFloorUnknown200489(10006, TargetEntityType.Area, nr6pf_entityId6, -1, 10006, -1, -1);
     }
     if (IsPlayerNo(6)) {
-        WarpCharacterAndCopyFloorUnknown200489(10007, TargetEntityType.Area, entityId7, -1, 10007, -1, -1);
+        WarpCharacterAndCopyFloorUnknown200489(10007, TargetEntityType.Area, nr6pf_entityId7, -1, 10007, -1, -1);
     }
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
     WaitFor(ElapsedSeconds(1));
@@ -18255,6 +18255,7 @@ L1:
 });
 
 $Event(90075861, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9, chrEntityId10, chrEntityId11, entityId, entityId2, entityId3, entityId4, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
+    // TODO: Unknown
     if (EventFlag(7512)) {
         DisableCharacter(chrEntityId2);
         DisableCharacter(chrEntityId10);
@@ -19886,7 +19887,7 @@ $Event(90085036, Default, function(eventFlagId, userDispLogParamId, hero, missio
 });
 
 $Event(90085037, Default, function(missionId, eventFlagId, eventFlagId2, assetEntityId, eventFlagId3, hero) {
-    // Misisons
+    // Missions
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
