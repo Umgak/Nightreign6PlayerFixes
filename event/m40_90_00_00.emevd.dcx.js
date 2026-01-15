@@ -50,6 +50,10 @@ $Event(0, Default, function() {
     $InitializeEvent(1, 40902660, 1, 40900618, 40900210, 40901612, 40901613);
     $InitializeEvent(1, 40902670, 1, 40900619, 40900210);
     $InitializeEvent(1, 40902672, 1, 40900619, 40900210, 40900618, 40900503);
+    $InitializeEvent(0, 40902700, 1, 40900619, 40900510, 40900512, 40900210);
+    $InitializeEvent(0, 40902702, 1, 1, 40900619, 40900510, 40900210);
+    $InitializeEvent(1, 40902702, 1, 2, 40900619, 40900511, 40900210);
+    $InitializeEvent(2, 40902702, 1, 3, 40900619, 40900512, 40900210);
     $InitializeEvent(2, 40902600, 2, 40900621, 40900622, 40900623, 40900624, 40901723, 40901724, 40901725, 10);
     $InitializeEvent(2, 40902603, 2, 40900621, 40901723, 40901724, 40901725);
     $InitializeEvent(6, 40902610, 2, 40900620, 40900621, 40900622, 40901720);
@@ -93,6 +97,10 @@ $Event(0, Default, function() {
     $InitializeEvent(6, 40902660, 6, 40900668, 40900260, 40901662, 40901663);
     $InitializeEvent(6, 40902670, 6, 40900669, 40900260);
     $InitializeEvent(6, 40902672, 6, 40900669, 40900260, 40900668, 40900503);
+    $InitializeEvent(1, 40902700, 6, 40900669, 40900513, 40900515, 40900260);
+    $InitializeEvent(3, 40902702, 6, 1, 40900669, 40900513, 40900260);
+    $InitializeEvent(4, 40902702, 6, 2, 40900669, 40900514, 40900260);
+    $InitializeEvent(5, 40902702, 6, 3, 40900669, 40900515, 40900260);
     $InitializeEvent(7, 40902690, 7, 40901770);
     $InitializeEvent(34, 40902560, 7, 40901770, 40900670, 40900501);
     $InitializeEvent(7, 40902520, 7, 40901670, 40901671, 40900677, 40900505, 40900676, 807392, 90, 0);
@@ -202,6 +210,9 @@ $Event(40902520, Restart, function(mapVariationId, assetEntityId, assetEntityId2
     EndIf(!IsMapVariation(mapVariationId));
     if (EventFlag(eventFlagId)) {
         DisableAsset(assetEntityId2);
+        if (assetEntityId3 != 0) {
+            EnableAsset(assetEntityId3);
+        }
         if (!EventFlag(eventFlagId3)) {
             EnableAsset(assetEntityId);
         }
@@ -403,5 +414,32 @@ L0:
     EndIf(IsMapVariation(7));
     EndIf(IsMapVariation(8));
     DisableAsset(40901791);
+});
+
+$Event(40902700, Restart, function(mapVariationId, eventFlagId, eventFlagId2, eventFlagId3, chrEntityId) {
+    EndIf(!IsMapVariation(mapVariationId));
+    EndIf(EventFlag(eventFlagId));
+    if (!AnyBatchEventFlags(eventFlagId2, eventFlagId3)) {
+        WaitFor(AnyBatchEventFlags(eventFlagId2, eventFlagId3));
+        ResetCharacterPosition(chrEntityId);
+    }
+L0:
+    WaitFor(!AnyBatchEventFlags(eventFlagId2, eventFlagId3));
+    RestartEvent();
+});
+
+$Event(40902702, Restart, function(mapVariationId, playerNo, eventFlagId, eventFlagId2, entityId) {
+    DisableNetworkSync();
+    EndIf(!IsMapVariation(mapVariationId));
+    EndIf(!IsPlayerNo(playerNo));
+    if (EventFlag(eventFlagId)) {
+        SetNetworkconnectedEventFlagID(eventFlagId2, OFF);
+        EndEvent();
+    }
+    WaitFor(EntityInRadiusOfEntity(20000, entityId, 100, 1));
+    SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    WaitFor(!EntityInRadiusOfEntity(20000, entityId, 100, 1));
+    SetNetworkconnectedEventFlagID(eventFlagId2, OFF);
+    RestartEvent();
 });
 

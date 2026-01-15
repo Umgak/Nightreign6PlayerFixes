@@ -3628,6 +3628,14 @@ $Event(90015477, Restart, function() {
     SetSpEffect(20000, 6999603);
 });
 
+$Event(90015478, Default, function(chrEntityId, eventFlagId) {
+    EndIf(!IsMapVariation(2));
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(CharacterHPValue(chrEntityId) <= 1);
+    DisableCharacterInvincibility(chrEntityId);
+    ForceCharacterDeath(chrEntityId, false);
+});
+
 $Event(90015500, Restart, function(areaEntityId) {
     EndIf(!EventFlag(7811));
     WaitFor(InArea(20000, areaEntityId));
@@ -4143,8 +4151,7 @@ $Event(90035048, Default, function(eventFlagId, eventFlagId2, entityId) {
         }
         WaitFor(ElapsedSeconds(3));
         if (EventFlag(8058)) {
-            RecordUserDispLogUnknown2003119(-1, 11173, eventFlagId, 0);
-            RecordUserDispLog(11174, entityId, LogObjectType.None, -1);
+            RecordUserDispLogUnknown2003119(11174, 11173, eventFlagId, 0);
         }
     }
 L0:
@@ -5723,12 +5730,13 @@ L6:
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
 });
 
-$Event(90035223, Default, function(eventFlagId, entityId, eventFlagId2) {
+$Event(90035223, Default, function(eventFlagId, chrEntityId, eventFlagId2) {
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8077) && EventFlag(8061) && EventFlag(eventFlagId));
     WaitFor(
-        (!EventFlag(eventFlagId2) && !InsidePlayArea(entityId, 50))
-            || PlayAreaCurrentTimeInRange(22, 40, 0, 23, 59, 59));
+        !EventFlag(eventFlagId2)
+            && CharacterHPValue(chrEntityId) >= 1
+            && (!InsidePlayArea(chrEntityId, 50) || PlayAreaCurrentTimeInRange(22, 40, 0, 23, 59, 59)));
     SetNetworkconnectedEventFlagID(8062, ON);
 });
 
@@ -7055,12 +7063,12 @@ $Event(90035264, Default, function(eventFlagId) {
         }
     }
 L0:
-    WaitFor((ElapsedSeconds(45) && PlayerIsInOwnWorld()) || EventFlag(80002) || EventFlag(8062));
+    WaitFor((ElapsedSeconds(49) && PlayerIsInOwnWorld()) || EventFlag(80002) || EventFlag(8062));
     EndIf(EventFlag(8062));
     if (PlayerIsInOwnWorld()) {
         SetNetworkconnectedEventFlagID(80002, ON);
     }
-    WaitFor((ElapsedSeconds(22) && PlayerIsInOwnWorld()) || !EventFlag(80002) || EventFlag(8062));
+    WaitFor((ElapsedSeconds(18) && PlayerIsInOwnWorld()) || !EventFlag(80002) || EventFlag(8062));
     if (PlayerIsInOwnWorld()) {
         SetNetworkconnectedEventFlagID(80002, OFF);
     }
@@ -8668,21 +8676,20 @@ $Event(90035281, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061));
-    cond &= EventFlag(eventFlagId4) && PlayerIsInOwnWorld();
-    WaitFor(cond || EventFlag(8061));
+    WaitFor((EventFlag(eventFlagId4) && PlayerIsInOwnWorld()) || EventFlag(8061));
     WaitFor(ElapsedSeconds(15));
     EndIf(EventFlag(8061));
     if (!EventFlag(9999)) {
-        cond &= PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59) && InsidePlayAreaByTime(0, 0, 17, 0, 0);
+        timeFlag &= PlayAreaCurrentTimeInRange(0, 0, 0, 20, 29, 59) && InsidePlayAreaByTime(0, 0, 17, 0, 0);
     }
-    cond &= !EventFlag(eventFlagId5)
+    timeFlag &= !EventFlag(eventFlagId5)
         && !EventFlag(eventFlagId6)
         && !EventFlag(eventFlagId7)
         && !EventFlag(eventFlagId8)
         && !EventFlag(eventFlagId9)
         && !IsHotSpot()
         && !AnyBatchEventFlags(eventFlagId, eventFlagId3);
-    EndIf(!cond);
+    EndIf(!timeFlag);
     if (!EventFlag(80012)) {
         SetNetworkconnectedEventFlagID(80012, ON);
         SetNetworkconnectedEventFlagID(eventFlagId, ON);
@@ -8783,15 +8790,16 @@ L10:
         DisableCharacterAI(chrEntityId);
         WaitFor(ElapsedSeconds(11));
         if (EventFlag(eventFlagId)) {
-            areaFlag |= InArea(10002, areaEntityId) || !EventFlag(7005);
+            areaFlagTime |= InArea(10002, areaEntityId) || !EventFlag(7005);
         }
         if (EventFlag(eventFlagId2)) {
-            areaFlag |= InArea(10003, areaEntityId) || !EventFlag(7006);
+            areaFlagTime |= InArea(10003, areaEntityId) || !EventFlag(7006);
         }
         if (EventFlag(eventFlagId3)) {
-            areaFlag |= InArea(10004, areaEntityId) || !EventFlag(7007);
+            areaFlagTime |= InArea(10004, areaEntityId) || !EventFlag(7007);
         }
-        WaitFor(areaFlag);
+        areaFlagTime |= ElapsedSeconds(5);
+        WaitFor(areaFlagTime);
         SetCharacterBackreadState(chrEntityId, false);
         DisableCharacter(chrEntityId);
         DisableCharacterAI(chrEntityId);
@@ -8843,6 +8851,8 @@ L0:
     SetSpEffect(chrEntityId2, 4488);
     SetSpEffect(chrEntityId2, 7248);
     WaitFixedTimeFrames(1);
+    SetSpEffect(chrEntityId, 63117);
+    WaitFixedTimeSeconds(5.5);
     SetSpEffect(chrEntityId, 63117);
 });
 
@@ -9022,6 +9032,13 @@ $Event(90045000, Default, function(eventFlagId, entityId, mapVariationId, logObj
         WaitFixedTimeSeconds(3);
         RestartEvent();
     }
+    if (IsPlayerNo(2)) {
+        WaitFor(ElapsedSeconds(0.1));
+    }
+    if (IsPlayerNo(3)) {
+        WaitFor(ElapsedSeconds(0.2));
+    }
+    EndIf(EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
     RemoveItemFromPlayer(ItemType.Goods, 8000, 1);
     RecordUserDispLog(11240, 10000, LogObjectType.NpcName, logObjectId);
@@ -9285,7 +9302,7 @@ $Event(90045041, Default, function(mapVariationId, eventFlagId, chrEntityId, chr
 
 $Event(90045050, Restart, function(chrEntityId, chrEntityId2, areaEntityId, areaEntityId2, areaEntityId3, areaEntityId4, areaEntityId5, areaEntityId6, areaEntityId7, areaEntityId8, areaEntityId9, areaEntityId10, areaEntityId11, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
     EndIf(CharacterHPValue(chrEntityId) <= 0);
-    if (!AnyBatchEventFlags(areaEntityId11, 22)) {
+    if (!AnyBatchEventFlags(areaEntityId11, eventFlagId9)) {
         RandomlySetNetworkconnectedEventFlagInRange(areaEntityId11, eventFlagId9, ON);
     }
     WaitFor(
@@ -10078,6 +10095,10 @@ $Event(90065050, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, bgmB
     }
     if (EventFlag(eventFlagId2)) {
         SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        SetNetworkUpdateRate(chrEntityId3, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+        SetNetworkUpdateRate(chrEntityId4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+        SetNetworkUpdateRate(chrEntityId5, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+        SetNetworkUpdateRate(chrEntityId6, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
         DisableCharacterHPBarDisplay(chrEntityId);
         EnableCharacter(chrEntityId);
         EnableCharacterAI(chrEntityId);
@@ -10110,6 +10131,10 @@ L10:
     }
     SpawnOneshotSFX(TargetEntityType.Character, chrEntityId2, 900, 690047);
     SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId3, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    SetNetworkUpdateRate(chrEntityId4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    SetNetworkUpdateRate(chrEntityId5, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    SetNetworkUpdateRate(chrEntityId6, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
     DisableCharacterHPBarDisplay(chrEntityId);
     WaitFor(ElapsedSeconds(3.5));
     SetSpEffect(chrEntityId3, 13748);
@@ -10136,6 +10161,11 @@ L10:
         LinkToBossHealthBar(Enabled, nameId3, chrEntityId4);
     }
     SetNetworkconnectedEventFlagID(eventFlagId2, ON);
+    DisableNetworkSync();
+    EndIf(!AnyBatchEventFlags(5000, 5001));
+    WaitFor(!AnyBatchEventFlags(5000, 5001));
+    WaitFor(ElapsedFrames(1));
+    DisplayBossHealthBar(Enabled, chrEntityId4, 0, nameId3);
 });
 
 $Event(90065051, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, eventFlagId) {
@@ -10147,6 +10177,8 @@ $Event(90065051, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, even
     }
     EnableCharacterImmortality(chrEntityId2);
     EnableCharacterImmortality(chrEntityId3);
+    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    SetNetworkUpdateRate(chrEntityId3, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
     DisableCharacter(chrEntityId2);
     DisableCharacterAI(chrEntityId2);
     EnableCharacterInvincibility(chrEntityId3);
@@ -10411,7 +10443,6 @@ $Event(90065082, Restart, function(chrEntityId, eventFlagId, eventFlagId2, event
         EndEvent();
     }
     if (EventFlag(eventFlagId2)) {
-        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
         EnableCharacter(chrEntityId);
         EnableCharacterAI(chrEntityId);
         EndEvent();
@@ -11862,6 +11893,7 @@ L0:
     }
     WaitFor(!CharacterHasSpEffect(chrEntityId, 60762) || CharacterDead(chrEntityId));
     WaitFor(!CharacterHasSpEffect(chrEntityId, 60762) || ElapsedSeconds(10));
+    SetSpEffect(20000, 60768);
     DeactivateGparamOverride(5);
 });
 
@@ -13241,7 +13273,20 @@ $Event(90075301, Restart, function(chrEntityId, chrEntityId2, chrEntityId3) {
         ForceAnimationPlayback(chrEntityId, 20029, false, false, false);
         WaitFor(ElapsedSeconds(4));
     }
+    if (CharacterHasSpEffect(chrEntityId, 5080)) {
+        ForceAnimationPlayback(chrEntityId, 20029, false, false, false);
+        WaitFor(ElapsedSeconds(4));
+    }
     DisplayBossHealthBar(Enabled, chrEntityId, 0, 907540000);
+    WaitFor(ElapsedSeconds(4));
+    if (CharacterHasSpEffect(chrEntityId, 5080)) {
+        ForceAnimationPlayback(chrEntityId, 20027, false, false, false);
+        WaitFor(ElapsedSeconds(4));
+    }
+    if (CharacterHasSpEffect(chrEntityId, 5080)) {
+        ForceAnimationPlayback(chrEntityId, 20027, false, false, false);
+        WaitFor(ElapsedSeconds(4));
+    }
 });
 
 $Event(90075302, Restart, function(chrEntityId, chrEntityId2) {
@@ -13620,7 +13665,20 @@ $Event(90075351, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, even
         ForceAnimationPlayback(chrEntityId, 20027, false, false, false);
         WaitFor(ElapsedSeconds(4));
     }
+    if (CharacterHasSpEffect(chrEntityId, 5080)) {
+        ForceAnimationPlayback(chrEntityId, 20027, false, false, false);
+        WaitFor(ElapsedSeconds(4));
+    }
     DisplayBossHealthBar(Enabled, chrEntityId, 0, 907540001);
+    WaitFor(ElapsedSeconds(4));
+    if (CharacterHasSpEffect(chrEntityId, 5080)) {
+        ForceAnimationPlayback(chrEntityId, 20027, false, false, false);
+        WaitFor(ElapsedSeconds(4));
+    }
+    if (CharacterHasSpEffect(chrEntityId, 5080)) {
+        ForceAnimationPlayback(chrEntityId, 20027, false, false, false);
+        WaitFor(ElapsedSeconds(4));
+    }
 });
 
 $Event(90075352, Restart, function(chrEntityId, chrEntityId2, eventFlagId) {
@@ -15620,8 +15678,22 @@ $Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, enti
         DisplayBossHealthBar(Enabled, chrEntityId2, 0, 907580001);
         LinkToBossHealthBar(Disabled, 907580001, 0);
         LinkToBossHealthBar(Enabled, 907580001, chrEntityId2);
+        EnableAsset(18001510);
+        WaitFor(CharacterBackreadStatus(chrEntityId2));
+        if (!(CharacterHasSpEffect(chrEntityId2, 46089)
+            || CharacterHasSpEffect(chrEntityId2, 46093)
+            || CharacterHasSpEffect(chrEntityId2, 46094)
+            || CharacterHasSpEffect(chrEntityId2, 46095)
+            || CharacterHasSpEffect(chrEntityId2, 46096)
+            || CharacterHasSpEffect(chrEntityId2, 46097)
+            || CharacterHasSpEffect(chrEntityId2, 46098)
+            || CharacterHasSpEffect(chrEntityId2, 46099)
+            || CharacterHasSpEffect(chrEntityId2, 46105))) {
+            ChangeWeather(Weather.Type87, -1, true);
+        }
         EndEvent();
     }
+L10:
     DisableCharacter(chrEntityId2);
     DisableCharacterAI(chrEntityId2);
     WaitFor(CharacterHasSpEffect(chrEntityId, 46082));
@@ -15677,34 +15749,36 @@ $Event(90075705, Restart, function(chrEntityId, chrEntityId2, eventFlagId, spEff
     WaitFor(ElapsedFrames(1));
     if (EventFlag(eventFlagId)) {
         ChangeWeather(weather, -1, true);
+        SpawnMapSFX(entityId2);
         ForceAnimationPlayback(18001510, 101, true, false, false);
-        EndEvent();
-    }
-    WaitFor(CharacterHasSpEffect(chrEntityId, 46089));
-    RestartIf(!CharacterHasSpEffect(chrEntityId, spEffectId));
-    ChangeWeather(weather, -1, true);
-    WaitFixedTimeFrames(1);
-    if (!CharacterHasSpEffect(chrEntityId, 46197)) {
-        GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46196));
-        GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46195));
-        GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46194));
-        GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46193));
-        GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46192));
-        GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46191));
-        GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46190));
-        PlaySE(18000810, SoundType.EnvironmentalSound, 180000100);
-        PlaySE(18000810, SoundType.EnvironmentalSound, 180000110);
     } else {
+        WaitFor(CharacterHasSpEffect(chrEntityId, 46089));
+        RestartIf(!CharacterHasSpEffect(chrEntityId, spEffectId));
+        ChangeWeather(weather, -1, true);
+        WaitFixedTimeFrames(1);
+        if (!CharacterHasSpEffect(chrEntityId, 46197)) {
+            GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46196));
+            GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46195));
+            GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46194));
+            GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46193));
+            GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46192));
+            GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46191));
+            GotoIf(S0, CharacterHasSpEffect(chrEntityId, 46190));
+            PlaySE(18000810, SoundType.EnvironmentalSound, 180000100);
+            PlaySE(18000810, SoundType.EnvironmentalSound, 180000110);
+        } else {
 S0:
-        PlaySE(18000810, SoundType.EnvironmentalSound, 180000200);
-        PlaySE(18000810, SoundType.EnvironmentalSound, 180000210);
+            PlaySE(18000810, SoundType.EnvironmentalSound, 180000200);
+            PlaySE(18000810, SoundType.EnvironmentalSound, 180000210);
+        }
+        SetNetworkconnectedEventFlagID(eventFlagId, ON);
+        SpawnMapSFX(entityId);
+        ForceAnimationPlayback(18001510, 100, false, true, false);
+        DeleteMapSFX(entityId, true);
+        SpawnMapSFX(entityId2);
+        ForceAnimationPlayback(18001510, 101, true, false, false);
     }
-    SetNetworkconnectedEventFlagID(eventFlagId, ON);
-    SpawnMapSFX(entityId);
-    ForceAnimationPlayback(18001510, 100, false, true, false);
-    DeleteMapSFX(entityId, true);
-    SpawnMapSFX(entityId2);
-    ForceAnimationPlayback(18001510, 101, true, false, false);
+L0:
     WaitFor(CharacterHasSpEffect(chrEntityId, 46088) || HPRatio(chrEntityId) <= 0);
     SetNetworkconnectedEventFlagID(eventFlagId, OFF);
     DeleteMapSFX(entityId2, true);
@@ -15722,7 +15796,6 @@ S1:
         PlaySE(18000810, SoundType.EnvironmentalSound, 180000220);
     }
     ForceAnimationPlayback(18001510, 200, false, true, false);
-L0:
     ForceAnimationPlayback(18001510, 201, true, false, false);
     if (!EventFlag(18002800)) {
         ChangeWeather(Weather.Type87, -1, true);
@@ -16055,7 +16128,8 @@ $Event(90075773, Restart, function(chrEntityId, eventFlagId) {
     }
     WaitFor(EventFlag(7511));
     EndIf(!CharacterHasSpEffect(20000, 6999200));
-    WaitFor(CharacterHasSpEffect(chrEntityId, 60521));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60521) || EventFlag(eventFlagId));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 60521) || ElapsedSeconds(25));
     SetSpEffect(20000, 6999201);
     SetSpEffect(20000, 60522);
     WaitFor(ElapsedSeconds(2.2));
@@ -16512,12 +16586,12 @@ $Event(90075830, Restart, function(chrEntityId, areaEntityId) {
     WaitFor(!InArea(chrEntityId, areaEntityId) || CharacterHasSpEffect(chrEntityId, 62560));
     SetSpEffect(chrEntityId, 62560);
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(chrEntityId, 62560));
+    WaitFor(CharacterHasSpEffect(chrEntityId, 62560) || ElapsedSeconds(3));
     EnableNetworkSync();
     WaitFor(InArea(chrEntityId, areaEntityId) || !CharacterHasSpEffect(chrEntityId, 62560));
     SetSpEffect(chrEntityId, 62561);
     DisableNetworkSync();
-    WaitFor(!CharacterHasSpEffect(chrEntityId, 62560));
+    WaitFor(!CharacterHasSpEffect(chrEntityId, 62560) || ElapsedSeconds(3));
     EnableNetworkSync();
     RestartEvent();
 });
@@ -16595,10 +16669,6 @@ $Event(90075850, Default, function(chrEntityId, chrEntityId2, chrEntityId3, chrE
     EnableCharacterDefaultBackread(chrEntityId2);
     EnableCharacterDefaultBackread(chrEntityId3);
     EnableCharacterDefaultBackread(chrEntityId4);
-    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
-    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
-    SetNetworkUpdateRate(chrEntityId3, true, CharacterUpdateFrequency.AlwaysUpdate);
-    SetNetworkUpdateRate(chrEntityId4, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisableCharacterHPBarDisplay(chrEntityId2);
     DisableCharacterHPBarDisplay(chrEntityId4);
     CreateReferredDamagePair(chrEntityId, chrEntityId2);
@@ -16637,6 +16707,8 @@ $Event(90075852, Restart, function(chrEntityId, entityId, entityId2, entityId3, 
     if (EventFlag(7511)) {
         EnableCharacter(chrEntityId);
         EnableCharacterAI(chrEntityId);
+        SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+        SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
         DisplayBossHealthBar(Enabled, chrEntityId2, 0, 907640000);
         LinkToBossHealthBar(Disabled, 907640000, 0);
         LinkToBossHealthBar(Enabled, 907640000, chrEntityId);
@@ -16646,6 +16718,8 @@ $Event(90075852, Restart, function(chrEntityId, entityId, entityId2, entityId3, 
 L10:
     EnableCharacter(chrEntityId);
     DisableCharacterAI(chrEntityId);
+    SetNetworkUpdateRate(chrEntityId, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
     ForceAnimationPlayback(chrEntityId, 30025, true, false, false);
     WaitFor(EventFlag(7511));
     SetBossBGM(762000, BossBGMState.Start);
@@ -16769,6 +16843,7 @@ L1:
             || CharacterHasSpEffect(chrEntityId6, 5032)
             || CharacterHasSpEffect(chrEntityId7, 5032)
             || CharacterHasSpEffect(chrEntityId8, 5032));
+    SetNetworkUpdateRate(chrEntityId9, false, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Disabled, chrEntityId9, 0, 907640000);
 });
 
@@ -16787,6 +16862,9 @@ L10:
         EnableCharacter(chrEntityId2);
         EnableCharacter(chrEntityId10);
         EnableCharacter(chrEntityId11);
+        SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
+        SetNetworkUpdateRate(chrEntityId10, true, CharacterUpdateFrequency.AlwaysUpdate);
+        SetNetworkUpdateRate(chrEntityId11, true, CharacterUpdateFrequency.AlwaysUpdate);
         DisplayBossHealthBar(Enabled, chrEntityId10, 0, 907640000);
         LinkToBossHealthBar(Disabled, 907640000, 0);
         LinkToBossHealthBar(Enabled, 907640000, chrEntityId2);
@@ -16803,6 +16881,11 @@ L11:
     WaitFor(ElapsedSeconds(1));
     DisableCharacter(chrEntityId);
     SetCharacterBackreadState(chrEntityId, true);
+    SetNetworkUpdateRate(chrEntityId, false, CharacterUpdateFrequency.AlwaysUpdate);
+    WaitFor(ElapsedFrames(1));
+    SetNetworkUpdateRate(chrEntityId2, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId10, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(chrEntityId11, true, CharacterUpdateFrequency.AlwaysUpdate);
     ForceAnimationPlayback(chrEntityId2, 30001, false, false, false);
     WaitFor(ElapsedFrames(1));
     EnableCharacter(chrEntityId10);
@@ -16873,7 +16956,7 @@ L0:
 L1:
     WaitFor(ElapsedSeconds(1));
     EnableCharacterAI(chrEntityId2);
-    EnableCharacterAI(chrEntityId4);
+    EnableCharacterAI(chrEntityId11);
     WaitFor(ElapsedSeconds(2));
     DisplayBossHealthBar(Enabled, chrEntityId10, 0, 907640000);
     LinkToBossHealthBar(Disabled, 907640000, 0);
@@ -16906,6 +16989,10 @@ L1:
         WaitFor(RandomElapsedSeconds(1, 1.5));
         ForceAnimationPlayback(chrEntityId9, 20039, false, false, false);
     }
+    WaitFor(ElapsedSeconds(5));
+    WaitFor(PlayerIsInOwnWorld() || ElapsedSeconds(5));
+    EnableCharacterAI(chrEntityId2);
+    EnableCharacterAI(chrEntityId11);
 });
 
 $Event(90075862, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9, eventFlagId) {
@@ -17538,6 +17625,15 @@ L0:
 L1:
     SetEventFlagID(6062, ON);
     EndEvent();
+});
+
+$Event(90075940, Default, function(mapVariationId, eventFlagId, eventFlagId2, itemId) {
+    DisableNetworkSync();
+    EndIf(!IsMapVariation(mapVariationId));
+    EndIf(EventFlag(eventFlagId));
+    EndIf(PlayerHasItem(ItemType.Antique, itemId));
+    WaitFor(IsGameMode(2) && EventFlag(7512));
+    SetEventFlagID(eventFlagId2, ON);
 });
 
 $Event(90075950, Restart, function(bgmBossConvParamId, chrEntityId, spEffectId, targetAmount) {
