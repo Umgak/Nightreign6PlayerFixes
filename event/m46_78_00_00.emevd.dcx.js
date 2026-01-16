@@ -6,7 +6,7 @@
 // @linked    [0,82]
 // @version    3.6.2
 // ==/EMEVD==
-
+import { morgottTargeted } from "globalFlags.js";
 $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015000, 9060, 46780800, 902130002, 50, 0, 9061);
     $InitializeCommonEvent(0, 90015030, 9060, 46780800, 50, 213021, 9061);
@@ -15,23 +15,23 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 9999);
     } else {
         if (IsPlayerNo(1)) {
-            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 8085);
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, morgottTargeted.P1);
         }
         if (IsPlayerNo(2)) {
-            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 8086);
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, morgottTargeted.P2);
         }
         if (IsPlayerNo(3)) {
-            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 8087);
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, morgottTargeted.P3);
         }
         // NR6PF: conditions and flags for extra players.
         if (IsPlayerNo(4)) {
-            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 11008085);
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, morgottTargeted.P4);
         }
         if (IsPlayerNo(5)) {
-            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 11008086);
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, morgottTargeted.P5);
         }
         if (IsPlayerNo(6)) {
-            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, 11008087);
+            $InitializeCommonEvent(0, 90035300, 46780200, 46780201, morgottTargeted.P6);
         }
     }
     $InitializeCommonEvent(0, 90015002, 8075, 46780200, 46780800, 46780800, 1020, 213001, 0, 0, 0);
