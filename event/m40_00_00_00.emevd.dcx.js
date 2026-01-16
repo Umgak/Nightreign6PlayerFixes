@@ -44,9 +44,14 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 40002671);
     $InitializeEvent(0, 40002672);
     $InitializeEvent(0, 40002673);
+    // stump reset logic, but messier than the ruined version
     $InitializeEvent(0, 40002674, 1, 40000570);
     $InitializeEvent(1, 40002674, 2, 40000571);
     $InitializeEvent(2, 40002674, 3, 40000572);
+    // nr6pf: new player instances
+    $InitializeEvent(3, 40002674, 4, 40000573);
+    $InitializeEvent(4, 40002674, 5, 40000574);
+    $InitializeEvent(5, 40002674, 6, 40000575);
     $InitializeEvent(0, 40002680, 8, 40001638);
     $InitializeEvent(1, 40002680, 9, 40001639);
     $InitializeCommonEvent(0, 90015500, 40002320);
@@ -285,14 +290,15 @@ $Event(40002672, Restart, function() {
 });
 
 $Event(40002673, Restart, function() {
+    // stump resetter
     EndIf(!IsMapVariation(7));
     EndIf(EventFlag(40000501));
-    if (!AnyBatchEventFlags(40000570, 40000572)) {
-        WaitFor(AnyBatchEventFlags(40000570, 40000572));
+    if (!AnyBatchEventFlags(40000570, 40000575)) { // nr6pf: expanded flag range
+        WaitFor(AnyBatchEventFlags(40000570, 40000575)); // nr6pf: expanded flag range
         ResetCharacterPosition(40000297);
     }
 L0:
-    WaitFor(!AnyBatchEventFlags(40000570, 40000572));
+    WaitFor(!AnyBatchEventFlags(40000570, 40000575)); // nr6pf: expanded flag range
     RestartEvent();
 });
 

@@ -50,10 +50,18 @@ $Event(0, Default, function() {
     $InitializeEvent(1, 40902660, 1, 40900618, 40900210, 40901612, 40901613);
     $InitializeEvent(1, 40902670, 1, 40900619, 40900210);
     $InitializeEvent(1, 40902672, 1, 40900619, 40900210, 40900618, 40900503);
-    $InitializeEvent(0, 40902700, 1, 40900619, 40900510, 40900512, 40900210);
+    // stump resetter from 1.03.2
+    // nr6pf: added new flags
+    $InitializeEvent(0, 40902700, 1, 40900619, 40900510, 40900515, 40900210);
+    // stump reset logic from 1.03.2
     $InitializeEvent(0, 40902702, 1, 1, 40900619, 40900510, 40900210);
     $InitializeEvent(1, 40902702, 1, 2, 40900619, 40900511, 40900210);
     $InitializeEvent(2, 40902702, 1, 3, 40900619, 40900512, 40900210);
+    // nr6pf: make stumps respect players 4-6
+    // events 40900513-5 were originally used down below, but they were renumbered for easier BatchEventFlags
+    $InitializeEvent(3, 40902702, 1, 4, 40900619, 40900513, 40900210);
+    $InitializeEvent(4, 40902702, 1, 5, 40900619, 40900514, 40900210);
+    $InitializeEvent(5, 40902702, 1, 6, 40900619, 40900515, 40900210);
     $InitializeEvent(2, 40902600, 2, 40900621, 40900622, 40900623, 40900624, 40901723, 40901724, 40901725, 10);
     $InitializeEvent(2, 40902603, 2, 40900621, 40901723, 40901724, 40901725);
     $InitializeEvent(6, 40902610, 2, 40900620, 40900621, 40900622, 40901720);
@@ -97,10 +105,18 @@ $Event(0, Default, function() {
     $InitializeEvent(6, 40902660, 6, 40900668, 40900260, 40901662, 40901663);
     $InitializeEvent(6, 40902670, 6, 40900669, 40900260);
     $InitializeEvent(6, 40902672, 6, 40900669, 40900260, 40900668, 40900503);
-    $InitializeEvent(1, 40902700, 6, 40900669, 40900513, 40900515, 40900260);
-    $InitializeEvent(3, 40902702, 6, 1, 40900669, 40900513, 40900260);
-    $InitializeEvent(4, 40902702, 6, 2, 40900669, 40900514, 40900260);
-    $InitializeEvent(5, 40902702, 6, 3, 40900669, 40900515, 40900260);
+    // stump resetter
+    // nr6pf: switched to new flag ranges
+    $InitializeEvent(1, 40902700, 6, 40900669, 40900516, 40900521, 40900260);
+    // stump reset logic
+    // nr6pf: renumbered (+3)
+    $InitializeEvent(6, 40902702, 6, 1, 40900669, 40900516, 40900260);
+    $InitializeEvent(7, 40902702, 6, 2, 40900669, 40900517, 40900260);
+    $InitializeEvent(8, 40902702, 6, 3, 40900669, 40900518, 40900260);
+    // nr6pf: respect players 4-6
+    $InitializeEvent(6, 40902702, 6, 1, 40900669, 40900519, 40900260);
+    $InitializeEvent(7, 40902702, 6, 2, 40900669, 40900520, 40900260);
+    $InitializeEvent(8, 40902702, 6, 3, 40900669, 40900521, 40900260);
     $InitializeEvent(7, 40902690, 7, 40901770);
     $InitializeEvent(34, 40902560, 7, 40901770, 40900670, 40900501);
     $InitializeEvent(7, 40902520, 7, 40901670, 40901671, 40900677, 40900505, 40900676, 807392, 90, 0);
