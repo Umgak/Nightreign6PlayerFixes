@@ -7,7 +7,6 @@ The vanilla scripts repeatedly explicitly reference players 1, 2, and 3, so when
 * Rune multipliers scale all the way up to 6 players (1.5x, 1.3x, 1x, 0.9x, 0.8x, 0.7x)
 * Defeat event will not trigger until ALL players are dead
 * Wending Grace/Blessing of Noklateo will revive ALL players
-* Sorcerous Rises will not reset if ANY players are nearby
 ### Raid events
 * Morgott boss raid can target all players
 * Maris boss raid will target all players 
@@ -18,15 +17,16 @@ The vanilla scripts repeatedly explicitly reference players 1, 2, and 3, so when
 * Caligo raid event rune rewards scale for up to 6 players
 * All players can trigger Hordes
 ### Bosses
-* Everdark Libra will spawn clones of all six players. This will be chaos. I know.
-* Gnoster laser beam can target all players
-* Heolstor teleports all players during phase change, instead of extra players awkwardly standing around where they were.
 * Duke's Dear Freyja night boss applies its slow effect to everyone
-* Fulghor, Champion of Nightglow should target players 4-6 more consistently when interrupted by them
 * Divine Beast Dancing Lion can steal heals from anyone, not just players 1-3
+* Gnoster laser beam can target all players
+* Fulghor, Champion of Nightglow should target players 4-6 more consistently when interrupted by them
+* Everdark Libra will spawn clones of all six players. This will be chaos. I know.
+* Heolstor teleports all players during phase change, instead of extra players awkwardly standing around where they were.
 ### Misc
-* DLC Boss Rush Tower effects work when players 1-3 are not present
-* DLC Boss Rush Tower rune rewards scale for up to 6 players
+* Sorcerous Rises will not reset if ANY players are nearby
+* Great Hollow Divine Tower effects work when players 1-3 are not present
+* Great Hollow Divine Tower rune rewards scale for up to 6 players
 
 
 ## Known issues:
