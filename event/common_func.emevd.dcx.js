@@ -18330,7 +18330,7 @@ L1:
 });
 
 $Event(90075861, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9, chrEntityId10, chrEntityId11, entityId, entityId2, entityId3, entityId4, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
-    // TODO: Unknown
+    // ED Harmonia
     if (EventFlag(7512)) {
         DisableCharacter(chrEntityId2);
         DisableCharacter(chrEntityId10);

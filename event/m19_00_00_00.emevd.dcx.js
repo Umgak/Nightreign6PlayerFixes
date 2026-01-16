@@ -62,7 +62,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075211, 19000821, 19000820, 19000221);
         $InitializeCommonEvent(0, 90075212, 19000821, 19000825, 19000826, 19000220, 19000221, 19000222, 0);
         // why did they do it like this, this is terrible
-        // Gnoster balls
+        // Gnoster laser targeting
         if (IsPlayerNo(1)) {
             $InitializeCommonEvent(0, 90075230, 19000822, 10002, 1);
             $InitializeCommonEvent(0, 90075230, 19000823, 10003, 0);
@@ -370,7 +370,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075266, 19010826, 0);
     }
     if (IsMapVariation(12)) {
-        // ED Gnoster balls
+        // ED Gnoster laser beam
         // why did they do it like this, this is terrible
         if (IsPlayerNo(1)) {
             $InitializeCommonEvent(0, 90075230, 19010822, 10002, 1);
