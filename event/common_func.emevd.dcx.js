@@ -10015,6 +10015,7 @@ $Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
 });
 
 $Event(90035281, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
+    // TODO: Balancers raid
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061));
@@ -18329,7 +18330,7 @@ L1:
     DisplayBossHealthBar(Disabled, chrEntityId9, 0, 907640000);
 });
 
-$Event(90075861, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9, chrEntityId10, chrEntityId11, entityId, entityId2, entityId3, entityId4, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
+$Event(90075861, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, chrEntityId4, chrEntityId5, chrEntityId6, chrEntityId7, chrEntityId8, chrEntityId9, chrEntityId10, chrEntityId11, entityId, entityId2, entityId3, entityId4, nr6pf_entityId5, nr6pf_entityId6, nr6pf_entityId7, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8) {
     // ED Harmonia
     if (EventFlag(7512)) {
         DisableCharacter(chrEntityId2);
@@ -18401,22 +18402,30 @@ L11:
 L0:
     if (IsPlayerNo(1)) {
         IssueShortWarpRequest(20000, TargetEntityType.Area, entityId2, -1);
+        SetCameraAngle(6.5, -1); // NR6PF: moved camera angles up here
     }
     if (IsPlayerNo(2)) {
         IssueShortWarpRequest(20000, TargetEntityType.Area, entityId3, -1);
+        SetCameraAngle(6.5, 9.5); // NR6PF: moved camera angles up here
     }
     if (IsPlayerNo(3)) {
         IssueShortWarpRequest(20000, TargetEntityType.Area, entityId4, -1);
+        SetCameraAngle(7, 0.5); // NR6PF: moved camera angles up here
     }
-    if (IsPlayerNo(1)) {
-        SetCameraAngle(6.5, -1);
+    // NR6PF: Phase transition warp
+    if (IsPlayerNo(4)) {
+        IssueShortWarpRequest(20000, TargetEntityType.Area, nr6pf_entityId5, -1);
+        SetCameraAngle(6.5, 11); // NR6PF: moved camera angles up here
     }
-    if (IsPlayerNo(2)) {
-        SetCameraAngle(6.5, 9.5);
+    if (IsPlayerNo(5)) {
+        IssueShortWarpRequest(20000, TargetEntityType.Area, nr6pf_entityId6, -1);
+        SetCameraAngle(7, 2); // NR6PF: moved camera angles up here
     }
-    if (IsPlayerNo(3)) {
-        SetCameraAngle(7, 0.5);
-    }
+    if (IsPlayerNo(6)) {
+        IssueShortWarpRequest(20000, TargetEntityType.Area, nr6pf_entityId7, -1);
+        SetCameraAngle(6.5, 19.5); // NR6PF: moved camera angles up here
+    }        
+    // NR6PF: Camera angle changes are up top now
     WaitFor(ElapsedSeconds(3));
     FadeToBlack(0, 1, false, -1);
     if (EventFlag(eventFlagId2)) {
