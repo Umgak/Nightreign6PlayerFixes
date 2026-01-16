@@ -341,13 +341,13 @@ S29:
         $InitializeCommonEvent(3, 90025000, 1058402800, 9029, 30);
         $InitializeCommonEvent(0, 90015472);
         $InitializeCommonEvent(0, 90015473);
+        $InitializeCommonEvent(0, 90015477);
     }
     // NR6PF: <fuck>
     // at least there's a massive valid unused block of flags going all the way up to 700172. I can keep the pattern the devs used going forward and not clobber anything or have to take a bite out of 11_00 again
     // anyway, this is ED Libra's clone initialization stuff.
-    // Requires LibraPatch
+    // Requires LilyHook
     // Vanilla: record player character choices
-    $InitializeCommonEvent(0, 90015477);
     $InitializeCommonEvent(0, 99075460, 1, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009);
     $InitializeCommonEvent(0, 99075460, 2, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039);
     $InitializeCommonEvent(0, 99075460, 3, 70060, 70061, 70062, 70063, 70064, 70065, 70066, 70067, 70068, 70069);
@@ -787,9 +787,7 @@ $Event(50, Default, function() {
 $Event(1100, Default, function() {
     WaitFor(IsGameMode(2) || EventFlag(69991));
     if (!EventFlag(7500)) {
-        if (PlayerIsInOwnWorld()) {
-            SetNetworkconnectedEventFlagID(7500, ON);
-        }
+        SetNetworkconnectedEventFlagID(7500, ON);
     }
     if (!EventFlag(7502)) {
         WaitFor(EventFlag(7502) && PlayerIsInOwnWorld());
@@ -1443,7 +1441,12 @@ $Event(1141, Default, function() {
 $Event(1142, Default, function() {
     EndIf(!EventFlag(8077));
     EndIf(EventFlag(8062));
-    WaitFor(EventFlag(8062) || AllBatchEventFlags(8215, 8217));
+    WaitFor(EventFlag(8061));
+    flag = EventFlag(8062) || AllBatchEventFlags(8215, 8217);
+    WaitFor(flag || PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59));
+    if (!flag.Passed) {
+        WaitFixedTimeFrames(1);
+    }
     if (!EventFlag(8062)) {
         SetNetworkconnectedEventFlagID(8025, ON);
         SetNetworkconnectedEventFlagID(8062, ON);

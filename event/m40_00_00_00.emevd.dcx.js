@@ -43,6 +43,10 @@ $Event(0, Default, function() {
     $InitializeEvent(0, 40002670);
     $InitializeEvent(0, 40002671);
     $InitializeEvent(0, 40002672);
+    $InitializeEvent(0, 40002673);
+    $InitializeEvent(0, 40002674, 1, 40000570);
+    $InitializeEvent(1, 40002674, 2, 40000571);
+    $InitializeEvent(2, 40002674, 3, 40000572);
     $InitializeEvent(0, 40002680, 8, 40001638);
     $InitializeEvent(1, 40002680, 9, 40001639);
     $InitializeCommonEvent(0, 90015500, 40002320);
@@ -152,6 +156,9 @@ $Event(40002580, Restart, function(mapVariationId, assetEntityId, assetEntityId2
     EndIf(!IsMapVariation(mapVariationId));
     if (EventFlag(40000501)) {
         DisableAsset(assetEntityId2);
+        if (IsMapVariation(8)) {
+            EnableAsset(40001630);
+        }
         if (!EventFlag(40000502)) {
             EnableAsset(assetEntityId);
         }
@@ -275,6 +282,33 @@ $Event(40002672, Restart, function() {
     SetNetworkconnectedEventFlagID(40000502, ON);
     SetNetworkconnectedEventFlagID(40000500, ON);
     SetNetworkconnectedEventFlagID(40000501, ON);
+});
+
+$Event(40002673, Restart, function() {
+    EndIf(!IsMapVariation(7));
+    EndIf(EventFlag(40000501));
+    if (!AnyBatchEventFlags(40000570, 40000572)) {
+        WaitFor(AnyBatchEventFlags(40000570, 40000572));
+        ResetCharacterPosition(40000297);
+    }
+L0:
+    WaitFor(!AnyBatchEventFlags(40000570, 40000572));
+    RestartEvent();
+});
+
+$Event(40002674, Restart, function(playerNo, eventFlagId) {
+    DisableNetworkSync();
+    EndIf(!IsMapVariation(7));
+    EndIf(!IsPlayerNo(playerNo));
+    if (EventFlag(40000501)) {
+        SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+        EndEvent();
+    }
+    WaitFor(EntityInRadiusOfEntity(20000, 40000297, 100, 1));
+    SetNetworkconnectedEventFlagID(eventFlagId, ON);
+    WaitFor(!EntityInRadiusOfEntity(20000, 40000297, 100, 1));
+    SetNetworkconnectedEventFlagID(eventFlagId, OFF);
+    RestartEvent();
 });
 
 $Event(40002680, Restart, function(mapVariationId, assetEntityId) {

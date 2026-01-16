@@ -151,7 +151,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 90075866, 16000858, 16000857, 16000250, 16000285, 20, 123, 23, NPCPartType.Part23, 73);
         $InitializeCommonEvent(0, 90075866, 16000858, 16000857, 16000250, 16000286, 20, 124, 24, NPCPartType.Part24, 74);
     }
-    $InitializeCommonEvent(0, 90075930, 161, 9081);
+    $InitializeCommonEvent(0, 90075940, 8, 161, 9081, 2070);
     $InitializeCommonEvent(0, 90075931);
 });
 
