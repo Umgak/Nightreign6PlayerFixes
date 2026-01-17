@@ -33,3 +33,26 @@ export const morgottTargeted = {
   P5: 11008086,
   P6: 11008087
 };
+
+export const balancersFlags = {
+  start: {
+    P1: 80012,
+    P2: 80013,
+    P3: 80014,
+  },
+  finishTimeout: {
+    P1: 80015,
+    P2: 80016,
+    P3: 80017,
+  },
+  finishVictory: {
+    P1: 80018,
+    P2: 80019,
+    P3: 80020,
+  },
+  flaskGuard: {
+    P1: 95001,
+    P2: 95002,
+    P3: 95003,
+  },
+};

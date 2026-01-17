@@ -6,7 +6,7 @@
 // @linked    [0,82]
 // @version    3.6.2
 // ==/EMEVD==
-import { aliveFlags, ownsRevivalTicket, missionPlayer } from "./globalFlags";
+import { aliveFlags, ownsRevivalTicket, missionPlayer, balancersFlags } from "./globalFlags";
 
 $Event(0, Default, function() {
     $InitializeEvent(0, 1600);
@@ -324,9 +324,9 @@ S29:
     $InitializeEvent(0, 1155);
     $InitializeEvent(0, 1154, 98170, 98171, 98160, 98161, 98175);
     $InitializeEvent(0, 1145);
-    $InitializeEvent(0, 1146, 80015, 80018, 95001);
-    $InitializeEvent(1, 1146, 80016, 80019, 95002);
-    $InitializeEvent(2, 1146, 80017, 80020, 95003);
+    $InitializeEvent(0, 1146, balancersFlags.finishTimeout.P1, balancersFlags.finishVictory.P1, balancersFlags.flaskGuard.P1);
+    $InitializeEvent(1, 1146, balancersFlags.finishTimeout.P2, balancersFlags.finishVictory.P2, balancersFlags.flaskGuard.P2);
+    $InitializeEvent(2, 1146, balancersFlags.finishTimeout.P3, balancersFlags.finishVictory.P3, balancersFlags.flaskGuard.P3);
     $InitializeEvent(0, 1148);
     $InitializeCommonEvent(0, 90035287);
     $InitializeEvent(0, 1135);
@@ -1501,11 +1501,11 @@ $Event(1145, Default, function() {
     EndIf(EventFlag(95000));
     WaitFor(EventFlag(8060));
     if (!IsPlayerCount(1)) {
-        WaitFor(AllBatchEventFlags(80012, 80014));
+        WaitFor(AllBatchEventFlags(balancersFlags.start.P1, balancersFlags.start.P3));
     }
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
-            WaitFor(AllBatchEventFlags(80012, 80013));
+            WaitFor(AllBatchEventFlags(balancersFlags.start.P1, balancersFlags.start.P2));
         }
     }
     if (PlayerIsInOwnWorld()) {
@@ -1518,7 +1518,7 @@ $Event(1145, Default, function() {
         RemoveEstusCharge();
     }
     if (!IsPlayerCount(1)) {
-        if (!AllBatchEventFlags(80018, 80020)) {
+        if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3)) {
             RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
             if (!EventFlag(8062)) {
                 SetSpEffect(20000, 448);
@@ -1527,7 +1527,7 @@ $Event(1145, Default, function() {
     }
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
-            if (!AllBatchEventFlags(80018, 80019)) {
+            if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P2)) {
                 RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
                 if (!EventFlag(8062)) {
                     SetSpEffect(20000, 448);
@@ -1566,16 +1566,16 @@ $Event(1148, Default, function() {
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
-    flag &= (EventFlag(80015) || EventFlag(80018)) && (EventFlag(80016) || EventFlag(80019));
+    flag &= (EventFlag(balancersFlags.finishTimeout.P1) || EventFlag(balancersFlags.finishVictory.P1)) && (EventFlag(balancersFlags.finishTimeout.P2) || EventFlag(balancersFlags.finishVictory.P2));
     if (!IsPlayerCount(1)) {
-        flag &= EventFlag(80017) || EventFlag(80020);
+        flag &= EventFlag(balancersFlags.finishTimeout.P3) || EventFlag(balancersFlags.finishVictory.P3);
     }
     WaitFor(flag);
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
-            if (!AllBatchEventFlags(80018, 80019)) {
+            if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P2)) {
                 SetNetworkconnectedEventFlagID(8062, ON);
-                if (CountEventFlags(TargetEventFlagType.EventFlag, 80015, 80016) >= 2) {
+                if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishTimeout.P1, balancersFlags.finishTimeout.P2) >= 2) {
                     RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
                 } else {
                     RecordUserDispLog(110054, 10000, LogObjectType.None, -1);
@@ -1586,9 +1586,9 @@ $Event(1148, Default, function() {
     }
 L0:
     if (!IsPlayerCount(1)) {
-        if (!AllBatchEventFlags(80018, 80020)) {
+        if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3)) {
             SetNetworkconnectedEventFlagID(8062, ON);
-            if (CountEventFlags(TargetEventFlagType.EventFlag, 80015, 80017) >= 2) {
+            if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishTimeout.P1, balancersFlags.finishTimeout.P3) >= 2) {
                 RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
             } else {
                 RecordUserDispLog(110054, 10000, LogObjectType.None, -1);

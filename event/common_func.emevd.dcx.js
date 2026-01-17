@@ -6,7 +6,7 @@
 // @linked    []
 // @version    3.6.2
 // ==/EMEVD==
-import { aliveFlags, missionPlayer, morgottTargeted } from "./globalFlags";
+import { aliveFlags, missionPlayer, morgottTargeted, balancersFlags } from "./globalFlags";
 
 $Event(90015000, Default, function(eventFlagId, chrEntityId, nameId, targetDistance, bgmBossConvParamId, eventFlagId2) {
     DisableNetworkSync();
@@ -9987,27 +9987,27 @@ $Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
         && !AnyBatchEventFlags(eventFlagId, eventFlagId3);
     EndIf(!timeFlag);
     if (IsPlayerNo(1)) {
-        EndIf(EventFlag(80012));
+        EndIf(EventFlag(balancersFlags.start.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(EventFlag(80013));
+        EndIf(EventFlag(balancersFlags.start.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(EventFlag(80014));
+        EndIf(EventFlag(balancersFlags.start.P3));
     }
     if (value == 0) {
         EndIf(!EventFlagAndRandomCondition(6001, 0.3));
     }
     if (IsPlayerNo(1)) {
-        SetNetworkconnectedEventFlagID(80012, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.start.P1, ON);
         SetNetworkconnectedEventFlagID(eventFlagId, ON);
     }
     if (IsPlayerNo(2)) {
-        SetNetworkconnectedEventFlagID(80013, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.start.P2, ON);
         SetNetworkconnectedEventFlagID(eventFlagId2, ON);
     }
     if (IsPlayerNo(3)) {
-        SetNetworkconnectedEventFlagID(80014, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.start.P3, ON);
         SetNetworkconnectedEventFlagID(eventFlagId3, ON);
     }
     WaitFor(EventFlag(8061) || PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59));
@@ -10034,16 +10034,16 @@ $Event(90035281, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
         && !IsHotSpot()
         && !AnyBatchEventFlags(eventFlagId, eventFlagId3);
     EndIf(!timeFlag);
-    if (!EventFlag(80012)) {
-        SetNetworkconnectedEventFlagID(80012, ON);
+    if (!EventFlag(balancersFlags.start.P1)) {
+        SetNetworkconnectedEventFlagID(balancersFlags.start.P1, ON);
         SetNetworkconnectedEventFlagID(eventFlagId, ON);
-    } else if (!EventFlag(80013)) {
-        SetNetworkconnectedEventFlagID(80013, ON);
+    } else if (!EventFlag(balancersFlags.start.P2)) {
+        SetNetworkconnectedEventFlagID(balancersFlags.start.P2, ON);
         SetNetworkconnectedEventFlagID(eventFlagId2, ON);
     } else {
         if (!IsPlayerCount(1)) {
-            if (!EventFlag(80014)) {
-                SetNetworkconnectedEventFlagID(80014, ON);
+            if (!EventFlag(balancersFlags.start.P3)) {
+                SetNetworkconnectedEventFlagID(balancersFlags.start.P3, ON);
                 SetNetworkconnectedEventFlagID(eventFlagId3, ON);
                 Goto(L0);
             }
@@ -10217,13 +10217,13 @@ $Event(90035285, Default, function(chrEntityId, eventFlagId, eventFlagId2, event
         // Code hook required, same as Caligo and the towers
         if (!IsPlayerCount(2)) {
             GotoIf(S0, IsPlayerCount(3));
-            if (CountEventFlags(TargetEventFlagType.EventFlag, 80018, 80020) < 1) {
+            if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3) < 1) {
                 RecordUserDispLog(110052, chrEntityId, LogObjectType.None, -1);
             }
         } else {
 S0:
             if (!IsPlayerCount(1)) {
-                if (CountEventFlags(TargetEventFlagType.EventFlag, 80018, 80020) < 2) {
+                if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3) < 2) {
                     RecordUserDispLog(110052, chrEntityId, LogObjectType.None, -1);
                 }
                 Goto(L1);
@@ -10231,13 +10231,13 @@ S0:
         }
 L1:
         if (EventFlag(eventFlagId)) {
-            SetNetworkconnectedEventFlagID(80018, ON);
+            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.P1, ON);
         }
         if (EventFlag(eventFlagId2)) {
-            SetNetworkconnectedEventFlagID(80019, ON);
+            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.P2, ON);
         }
         if (EventFlag(eventFlagId3)) {
-            SetNetworkconnectedEventFlagID(80020, ON);
+            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.P3, ON);
         }
         EndEvent();
     }
@@ -10268,13 +10268,13 @@ $Event(90035286, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
     EndIf(CharacterHPValue(chrEntityId) <= 0 || EventFlag(eventFlagId4));
     WaitFor(ElapsedSeconds(5));
     if (EventFlag(eventFlagId)) {
-        SetNetworkconnectedEventFlagID(80015, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.P1, ON);
     }
     if (EventFlag(eventFlagId2)) {
-        SetNetworkconnectedEventFlagID(80016, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.P2, ON);
     }
     if (EventFlag(eventFlagId3)) {
-        SetNetworkconnectedEventFlagID(80017, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.P3, ON);
     }
     SetNetworkconnectedEventFlagID(eventFlagId5, ON);
     DisableCharacter(chrEntityId);
