@@ -9957,19 +9957,20 @@ L0:
     RestartEvent();
 });
 
-$Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, value, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
-    // TODO: Balancers Raid (oh god)
+$Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, value, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, nr6pf_eventFlagId10, nr6pf_eventFlagId11, nr6pf_eventFlagId12) {
+    // Balancers Raid: init
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061));
     WaitFor(EventFlag(eventFlagId4));
-    if (IsPlayerNo(1)) {
+    // NR6PF: Players are pared off into groups of 2.
+    if (IsPlayerNo(1) || IsPlayerNo(4)) {
         WaitFor(ElapsedSeconds(0));
     }
-    if (IsPlayerNo(2)) {
+    if (IsPlayerNo(2) || IsPlayerNo(5)) {
         WaitFor(ElapsedSeconds(3));
     }
-    if (IsPlayerNo(3)) {
+    if (IsPlayerNo(3) || IsPlayerNo(6)) {
         WaitFor(ElapsedSeconds(6));
     }
     if (EventFlag(9999)) {
@@ -9986,28 +9987,29 @@ $Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
         && !IsHotSpot()
         && !AnyBatchEventFlags(eventFlagId, eventFlagId3);
     EndIf(!timeFlag);
-    if (IsPlayerNo(1)) {
-        EndIf(EventFlag(balancersFlags.start.P1));
+    // NR6PF: P4-6 will run the same blocks as P1-3
+    if (IsPlayerNo(1) || IsPlayerNo(4)) {
+        EndIf(EventFlag(balancersFlags.start.Ins1));
     }
-    if (IsPlayerNo(2)) {
-        EndIf(EventFlag(balancersFlags.start.P2));
+    if (IsPlayerNo(2) || IsPlayerNo(5)) {
+        EndIf(EventFlag(balancersFlags.start.Ins2));
     }
-    if (IsPlayerNo(3)) {
-        EndIf(EventFlag(balancersFlags.start.P3));
+    if (IsPlayerNo(3) || IsPlayerNo(6)) {
+        EndIf(EventFlag(balancersFlags.start.Ins3));
     }
     if (value == 0) {
         EndIf(!EventFlagAndRandomCondition(6001, 0.3));
     }
-    if (IsPlayerNo(1)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.start.P1, ON);
+    if (IsPlayerNo(1) || IsPlayerNo(4)) {
+        SetNetworkconnectedEventFlagID(balancersFlags.start.Ins1, ON);
         SetNetworkconnectedEventFlagID(eventFlagId, ON);
     }
-    if (IsPlayerNo(2)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.start.P2, ON);
+    if (IsPlayerNo(2) || IsPlayerNo(5)) {
+        SetNetworkconnectedEventFlagID(balancersFlags.start.Ins2, ON);
         SetNetworkconnectedEventFlagID(eventFlagId2, ON);
     }
-    if (IsPlayerNo(3)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.start.P3, ON);
+    if (IsPlayerNo(3) || IsPlayerNo(6)) {
+        SetNetworkconnectedEventFlagID(balancersFlags.start.Ins3, ON);
         SetNetworkconnectedEventFlagID(eventFlagId3, ON);
     }
     WaitFor(EventFlag(8061) || PlayAreaCurrentTimeInRange(23, 0, 0, 23, 59, 59));
@@ -10016,7 +10018,8 @@ $Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
 });
 
 $Event(90035281, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
-    // TODO: Balancers raid
+    // TODO: Balancers raid: init pt2
+    // No changes
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061));
@@ -10034,16 +10037,16 @@ $Event(90035281, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
         && !IsHotSpot()
         && !AnyBatchEventFlags(eventFlagId, eventFlagId3);
     EndIf(!timeFlag);
-    if (!EventFlag(balancersFlags.start.P1)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.start.P1, ON);
+    if (!EventFlag(balancersFlags.start.Ins1)) {
+        SetNetworkconnectedEventFlagID(balancersFlags.start.Ins1, ON);
         SetNetworkconnectedEventFlagID(eventFlagId, ON);
-    } else if (!EventFlag(balancersFlags.start.P2)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.start.P2, ON);
+    } else if (!EventFlag(balancersFlags.start.Ins2)) {
+        SetNetworkconnectedEventFlagID(balancersFlags.start.Ins2, ON);
         SetNetworkconnectedEventFlagID(eventFlagId2, ON);
     } else {
         if (!IsPlayerCount(1)) {
-            if (!EventFlag(balancersFlags.start.P3)) {
-                SetNetworkconnectedEventFlagID(balancersFlags.start.P3, ON);
+            if (!EventFlag(balancersFlags.start.Ins3)) {
+                SetNetworkconnectedEventFlagID(balancersFlags.start.Ins3, ON);
                 SetNetworkconnectedEventFlagID(eventFlagId3, ON);
                 Goto(L0);
             }
@@ -10057,19 +10060,21 @@ L0:
 });
 
 $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
-    // TODO: Balancers raid
+    // TODO: Balancers raid: warp players to maps
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8062));
     EndIf(EventFlag(8061));
     WaitFor(EventFlag(8061));
-    if (IsPlayerNo(1)) {
+    // NR6PF: Group players into duos
+    // Also prevents players from getting warped 3 times, thus getting blackscreened
+    if (IsPlayerNo(1) || IsPlayerNo(4)) {
         EndIf(!EventFlag(eventFlagId));
     }
-    if (IsPlayerNo(2)) {
+    if (IsPlayerNo(2) || IsPlayerNo(5)) {
         EndIf(!EventFlag(eventFlagId2));
     }
-    if (IsPlayerNo(3)) {
+    if (IsPlayerNo(3) || IsPlayerNo(6)) {
         EndIf(!EventFlag(eventFlagId3));
     }
     WaitFor(ElapsedSeconds(3));
@@ -10078,7 +10083,7 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
     SetSpEffect(20000, 63105);
     WaitFor(ElapsedSeconds(2));
     FadeToBlack(1, 1, true, -1);
-    DisableCharacterInvincibility(20000);
+    DisableCharacterInvincibility(20000); // player is not invincible here anyway, fromsoft.
     SetSpEffect(20000, 98205);
     WaitFor(ElapsedSeconds(0.9));
     SetSpEffect(20000, 99280);
@@ -10112,7 +10117,7 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
 });
 
 $Event(90035283, Default, function(chrEntityId, areaEntityId, assetEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
-    // TODO: Balancers raid
+    // TODO: Balancers raid: spawn Balancers enemy and setup map state
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId3));
     if (EventFlag(eventFlagId5) || EventFlag(eventFlagId6)) {
@@ -10135,14 +10140,18 @@ L10:
         DisableCharacter(chrEntityId);
         DisableCharacterAI(chrEntityId);
         WaitFor(ElapsedSeconds(11));
+        // NR6PF: Pairing
         if (EventFlag(eventFlagId)) {
             areaFlagTime |= InArea(10002, areaEntityId) || !EventFlag(aliveFlags.P1);
+            areaFlagTime |= InArea(10005, areaEntityId) || !EventFlag(aliveFlags.P4);
         }
         if (EventFlag(eventFlagId2)) {
             areaFlagTime |= InArea(10003, areaEntityId) || !EventFlag(aliveFlags.P2);
+            areaFlagTime |= InArea(10006, areaEntityId) || !EventFlag(aliveFlags.P5);
         }
         if (EventFlag(eventFlagId3)) {
             areaFlagTime |= InArea(10004, areaEntityId) || !EventFlag(aliveFlags.P3);
+            areaFlagTime |= InArea(10007, areaEntityId) || !EventFlag(aliveFlags.P6);
         }
         areaFlagTime |= ElapsedSeconds(5);
         WaitFor(areaFlagTime);
@@ -10170,6 +10179,7 @@ L0:
 });
 
 $Event(90035284, Default, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
+    // TODO: Balancers raid: charm enemies (should only have to change init)
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(eventFlagId3));
     EndIf(EventFlag(eventFlagId4));
@@ -10203,6 +10213,7 @@ L0:
 });
 
 $Event(90035285, Default, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5) {
+    // Balancers raid: record victories
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(eventFlagId4));
     EndIf(EventFlag(eventFlagId5));
@@ -10213,17 +10224,15 @@ $Event(90035285, Default, function(chrEntityId, eventFlagId, eventFlagId2, event
     EndIf(EventFlag(eventFlagId5));
     if (CharacterHPValue(chrEntityId) <= 0) {
         WaitFor(EventFlag(eventFlagId4));
-        // TODO: Balancers raid
-        // Code hook required, same as Caligo and the towers
         if (!IsPlayerCount(2)) {
             GotoIf(S0, IsPlayerCount(3));
-            if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3) < 1) {
+            if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishVictory.Ins1, balancersFlags.finishVictory.Ins3) < 1) {
                 RecordUserDispLog(110052, chrEntityId, LogObjectType.None, -1);
             }
         } else {
 S0:
             if (!IsPlayerCount(1)) {
-                if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3) < 2) {
+                if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishVictory.Ins1, balancersFlags.finishVictory.Ins3) < 2) {
                     RecordUserDispLog(110052, chrEntityId, LogObjectType.None, -1);
                 }
                 Goto(L1);
@@ -10231,13 +10240,13 @@ S0:
         }
 L1:
         if (EventFlag(eventFlagId)) {
-            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.P1, ON);
+            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.Ins1, ON);
         }
         if (EventFlag(eventFlagId2)) {
-            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.P2, ON);
+            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.Ins2, ON);
         }
         if (EventFlag(eventFlagId3)) {
-            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.P3, ON);
+            SetNetworkconnectedEventFlagID(balancersFlags.finishVictory.Ins3, ON);
         }
         EndEvent();
     }
@@ -10246,6 +10255,7 @@ L0:
 });
 
 $Event(90035286, Default, function(chrEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5) {
+    // Balancers raid: timeout
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(eventFlagId4));
     EndIf(EventFlag(eventFlagId5));
@@ -10268,13 +10278,13 @@ $Event(90035286, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
     EndIf(CharacterHPValue(chrEntityId) <= 0 || EventFlag(eventFlagId4));
     WaitFor(ElapsedSeconds(5));
     if (EventFlag(eventFlagId)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.P1, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.Ins1, ON);
     }
     if (EventFlag(eventFlagId2)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.P2, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.Ins2, ON);
     }
     if (EventFlag(eventFlagId3)) {
-        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.P3, ON);
+        SetNetworkconnectedEventFlagID(balancersFlags.finishTimeout.Ins3, ON);
     }
     SetNetworkconnectedEventFlagID(eventFlagId5, ON);
     DisableCharacter(chrEntityId);

@@ -324,9 +324,11 @@ S29:
     $InitializeEvent(0, 1155);
     $InitializeEvent(0, 1154, 98170, 98171, 98160, 98161, 98175);
     $InitializeEvent(0, 1145);
-    $InitializeEvent(0, 1146, balancersFlags.finishTimeout.P1, balancersFlags.finishVictory.P1, balancersFlags.flaskGuard.P1);
-    $InitializeEvent(1, 1146, balancersFlags.finishTimeout.P2, balancersFlags.finishVictory.P2, balancersFlags.flaskGuard.P2);
-    $InitializeEvent(2, 1146, balancersFlags.finishTimeout.P3, balancersFlags.finishVictory.P3, balancersFlags.flaskGuard.P3);
+    // NR6PF: Balancers raid timeout/victory behavior
+    $InitializeEvent(0, 1146, balancersFlags.finishTimeout.Ins1, balancersFlags.finishVictory.Ins1, balancersFlags.flaskGuard.Ins1);
+    $InitializeEvent(1, 1146, balancersFlags.finishTimeout.Ins2, balancersFlags.finishVictory.Ins2, balancersFlags.flaskGuard.Ins2);
+    $InitializeEvent(2, 1146, balancersFlags.finishTimeout.Ins3, balancersFlags.finishVictory.Ins3, balancersFlags.flaskGuard.Ins3);
+    // NR6PF: Balancers raid: really messy event for end behavior
     $InitializeEvent(0, 1148);
     $InitializeCommonEvent(0, 90035287);
     $InitializeEvent(0, 1135);
@@ -1495,17 +1497,17 @@ $Event(1144, Default, function() {
 });
 
 $Event(1145, Default, function() {
-    // TODO: I think this is Balancers
+    // Balancers raid: flask stealing during init
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(95000));
     WaitFor(EventFlag(8060));
     if (!IsPlayerCount(1)) {
-        WaitFor(AllBatchEventFlags(balancersFlags.start.P1, balancersFlags.start.P3));
+        WaitFor(AllBatchEventFlags(balancersFlags.start.Ins1, balancersFlags.start.Ins3));
     }
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
-            WaitFor(AllBatchEventFlags(balancersFlags.start.P1, balancersFlags.start.P2));
+            WaitFor(AllBatchEventFlags(balancersFlags.start.Ins1, balancersFlags.start.Ins2));
         }
     }
     if (PlayerIsInOwnWorld()) {
@@ -1518,7 +1520,7 @@ $Event(1145, Default, function() {
         RemoveEstusCharge();
     }
     if (!IsPlayerCount(1)) {
-        if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3)) {
+        if (!AllBatchEventFlags(balancersFlags.finishVictory.Ins1, balancersFlags.finishVictory.Ins3)) {
             RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
             if (!EventFlag(8062)) {
                 SetSpEffect(20000, 448);
@@ -1527,7 +1529,7 @@ $Event(1145, Default, function() {
     }
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
-            if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P2)) {
+            if (!AllBatchEventFlags(balancersFlags.finishVictory.Ins1, balancersFlags.finishVictory.Ins2)) {
                 RecordUserDispLog(110051, 10000, LogObjectType.None, -1);
                 if (!EventFlag(8062)) {
                     SetSpEffect(20000, 448);
@@ -1540,6 +1542,7 @@ $Event(1145, Default, function() {
 });
 
 $Event(1146, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
+    // Balancers raid: restore flasks for victory
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     if (EventFlag(eventFlagId2) && !EventFlag(eventFlagId3)) {
@@ -1562,20 +1565,20 @@ $Event(1146, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
 });
 
 $Event(1148, Default, function() {
-    // TODO: Also balancers
+    // Balancers raid: report victory status
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8062));
     WaitFor(EventFlag(8061));
-    flag &= (EventFlag(balancersFlags.finishTimeout.P1) || EventFlag(balancersFlags.finishVictory.P1)) && (EventFlag(balancersFlags.finishTimeout.P2) || EventFlag(balancersFlags.finishVictory.P2));
+    flag &= (EventFlag(balancersFlags.finishTimeout.Ins1) || EventFlag(balancersFlags.finishVictory.Ins1)) && (EventFlag(balancersFlags.finishTimeout.Ins2) || EventFlag(balancersFlags.finishVictory.Ins2));
     if (!IsPlayerCount(1)) {
-        flag &= EventFlag(balancersFlags.finishTimeout.P3) || EventFlag(balancersFlags.finishVictory.P3);
+        flag &= EventFlag(balancersFlags.finishTimeout.Ins3) || EventFlag(balancersFlags.finishVictory.Ins3);
     }
     WaitFor(flag);
     if (!IsPlayerCount(2)) {
         if (!IsPlayerCount(3)) {
-            if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P2)) {
+            if (!AllBatchEventFlags(balancersFlags.finishVictory.Ins1, balancersFlags.finishVictory.Ins2)) {
                 SetNetworkconnectedEventFlagID(8062, ON);
-                if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishTimeout.P1, balancersFlags.finishTimeout.P2) >= 2) {
+                if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishTimeout.Ins1, balancersFlags.finishTimeout.Ins2) >= 2) {
                     RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
                 } else {
                     RecordUserDispLog(110054, 10000, LogObjectType.None, -1);
@@ -1586,9 +1589,9 @@ $Event(1148, Default, function() {
     }
 L0:
     if (!IsPlayerCount(1)) {
-        if (!AllBatchEventFlags(balancersFlags.finishVictory.P1, balancersFlags.finishVictory.P3)) {
+        if (!AllBatchEventFlags(balancersFlags.finishVictory.Ins1, balancersFlags.finishVictory.Ins3)) {
             SetNetworkconnectedEventFlagID(8062, ON);
-            if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishTimeout.P1, balancersFlags.finishTimeout.P3) >= 2) {
+            if (CountEventFlags(TargetEventFlagType.EventFlag, balancersFlags.finishTimeout.Ins1, balancersFlags.finishTimeout.Ins3) >= 2) {
                 RecordUserDispLog(110055, 10000, LogObjectType.None, -1);
             } else {
                 RecordUserDispLog(110054, 10000, LogObjectType.None, -1);
