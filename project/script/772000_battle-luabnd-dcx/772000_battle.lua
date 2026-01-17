@@ -552,6 +552,7 @@ function Artorius772000_Act05(ai, goal, paramTbl)
     local distanceEnemy = ai:GetDist(TARGET_ENE_0)
     local distanceTARGET_ENE_1 = ai:GetDist(TARGET_ENE_1)
     local distanceTARGET_ENE_2 = ai:GetDist(TARGET_ENE_2)
+    -- unused, no need to do anything at all
     if ai:HasSpecialEffectId(TARGET_SELF, 5401) == true then
         if distanceEnemy < 7 then
             goal:AddSubGoal(GOAL_COMMON_StepSafety, 2, -1, 1, -1, -1, TARGET_ENE_0, 0, 0, true)
@@ -1070,6 +1071,7 @@ Goal.Interrupt = function (self, ai, goal)
     local distanceEnemy = ai:GetDist(TARGET_ENE_0)
     local distanceTARGET_ENE_1 = ai:GetDist(TARGET_ENE_1)
     local distanceTARGET_ENE_2 = ai:GetDist(TARGET_ENE_2)
+    -- unused, no need to do anything at all
     local distanceYEnemy = ai:GetDistY(TARGET_ENE_0)
     local f27_local4 = 5 - ai:GetMapHitRadius(TARGET_SELF)
     local upAngleThreshold = 0
@@ -1108,6 +1110,19 @@ Goal.Interrupt = function (self, ai, goal)
             return true
         elseif ai:IsInsideTargetCustom(TARGET_SELF, TARGET_ENE_2, AI_DIR_TYPE_F, 360, 180, 30) then
             goal:AddSubGoal(GOAL_COMMON_ComboFinal, 15, 3028, TARGET_ENE_2, 999, 0, 0)
+            Artorius772000_ActAfter_AdjustSpace(ai, goal, paramTbl)
+            return true
+        -- NR6PF: checks for getting interrupted by bonus players
+        elseif ai:IsInsideTargetCustom(TARGET_SELF, TARGET_ENE_3, AI_DIR_TYPE_F, 360, 180, 30) then
+            goal:AddSubGoal(GOAL_COMMON_ComboFinal, 15, 3028, TARGET_ENE_3, 999, 0, 0)
+            Artorius772000_ActAfter_AdjustSpace(ai, goal, paramTbl)
+            return true
+        elseif ai:IsInsideTargetCustom(TARGET_SELF, TARGET_ENE_4, AI_DIR_TYPE_F, 360, 180, 30) then
+            goal:AddSubGoal(GOAL_COMMON_ComboFinal, 15, 3028, TARGET_ENE_4, 999, 0, 0)
+            Artorius772000_ActAfter_AdjustSpace(ai, goal, paramTbl)
+            return true
+        elseif ai:IsInsideTargetCustom(TARGET_SELF, TARGET_ENE_5, AI_DIR_TYPE_F, 360, 180, 30) then
+            goal:AddSubGoal(GOAL_COMMON_ComboFinal, 15, 3028, TARGET_ENE_5, 999, 0, 0)
             Artorius772000_ActAfter_AdjustSpace(ai, goal, paramTbl)
             return true
         elseif ai:IsInsideTargetCustom(TARGET_SELF, TARGET_ENE_0, AI_DIR_TYPE_F, 360, 180, 30) then
