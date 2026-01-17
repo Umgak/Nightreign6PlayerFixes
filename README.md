@@ -16,6 +16,7 @@ The vanilla scripts repeatedly explicitly reference players 1, 2, and 3, so when
 * Caligo raid event is able to target all 6 players
 * Caligo raid event rune rewards scale for up to 6 players
 * All players can trigger Hordes
+* Balancers raid event will pair the extra players up with the original players, instead of warping them a million times and black screening them.
 ### Bosses
 * Duke's Dear Freyja night boss applies its slow effect to everyone
 * Divine Beast Dancing Lion can steal heals from anyone, not just players 1-3
@@ -28,8 +29,7 @@ The vanilla scripts repeatedly explicitly reference players 1, 2, and 3, so when
 * Great Hollow Divine Tower effects work when players 1-3 are not present
 * Great Hollow Divine Tower rune rewards scale for up to 6 players
 
-
 ## Known issues:
 * Wormface night boss
-* Balancers raid (84 event flags in 28 maps)
 * Gladius raid (wontfix for now)
+* Anything I haven't looked into for AI scripts.

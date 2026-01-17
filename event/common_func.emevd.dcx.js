@@ -8309,8 +8309,7 @@ L0:
     GotoIf(L5, IsPlayerCount(5));
     GotoIf(L6, IsPlayerCount(6));
     // player count is something fucky, just use 3 player
-    SetSpEffect(20000, 98800); // 52000
-    Goto(L7);
+    Goto(L3);
 L1:
     SetSpEffect(20000, 98802); // 78000
     Goto(L7);
@@ -10018,7 +10017,7 @@ $Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFla
 });
 
 $Event(90035281, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
-    // TODO: Balancers raid: init pt2
+    // Balancers raid: init pt2
     // No changes
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
@@ -10060,7 +10059,7 @@ L0:
 });
 
 $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
-    // TODO: Balancers raid: warp players to maps
+    // Balancers raid: warp players to maps
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8062));
@@ -10070,12 +10069,12 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
     // Also prevents players from getting warped 3 times, thus getting blackscreened
     if (IsPlayerNo(1) || IsPlayerNo(4)) {
         EndIf(!EventFlag(eventFlagId));
-    }
-    if (IsPlayerNo(2) || IsPlayerNo(5)) {
+    } else if (IsPlayerNo(2) || IsPlayerNo(5)) {
         EndIf(!EventFlag(eventFlagId2));
-    }
-    if (IsPlayerNo(3) || IsPlayerNo(6)) {
+    } else if (IsPlayerNo(3) || IsPlayerNo(6)) {
         EndIf(!EventFlag(eventFlagId3));
+    } else {
+        EndEvent();
     }
     WaitFor(ElapsedSeconds(3));
     SetSpEffect(20000, 63101);
@@ -10117,7 +10116,7 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
 });
 
 $Event(90035283, Default, function(chrEntityId, areaEntityId, assetEntityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
-    // TODO: Balancers raid: spawn Balancers enemy and setup map state
+    // Balancers raid: spawn Balancers enemy and setup map state
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(8061) && !AnyBatchEventFlags(eventFlagId, eventFlagId3));
     if (EventFlag(eventFlagId5) || EventFlag(eventFlagId6)) {
@@ -10179,7 +10178,7 @@ L0:
 });
 
 $Event(90035284, Default, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
-    // TODO: Balancers raid: charm enemies (should only have to change init)
+    // Balancers raid: charm enemies (should only have to change init)
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(eventFlagId3));
     EndIf(EventFlag(eventFlagId4));
