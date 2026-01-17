@@ -10379,6 +10379,7 @@ $Event(90035300, Default, function(eventFlagId, eventFlagId2, eventFlagId3) {
 });
 
 $Event(90045000, Default, function(eventFlagId, entityId, mapVariationId, logObjectId) {
+    // Evergaols
     DisableNetworkSync();
     EndIf(!IsMapVariation(mapVariationId));
     EndIf(EventFlag(eventFlagId));
@@ -10390,11 +10391,22 @@ $Event(90045000, Default, function(eventFlagId, entityId, mapVariationId, logObj
         WaitFixedTimeSeconds(3);
         RestartEvent();
     }
+    // wow there are tiny sleeps here
     if (IsPlayerNo(2)) {
         WaitFor(ElapsedSeconds(0.1));
     }
     if (IsPlayerNo(3)) {
         WaitFor(ElapsedSeconds(0.2));
+    }
+    // NR6PF: get more sleeps, just for consistency.
+    if (IsPlayerNo(4)) {
+        WaitFor(ElapsedSeconds(0.3));
+    }
+    if (IsPlayerNo(5)) {
+        WaitFor(ElapsedSeconds(0.4));
+    }
+    if (IsPlayerNo(6)) {
+        WaitFor(ElapsedSeconds(0.5));
     }
     EndIf(EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
