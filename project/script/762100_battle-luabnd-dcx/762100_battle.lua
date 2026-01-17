@@ -1,3 +1,5 @@
+-- Everdark Sovreign Weapon-Bequeathed Harmonia
+-- only one patch lel
 RegisterTableGoal(GOAL_AngelsDaughters762100_Battle, "AngelsDaughters762100_Battle")
 REGISTER_GOAL_NO_SUB_GOAL(GOAL_AngelsDaughters762100_Battle, true)
 
@@ -12,6 +14,7 @@ Goal.Activate = function (self, ai, goal)
     local paramTbls = {}
     Common_Clear_Param(probabilities, acts, paramTbls)
     local distanceEnemy = ai:GetDist(TARGET_ENE_0)
+    -- unused
     local distanceTARGET_ENE_1 = ai:GetDist(TARGET_ENE_1)
     local distanceTARGET_ENE_2 = ai:GetDist(TARGET_ENE_2)
     local random = ai:GetRandam_Int(1, 100)
@@ -667,7 +670,15 @@ function AngelsDaughters762100_Act49(ai, goal, paramTbl)
     elseif ai:HasSpecialEffectId(TARGET_ENE_1, 60730) == true then
         goal:AddSubGoal(GOAL_COMMON_ApproachSettingDirection, ai:GetRandam_Int(1, 2), TARGET_ENE_1, 10, TARGET_SELF, true, -1, AI_DIR_TYPE_ToR, ai:GetRandam_Int(4, 5))
     elseif ai:HasSpecialEffectId(TARGET_ENE_2, 60730) == true then
-        goal:AddSubGoal(GOAL_COMMON_ApproachSettingDirection, ai:GetRandam_Int(1, 2), TARGET_ENE_1, 10, TARGET_SELF, true, -1, AI_DIR_TYPE_ToL, ai:GetRandam_Int(4, 5))
+        goal:AddSubGoal(GOAL_COMMON_ApproachSettingDirection, ai:GetRandam_Int(1, 2), TARGET_ENE_2, 10, TARGET_SELF, true, -1, AI_DIR_TYPE_ToL, ai:GetRandam_Int(4, 5)) -- NR6PF: Why do I have to fix Fromsoft's errors too? Correctly target TARGET_ENE_3
+        -- NR6PF: Also target P4-6 if they get the effect, blah blah
+    elseif ai:HasSpecialEffectId(TARGET_ENE_3, 60730) == true then
+        goal:AddSubGoal(GOAL_COMMON_ApproachSettingDirection, ai:GetRandam_Int(1, 2), TARGET_ENE_3, 10, TARGET_SELF, true, -1, AI_DIR_TYPE_ToR, ai:GetRandam_Int(4, 5))
+    elseif ai:HasSpecialEffectId(TARGET_ENE_4, 60730) == true then
+        goal:AddSubGoal(GOAL_COMMON_ApproachSettingDirection, ai:GetRandam_Int(1, 2), TARGET_ENE_4, 10, TARGET_SELF, true, -1, AI_DIR_TYPE_ToR, ai:GetRandam_Int(4, 5))
+    elseif ai:HasSpecialEffectId(TARGET_ENE_5, 60730) == true then
+        goal:AddSubGoal(GOAL_COMMON_ApproachSettingDirection, ai:GetRandam_Int(1, 2), TARGET_ENE_5, 10, TARGET_SELF, true, -1, AI_DIR_TYPE_ToR, ai:GetRandam_Int(4, 5))
+    
     end
     GetWellSpace_Odds = 0
     return GetWellSpace_Odds
