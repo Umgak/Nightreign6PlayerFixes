@@ -6,6 +6,7 @@
 // @linked    [0,82]
 // @version    3.6.2
 // ==/EMEVD==
+import { aliveFlags, ownsRevivalTicket, missionPlayer } from "./globalFlags";
 
 $Event(0, Default, function() {
     $InitializeEvent(0, 1600);
@@ -389,23 +390,23 @@ S29:
 
     //NR6PF: TEMP: Stashing these flags in 11_00
     if (IsPlayerNo(1)) {
-        $InitializeEvent(0, 1310, 7010);
+        $InitializeEvent(0, 1310, ownsRevivalTicket.P1);
     }
     if (IsPlayerNo(2)) {
-        $InitializeEvent(0, 1310, 7011);
+        $InitializeEvent(0, 1310, ownsRevivalTicket.P2);
     }
     if (IsPlayerNo(3)) {
-        $InitializeEvent(0, 1310, 7012);
+        $InitializeEvent(0, 1310, ownsRevivalTicket.P3);
     }
     // NR6PF: Boss Battle Death Prohibition
     if (IsPlayerNo(4)) {
-        $InitializeEvent(0, 1310, 11007010);
+        $InitializeEvent(0, 1310, ownsRevivalTicket.P4);
     }
     if (IsPlayerNo(5)) {
-        $InitializeEvent(0, 1310, 11007011);
+        $InitializeEvent(0, 1310, ownsRevivalTicket.P5);
     }
     if (IsPlayerNo(6)) {
-        $InitializeEvent(0, 1310, 11007012);
+        $InitializeEvent(0, 1310, ownsRevivalTicket.P6);
     }
     $InitializeEvent(0, 1108, 9019);
     $InitializeEvent(0, 1305);
@@ -724,37 +725,37 @@ $Event(50, Default, function() {
         // 11007012 Owns 1 revival ticket_PL6
 
         if (IsPlayerNo(1)) {
-            $InitializeEvent(0, 1182, 7005);
-            $InitializeEvent(0, 1183, 7010, 7005);
+            $InitializeEvent(0, 1182, aliveFlags.P1);
+            $InitializeEvent(0, 1183, ownsRevivalTicket.P1, aliveFlags.P1);
         }
         if (IsPlayerNo(2)) {
-            $InitializeEvent(0, 1182, 7006);
-            $InitializeEvent(0, 1183, 7011, 7006);
+            $InitializeEvent(0, 1182, aliveFlags.P2);
+            $InitializeEvent(0, 1183, ownsRevivalTicket.P2, aliveFlags.P2);
         }
         if (IsPlayerNo(3)) {
-            $InitializeEvent(0, 1182, 7007);
-            $InitializeEvent(0, 1183, 7012, 7007);
+            $InitializeEvent(0, 1182, aliveFlags.P3);
+            $InitializeEvent(0, 1183, ownsRevivalTicket.P3, aliveFlags.P3);
         }
         // NR6PF: Setup wending grace/death flags
         if (IsPlayerNo(4)) {
-            $InitializeEvent(0, 1182, 11007005);
-            $InitializeEvent(0, 1183, 11007010, 11007005);
+            $InitializeEvent(0, 1182, aliveFlags.P4);
+            $InitializeEvent(0, 1183, ownsRevivalTicket.P4, aliveFlags.P4);
         }
         if (IsPlayerNo(5)) {
-            $InitializeEvent(0, 1182, 11007006);
-            $InitializeEvent(0, 1183, 11007011, 11007006);
+            $InitializeEvent(0, 1182, aliveFlags.P5);
+            $InitializeEvent(0, 1183, ownsRevivalTicket.P5, aliveFlags.P5);
         }
         if (IsPlayerNo(6)) {
-            $InitializeEvent(0, 1182, 11007007);
-            $InitializeEvent(0, 1183, 11007012, 11007007);
+            $InitializeEvent(0, 1182, aliveFlags.P6);
+            $InitializeEvent(0, 1183, ownsRevivalTicket.P6, aliveFlags.P6);
         }
-        $InitializeEvent(0, 1184, 10002, 7005, 7010);
-        $InitializeEvent(1, 1184, 10003, 7006, 7011);
-        $InitializeEvent(2, 1184, 10004, 7007, 7012);
+        $InitializeEvent(0, 1184, 10002, aliveFlags.P1, ownsRevivalTicket.P1);
+        $InitializeEvent(1, 1184, 10003, aliveFlags.P2, ownsRevivalTicket.P2);
+        $InitializeEvent(2, 1184, 10004, aliveFlags.P3, ownsRevivalTicket.P3);
         //NR6PF: Again!
-        $InitializeEvent(3, 1184, 10005, 11007005, 11007010);
-        $InitializeEvent(4, 1184, 10006, 11007006, 11007011);
-        $InitializeEvent(5, 1184, 10007, 11007007, 11007012);
+        $InitializeEvent(3, 1184, 10005, aliveFlags.P4, ownsRevivalTicket.P4);
+        $InitializeEvent(4, 1184, 10006, aliveFlags.P5, ownsRevivalTicket.P5);
+        $InitializeEvent(5, 1184, 10007, aliveFlags.P6, ownsRevivalTicket.P6);
     }
     $InitializeEvent(0, 1188);
     $InitializeEvent(0, 1900);
@@ -1369,7 +1370,7 @@ $Event(1139, Default, function() {
             DisplayTextEffectId(6090);
         }
         if (EventFlag(8080)) {
-            DisplayTextEffectId(7010);
+            DisplayTextEffectId(ownsRevivalTicket.P1);
         }
         if (EventFlag(8081)) {
             DisplayTextEffectId(7000);
@@ -1766,10 +1767,10 @@ $Event(1180, Restart, function() {
     // Trigger wending grace/Noklateo, game end state
     EndIf(HasMultiplayerState(MultiplayerState.Singleplayer));
     WaitFor(EventFlag(7500)); // Day 1 started flag - do not kill the players before they arrive
-    cond &= !(AnyBatchEventFlags(7005, 7007) || AnyBatchEventFlags(11007005, 11007007)); // NR6PF: Added check to extra "I am alive" flags - if this evaluates to true then the party has planked. Check for revives or end game.
+    cond &= !(AnyBatchEventFlags(aliveFlags.P1, aliveFlags.P3) || AnyBatchEventFlags(aliveFlags.P4, aliveFlags.P6)); // NR6PF: Added check to extra "I am alive" flags - if this evaluates to true then the party has planked. Check for revives or end game.
     cond &= EventFlag(7515) || EventFlag(7510); // Night boss OR day 3 started
     WaitFor(cond);
-    if (AnyBatchEventFlags(7010, 7012) || AnyBatchEventFlags(11007010, 11007012)) { // NR6PF: Added check to extra "Owns revival ticket" flags
+    if (AnyBatchEventFlags(ownsRevivalTicket.P1, ownsRevivalTicket.P3) || AnyBatchEventFlags(ownsRevivalTicket.P4, ownsRevivalTicket.P6)) { // NR6PF: Added check to extra "Owns revival ticket" flags
         if (IsPlayerNo(1)) {
             if (CharacterHasSpEffect(10002, 540155)) { // Wending grace held spEffect
                 cond &= CharacterHasSpEffect(10002, 540157) && InsidePlayArea(10002, 0);    // Dead
@@ -1876,7 +1877,7 @@ L2:
         }
 L3:
         SaveRequest();
-        WaitFor((AnyBatchEventFlags(7005, 7007) || AnyBatchEventFlags(11007005, 11007007)) || ElapsedSeconds(20)); // NR6PF: Check extra I am alive flags
+        WaitFor((AnyBatchEventFlags(aliveFlags.P1, aliveFlags.P3) || AnyBatchEventFlags(aliveFlags.P4, aliveFlags.P6)) || ElapsedSeconds(20)); // NR6PF: Check extra I am alive flags
         WaitFixedTimeSeconds(1);
         RestartEvent();
     }
@@ -1891,7 +1892,7 @@ L0:
     EnableCharacterInvincibility(10007);
     SetEventFlagID(9017, ON);
     WaitFor(ElapsedSeconds(2));
-    if ((AnyBatchEventFlags(7005, 7007)|| AnyBatchEventFlags(11007005, 11007007))) { // NR6PF: Check extra I am alive flags
+    if ((AnyBatchEventFlags(aliveFlags.P1, aliveFlags.P3)|| AnyBatchEventFlags(aliveFlags.P4, aliveFlags.P6))) { // NR6PF: Check extra I am alive flags
         DisableCharacterInvincibility(10002);
         DisableCharacterInvincibility(10003);
         DisableCharacterInvincibility(10004);
@@ -2448,7 +2449,7 @@ $Event(1310, Restart, function(eventFlagId) {
             && CharacterHasTeamType(20000, TeamType.Unknown77)
             && CharacterHasSpEffect(20000, 540157)
             && !InsidePlayArea(20000, 0));
-    cond = !(AnyBatchEventFlags(7005, 7007) || AnyBatchEventFlags(11007005, 11007007)) && EventFlag(eventFlagId); // NR6PF: Check the extra flags!! 11007005 will be I am alive flag_PL2 etc
+    cond = !(AnyBatchEventFlags(aliveFlags.P1, aliveFlags.P3) || AnyBatchEventFlags(aliveFlags.P4, aliveFlags.P6)) && EventFlag(eventFlagId); // NR6PF: Check the extra flags!! 11007005 will be I am alive flag_PL2 etc
     flagChr = !EventFlag(9015) || !CharacterHasTeamType(20000, TeamType.Unknown77) || InsidePlayArea(20000, 0);
     WaitFor(ElapsedSeconds(15) || cond || flagChr);
     EndIf(EventFlag(7516));
@@ -3119,23 +3120,23 @@ $Event(1520, Restart, function(missionId, eventFlagId, eventFlagId2, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -3176,23 +3177,23 @@ $Event(1592, Default, function(eventFlagId, eventFlagId2, eventFlagId3, hero, mi
     DisableNetworkSync();
     EndIf(!MissionActive(101));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));

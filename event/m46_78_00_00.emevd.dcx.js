@@ -7,6 +7,7 @@
 // @version    3.6.2
 // ==/EMEVD==
 import { morgottTargeted } from "globalFlags.js";
+
 $Event(0, Default, function() {
     $InitializeCommonEvent(0, 90015000, 9060, 46780800, 902130002, 50, 0, 9061);
     $InitializeCommonEvent(0, 90015030, 9060, 46780800, 50, 213021, 9061);

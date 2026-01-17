@@ -6,6 +6,7 @@
 // @linked    []
 // @version    3.6.2
 // ==/EMEVD==
+import { aliveFlags, missionPlayer, morgottTargeted } from "./globalFlags";
 
 $Event(90015000, Default, function(eventFlagId, chrEntityId, nameId, targetDistance, bgmBossConvParamId, eventFlagId2) {
     DisableNetworkSync();
@@ -5066,7 +5067,7 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
     // Morgott
     DisableNetworkSync();
     EndIf(!EventFlag(8075));
-    EndIf(AnyBatchEventFlags(8085, 8087 || AnyBatchEventFlags(11008085, 11008087))); // extra flags for players 3-6 are stashed in the Spirit Shelter range
+    EndIf(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3 || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6))); // extra flags for players 3-6 are stashed in the Spirit Shelter range
     WaitFor(EventFlag(eventFlagId2));
     if (IsPlayerNo(1)) {
         WaitFor(ElapsedSeconds(0));
@@ -5113,36 +5114,36 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
                 && CharacterBackreadStatus(10007)
                 && CharacterBackreadStatus(chrEntityId)));
     if (EventFlag(9999)) {
-        SetNetworkconnectedEventFlagID(8085, ON);
+        SetNetworkconnectedEventFlagID(morgottTargeted.P1, ON);
     } else if (EntityInRadiusOfEntity(10002, chrEntityId, targetDistance, 1)
         && CharacterBackreadStatus(10002)
         && CharacterBackreadStatus(chrEntityId)) {
-        SetNetworkconnectedEventFlagID(8085, ON);
+        SetNetworkconnectedEventFlagID(morgottTargeted.P1, ON);
     } else if (EntityInRadiusOfEntity(10003, chrEntityId, targetDistance, 1)
         && CharacterBackreadStatus(10003)
         && CharacterBackreadStatus(chrEntityId)) {
-        SetNetworkconnectedEventFlagID(8086, ON);
+        SetNetworkconnectedEventFlagID(morgottTargeted.P2, ON);
     } else if (EntityInRadiusOfEntity(10004, chrEntityId, targetDistance, 1)
         && CharacterBackreadStatus(10004)
         && CharacterBackreadStatus(chrEntityId)) {
-        SetNetworkconnectedEventFlagID(8087, ON);
+        SetNetworkconnectedEventFlagID(morgottTargeted.P3, ON);
     // NR6PF: extra conditions for players 4-6
     } else if (EntityInRadiusOfEntity(10005, chrEntityId, targetDistance, 1)
         && CharacterBackreadStatus(10005)
         && CharacterBackreadStatus(chrEntityId)) {
-        SetNetworkconnectedEventFlagID(11008085, ON);
+        SetNetworkconnectedEventFlagID(morgottTargeted.P4, ON);
     } else if (EntityInRadiusOfEntity(10006, chrEntityId, targetDistance, 1)
         && CharacterBackreadStatus(10006)
         && CharacterBackreadStatus(chrEntityId)) {
-        SetNetworkconnectedEventFlagID(11008086, ON);
+        SetNetworkconnectedEventFlagID(morgottTargeted.P5, ON);
     } else if (EntityInRadiusOfEntity(10007, chrEntityId, targetDistance, 1)
         && CharacterBackreadStatus(10007)
         && CharacterBackreadStatus(chrEntityId)) {
-        SetNetworkconnectedEventFlagID(11008087, ON);
+        SetNetworkconnectedEventFlagID(morgottTargeted.P6, ON);
         Goto(L0);
     }
 L0:
-    WaitFor(AnyBatchEventFlags(8085, 8087) || AnyBatchEventFlags(11008085, 11008087)); // Once again, extra flags for players 3-6 in Spirit Shelter range
+    WaitFor(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6)); // Once again, extra flags for players 3-6 in Spirit Shelter range
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
@@ -5151,7 +5152,7 @@ L0:
 $Event(90035201, Default, function(eventFlagId) {
     // Morgott
     EndIf(!EventFlag(8075));
-    EndIf(AnyBatchEventFlags(8085, 8087) || AnyBatchEventFlags(11008085, 11008087)); // extra flags for players 3-6 are stashed in the Spirit Shelter range
+    EndIf(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6)); // extra flags for players 3-6 are stashed in the Spirit Shelter range
     WaitFor(EventFlag(8060));
     WaitFor(EventFlag(8089) || EventFlag(8061));
     WaitFor(ElapsedFrames(1));
@@ -5166,7 +5167,7 @@ $Event(90035201, Default, function(eventFlagId) {
             || CharacterHasTeamType(10002, TeamType.WhitePhantom);
         if (chr) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
-                SetNetworkconnectedEventFlagID(8085, ON);
+                SetNetworkconnectedEventFlagID(morgottTargeted.P1, ON);
                 Goto(L0);
             }
         }
@@ -5174,7 +5175,7 @@ $Event(90035201, Default, function(eventFlagId) {
             || CharacterHasTeamType(10003, TeamType.WhitePhantom);
         if (chr2) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
-                SetNetworkconnectedEventFlagID(8086, ON);
+                SetNetworkconnectedEventFlagID(morgottTargeted.P2, ON);
                 Goto(L0);
             }
         }
@@ -5182,7 +5183,7 @@ $Event(90035201, Default, function(eventFlagId) {
             || CharacterHasTeamType(10004, TeamType.WhitePhantom);
         if (chr3) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
-                SetNetworkconnectedEventFlagID(8087, ON);
+                SetNetworkconnectedEventFlagID(morgottTargeted.P3, ON);
                 Goto(L0);
             }
         }
@@ -5191,7 +5192,7 @@ $Event(90035201, Default, function(eventFlagId) {
             || CharacterHasTeamType(10005, TeamType.WhitePhantom);
         if (nr6pf_chr4) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
-                SetNetworkconnectedEventFlagID(11008085, ON);
+                SetNetworkconnectedEventFlagID(morgottTargeted.P4, ON);
                 Goto(L0);
             }
         }
@@ -5199,7 +5200,7 @@ $Event(90035201, Default, function(eventFlagId) {
             || CharacterHasTeamType(10006, TeamType.WhitePhantom);
         if (nr6pf_chr5) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
-                SetNetworkconnectedEventFlagID(11008086, ON);
+                SetNetworkconnectedEventFlagID(morgottTargeted.P5, ON);
                 Goto(L0);
             }
         }
@@ -5207,28 +5208,28 @@ $Event(90035201, Default, function(eventFlagId) {
             || CharacterHasTeamType(10007, TeamType.WhitePhantom);
         if (nr6pf_chr6) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
-                SetNetworkconnectedEventFlagID(11008087, ON);
+                SetNetworkconnectedEventFlagID(morgottTargeted.P6, ON);
                 Goto(L0);
             }
         }
         if (chr) {
-            SetNetworkconnectedEventFlagID(8085, ON);
+            SetNetworkconnectedEventFlagID(morgottTargeted.P1, ON);
         } else if (chr2) {
-            SetNetworkconnectedEventFlagID(8086, ON);
+            SetNetworkconnectedEventFlagID(morgottTargeted.P2, ON);
         } else if (chr3) {
-            SetNetworkconnectedEventFlagID(8087, ON);
+            SetNetworkconnectedEventFlagID(morgottTargeted.P3, ON);
         // NR6PF: extra conditions for players 4-6
         } else if (nr6pf_chr4) {
-            SetNetworkconnectedEventFlagID(11008085, ON);
+            SetNetworkconnectedEventFlagID(morgottTargeted.P4, ON);
         } else if (nr6pf_chr5) {
-            SetNetworkconnectedEventFlagID(11008086, ON);
+            SetNetworkconnectedEventFlagID(morgottTargeted.P5, ON);
         } else if (nr6pf_chr6) {
-            SetNetworkconnectedEventFlagID(11008087, ON);
+            SetNetworkconnectedEventFlagID(morgottTargeted.P6, ON);
             Goto(L0);
         }
     }
 L0:
-    WaitFor(AnyBatchEventFlags(8085, 8087) || AnyBatchEventFlags(11008085, 11008087)); // Once again, extra flags for players 3-6 in Spirit Shelter range
+    WaitFor(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6)); // Once again, extra flags for players 3-6 in Spirit Shelter range
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
@@ -5267,28 +5268,28 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
             cond &= IsPlayerNo(1) && CharacterHasSpEffect(10000, 99171);
             WaitFor(cond);
         } else {
-            if (EventFlag(8085)) {
+            if (EventFlag(morgottTargeted.P1)) {
                 cond &= IsPlayerNo(1) && CharacterHasSpEffect(10002, 99171);
                 WaitFor(cond);
             }
-            if (EventFlag(8086)) {
+            if (EventFlag(morgottTargeted.P2)) {
                 cond &= IsPlayerNo(2) && CharacterHasSpEffect(10003, 99171);
                 WaitFor(cond);
             }
-            if (EventFlag(8087)) {
+            if (EventFlag(morgottTargeted.P3)) {
                 cond &= IsPlayerNo(3) && CharacterHasSpEffect(10004, 99171);
                 WaitFor(cond);
             }
             // NR6PF: extra conditions for players 4-6
-            if (EventFlag(11008085)) {
+            if (EventFlag(morgottTargeted.P4)) {
                 cond &= IsPlayerNo(4) && CharacterHasSpEffect(10005, 99171);
                 WaitFor(cond);
             }
-            if (EventFlag(11008086)) {
+            if (EventFlag(morgottTargeted.P5)) {
                 cond &= IsPlayerNo(5) && CharacterHasSpEffect(10006, 99171);
                 WaitFor(cond);
             }
-            if (EventFlag(11008087)) {
+            if (EventFlag(morgottTargeted.P6)) {
                 cond &= IsPlayerNo(6) && CharacterHasSpEffect(10007, 99171);
                 WaitFor(cond);
             }
@@ -5298,21 +5299,21 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
         EnableCharacterDisableOnHitUnload(chrEntityId);
         EndEvent();
     }
-    if (EventFlag(8085)) {
+    if (EventFlag(morgottTargeted.P1)) {
         if (!IsPlayerNo(1)) {
             DisableCharacterDefaultBackread(chrEntityId);
             SetCharacterEnableDistance(chrEntityId, -1);
             EnableCharacterDisableOnHitUnload(chrEntityId);
         }
     }
-    if (EventFlag(8086)) {
+    if (EventFlag(morgottTargeted.P2)) {
         if (!IsPlayerNo(2)) {
             DisableCharacterDefaultBackread(chrEntityId);
             SetCharacterEnableDistance(chrEntityId, -1);
             EnableCharacterDisableOnHitUnload(chrEntityId);
         }
     }
-    if (EventFlag(8087)) {
+    if (EventFlag(morgottTargeted.P3)) {
         if (!IsPlayerNo(3)) {
             DisableCharacterDefaultBackread(chrEntityId);
             SetCharacterEnableDistance(chrEntityId, -1);
@@ -5320,54 +5321,54 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
         }
     }
     // NR6PF: I hate Morgott. There are so many checks.
-    if (EventFlag(11008085)) {
+    if (EventFlag(morgottTargeted.P4)) {
         if (!IsPlayerNo(4)) {
             DisableCharacterDefaultBackread(chrEntityId);
             SetCharacterEnableDistance(chrEntityId, -1);
             EnableCharacterDisableOnHitUnload(chrEntityId);
         }
     }
-    if (EventFlag(11008086)) {
+    if (EventFlag(morgottTargeted.P5)) {
         if (!IsPlayerNo(5)) {
             DisableCharacterDefaultBackread(chrEntityId);
             SetCharacterEnableDistance(chrEntityId, -1);
             EnableCharacterDisableOnHitUnload(chrEntityId);
         }
     }
-    if (EventFlag(11008087)) {
+    if (EventFlag(morgottTargeted.P6)) {
         if (!IsPlayerNo(6)) {
             DisableCharacterDefaultBackread(chrEntityId);
             SetCharacterEnableDistance(chrEntityId, -1);
             EnableCharacterDisableOnHitUnload(chrEntityId);
         }
     }
-    if (EventFlag(8085)) {
+    if (EventFlag(morgottTargeted.P1)) {
         if (IsPlayerNo(1)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
     }
-    if (EventFlag(8086)) {
+    if (EventFlag(morgottTargeted.P2)) {
         if (IsPlayerNo(2)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
     }
-    if (EventFlag(8087)) {
+    if (EventFlag(morgottTargeted.P3)) {
         if (IsPlayerNo(3)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
     }
     // NR6PF: Seriously, why does this guy have a check EVERY SINGLE LINE
-    if (EventFlag(11008085)) {
+    if (EventFlag(morgottTargeted.P4)) {
         if (IsPlayerNo(4)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
     }
-    if (EventFlag(11008086)) {
+    if (EventFlag(morgottTargeted.P5)) {
         if (IsPlayerNo(5)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
     }
-    if (EventFlag(11008087)) {
+    if (EventFlag(morgottTargeted.P6)) {
         if (IsPlayerNo(6)) {
             SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
         }
@@ -5381,23 +5382,23 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
     if (EventFlag(9999)) {
         SetSpEffect(10000, 99170);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             SetSpEffect(10002, 99170);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             SetSpEffect(10003, 99170);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             SetSpEffect(10004, 99170);
         }
         // NR6PF: effect for players 4-6 as well
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             SetSpEffect(10005, 99170);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             SetSpEffect(10006, 99170);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             SetSpEffect(10007, 99170);
         }
     }
@@ -5408,23 +5409,23 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
     if (EventFlag(9999)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10000, 900, 10002);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10002, 900, 10002);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10003, 900, 10003);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10004, 900, 10004);
         }
         // NR6PF: I do wish they had loops sometimes, jeez
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10005, 900, 10005);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10006, 900, 10006);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10007, 900, 10007);
         }
     }
@@ -5432,23 +5433,23 @@ $Event(90035202, Default, function(chrEntityId, eventFlagId) {
     if (EventFlag(9999)) {
         SetSpEffect(10000, 99171);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             SetSpEffect(10002, 99171);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             SetSpEffect(10003, 99171);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             SetSpEffect(10004, 99171);
         }
         // NR6PF: effect for players 4-6 as well
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             SetSpEffect(10005, 99171);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             SetSpEffect(10006, 99171);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             SetSpEffect(10007, 99171);
         }
     }
@@ -5485,28 +5486,28 @@ $Event(90035203, Default, function(eventFlagId) {
         SetSpEffect(10000, 99191);
         SetSpEffect(10000, 508);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             SetSpEffect(10002, 99191);
             SetSpEffect(10002, 508);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             SetSpEffect(10003, 99191);
             SetSpEffect(10003, 508);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             SetSpEffect(10004, 99191);
             SetSpEffect(10004, 508);
         }
         // NR6PF: Apply to players 4-6 too
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             SetSpEffect(10005, 99191);
             SetSpEffect(10005, 508);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             SetSpEffect(10006, 99191);
             SetSpEffect(10006, 508);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             SetSpEffect(10007, 99191);
             SetSpEffect(10007, 508);
         }
@@ -5514,23 +5515,23 @@ $Event(90035203, Default, function(eventFlagId) {
     if (EventFlag(9999)) {
         spFlag |= !CharacterHasSpEffect(10000, 99191) || !CharacterHasSpEffect(10000, 508);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             spFlag |= !CharacterHasSpEffect(10002, 99191) || !CharacterHasSpEffect(10002, 508);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             spFlag |= !CharacterHasSpEffect(10003, 99191) || !CharacterHasSpEffect(10003, 508);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             spFlag |= !CharacterHasSpEffect(10004, 99191) || !CharacterHasSpEffect(10004, 508);
         }
         // NR6PF: Ditto
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             spFlag |= !CharacterHasSpEffect(10005, 99191) || !CharacterHasSpEffect(10005, 508);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             spFlag |= !CharacterHasSpEffect(10006, 99191) || !CharacterHasSpEffect(10006, 508);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             spFlag |= !CharacterHasSpEffect(10007, 99191) || !CharacterHasSpEffect(10007, 508);
         }
     }
@@ -5548,46 +5549,46 @@ $Event(90035204, Default, function(chrEntityId, eventFlagId) {
     if (EventFlag(9999)) {
         chrSp &= IsPlayerNo(1) && CharacterHasSpEffect(10000, 99171);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             chrSp &= IsPlayerNo(1) && CharacterHasSpEffect(10002, 99171);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             chrSp &= IsPlayerNo(2) && CharacterHasSpEffect(10003, 99171);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             chrSp &= IsPlayerNo(3) && CharacterHasSpEffect(10004, 99171);
         }
         // NR6PF: extra conditions for players 4-6
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             chrSp &= IsPlayerNo(4) && CharacterHasSpEffect(10005, 99171);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             chrSp &= IsPlayerNo(5) && CharacterHasSpEffect(10006, 99171);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             chrSp &= IsPlayerNo(6) && CharacterHasSpEffect(10007, 99171);
         }
     }
 L0:
     WaitFor(chrSp);
     if (!EventFlag(9999)) {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             chrSpHpArea &= IsPlayerNo(1);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             chrSpHpArea &= IsPlayerNo(2);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             chrSpHpArea &= IsPlayerNo(3);
         }
         // NR6PF: extra conditions for players 4-6
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             chrSpHpArea &= IsPlayerNo(4);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             chrSpHpArea &= IsPlayerNo(5);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             chrSpHpArea &= IsPlayerNo(6);
         }
     }
@@ -5596,23 +5597,23 @@ L1:
     if (EventFlag(9999)) {
         chrSpHpArea &= CharacterHPValue(10000) != 0;
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             chrSpHpArea &= CharacterHPValue(10002) != 0;
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             chrSpHpArea &= CharacterHPValue(10003) != 0;
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             chrSpHpArea &= CharacterHPValue(10004) != 0;
         }
         // NR6PF: extra conditions for players 4-6
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             chrSpHpArea &= CharacterHPValue(10005) != 0;
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             chrSpHpArea &= CharacterHPValue(10006) != 0;
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             chrSpHpArea &= CharacterHPValue(10007) != 0;
         }
     }
@@ -5620,23 +5621,23 @@ L2:
     if (EventFlag(9999)) {
         areaSp |= !EntityInRadiusOfEntity(10000, chrEntityId, 25, 1);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             areaSp |= !EntityInRadiusOfEntity(10002, chrEntityId, 25, 1);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             areaSp |= !EntityInRadiusOfEntity(10003, chrEntityId, 25, 1);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             areaSp |= !EntityInRadiusOfEntity(10004, chrEntityId, 25, 1);
         }
         // NR6PF: extra conditions for players 4-6
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             areaSp |= !EntityInRadiusOfEntity(10005, chrEntityId, 25, 1);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             areaSp |= !EntityInRadiusOfEntity(10006, chrEntityId, 25, 1);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             areaSp |= !EntityInRadiusOfEntity(10007, chrEntityId, 25, 1);
         }
     }
@@ -5654,21 +5655,21 @@ L3:
             || CharacterHasSpEffect(10000, 102610)
             || CharacterHasSpEffect(10000, 16166);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             sp |= CharacterHasSpEffect(10002, 32)
                 || CharacterHasSpEffect(10002, 99200)
                 || CharacterHasSpEffect(10002, 99201)
                 || CharacterHasSpEffect(10002, 102610)
                 || CharacterHasSpEffect(10002, 16166);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             sp |= CharacterHasSpEffect(10003, 32)
                 || CharacterHasSpEffect(10003, 99200)
                 || CharacterHasSpEffect(10003, 99201)
                 || CharacterHasSpEffect(10003, 102610)
                 || CharacterHasSpEffect(10003, 16166);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             sp |= CharacterHasSpEffect(10004, 32)
                 || CharacterHasSpEffect(10004, 99200)
                 || CharacterHasSpEffect(10004, 99201)
@@ -5676,21 +5677,21 @@ L3:
                 || CharacterHasSpEffect(10004, 16166);
         }
         // NR6PF: Apply effects to other players, again. Why does this bastard have to have a check before he does ANYTHING
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             sp |= CharacterHasSpEffect(10005, 32)
                 || CharacterHasSpEffect(10005, 99200)
                 || CharacterHasSpEffect(10005, 99201)
                 || CharacterHasSpEffect(10005, 102610)
                 || CharacterHasSpEffect(10005, 16166);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             sp |= CharacterHasSpEffect(10006, 32)
                 || CharacterHasSpEffect(10006, 99200)
                 || CharacterHasSpEffect(10006, 99201)
                 || CharacterHasSpEffect(10006, 102610)
                 || CharacterHasSpEffect(10006, 16166);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             sp |= CharacterHasSpEffect(10007, 32)
                 || CharacterHasSpEffect(10007, 99200)
                 || CharacterHasSpEffect(10007, 99201)
@@ -5709,21 +5710,21 @@ L4:
                 && !CharacterHasSpEffect(10000, 102610)
                 && !CharacterHasSpEffect(10000, 16166);
         } else {
-            if (EventFlag(8085)) {
+            if (EventFlag(morgottTargeted.P1)) {
                 sp2 &= !CharacterHasSpEffect(10002, 32)
                     && !CharacterHasSpEffect(10002, 99200)
                     && !CharacterHasSpEffect(10002, 99201)
                     && !CharacterHasSpEffect(10002, 102610)
                     && !CharacterHasSpEffect(10002, 16166);
             }
-            if (EventFlag(8086)) {
+            if (EventFlag(morgottTargeted.P2)) {
                 sp2 &= !CharacterHasSpEffect(10003, 32)
                     && !CharacterHasSpEffect(10003, 99200)
                     && !CharacterHasSpEffect(10003, 99201)
                     && !CharacterHasSpEffect(10003, 102610)
                     && !CharacterHasSpEffect(10003, 16166);
             }
-            if (EventFlag(8087)) {
+            if (EventFlag(morgottTargeted.P3)) {
                 sp2 &= !CharacterHasSpEffect(10004, 32)
                     && !CharacterHasSpEffect(10004, 99200)
                     && !CharacterHasSpEffect(10004, 99201)
@@ -5731,21 +5732,21 @@ L4:
                     && !CharacterHasSpEffect(10004, 16166);
             }
             // xnopyt
-            if (EventFlag(11008085)) {
+            if (EventFlag(morgottTargeted.P4)) {
                 sp2 &= !CharacterHasSpEffect(10005, 32)
                     && !CharacterHasSpEffect(10005, 99200)
                     && !CharacterHasSpEffect(10005, 99201)
                     && !CharacterHasSpEffect(10005, 102610)
                     && !CharacterHasSpEffect(10005, 16166);
             }
-            if (EventFlag(11008086)) {
+            if (EventFlag(morgottTargeted.P5)) {
                 sp2 &= !CharacterHasSpEffect(10006, 32)
                     && !CharacterHasSpEffect(10006, 99200)
                     && !CharacterHasSpEffect(10006, 99201)
                     && !CharacterHasSpEffect(10006, 102610)
                     && !CharacterHasSpEffect(10006, 16166);
             }
-            if (EventFlag(11008087)) {
+            if (EventFlag(morgottTargeted.P6)) {
                 sp2 &= !CharacterHasSpEffect(10007, 32)
                     && !CharacterHasSpEffect(10007, 99200)
                     && !CharacterHasSpEffect(10007, 99201)
@@ -5766,23 +5767,23 @@ L5:
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10000, 900, 10002);
         RestartEvent();
     }
-    if (EventFlag(8085)) {
+    if (EventFlag(morgottTargeted.P1)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10002, 900, 10002);
     }
-    if (EventFlag(8086)) {
+    if (EventFlag(morgottTargeted.P2)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10003, 900, 10003);
     }
-    if (EventFlag(8087)) {
+    if (EventFlag(morgottTargeted.P3)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10004, 900, 10004);
     }
     // NR6PF: extra warps for players 4-6
-    if (EventFlag(11008085)) {
+    if (EventFlag(morgottTargeted.P4)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10005, 900, 10005);
     }
-    if (EventFlag(11008086)) {
+    if (EventFlag(morgottTargeted.P5)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10006, 900, 10006);
     }
-    if (EventFlag(11008087)) {
+    if (EventFlag(morgottTargeted.P6)) {
         WarpCharacterAndCopyFloor(chrEntityId, TargetEntityType.Character, 10007, 900, 10007);
     }
     RestartEvent();
@@ -5803,7 +5804,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
             || CharacterHasTeamType(10000, TeamType.Disabled);
         chr |= !chr2;
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             chr |= CharacterDead(10002);
             chr2 |= CharacterHasTeamType(10002, TeamType.Human)
                 || CharacterHasTeamType(10002, TeamType.WhitePhantom)
@@ -5811,7 +5812,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
                 || CharacterHasTeamType(10002, TeamType.Disabled);
             chr |= !chr2;
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             chr |= CharacterDead(10003);
             chr2 |= CharacterHasTeamType(10003, TeamType.Human)
                 || CharacterHasTeamType(10003, TeamType.WhitePhantom)
@@ -5819,7 +5820,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
                 || CharacterHasTeamType(10003, TeamType.Disabled);
             chr |= !chr2;
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             chr |= CharacterDead(10004);
             chr2 |= CharacterHasTeamType(10004, TeamType.Human)
                 || CharacterHasTeamType(10004, TeamType.WhitePhantom)
@@ -5828,7 +5829,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
             chr |= !chr2;
         }
         // NR6PF: Check if players 4-6 are targeted/dead
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             chr |= CharacterDead(10005);
             chr2 |= CharacterHasTeamType(10005, TeamType.Human)
                 || CharacterHasTeamType(10005, TeamType.WhitePhantom)
@@ -5836,7 +5837,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
                 || CharacterHasTeamType(10005, TeamType.Disabled);
             chr |= !chr2;
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             chr |= CharacterDead(10006);
             chr2 |= CharacterHasTeamType(10006, TeamType.Human)
                 || CharacterHasTeamType(10006, TeamType.WhitePhantom)
@@ -5844,7 +5845,7 @@ $Event(90035205, Default, function(chrEntityId, eventFlagId, eventFlagId2) {
                 || CharacterHasTeamType(10006, TeamType.Disabled);
             chr |= !chr2;
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             chr |= CharacterDead(10007);
             chr2 |= CharacterHasTeamType(10007, TeamType.Human)
                 || CharacterHasTeamType(10007, TeamType.WhitePhantom)
@@ -5884,23 +5885,23 @@ $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
     if (EventFlag(9999)) {
         hpFlag |= CharacterHPValue(10000) == 0;
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             hpFlag |= CharacterHPValue(10002) == 0;
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             hpFlag |= CharacterHPValue(10003) == 0;
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             hpFlag |= CharacterHPValue(10004) == 0;
         }
         // NR6PF: extra conditions for players 4-6
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             hpFlag |= CharacterHPValue(10005) == 0;
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             hpFlag |= CharacterHPValue(10006) == 0;
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             hpFlag |= CharacterHPValue(10007) == 0;
         }
     }
@@ -5910,23 +5911,23 @@ $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
     if (EventFlag(9999)) {
         IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10000, 220);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10002, 220);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10003, 220);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10004, 220);
         }
         // Warp for players 4-6
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10005, 220);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10006, 220);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             IssueShortWarpRequest(chrEntityId2, TargetEntityType.Character, 10007, 220);
         }
     }
@@ -5934,23 +5935,23 @@ $Event(90035206, Default, function(chrEntityId, chrEntityId2, eventFlagId) {
     if (EventFlag(9999)) {
         WaitFor(CharacterHPValue(10000) != 0);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             WaitFor(CharacterHPValue(10002) != 0);
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             WaitFor(CharacterHPValue(10003) != 0);
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             WaitFor(CharacterHPValue(10004) != 0);
         }
         // Wait for players 4-6 to respawn
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             WaitFor(CharacterHPValue(10005) != 0);
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             WaitFor(CharacterHPValue(10006) != 0);
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             WaitFor(CharacterHPValue(10007) != 0);
         }
     }
@@ -5994,91 +5995,91 @@ $Event(90035209, Default, function(eventFlagId) {
     if (EventFlag(9999)) {
         SetBossBGM(213021, BossBGMState.Start);
     } else {
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             if (IsPlayerNo(1)) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             if (IsPlayerNo(2)) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             if (IsPlayerNo(3)) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
         // NR6PF: Let the other players hear the BGM :<
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             if (IsPlayerNo(4)) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             if (IsPlayerNo(5)) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             if (IsPlayerNo(6)) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             area |= EntityInRadiusOfEntity(20000, 10002, 30, 1);
             if (area) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             area |= EntityInRadiusOfEntity(20000, 10003, 30, 1);
             if (area) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             area |= EntityInRadiusOfEntity(20000, 10004, 30, 1);
             if (area) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
         // NR6PF: Boss BGM for when players 4-6 are target
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             area |= EntityInRadiusOfEntity(20000, 10005, 30, 1);
             if (area) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             area |= EntityInRadiusOfEntity(20000, 10006, 30, 1);
             if (area) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             area |= EntityInRadiusOfEntity(20000, 10007, 30, 1);
             if (area) {
                 SetBossBGM(213021, BossBGMState.Start);
             }
         }
-        if (EventFlag(8085)) {
+        if (EventFlag(morgottTargeted.P1)) {
             EndIf(!IsPlayerNo(1));
         }
-        if (EventFlag(8086)) {
+        if (EventFlag(morgottTargeted.P2)) {
             EndIf(!IsPlayerNo(2));
         }
-        if (EventFlag(8087)) {
+        if (EventFlag(morgottTargeted.P3)) {
             EndIf(!IsPlayerNo(3));
         }
         // NR6PF: The game has a guard clause here to block BGM if the player is not the target
-        if (EventFlag(11008085)) {
+        if (EventFlag(morgottTargeted.P4)) {
             EndIf(!IsPlayerNo(4));
         }
-        if (EventFlag(11008086)) {
+        if (EventFlag(morgottTargeted.P5)) {
             EndIf(!IsPlayerNo(5));
         }
-        if (EventFlag(11008087)) {
+        if (EventFlag(morgottTargeted.P6)) {
             EndIf(!IsPlayerNo(6));
         }
     }
@@ -10135,13 +10136,13 @@ L10:
         DisableCharacterAI(chrEntityId);
         WaitFor(ElapsedSeconds(11));
         if (EventFlag(eventFlagId)) {
-            areaFlagTime |= InArea(10002, areaEntityId) || !EventFlag(7005);
+            areaFlagTime |= InArea(10002, areaEntityId) || !EventFlag(aliveFlags.P1);
         }
         if (EventFlag(eventFlagId2)) {
-            areaFlagTime |= InArea(10003, areaEntityId) || !EventFlag(7006);
+            areaFlagTime |= InArea(10003, areaEntityId) || !EventFlag(aliveFlags.P2);
         }
         if (EventFlag(eventFlagId3)) {
-            areaFlagTime |= InArea(10004, areaEntityId) || !EventFlag(7007);
+            areaFlagTime |= InArea(10004, areaEntityId) || !EventFlag(aliveFlags.P3);
         }
         areaFlagTime |= ElapsedSeconds(5);
         WaitFor(areaFlagTime);
@@ -19256,23 +19257,23 @@ $Event(90085005, Default, function(missionId, hero, eventFlagId, eventFlagId2) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // NR6PF: Add new players checks
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!HasMissionState(missionId, 1));
     EndIf(!IsHero(hero));
@@ -19396,23 +19397,23 @@ $Event(90085010, Default, function(missionId, eventFlagId, userDispLogParamId, h
     EndIf(!IsGameMode(2));
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19557,23 +19558,23 @@ $Event(90085020, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
     DisableNetworkSync();
     GotoIf(L2, !MissionActive(missionId));
     GotoIf(S0, !IsPlayerNo(1));
-    GotoIf(L2, !EventFlag(7015));
+    GotoIf(L2, !EventFlag(missionPlayer.P1));
 S0:
     GotoIf(S1, !IsPlayerNo(2));
-    GotoIf(L2, !EventFlag(7016));
+    GotoIf(L2, !EventFlag(missionPlayer.P2));
 S1:
     GotoIf(S2, !IsPlayerNo(3));
-    GotoIf(L2, !EventFlag(7017));
+    GotoIf(L2, !EventFlag(missionPlayer.P3));
 S2:
     // NR6PF: More players!
     GotoIf(S3, !IsPlayerNo(4));
-    GotoIf(L2, !EventFlag(7018));
+    GotoIf(L2, !EventFlag(missionPlayer.P4));
 S3:
     GotoIf(S4, !IsPlayerNo(5));
-    GotoIf(L2, !EventFlag(7019));
+    GotoIf(L2, !EventFlag(missionPlayer.P5));
 S4:
     GotoIf(S5, !IsPlayerNo(6));
-    GotoIf(L2, !EventFlag(7020));
+    GotoIf(L2, !EventFlag(missionPlayer.P6));
 S5:
     GotoIf(L2, !IsHero(hero));
     GotoIf(L2, !HasMissionState(missionId, 1));
@@ -19613,23 +19614,23 @@ $Event(90085021, Default, function(missionId, eventFlagId, areaEntityId, eventFl
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19646,23 +19647,23 @@ $Event(90085022, Default, function(missionId, eventFlagId, areaEntityId, entityI
     HideFloatingMessage(operationGuideParamId, entityId);
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19681,23 +19682,23 @@ $Event(90085023, Default, function(missionId, eventFlagId, eventFlagId2, entityI
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19721,23 +19722,23 @@ $Event(90085025, Default, function(missionId, eventFlagId, eventFlagId2, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19757,23 +19758,23 @@ $Event(90085026, Default, function(missionId, eventFlagId, value, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        flagChrMission &= EventFlag(7015);
+        flagChrMission &= EventFlag(missionPlayer.P1);
     }
     if (IsPlayerNo(2)) {
-        flagChrMission &= EventFlag(7016);
+        flagChrMission &= EventFlag(missionPlayer.P2);
     }
     if (IsPlayerNo(3)) {
-        flagChrMission &= EventFlag(7017);
+        flagChrMission &= EventFlag(missionPlayer.P3);
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        flagChrMission &= EventFlag(7018);
+        flagChrMission &= EventFlag(missionPlayer.P4);
     }
     if (IsPlayerNo(5)) {
-        flagChrMission &= EventFlag(7019);
+        flagChrMission &= EventFlag(missionPlayer.P5);
     }
     if (IsPlayerNo(6)) {
-        flagChrMission &= EventFlag(7020);
+        flagChrMission &= EventFlag(missionPlayer.P6);
     }
     flagChrMission &= IsHero(hero) && HasMissionState(missionId, 1);
     EndIf(flagChrMission);
@@ -19792,23 +19793,23 @@ $Event(90085027, Default, function(missionId, mapVariationId, eventFlagId, hero)
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19827,23 +19828,23 @@ $Event(90085028, Default, function(missionId, eventFlagId, eventFlagId2, userDis
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19924,23 +19925,23 @@ $Event(90085035, Default, function(missionId, eventFlagId, entityId, actionButto
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -19959,33 +19960,33 @@ $Event(90085036, Default, function(eventFlagId, userDispLogParamId, hero, missio
     WaitFor(EventFlag(eventFlagId));
     WaitFixedTimeSeconds(3);
     if (IsPlayerNo(1)) {
-        if (EventFlag(7015)) {
+        if (EventFlag(missionPlayer.P1)) {
             RecordUserDispLog(userDispLogParamId, 10002, LogObjectType.None, -1);
         }
     }
     if (IsPlayerNo(2)) {
-        if (EventFlag(7016)) {
+        if (EventFlag(missionPlayer.P2)) {
             RecordUserDispLog(userDispLogParamId, 10003, LogObjectType.None, -1);
         }
     }
     if (IsPlayerNo(3)) {
-        if (EventFlag(7017)) {
+        if (EventFlag(missionPlayer.P3)) {
             RecordUserDispLog(userDispLogParamId, 10004, LogObjectType.None, -1);
         }
     }
     // NR6PF: Check new players
     if (IsPlayerNo(4)) {
-        if (EventFlag(7018)) {
+        if (EventFlag(missionPlayer.P4)) {
             RecordUserDispLog(userDispLogParamId, 10005, LogObjectType.None, -1);
         }
     }
     if (IsPlayerNo(5)) {
-        if (EventFlag(7019)) {
+        if (EventFlag(missionPlayer.P5)) {
             RecordUserDispLog(userDispLogParamId, 10006, LogObjectType.None, -1);
         }
     }
     if (IsPlayerNo(6)) {
-        if (EventFlag(7020)) {
+        if (EventFlag(missionPlayer.P6)) {
             RecordUserDispLog(userDispLogParamId, 10007, LogObjectType.None, -1);
         }
     }
@@ -19996,23 +19997,23 @@ $Event(90085037, Default, function(missionId, eventFlagId, eventFlagId2, assetEn
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -20045,23 +20046,23 @@ $Event(90085041, Default, function(missionId, eventFlagId, eventFlagId2, hero) {
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // NR6PF: Add new players checks
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!(IsHero(hero) && HasMissionState(missionId, 1)));
     if (EventFlag(eventFlagId)) {
@@ -20254,23 +20255,23 @@ $Event(90085222, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // Flags for extra players. so it is possible for them to receive events
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(hero));
     EndIf(!HasMissionState(missionId, 1));
@@ -20498,23 +20499,23 @@ $Event(90085951, Default, function(missionId, eventFlagId, eventFlagId2, eventFl
     DisableNetworkSync();
     EndIf(!MissionActive(missionId));
     if (IsPlayerNo(1)) {
-        EndIf(!EventFlag(7015));
+        EndIf(!EventFlag(missionPlayer.P1));
     }
     if (IsPlayerNo(2)) {
-        EndIf(!EventFlag(7016));
+        EndIf(!EventFlag(missionPlayer.P2));
     }
     if (IsPlayerNo(3)) {
-        EndIf(!EventFlag(7017));
+        EndIf(!EventFlag(missionPlayer.P3));
     }
     // NR6PF: Add new players checks
     if (IsPlayerNo(4)) {
-        EndIf(!EventFlag(7018));
+        EndIf(!EventFlag(missionPlayer.P4));
     }
     if (IsPlayerNo(5)) {
-        EndIf(!EventFlag(7019));
+        EndIf(!EventFlag(missionPlayer.P5));
     }
     if (IsPlayerNo(6)) {
-        EndIf(!EventFlag(7020));
+        EndIf(!EventFlag(missionPlayer.P6));
     }
     EndIf(!IsHero(Hero.Undertaker));
     EndIf(!HasMissionState(missionId, 1));
