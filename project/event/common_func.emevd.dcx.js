@@ -9956,7 +9956,7 @@ L0:
     RestartEvent();
 });
 
-$Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, value, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, nr6pf_eventFlagId10, nr6pf_eventFlagId11, nr6pf_eventFlagId12) {
+$Event(90035280, Default, function(entityId, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, value, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9) {
     // Balancers Raid: init
     DisableNetworkSync();
     EndIf(!EventFlag(8081));
@@ -10066,7 +10066,7 @@ $Event(90035282, Default, function(chrEntityId, entityId, eventFlagId, eventFlag
     EndIf(EventFlag(8061));
     WaitFor(EventFlag(8061));
     // NR6PF: Group players into duos
-    // Also prevents players from getting warped 3 times, thus getting blackscreened
+    // Also prevents players from getting warped to POIs that aren't initialized
     if (IsPlayerNo(1) || IsPlayerNo(4)) {
         EndIf(!EventFlag(eventFlagId));
     } else if (IsPlayerNo(2) || IsPlayerNo(5)) {
