@@ -1,3 +1,4 @@
+-- Fulghor, Champion of Nightglow
 RegisterTableGoal(GOAL_Centaurus760000_Battle, "Centaurus760000_Battle")
 REGISTER_GOAL_NO_SUB_GOAL(GOAL_Centaurus760000_Battle, true)
 
