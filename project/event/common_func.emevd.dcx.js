@@ -2042,10 +2042,17 @@ L0:
 });
 
 $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, bossMapCylinder) {
+    /* 
+        Great Hollow: Divine Towers
+        This event had to be entirely rewritten, from scratch, in raw EMEVD (no MattScript)
+        The vanilla event's usage of condition groups was so insanely inefficient that I saw no other way
+        This has been converted into MattScript for readability NOW, but it wasn't originally.
+    */
     // end if boss is already dead
     EndIf(EventFlag(bossDeadFlag));
     // check if boss already has effect, skip to L0
-    // renumbered to 08 so I can use 10-15 for player checks contiguously
+    // In my original non-mattscript version, I had renumbered this group to OR_08 from OR_10
+    // MattScript abstracted that away, which is fine.
     sp = CharacterRatioHasSpEffect(bossEntityId, 98280, NotEqual, 0)
         || CharacterRatioHasSpEffect(bossEntityId, 98281, NotEqual, 0)
         || CharacterRatioHasSpEffect(bossEntityId, 98282, NotEqual, 0)
@@ -2058,7 +2065,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
         || CharacterRatioHasSpEffect(bossEntityId, 98289, NotEqual, 0);
     if (!sp) {
         WaitFor(EventFlag(bossSpawnedFlag));
-        area = EntityInRadiusOfEntity(1028402600, bossMapCylinder, 15, 1);
+        area &= EntityInRadiusOfEntity(1028402600, bossMapCylinder, 15, 1);
         if (area) {
             // stupid use of AND registers but... gotta use 'em somehow.
             // store whether player is inside the map volume in one AND per player
@@ -2069,10 +2076,8 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             areaSp5 &= InArea(10006, 1028402550);
             areaSp6 &= InArea(10007, 1028402550);
         }
-        area2 = EntityInRadiusOfEntity(1028402601, bossMapCylinder, 15, 1);
+        area2 &= EntityInRadiusOfEntity(1028402601, bossMapCylinder, 15, 1);
         if (area2) {
-            // stupid use of AND registers but... gotta use 'em somehow.
-            // store whether player is inside the map volume in one AND per player
             areaSp &= InArea(10002, 1028402551);
             areaSp2 &= InArea(10003, 1028402551);
             areaSp3 &= InArea(10004, 1028402551);
@@ -2080,10 +2085,8 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             areaSp5 &= InArea(10006, 1028402551);
             areaSp6 &= InArea(10007, 1028402551);
         }
-        area3 = EntityInRadiusOfEntity(1028402602, bossMapCylinder, 15, 1);
+        area3 &= EntityInRadiusOfEntity(1028402602, bossMapCylinder, 15, 1);
         if (area3) {
-            // stupid use of AND registers but... gotta use 'em somehow.
-            // store whether player is inside the map volume in one AND per player
             areaSp &= InArea(10002, 1028402552);
             areaSp2 &= InArea(10003, 1028402552);
             areaSp3 &= InArea(10004, 1028402552);
@@ -2091,10 +2094,8 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             areaSp5 &= InArea(10006, 1028402552);
             areaSp6 &= InArea(10007, 1028402552);
         }
-        area4 = EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
+        area4 &= EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
         if (area4) {
-            // stupid use of AND registers but... gotta use 'em somehow.
-            // store whether player is inside the map volume in one AND per player
             areaSp &= InArea(10002, 1056402550);
             areaSp2 &= InArea(10003, 1056402550);
             areaSp3 &= InArea(10004, 1056402550);
@@ -2102,10 +2103,8 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             areaSp5 &= InArea(10006, 1056402550);
             areaSp6 &= InArea(10007, 1056402550);
         }
-        area5 = EntityInRadiusOfEntity(1056402602, bossMapCylinder, 15, 1);
+        area5 &= EntityInRadiusOfEntity(1056402602, bossMapCylinder, 15, 1);
         if (area5) {
-            // stupid use of AND registers but... gotta use 'em somehow.
-            // store whether player is inside the map volume in one AND per player
             areaSp &= InArea(10002, 1056402551);
             areaSp2 &= InArea(10003, 1056402551);
             areaSp3 &= InArea(10004, 1056402551);
@@ -2113,10 +2112,8 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             areaSp5 &= InArea(10006, 1056402551);
             areaSp6 &= InArea(10007, 1056402551);
         }
-        area6 = EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
+        area6 &= EntityInRadiusOfEntity(1056402603, bossMapCylinder, 15, 1);
         if (area6) {
-            // stupid use of AND registers but... gotta use 'em somehow.
-            // store whether player is inside the map volume in one AND per player
             areaSp &= InArea(10002, 1056402552);
             areaSp2 &= InArea(10003, 1056402552);
             areaSp3 &= InArea(10004, 1056402552);
@@ -2124,7 +2121,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             areaSp5 &= InArea(10006, 1056402552);
             areaSp6 &= InArea(10007, 1056402552);
         }
-        // OR group for P1 effects
+        // 1 OR group for each player's effects
         sp2 = CharacterHasSpEffect(10002, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98262, NotEqual, 0)
@@ -2135,9 +2132,8 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             || CharacterHasSpEffect(10002, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10002, 98269, NotEqual, 0);
-        // AND with if they're in the area
+        // ANDed with if they're in the area
         areaSp &= sp2;
-        // OR group for P2 effects
         sp3 = CharacterHasSpEffect(10003, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98262, NotEqual, 0)
@@ -2148,9 +2144,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             || CharacterHasSpEffect(10003, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10003, 98269, NotEqual, 0);
-        // AND with if they're in the area
         areaSp2 &= sp3;
-        // OR group for P3 effects
         sp4 = CharacterHasSpEffect(10004, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98262, NotEqual, 0)
@@ -2161,9 +2155,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             || CharacterHasSpEffect(10004, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10004, 98269, NotEqual, 0);
-        // AND with if they're in the area
         areaSp3 &= sp4;
-        // OR group for P4 effects
         sp5 = CharacterHasSpEffect(10005, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10005, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10005, 98262, NotEqual, 0)
@@ -2174,9 +2166,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             || CharacterHasSpEffect(10005, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10005, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10005, 98269, NotEqual, 0);
-        // AND with if they're in the area
         areaSp4 &= sp5;
-        // OR group for P5 effects
         sp6 = CharacterHasSpEffect(10006, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10006, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10006, 98262, NotEqual, 0)
@@ -2187,9 +2177,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             || CharacterHasSpEffect(10006, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10006, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10006, 98269, NotEqual, 0);
-        // AND with if they're in the area
         areaSp5 &= sp6;
-        // OR group for P5 effects
         sp7 = CharacterHasSpEffect(10007, 98260, NotEqual, 0)
             || CharacterHasSpEffect(10007, 98261, NotEqual, 0)
             || CharacterHasSpEffect(10007, 98262, NotEqual, 0)
@@ -2200,13 +2188,11 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             || CharacterHasSpEffect(10007, 98267, NotEqual, 0)
             || CharacterHasSpEffect(10007, 98268, NotEqual, 0)
             || CharacterHasSpEffect(10007, 98269, NotEqual, 0);
-        // AND with if they're in the area
         areaSp6 &= sp7;
         // OR the groups together
         areaSp7 = areaSp || areaSp2 || areaSp3 || areaSp4 || areaSp5 || areaSp6;
         // WaitFor any above
         WaitFor(areaSp7);
-        // was it not P1?
         if (areaSp.Passed) {
             // if it was P1, copy from P1
             if (!CharacterHasSpEffect(10002, 98260, Equal, 0)) {
@@ -2239,9 +2225,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             if (!CharacterHasSpEffect(10002, 98269, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98289);
             }
-        // was it not P2?
         } else if (areaSp2.Passed) {
-            // if it was P2, copy from P2
             if (!CharacterHasSpEffect(10003, 98260, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98280);
             }
@@ -2272,9 +2256,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             if (!CharacterHasSpEffect(10003, 98269, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98289);
             }
-        // was it not P3?
         } else if (areaSp3.Passed) {
-            // if it was P3, copy from P3
             if (!CharacterHasSpEffect(10004, 98260, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98280);
             }
@@ -2305,9 +2287,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             if (!CharacterHasSpEffect(10004, 98269, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98289);
             }
-        // was it not P4?
         } else if (areaSp4.Passed) {
-            // if it was P4, copy from P4
             if (!CharacterHasSpEffect(10005, 98260, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98280);
             }
@@ -2338,9 +2318,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             if (!CharacterHasSpEffect(10005, 98269, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98289);
             }
-        // was it not P5?
         } else if (areaSp5.Passed) {
-            // if it was P5, copy from P5
             if (!CharacterHasSpEffect(10006, 98260, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98280);
             }
@@ -2371,9 +2349,7 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
             if (!CharacterHasSpEffect(10006, 98269, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98289);
             }
-        // was it not P6?
         } else if (areaSp6.Passed) {
-            // if it was P6, copy from P6
             if (!CharacterHasSpEffect(10007, 98260, Equal, 0)) {
                 SetSpEffect(bossEntityId, 98280);
             }
@@ -2409,14 +2385,23 @@ $Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, 
     }
 L0:
     WaitFixedTimeSeconds(0.5);
-    // just recheck the old AND groups. no point to make an extra function call.
+    // AND groups are empty here if the boss had the effect already.
+    // hence why the game makes the same call to IfEntityInoutsideRadiusOfEntity twice per region
+    area &= EntityInRadiusOfEntity(1028402600, bossMapCylinder, 15, 1);
     if (area) {
-        // harvest 3 AND groups by ORing the results directly
-        // previously, this was using an AND group to store whether the player was inside the area
-        // then negating it
-        // then storing that in an OR group
-        // fromsoft why
-        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402550); // saves 3 AND groups // switched to Outside
+        /* 
+            in vanilla, these blocks look like this:
+                IfInoutsideArea(AND_05, InsideOutsideState.Inside, 10002, 1056402570, 1);
+                IfConditionGroup(OR_05, FAIL, AND_05);
+                IfInoutsideArea(OR_05, InsideOutsideState.Outside, 10002, 1056402552, 1);
+            this is stupid and wasteful, since it's just storing the value of Inside to a register, then negating it, then ORing it
+            so I just switched to:
+                IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402570, 1);
+                IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402550, 1);
+            Saves 3 AND groups which I was able to repurpose.
+            This event has very messy register use throughout
+        */
+        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402550);
         area8 |= !InArea(10003, 1028402570) || !InArea(10003, 1028402550);
         area9 |= !InArea(10004, 1028402570) || !InArea(10004, 1028402550);
         area10 |= !InArea(10005, 1028402570) || !InArea(10005, 1028402550);
@@ -2424,8 +2409,9 @@ L0:
         area12 |= !InArea(10007, 1028402570) || !InArea(10007, 1028402550);
     }
 L1:
+    area2 &= EntityInRadiusOfEntity(1028402601, bossMapCylinder, 15, 1);
     if (area2) {
-        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402551); // saves 3 AND groups // switched to Outside
+        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402551);
         area8 |= !InArea(10003, 1028402570) || !InArea(10003, 1028402551);
         area9 |= !InArea(10004, 1028402570) || !InArea(10004, 1028402551);
         area10 |= !InArea(10005, 1028402570) || !InArea(10005, 1028402551);
@@ -2433,8 +2419,9 @@ L1:
         area12 |= !InArea(10007, 1028402570) || !InArea(10007, 1028402551);
     }
 L2:
+    area3 &= EntityInRadiusOfEntity(1028402602, bossMapCylinder, 15, 1);
     if (area3) {
-        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402552); // saves 3 AND groups // switched to Outside
+        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402552);
         area8 |= !InArea(10003, 1028402570) || !InArea(10003, 1028402552);
         area9 |= !InArea(10004, 1028402570) || !InArea(10004, 1028402552);
         area10 |= !InArea(10005, 1028402570) || !InArea(10005, 1028402552);
@@ -2442,8 +2429,9 @@ L2:
         area12 |= !InArea(10007, 1028402570) || !InArea(10007, 1028402552);
     }
 L3:
+    area4 &= EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
     if (area4) {
-        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402550); // saves 3 AND groups // switched to Outside
+        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402550);
         area8 |= !InArea(10003, 1056402570) || !InArea(10003, 1056402550);
         area9 |= !InArea(10004, 1056402570) || !InArea(10004, 1056402550);
         area10 |= !InArea(10005, 1056402570) || !InArea(10005, 1056402550);
@@ -2451,8 +2439,9 @@ L3:
         area12 |= !InArea(10007, 1056402570) || !InArea(10007, 1056402550);
     }
 L4:
+    area5 &= EntityInRadiusOfEntity(1056402602, bossMapCylinder, 15, 1);
     if (area5) {
-        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402551); // saves 3 AND groups // switched to Outside
+        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402551);
         area8 |= !InArea(10003, 1056402570) || !InArea(10003, 1056402551);
         area9 |= !InArea(10004, 1056402570) || !InArea(10004, 1056402551);
         area10 |= !InArea(10005, 1056402570) || !InArea(10005, 1056402551);
@@ -2460,9 +2449,10 @@ L4:
         area12 |= !InArea(10007, 1056402570) || !InArea(10007, 1056402551);
     }
 L5:
+    area6 &= EntityInRadiusOfEntity(1056402603, bossMapCylinder, 15, 1);
     if (area6) {
-        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402552); // saves 3 AND groups // switched to Outside
-        area8 |= !InArea(10003, 1056402570) || !InArea(10003, 1056402552);
+        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402552);
+        area8 |= !InArea(10003, 1056402570) || !InArea(10003, 1056402552); 
         area9 |= !InArea(10004, 1056402570) || !InArea(10004, 1056402552);
         area10 |= !InArea(10005, 1056402570) || !InArea(10005, 1056402552);
         area11 |= !InArea(10006, 1056402570) || !InArea(10006, 1056402552);
@@ -2470,691 +2460,12 @@ L5:
     }
 L6:
     area13 = area7 && area8 && area9 && area10 && area11 && area12;
-    // I'm literally out of OR groups, but that's okay!
     areaFlag = area13 || EventFlag(bossDeadFlag);
     WaitFor(areaFlag);
     SetSpEffect(bossEntityId, 98279);
     WaitFixedTimeSeconds(0.5);
     RestartEvent();
 });
-
-/*$Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entityId) {
-    // Boss rush towers
-    // This event is so complex that there are no more condition groups to modify it.
-    // I'll probably end up storing the state as an array of event flags.
-    EndIf(EventFlag(eventFlagId2));
-    sp = CharacterRatioHasSpEffect(chrEntityId, 98280, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98281, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98282, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98283, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98284, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98285, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98286, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98287, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98288, NotEqual, 0)
-        || CharacterRatioHasSpEffect(chrEntityId, 98289, NotEqual, 0);
-    if (!sp) {
-        WaitFor(EventFlag(eventFlagId));
-        area &= EntityInRadiusOfEntity(1028402600, entityId, 15, 1);
-        if (area) {
-            areaSp &= InArea(10002, 1028402550);
-            areaSp2 &= InArea(10003, 1028402550);
-            areaSp3 &= InArea(10004, 1028402550);
-            // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp4 &= InArea(10005, 1028402550);
-            nr6pf_areaSp5 &= InArea(10006, 1028402550);
-            nr6pf_areaSp6 &= InArea(10007, 1028402550);
-        }
-        area2 &= EntityInRadiusOfEntity(1028402601, entityId, 15, 1);
-        if (area2) {
-            areaSp &= InArea(10002, 1028402551);
-            areaSp2 &= InArea(10003, 1028402551);
-            areaSp3 &= InArea(10004, 1028402551);
-            // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp4 &= InArea(10005, 1028402551);
-            nr6pf_areaSp5 &= InArea(10006, 1028402551);
-            nr6pf_areaSp6 &= InArea(10007, 1028402551);
-        }
-        area3 &= EntityInRadiusOfEntity(1028402602, entityId, 15, 1);
-        if (area3) {
-            areaSp &= InArea(10002, 1028402552);
-            areaSp2 &= InArea(10003, 1028402552);
-            areaSp3 &= InArea(10004, 1028402552);
-            // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp4 &= InArea(10005, 1028402552);
-            nr6pf_areaSp5 &= InArea(10006, 1028402552);
-            nr6pf_areaSp6 &= InArea(10007, 1028402552);
-        }
-        area4 &= EntityInRadiusOfEntity(1056402601, entityId, 15, 1);
-        if (area4) {
-            areaSp &= InArea(10002, 1056402550);
-            areaSp2 &= InArea(10003, 1056402550);
-            areaSp3 &= InArea(10004, 1056402550);
-            // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp4 &= InArea(10005, 1056402550);
-            nr6pf_areaSp5 &= InArea(10006, 1056402550);
-            nr6pf_areaSp6 &= InArea(10007, 1056402550);
-        }
-        area5 &= EntityInRadiusOfEntity(1056402602, entityId, 15, 1);
-        if (area5) {
-            areaSp &= InArea(10002, 1056402551);
-            areaSp2 &= InArea(10003, 1056402551);
-            areaSp3 &= InArea(10004, 1056402551);
-            // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp4 &= InArea(10005, 1056402551);
-            nr6pf_areaSp5 &= InArea(10006, 1056402551);
-            nr6pf_areaSp6 &= InArea(10007, 1056402551);
-        }
-        area6 &= EntityInRadiusOfEntity(1056402603, entityId, 15, 1);
-        if (area6) {
-            areaSp &= InArea(10002, 1056402552);
-            areaSp2 &= InArea(10003, 1056402552);
-            areaSp3 &= InArea(10004, 1056402552);
-            // NR6PF: Allow new players to trigger the tower
-            nr6pf_areaSp4 &= InArea(10005, 1056402552);
-            nr6pf_areaSp5 &= InArea(10006, 1056402552);
-            nr6pf_areaSp6 &= InArea(10007, 1056402552);
-        }
-        sp2 = CharacterHasSpEffect(10002, 98260, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98261, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98262, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98263, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98264, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98265, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98266, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98267, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98268, NotEqual, 0)
-            || CharacterHasSpEffect(10002, 98269, NotEqual, 0);
-        areaSp &= sp2;
-        sp3 = CharacterHasSpEffect(10003, 98260, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98261, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98262, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98263, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98264, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98265, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98266, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98267, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98268, NotEqual, 0)
-            || CharacterHasSpEffect(10003, 98269, NotEqual, 0);
-        areaSp2 &= sp3;
-        sp4 = CharacterHasSpEffect(10004, 98260, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98261, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98262, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98263, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98264, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98265, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98266, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98267, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98268, NotEqual, 0)
-            || CharacterHasSpEffect(10004, 98269, NotEqual, 0);
-        areaSp3 &= sp4;
-        // NR6PF: Test extra players for spEffects
-        nr6pf_sp5 = CharacterHasSpEffect(10005, 98260, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98261, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98262, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98263, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98264, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98265, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98266, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98267, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98268, NotEqual, 0)
-            || CharacterHasSpEffect(10005, 98269, NotEqual, 0);
-        nr6pf_areaSp4 &= nr6pf_sp5;
-        nr6pf_sp6 = CharacterHasSpEffect(10006, 98260, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98261, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98262, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98263, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98264, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98265, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98266, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98267, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98268, NotEqual, 0)
-            || CharacterHasSpEffect(10006, 98269, NotEqual, 0);
-        nr6pf_areaSp5 &= nr6pf_sp6;
-        nr6pf_sp7 = CharacterHasSpEffect(10007, 98260, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98261, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98262, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98263, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98264, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98265, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98266, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98267, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98268, NotEqual, 0)
-            || CharacterHasSpEffect(10007, 98269, NotEqual, 0);
-        nr6pf_areaSp6 &= nr6pf_sp7;
-        areaSp4 = areaSp || areaSp2 || areaSp3 || nr6pf_areaSp4 || nr6pf_areaSp5 || nr6pf_areaSp6; // NR6PF: Test areaSp for bonus players
-        WaitFor(areaSp4);
-        if (areaSp.Passed) {
-            if (!CharacterHasSpEffect(10002, 98260, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98280);
-            }
-            if (!CharacterHasSpEffect(10002, 98261, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98281);
-            }
-            if (!CharacterHasSpEffect(10002, 98262, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98282);
-            }
-            if (!CharacterHasSpEffect(10002, 98263, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98283);
-            }
-            if (!CharacterHasSpEffect(10002, 98264, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98284);
-            }
-            if (!CharacterHasSpEffect(10002, 98265, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98285);
-            }
-            if (!CharacterHasSpEffect(10002, 98266, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98286);
-            }
-            if (!CharacterHasSpEffect(10002, 98267, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98287);
-            }
-            if (!CharacterHasSpEffect(10002, 98268, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98288);
-            }
-            if (!CharacterHasSpEffect(10002, 98269, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98289);
-            }
-        } else if (areaSp2.Passed) {
-            if (!CharacterHasSpEffect(10003, 98260, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98280);
-            }
-            if (!CharacterHasSpEffect(10003, 98261, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98281);
-            }
-            if (!CharacterHasSpEffect(10003, 98262, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98282);
-            }
-            if (!CharacterHasSpEffect(10003, 98263, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98283);
-            }
-            if (!CharacterHasSpEffect(10003, 98264, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98284);
-            }
-            if (!CharacterHasSpEffect(10003, 98265, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98285);
-            }
-            if (!CharacterHasSpEffect(10003, 98266, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98286);
-            }
-            if (!CharacterHasSpEffect(10003, 98267, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98287);
-            }
-            if (!CharacterHasSpEffect(10003, 98268, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98288);
-            }
-            if (!CharacterHasSpEffect(10003, 98269, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98289);
-            }
-        } else if (areaSp3.Passed) {
-            if (!CharacterHasSpEffect(10004, 98260, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98280);
-            }
-            if (!CharacterHasSpEffect(10004, 98261, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98281);
-            }
-            if (!CharacterHasSpEffect(10004, 98262, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98282);
-            }
-            if (!CharacterHasSpEffect(10004, 98263, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98283);
-            }
-            if (!CharacterHasSpEffect(10004, 98264, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98284);
-            }
-            if (!CharacterHasSpEffect(10004, 98265, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98285);
-            }
-            if (!CharacterHasSpEffect(10004, 98266, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98286);
-            }
-            if (!CharacterHasSpEffect(10004, 98267, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98287);
-            }
-            if (!CharacterHasSpEffect(10004, 98268, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98288);
-            }
-            if (!CharacterHasSpEffect(10004, 98269, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98289);
-            }
-            // NR6PF: Add boss speffect cloning for bonus players 
-        } else if (nr6pf_areaSp4.Passed) {
-            if (!CharacterHasSpEffect(10005, 98260, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98280);
-            }
-            if (!CharacterHasSpEffect(10005, 98261, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98281);
-            }
-            if (!CharacterHasSpEffect(10005, 98262, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98282);
-            }
-            if (!CharacterHasSpEffect(10005, 98263, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98283);
-            }
-            if (!CharacterHasSpEffect(10005, 98264, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98284);
-            }
-            if (!CharacterHasSpEffect(10005, 98265, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98285);
-            }
-            if (!CharacterHasSpEffect(10005, 98266, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98286);
-            }
-            if (!CharacterHasSpEffect(10005, 98267, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98287);
-            }
-            if (!CharacterHasSpEffect(10005, 98268, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98288);
-            }
-            if (!CharacterHasSpEffect(10005, 98269, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98289);
-            }
-        } else if (nr6pf_areaSp5.Passed) {
-            if (!CharacterHasSpEffect(10006, 98260, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98280);
-            }
-            if (!CharacterHasSpEffect(10006, 98261, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98281);
-            }
-            if (!CharacterHasSpEffect(10006, 98262, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98282);
-            }
-            if (!CharacterHasSpEffect(10006, 98263, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98283);
-            }
-            if (!CharacterHasSpEffect(10006, 98264, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98284);
-            }
-            if (!CharacterHasSpEffect(10006, 98265, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98285);
-            }
-            if (!CharacterHasSpEffect(10006, 98266, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98286);
-            }
-            if (!CharacterHasSpEffect(10006, 98267, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98287);
-            }
-            if (!CharacterHasSpEffect(10006, 98268, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98288);
-            }
-            if (!CharacterHasSpEffect(10006, 98269, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98289);
-            }
-        } else if (nr6pf_areaSp6.Passed) {
-            if (!CharacterHasSpEffect(10007, 98260, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98280);
-            }
-            if (!CharacterHasSpEffect(10007, 98261, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98281);
-            }
-            if (!CharacterHasSpEffect(10007, 98262, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98282);
-            }
-            if (!CharacterHasSpEffect(10007, 98263, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98283);
-            }
-            if (!CharacterHasSpEffect(10007, 98264, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98284);
-            }
-            if (!CharacterHasSpEffect(10007, 98265, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98285);
-            }
-            if (!CharacterHasSpEffect(10007, 98266, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98286);
-            }
-            if (!CharacterHasSpEffect(10007, 98267, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98287);
-            }
-            if (!CharacterHasSpEffect(10007, 98268, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98288);
-            }
-            if (!CharacterHasSpEffect(10007, 98269, Equal, 0)) {
-                SetSpEffect(chrEntityId, 98289);
-            }
-            Goto(L0);
-        }
-    }
-L0:
-    WaitFixedTimeSeconds(0.5);
-    area &= EntityInRadiusOfEntity(1028402600, entityId, 15, 1);
-    if (area) {
-        area7 &= InArea(10002, 1028402570);
-        area8 |= !area7 || !InArea(10002, 1028402550);
-        area9 &= InArea(10003, 1028402570);
-        area10 |= !area9 || !InArea(10003, 1028402550);
-        area11 &= InArea(10004, 1028402570);
-        area12 |= !area11 || !InArea(10004, 1028402550);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1028402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1028402550);
-        nr6pf_area15 &= InArea(10006, 1028402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1028402550);
-        nr6pf_area17 &= InArea(10007, 1028402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1028402550);
-    }
-L1:
-    area2 &= EntityInRadiusOfEntity(1028402601, entityId, 15, 1);
-    if (area2) {
-        area7 &= InArea(10002, 1028402570);
-        area8 |= !area7 || !InArea(10002, 1028402551);
-        area9 &= InArea(10003, 1028402570);
-        area10 |= !area9 || !InArea(10003, 1028402551);
-        area11 &= InArea(10004, 1028402570);
-        area12 |= !area11 || !InArea(10004, 1028402551);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1028402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1028402551);
-        nr6pf_area15 &= InArea(10006, 1028402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1028402551);
-        nr6pf_area17 &= InArea(10007, 1028402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1028402551);
-    }
-L2:
-    area3 &= EntityInRadiusOfEntity(1028402602, entityId, 15, 1);
-    if (area3) {
-        area7 &= InArea(10002, 1028402570);
-        area8 |= !area7 || !InArea(10002, 1028402552);
-        area9 &= InArea(10003, 1028402570);
-        area10 |= !area9 || !InArea(10003, 1028402552);
-        area11 &= InArea(10004, 1028402570);
-        area12 |= !area11 || !InArea(10004, 1028402552);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1028402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1028402552);
-        nr6pf_area15 &= InArea(10006, 1028402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1028402552);
-        nr6pf_area17 &= InArea(10007, 1028402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1028402552);
-    }
-L3:
-    area4 &= EntityInRadiusOfEntity(1056402601, entityId, 15, 1);
-    if (area4) {
-        area7 &= InArea(10002, 1056402570);
-        area8 |= !area7 || !InArea(10002, 1056402550);
-        area9 &= InArea(10003, 1056402570);
-        area10 |= !area9 || !InArea(10003, 1056402550);
-        area11 &= InArea(10004, 1056402570);
-        area12 |= !area11 || !InArea(10004, 1056402550);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1056402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1056402550);
-        nr6pf_area15 &= InArea(10006, 1056402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1056402550);
-        nr6pf_area17 &= InArea(10007, 1056402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1056402550);
-    }
-L4:
-    area5 &= EntityInRadiusOfEntity(1056402602, entityId, 15, 1);
-    if (area5) {
-        area7 &= InArea(10002, 1056402570);
-        area8 |= !area7 || !InArea(10002, 1056402551);
-        area9 &= InArea(10003, 1056402570);
-        area10 |= !area9 || !InArea(10003, 1056402551);
-        area11 &= InArea(10004, 1056402570);
-        area12 |= !area11 || !InArea(10004, 1056402551);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1056402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1056402551);
-        nr6pf_area15 &= InArea(10006, 1056402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1056402551);
-        nr6pf_area17 &= InArea(10007, 1056402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1056402551);
-    }
-L5:
-    area6 &= EntityInRadiusOfEntity(1056402603, entityId, 15, 1);
-    if (area6) {
-        area7 &= InArea(10002, 1056402570);
-        area8 |= !area7 || !InArea(10002, 1056402552);
-        area9 &= InArea(10003, 1056402570);
-        area10 |= !area9 || !InArea(10003, 1056402552);
-        area11 &= InArea(10004, 1056402570);
-        area12 |= !area11 || !InArea(10004, 1056402552);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1056402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1056402552);
-        nr6pf_area15 &= InArea(10006, 1056402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1056402552);
-        nr6pf_area17 &= InArea(10007, 1056402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1056402552);
-    }
-L6:
-    area13 = area8 && area10 && area12 && nr6pf_area14 && nr6pf_area16 && nr6pf_area18; // NR6PF: Check extra players
-    areaFlag = area13 || EventFlag(eventFlagId2);
-    WaitFor(areaFlag);
-    SetSpEffect(chrEntityId, 98279);
-    WaitFixedTimeSeconds(0.5);
-    RestartEvent();
-});*/
-
-/*$Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, bossMapCylinder) {
-  // NR6PF: Great Hollow divine towers
-  // Main event - invokes 90015451 for copy effect
-  // I had to completely rewrite the logic for this, because the base game's version utilized a whopping 13 of the 15 AND groups!
-  EndIf(EventFlag(bossDeadFlag));
-  bossHasSpEffect = CharacterRatioHasSpEffect(bossEntityId, 98280, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98281, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98282, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98283, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98284, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98285, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98286, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98287, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98288, NotEqual, 0)
-    || CharacterRatioHasSpEffect(bossEntityId, 98289, NotEqual, 0);
-  if (!bossHasSpEffect) {
-    WaitFor(EventFlag(bossSpawnedFlag));
-    area &= EntityInRadiusOfEntity(1028402600, bossMapCylinder, 15, 1);
-    if (area) {
-      $InitializeEvent(0, 90015451, 10002, bossEntityId, 1028402550);
-      $InitializeEvent(1, 90015451, 10003, bossEntityId, 1028402550);
-      $InitializeEvent(2, 90015451, 10004, bossEntityId, 1028402550);
-      $InitializeEvent(3, 90015451, 10005, bossEntityId, 1028402550);
-      $InitializeEvent(4, 90015451, 10006, bossEntityId, 1028402550);
-      $InitializeEvent(5, 90015451, 10007, bossEntityId, 1028402550);
-    }
-    area2 &= EntityInRadiusOfEntity(1028402601, bossMapCylinder, 15, 1);
-    if (area2) {
-      $InitializeEvent(0, 90015451, 10002, bossEntityId, 1028402551);
-      $InitializeEvent(1, 90015451, 10003, bossEntityId, 1028402551);
-      $InitializeEvent(2, 90015451, 10004, bossEntityId, 1028402551);
-      $InitializeEvent(3, 90015451, 10005, bossEntityId, 1028402551);
-      $InitializeEvent(4, 90015451, 10006, bossEntityId, 1028402551);
-      $InitializeEvent(5, 90015451, 10007, bossEntityId, 1028402551);
-    }
-    area3 &= EntityInRadiusOfEntity(1028402602, bossMapCylinder, 15, 1);
-    if (area3) {
-      $InitializeEvent(0, 90015451, 10002, bossEntityId, 1028402552);
-      $InitializeEvent(1, 90015451, 10003, bossEntityId, 1028402552);
-      $InitializeEvent(2, 90015451, 10004, bossEntityId, 1028402552);
-      $InitializeEvent(3, 90015451, 10005, bossEntityId, 1028402552);
-      $InitializeEvent(4, 90015451, 10006, bossEntityId, 1028402552);
-      $InitializeEvent(5, 90015451, 10007, bossEntityId, 1028402552);
-    }
-    area4 &= EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
-    if (area4) {
-      $InitializeEvent(0, 90015451, 10002, bossEntityId, 1056402550);
-      $InitializeEvent(1, 90015451, 10003, bossEntityId, 1056402550);
-      $InitializeEvent(2, 90015451, 10004, bossEntityId, 1056402550);
-      $InitializeEvent(3, 90015451, 10005, bossEntityId, 1056402550);
-      $InitializeEvent(4, 90015451, 10006, bossEntityId, 1056402550);
-      $InitializeEvent(5, 90015451, 10007, bossEntityId, 1056402550);
-    }
-    area5 &= EntityInRadiusOfEntity(1056402602, bossMapCylinder, 15, 1);
-    if (area5) {
-      $InitializeEvent(0, 90015451, 10002, bossEntityId, 1056402551);
-      $InitializeEvent(1, 90015451, 10003, bossEntityId, 1056402551);
-      $InitializeEvent(2, 90015451, 10004, bossEntityId, 1056402551);
-      $InitializeEvent(3, 90015451, 10005, bossEntityId, 1056402551);
-      $InitializeEvent(4, 90015451, 10006, bossEntityId, 1056402551);
-      $InitializeEvent(5, 90015451, 10007, bossEntityId, 1056402551);
-    }
-    area6 &= EntityInRadiusOfEntity(1056402603, bossMapCylinder, 15, 1);
-    if (area6) {
-      $InitializeEvent(0, 90015451, 10002, bossEntityId, 1056402552);
-      $InitializeEvent(1, 90015451, 10003, bossEntityId, 1056402552);
-      $InitializeEvent(2, 90015451, 10004, bossEntityId, 1056402552);
-      $InitializeEvent(3, 90015451, 10005, bossEntityId, 1056402552);
-      $InitializeEvent(4, 90015451, 10006, bossEntityId, 1056402552);
-      $InitializeEvent(5, 90015451, 10007, bossEntityId, 1056402552);
-    }
-  }
-L0:
-  WaitFixedTimeSeconds(0.5);
-  // game does area &= again with the same exact check, pointless
-    if (area) {
-        area7 &= InArea(10002, 1028402570);
-        area8 |= !area7 || !InArea(10002, 1028402550);
-        area9 &= InArea(10003, 1028402570);
-        area10 |= !area9 || !InArea(10003, 1028402550);
-        area11 &= InArea(10004, 1028402570);
-        area12 |= !area11 || !InArea(10004, 1028402550);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1028402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1028402550);
-        nr6pf_area15 &= InArea(10006, 1028402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1028402550);
-        nr6pf_area17 &= InArea(10007, 1028402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1028402550);
-    }
-L1:
-    if (area2) {
-        area7 &= InArea(10002, 1028402570);
-        area8 |= !area7 || !InArea(10002, 1028402551);
-        area9 &= InArea(10003, 1028402570);
-        area10 |= !area9 || !InArea(10003, 1028402551);
-        area11 &= InArea(10004, 1028402570);
-        area12 |= !area11 || !InArea(10004, 1028402551);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1028402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1028402551);
-        nr6pf_area15 &= InArea(10006, 1028402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1028402551);
-        nr6pf_area17 &= InArea(10007, 1028402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1028402551);
-    }
-L2:
-    if (area3) {
-        area7 &= InArea(10002, 1028402570);
-        area8 |= !area7 || !InArea(10002, 1028402552);
-        area9 &= InArea(10003, 1028402570);
-        area10 |= !area9 || !InArea(10003, 1028402552);
-        area11 &= InArea(10004, 1028402570);
-        area12 |= !area11 || !InArea(10004, 1028402552);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1028402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1028402552);
-        nr6pf_area15 &= InArea(10006, 1028402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1028402552);
-        nr6pf_area17 &= InArea(10007, 1028402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1028402552);
-    }
-L3:
-    if (area4) {
-        area7 &= InArea(10002, 1056402570);
-        area8 |= !area7 || !InArea(10002, 1056402550);
-        area9 &= InArea(10003, 1056402570);
-        area10 |= !area9 || !InArea(10003, 1056402550);
-        area11 &= InArea(10004, 1056402570);
-        area12 |= !area11 || !InArea(10004, 1056402550);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1056402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1056402550);
-        nr6pf_area15 &= InArea(10006, 1056402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1056402550);
-        nr6pf_area17 &= InArea(10007, 1056402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1056402550);
-    }
-L4:
-    if (area5) {
-        area7 &= InArea(10002, 1056402570);
-        area8 |= !area7 || !InArea(10002, 1056402551);
-        area9 &= InArea(10003, 1056402570);
-        area10 |= !area9 || !InArea(10003, 1056402551);
-        area11 &= InArea(10004, 1056402570);
-        area12 |= !area11 || !InArea(10004, 1056402551);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1056402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1056402551);
-        nr6pf_area15 &= InArea(10006, 1056402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1056402551);
-        nr6pf_area17 &= InArea(10007, 1056402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1056402551);
-    }
-L5:
-    if (area6) {
-        area7 &= InArea(10002, 1056402570);
-        area8 |= !area7 || !InArea(10002, 1056402552);
-        area9 &= InArea(10003, 1056402570);
-        area10 |= !area9 || !InArea(10003, 1056402552);
-        area11 &= InArea(10004, 1056402570);
-        area12 |= !area11 || !InArea(10004, 1056402552);
-        // NR6PF: Check if extra players are InArea
-        nr6pf_area13 &= InArea(10005, 1056402570);
-        nr6pf_area14 |= !nr6pf_area13 || !InArea(10005, 1056402552);
-        nr6pf_area15 &= InArea(10006, 1056402570);
-        nr6pf_area16 |= !nr6pf_area15 || !InArea(10006, 1056402552);
-        nr6pf_area17 &= InArea(10007, 1056402570);
-        nr6pf_area18 |= !nr6pf_area17 || !InArea(10007, 1056402552);
-    }
-L6:
-    area13 = area8 && area10 && area12 && nr6pf_area14 && nr6pf_area16 && nr6pf_area18; // NR6PF: Check extra players
-    areaFlag = area13 || EventFlag(bossDeadFlag);
-    WaitFor(areaFlag);
-    SetSpEffect(bossEntityId, 98279);
-    WaitFixedTimeSeconds(0.5);
-    RestartEvent();
-});
-
-$Event(90015451, Restart, function(playerEntityId, bossEntityId, towerAreaId) {
-  // NR6PF: Great Hollow divine towers
-  // Sub-event to handle copying player effects to the boss
-  // Squashes a TON of event groups to put it in a separate event.
-  condGroup &= InArea(playerEntityId, towerAreaId);
-  playerHasSpEffect = CharacterHasSpEffect(playerEntityId, 98260, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98261, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98262, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98263, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98264, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98265, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98266, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98267, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98268, NotEqual, 0)
-    || CharacterHasSpEffect(playerEntityId, 98269, NotEqual, 0);
-  condGroup &= playerHasSpEffect;
-  if (condGroup) {
-    if (!CharacterHasSpEffect(playerEntityId, 98260, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98280);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98261, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98281);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98262, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98282);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98263, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98283);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98264, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98284);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98265, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98285);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98266, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98286);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98267, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98287);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98268, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98288);
-    }
-    if (!CharacterHasSpEffect(playerEntityId, 98269, Equal, 0)) {
-        SetSpEffect(bossEntityId, 98289);
-    }
-  }
-});*/
-
 
 $Event(90015447, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6) {
     SetNetworkconnectedEventFlagID(eventFlagId4, OFF);
