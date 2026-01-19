@@ -48,12 +48,12 @@ $Event(90015000, Default, function(eventFlagId, chrEntityId, nameId, targetDista
         DisplayBossHealthBar(Enabled, chrEntityId, 1, nameId);
     }
     LinkToBossHealthBar(Enabled, nameId, chrEntityId);
-    chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
     chr2 = CharacterRatioDead(chrEntityId);
@@ -121,12 +121,12 @@ $Event(90015002, Default, function(eventFlagId, eventFlagId2, eventFlagId3, chrE
     if (hp.Passed) {
         WaitFixedTimeSeconds(5);
     } else {
-        chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+        chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
             && !EntityInRadiusOfEntity(20000, chrEntityId, 30, 1);
         area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
         hp2 = CharacterRatioHPValue(chrEntityId) <= 0;
@@ -260,12 +260,12 @@ $Event(90015007, Default, function(eventFlagId, chrEntityId, areaEntityId, targe
         DisplayBossHealthBar(Enabled, chrEntityId, 1, nameId);
     }
     LinkToBossHealthBar(Enabled, nameId, chrEntityId);
-    chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !InArea(20000, areaEntityId)
         && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
@@ -452,8 +452,8 @@ $Event(90015018, Restart, function(eventFlagId, eventFlagId2, bgmBossConvParamId
             WaitFor(EventFlag(eventFlagId));
         }
         WaitFor(
-            ((CharacterHasSpEffect(chrEntityId, spEffectId, GreaterOrEqual, 1)
-                && CharacterRatioHPRatio(chrEntityId, NotEqual, 0) <= targetAmount)
+            (CharacterHasSpEffect(chrEntityId, spEffectId, GreaterOrEqual, 1)
+                && CharacterRatioHPRatio(chrEntityId, NotEqual, 0) <= targetAmount
                 && BossBGMPlaying(bgmBossConvParamId))
                 || EventFlag(eventFlagId2));
         EndIf(EventFlag(eventFlagId2));
@@ -525,12 +525,12 @@ $Event(90015021, Default, function(eventFlagId, chrEntityId, nameId, targetDista
         DisplayBossHealthBar(Enabled, chrEntityId, 1, nameId);
     }
     LinkToBossHealthBar(Enabled, nameId, chrEntityId);
-    chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
     chr2 = CharacterRatioDead(chrEntityId);
@@ -621,12 +621,12 @@ $Event(90015023, Default, function(eventFlagId, targetDistance, eventFlagId2, ch
         Goto(L0);
     }
 L0:
-    chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
     chr2 = CharacterRatioDead(chrEntityId);
@@ -723,12 +723,12 @@ $Event(90015025, Default, function(eventFlagId, eventFlagId2, eventFlagId3, chrE
     if (hp.Passed) {
         WaitFixedTimeSeconds(5);
     } else {
-        chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+        chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
             && !EntityInRadiusOfEntity(20000, chrEntityId, 30, 1);
         area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
         hp2 = CharacterRatioHPValue(chrEntityId) <= 0;
@@ -775,12 +775,12 @@ $Event(90015026, Default, function(eventFlagId, targetDistance, eventFlagId2, ch
     EndIf(chr.Passed);
     DisplayBossHealthBar(Enabled, chrEntityId2, 1, nameId);
     LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-    chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
     chr2 = CharacterRatioDead(chrEntityId);
@@ -840,12 +840,12 @@ $Event(90015030, Restart, function(eventFlagId, chrEntityId, targetDistance, bgm
     }
     SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
     WaitFixedTimeFrames(1);
-    chrArea = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
     chr2 = CharacterRatioDead(chrEntityId);
@@ -905,12 +905,12 @@ $Event(90015031, Default, function(eventFlagId, chrEntityId, areaEntityId, targe
     }
     SetBossBGM(bgmBossConvParamId, BossBGMState.Start);
     WaitFixedTimeFrames(1);
-    chrArea = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !InArea(20000, areaEntityId)
         && !EntityInRadiusOfEntity(20000, chrEntityId, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
@@ -1540,12 +1540,12 @@ $Event(90015301, Default, function(chrEntityId, eventFlagId, eventFlagId2, event
     if (flagCmp.Passed) {
         WaitFixedTimeSeconds(1);
     } else {
-        chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+        chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
             && !EntityInRadiusOfEntity(20000, chrEntityId, 30, 1);
         area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
         flagCmp2 = EventFlag(eventFlagId3) && (value == 1 || EventFlag(eventFlagId4));
@@ -1686,13 +1686,13 @@ $Event(90015401, Restart, function(chrEntityId, eventFlagId, eventFlagId2, event
         }
 L0:
         chrArea = CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
-            && (!InArea(10002, areaEntityId)
-                && !InArea(10003, areaEntityId)
-                && !InArea(10004, areaEntityId)
-                // NR6PF: Fix... whatever this is, I didn't look. Used in several places.
-                && !InArea(10005, areaEntityId)
-                && !InArea(10006, areaEntityId)
-                && !InArea(10007, areaEntityId));
+            && !InArea(10002, areaEntityId)
+            && !InArea(10003, areaEntityId)
+            && !InArea(10004, areaEntityId)
+            // NR6PF: Fix... whatever this is, I didn't look. Used in several places.
+            && !InArea(10005, areaEntityId)
+            && !InArea(10006, areaEntityId)
+            && !InArea(10007, areaEntityId);
         hp2 = CharacterHPValue(chrEntityId) == 0;
         WaitFor(
             (chrArea || !EventFlag(eventFlagId) || hp2) && CharacterBackreadStatus(chrEntityId));
@@ -1811,12 +1811,12 @@ $Event(90015406, Default, function(eventFlagId, chrEntityId, chrEntityId2, areaE
         DisplayBossHealthBar(Enabled, chrEntityId, 1, nameId);
     }
     LinkToBossHealthBar(Enabled, nameId, chrEntityId2);
-    chrArea2 = (CharacterAIState(chrEntityId2, AIStateType.Recognition, LessOrEqual, 0)
+    chrArea2 = CharacterAIState(chrEntityId2, AIStateType.Recognition, LessOrEqual, 0)
         && CharacterAIState(chrEntityId2, AIStateType.Alert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId2, AIStateType.Combat, LessOrEqual, 0)
         && CharacterAIState(chrEntityId2, AIStateType.PassiveAlert, LessOrEqual, 0)
         && CharacterAIState(chrEntityId2, AIStateType.ActiveAlert, LessOrEqual, 0)
-        && CharacterAIState(chrEntityId2, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+        && CharacterAIState(chrEntityId2, AIStateType.WaitBeforeForget, LessOrEqual, 0)
         && !InArea(20000, areaEntityId)
         && !EntityInRadiusOfEntity(20000, chrEntityId2, targetDistance, 1);
     area = EntityInRadiusOfEntity(20000, chrEntityId2, 100, 1);
@@ -1874,12 +1874,12 @@ $Event(90015407, Default, function(eventFlagId, eventFlagId2, eventFlagId3, chrE
     if (hp.Passed) {
         WaitFixedTimeSeconds(5);
     } else {
-        chrArea2 = (CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
+        chrArea2 = CharacterAIState(chrEntityId, AIStateType.Recognition, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Alert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.Combat, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.PassiveAlert, LessOrEqual, 0)
             && CharacterAIState(chrEntityId, AIStateType.ActiveAlert, LessOrEqual, 0)
-            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0))
+            && CharacterAIState(chrEntityId, AIStateType.WaitBeforeForget, LessOrEqual, 0)
             && !EntityInRadiusOfEntity(20000, chrEntityId, 30, 1);
         area = EntityInRadiusOfEntity(20000, chrEntityId, 100, 1);
         hp2 = CharacterRatioHPValue(chrEntityId) <= 0;
@@ -2041,419 +2041,441 @@ L0:
     RestartEvent();
 });
 
-Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, bossMapCylinder) {
+$Event(90015446, Restart, function(bossEntityId, bossSpawnedFlag, bossDeadFlag, bossMapCylinder) {
     // end if boss is already dead
-    EndIfEventFlag(EventEndType.End, ON, TargetEventFlagType.EventFlag, bossDeadFlag);
+    EndIf(EventFlag(bossDeadFlag));
     // check if boss already has effect, skip to L0
     // renumbered to 08 so I can use 10-15 for player checks contiguously
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98280, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98281, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98282, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98283, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98284, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98285, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98286, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98287, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98288, true, NotEqual, 0);
-    IfCharacterRatioHasSpEffect(OR_08, bossEntityId, 98289, true, NotEqual, 0);
-    GotoIfConditionGroupStateUncompiled(Label.Label0, PASS, OR_08);
-    IfEventFlag(MAIN, ON, TargetEventFlagType.EventFlag, bossSpawnedFlag);
-    IfEntityInoutsideRadiusOfEntity(AND_10, InsideOutsideState.Inside, 1028402600, bossMapCylinder, 15, 1);
-    SkipIfConditionGroupStateUncompiled(6, FAIL, AND_10);
-    // stupid use of AND registers but... gotta use 'em somehow.
-    // store whether player is inside the map volume in one AND per player
-    IfInoutsideArea(AND_01, InsideOutsideState.Inside, 10002, 1028402550, 1);
-    IfInoutsideArea(AND_02, InsideOutsideState.Inside, 10003, 1028402550, 1);
-    IfInoutsideArea(AND_03, InsideOutsideState.Inside, 10004, 1028402550, 1);
-    IfInoutsideArea(AND_04, InsideOutsideState.Inside, 10005, 1028402550, 1);
-    IfInoutsideArea(AND_05, InsideOutsideState.Inside, 10006, 1028402550, 1);
-    IfInoutsideArea(AND_06, InsideOutsideState.Inside, 10007, 1028402550, 1);
-    IfEntityInoutsideRadiusOfEntity(AND_11, InsideOutsideState.Inside, 1028402601, bossMapCylinder, 15, 1);
-    SkipIfConditionGroupStateUncompiled(6, FAIL, AND_11);
-    // stupid use of AND registers but... gotta use 'em somehow.
-    // store whether player is inside the map volume in one AND per player
-    IfInoutsideArea(AND_01, InsideOutsideState.Inside, 10002, 1028402551, 1);
-    IfInoutsideArea(AND_02, InsideOutsideState.Inside, 10003, 1028402551, 1);
-    IfInoutsideArea(AND_03, InsideOutsideState.Inside, 10004, 1028402551, 1);
-    IfInoutsideArea(AND_04, InsideOutsideState.Inside, 10005, 1028402551, 1);
-    IfInoutsideArea(AND_05, InsideOutsideState.Inside, 10006, 1028402551, 1);
-    IfInoutsideArea(AND_06, InsideOutsideState.Inside, 10007, 1028402551, 1);
-    IfEntityInoutsideRadiusOfEntity(AND_12, InsideOutsideState.Inside, 1028402602, bossMapCylinder, 15, 1);
-    SkipIfConditionGroupStateUncompiled(6, FAIL, AND_12);
-    // stupid use of AND registers but... gotta use 'em somehow.
-    // store whether player is inside the map volume in one AND per player
-    IfInoutsideArea(AND_01, InsideOutsideState.Inside, 10002, 1028402552, 1);
-    IfInoutsideArea(AND_02, InsideOutsideState.Inside, 10003, 1028402552, 1);
-    IfInoutsideArea(AND_03, InsideOutsideState.Inside, 10004, 1028402552, 1);
-    IfInoutsideArea(AND_04, InsideOutsideState.Inside, 10005, 1028402552, 1);
-    IfInoutsideArea(AND_05, InsideOutsideState.Inside, 10006, 1028402552, 1);
-    IfInoutsideArea(AND_06, InsideOutsideState.Inside, 10007, 1028402552, 1);
-    IfEntityInoutsideRadiusOfEntity(AND_13, InsideOutsideState.Inside, 1056402601, bossMapCylinder, 15, 1);
-    SkipIfConditionGroupStateUncompiled(6, FAIL, AND_13);
-    // stupid use of AND registers but... gotta use 'em somehow.
-    // store whether player is inside the map volume in one AND per player
-    IfInoutsideArea(AND_01, InsideOutsideState.Inside, 10002, 1056402550, 1);
-    IfInoutsideArea(AND_02, InsideOutsideState.Inside, 10003, 1056402550, 1);
-    IfInoutsideArea(AND_03, InsideOutsideState.Inside, 10004, 1056402550, 1);
-    IfInoutsideArea(AND_04, InsideOutsideState.Inside, 10005, 1056402550, 1);
-    IfInoutsideArea(AND_05, InsideOutsideState.Inside, 10006, 1056402550, 1);
-    IfInoutsideArea(AND_06, InsideOutsideState.Inside, 10007, 1056402550, 1);
-    IfEntityInoutsideRadiusOfEntity(AND_14, InsideOutsideState.Inside, 1056402602, bossMapCylinder, 15, 1);
-    SkipIfConditionGroupStateUncompiled(6, FAIL, AND_14);
-    // stupid use of AND registers but... gotta use 'em somehow.
-    // store whether player is inside the map volume in one AND per player
-    IfInoutsideArea(AND_01, InsideOutsideState.Inside, 10002, 1056402551, 1);
-    IfInoutsideArea(AND_02, InsideOutsideState.Inside, 10003, 1056402551, 1);
-    IfInoutsideArea(AND_03, InsideOutsideState.Inside, 10004, 1056402551, 1);
-    IfInoutsideArea(AND_04, InsideOutsideState.Inside, 10005, 1056402551, 1);
-    IfInoutsideArea(AND_05, InsideOutsideState.Inside, 10006, 1056402551, 1);
-    IfInoutsideArea(AND_06, InsideOutsideState.Inside, 10007, 1056402551, 1);
-    IfEntityInoutsideRadiusOfEntity(AND_15, InsideOutsideState.Inside, 1056402601, bossMapCylinder, 15, 1);
-    SkipIfConditionGroupStateUncompiled(6, FAIL, AND_15);
-    // stupid use of AND registers but... gotta use 'em somehow.
-    // store whether player is inside the map volume in one AND per player
-    IfInoutsideArea(AND_01, InsideOutsideState.Inside, 10002, 1056402552, 1);
-    IfInoutsideArea(AND_02, InsideOutsideState.Inside, 10003, 1056402552, 1);
-    IfInoutsideArea(AND_03, InsideOutsideState.Inside, 10004, 1056402552, 1);
-    IfInoutsideArea(AND_04, InsideOutsideState.Inside, 10005, 1056402552, 1);
-    IfInoutsideArea(AND_05, InsideOutsideState.Inside, 10006, 1056402552, 1);
-    IfInoutsideArea(AND_06, InsideOutsideState.Inside, 10007, 1056402552, 1);
-    // OR group for P1 effects
-    IfCharacterHasSpEffect(OR_01, 10002, 98260, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98261, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98262, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98263, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98264, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98265, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98266, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98267, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98268, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_01, 10002, 98269, true, NotEqual, 0);
-    // AND with if they're in the area
-    IfConditionGroup(AND_01, PASS, OR_01);
-    // OR group for P2 effects
-    IfCharacterHasSpEffect(OR_02, 10003, 98260, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98261, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98262, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98263, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98264, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98265, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98266, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98267, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98268, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_02, 10003, 98269, true, NotEqual, 0);
-    // AND with if they're in the area
-    IfConditionGroup(AND_02, PASS, OR_02);
-    // OR group for P3 effects
-    IfCharacterHasSpEffect(OR_03, 10004, 98260, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98261, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98262, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98263, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98264, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98265, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98266, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98267, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98268, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_03, 10004, 98269, true, NotEqual, 0);
-    // AND with if they're in the area
-    IfConditionGroup(AND_03, PASS, OR_03);
-    // OR group for P4 effects
-    IfCharacterHasSpEffect(OR_04, 10005, 98260, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98261, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98262, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98263, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98264, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98265, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98266, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98267, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98268, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_04, 10005, 98269, true, NotEqual, 0);
-    // AND with if they're in the area
-    IfConditionGroup(AND_04, PASS, OR_04);
-    // OR group for P5 effects
-    IfCharacterHasSpEffect(OR_05, 10006, 98260, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98261, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98262, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98263, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98264, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98265, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98266, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98267, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98268, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_05, 10006, 98269, true, NotEqual, 0);
-    // AND with if they're in the area
-    IfConditionGroup(AND_05, PASS, OR_05);
-    // OR group for P5 effects
-    IfCharacterHasSpEffect(OR_06, 10007, 98260, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98261, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98262, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98263, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98264, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98265, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98266, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98267, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98268, true, NotEqual, 0);
-    IfCharacterHasSpEffect(OR_06, 10007, 98269, true, NotEqual, 0);
-    // AND with if they're in the area
-    IfConditionGroup(AND_06, PASS, OR_06);
-    // OR the groups together
-    IfConditionGroup(OR_07, PASS, AND_01);
-    IfConditionGroup(OR_07, PASS, AND_02);
-    IfConditionGroup(OR_07, PASS, AND_03);
-    IfConditionGroup(OR_07, PASS, AND_04);
-    IfConditionGroup(OR_07, PASS, AND_05);
-    IfConditionGroup(OR_07, PASS, AND_06);
-    // WaitFor any above
-    IfConditionGroup(MAIN, PASS, OR_07);
-    // was it not P1?
-    SkipIfConditionGroupStateCompiled(21, FAIL, AND_01);
-    // if it was P1, copy from P1
-    SkipIfCharacterHasSpEffect(1, 10002, 98260, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98280);
-    SkipIfCharacterHasSpEffect(1, 10002, 98261, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98281);
-    SkipIfCharacterHasSpEffect(1, 10002, 98262, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98282);
-    SkipIfCharacterHasSpEffect(1, 10002, 98263, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98283);
-    SkipIfCharacterHasSpEffect(1, 10002, 98264, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98284);
-    SkipIfCharacterHasSpEffect(1, 10002, 98265, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98285);
-    SkipIfCharacterHasSpEffect(1, 10002, 98266, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98286);
-    SkipIfCharacterHasSpEffect(1, 10002, 98267, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98287);
-    SkipIfCharacterHasSpEffect(1, 10002, 98268, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98288);
-    SkipIfCharacterHasSpEffect(1, 10002, 98269, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98289);
-    GotoUnconditionally(Label.Label0);
-    // was it not P2?
-    SkipIfConditionGroupStateCompiled(21, FAIL, AND_02);
-    // if it was P2, copy from P2
-    SkipIfCharacterHasSpEffect(1, 10003, 98260, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98280);
-    SkipIfCharacterHasSpEffect(1, 10003, 98261, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98281);
-    SkipIfCharacterHasSpEffect(1, 10003, 98262, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98282);
-    SkipIfCharacterHasSpEffect(1, 10003, 98263, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98283);
-    SkipIfCharacterHasSpEffect(1, 10003, 98264, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98284);
-    SkipIfCharacterHasSpEffect(1, 10003, 98265, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98285);
-    SkipIfCharacterHasSpEffect(1, 10003, 98266, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98286);
-    SkipIfCharacterHasSpEffect(1, 10003, 98267, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98287);
-    SkipIfCharacterHasSpEffect(1, 10003, 98268, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98288);
-    SkipIfCharacterHasSpEffect(1, 10003, 98269, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98289);
-    GotoUnconditionally(Label.Label0);
-    // was it not P3?
-    SkipIfConditionGroupStateCompiled(21, FAIL, AND_03);
-    // if it was P3, copy from P3
-    SkipIfCharacterHasSpEffect(1, 10004, 98260, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98280);
-    SkipIfCharacterHasSpEffect(1, 10004, 98261, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98281);
-    SkipIfCharacterHasSpEffect(1, 10004, 98262, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98282);
-    SkipIfCharacterHasSpEffect(1, 10004, 98263, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98283);
-    SkipIfCharacterHasSpEffect(1, 10004, 98264, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98284);
-    SkipIfCharacterHasSpEffect(1, 10004, 98265, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98285);
-    SkipIfCharacterHasSpEffect(1, 10004, 98266, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98286);
-    SkipIfCharacterHasSpEffect(1, 10004, 98267, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98287);
-    SkipIfCharacterHasSpEffect(1, 10004, 98268, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98288);
-    SkipIfCharacterHasSpEffect(1, 10004, 98269, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98289);
-    GotoUnconditionally(Label.Label0);
-    // was it not P4?
-    SkipIfConditionGroupStateCompiled(21, FAIL, AND_04);
-    // if it was P4, copy from P4
-    SkipIfCharacterHasSpEffect(1, 10005, 98260, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98280);
-    SkipIfCharacterHasSpEffect(1, 10005, 98261, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98281);
-    SkipIfCharacterHasSpEffect(1, 10005, 98262, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98282);
-    SkipIfCharacterHasSpEffect(1, 10005, 98263, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98283);
-    SkipIfCharacterHasSpEffect(1, 10005, 98264, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98284);
-    SkipIfCharacterHasSpEffect(1, 10005, 98265, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98285);
-    SkipIfCharacterHasSpEffect(1, 10005, 98266, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98286);
-    SkipIfCharacterHasSpEffect(1, 10005, 98267, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98287);
-    SkipIfCharacterHasSpEffect(1, 10005, 98268, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98288);
-    SkipIfCharacterHasSpEffect(1, 10005, 98269, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98289);
-    GotoUnconditionally(Label.Label0);
-    // was it not P5?
-    SkipIfConditionGroupStateCompiled(21, FAIL, AND_05);
-    // if it was P5, copy from P5
-    SkipIfCharacterHasSpEffect(1, 10006, 98260, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98280);
-    SkipIfCharacterHasSpEffect(1, 10006, 98261, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98281);
-    SkipIfCharacterHasSpEffect(1, 10006, 98262, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98282);
-    SkipIfCharacterHasSpEffect(1, 10006, 98263, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98283);
-    SkipIfCharacterHasSpEffect(1, 10006, 98264, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98284);
-    SkipIfCharacterHasSpEffect(1, 10006, 98265, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98285);
-    SkipIfCharacterHasSpEffect(1, 10006, 98266, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98286);
-    SkipIfCharacterHasSpEffect(1, 10006, 98267, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98287);
-    SkipIfCharacterHasSpEffect(1, 10006, 98268, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98288);
-    SkipIfCharacterHasSpEffect(1, 10006, 98269, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98289);
-    GotoUnconditionally(Label.Label0);
-    // was it not P6?
-    SkipIfConditionGroupStateCompiled(21, FAIL, AND_06);
-    // if it was P6, copy from P6
-    SkipIfCharacterHasSpEffect(1, 10007, 98260, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98280);
-    SkipIfCharacterHasSpEffect(1, 10007, 98261, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98281);
-    SkipIfCharacterHasSpEffect(1, 10007, 98262, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98282);
-    SkipIfCharacterHasSpEffect(1, 10007, 98263, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98283);
-    SkipIfCharacterHasSpEffect(1, 10007, 98264, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98284);
-    SkipIfCharacterHasSpEffect(1, 10007, 98265, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98285);
-    SkipIfCharacterHasSpEffect(1, 10007, 98266, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98286);
-    SkipIfCharacterHasSpEffect(1, 10007, 98267, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98287);
-    SkipIfCharacterHasSpEffect(1, 10007, 98268, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98288);
-    SkipIfCharacterHasSpEffect(1, 10007, 98269, true, Equal, 0);
-    SetSpEffect(bossEntityId, 98289);
-    GotoUnconditionally(Label.Label0);
-    Label0();
+    sp = CharacterRatioHasSpEffect(bossEntityId, 98280, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98281, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98282, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98283, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98284, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98285, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98286, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98287, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98288, NotEqual, 0)
+        || CharacterRatioHasSpEffect(bossEntityId, 98289, NotEqual, 0);
+    if (!sp) {
+        WaitFor(EventFlag(bossSpawnedFlag));
+        area = EntityInRadiusOfEntity(1028402600, bossMapCylinder, 15, 1);
+        if (area) {
+            // stupid use of AND registers but... gotta use 'em somehow.
+            // store whether player is inside the map volume in one AND per player
+            areaSp &= InArea(10002, 1028402550);
+            areaSp2 &= InArea(10003, 1028402550);
+            areaSp3 &= InArea(10004, 1028402550);
+            areaSp4 &= InArea(10005, 1028402550);
+            areaSp5 &= InArea(10006, 1028402550);
+            areaSp6 &= InArea(10007, 1028402550);
+        }
+        area2 = EntityInRadiusOfEntity(1028402601, bossMapCylinder, 15, 1);
+        if (area2) {
+            // stupid use of AND registers but... gotta use 'em somehow.
+            // store whether player is inside the map volume in one AND per player
+            areaSp &= InArea(10002, 1028402551);
+            areaSp2 &= InArea(10003, 1028402551);
+            areaSp3 &= InArea(10004, 1028402551);
+            areaSp4 &= InArea(10005, 1028402551);
+            areaSp5 &= InArea(10006, 1028402551);
+            areaSp6 &= InArea(10007, 1028402551);
+        }
+        area3 = EntityInRadiusOfEntity(1028402602, bossMapCylinder, 15, 1);
+        if (area3) {
+            // stupid use of AND registers but... gotta use 'em somehow.
+            // store whether player is inside the map volume in one AND per player
+            areaSp &= InArea(10002, 1028402552);
+            areaSp2 &= InArea(10003, 1028402552);
+            areaSp3 &= InArea(10004, 1028402552);
+            areaSp4 &= InArea(10005, 1028402552);
+            areaSp5 &= InArea(10006, 1028402552);
+            areaSp6 &= InArea(10007, 1028402552);
+        }
+        area4 = EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
+        if (area4) {
+            // stupid use of AND registers but... gotta use 'em somehow.
+            // store whether player is inside the map volume in one AND per player
+            areaSp &= InArea(10002, 1056402550);
+            areaSp2 &= InArea(10003, 1056402550);
+            areaSp3 &= InArea(10004, 1056402550);
+            areaSp4 &= InArea(10005, 1056402550);
+            areaSp5 &= InArea(10006, 1056402550);
+            areaSp6 &= InArea(10007, 1056402550);
+        }
+        area5 = EntityInRadiusOfEntity(1056402602, bossMapCylinder, 15, 1);
+        if (area5) {
+            // stupid use of AND registers but... gotta use 'em somehow.
+            // store whether player is inside the map volume in one AND per player
+            areaSp &= InArea(10002, 1056402551);
+            areaSp2 &= InArea(10003, 1056402551);
+            areaSp3 &= InArea(10004, 1056402551);
+            areaSp4 &= InArea(10005, 1056402551);
+            areaSp5 &= InArea(10006, 1056402551);
+            areaSp6 &= InArea(10007, 1056402551);
+        }
+        area6 = EntityInRadiusOfEntity(1056402601, bossMapCylinder, 15, 1);
+        if (area6) {
+            // stupid use of AND registers but... gotta use 'em somehow.
+            // store whether player is inside the map volume in one AND per player
+            areaSp &= InArea(10002, 1056402552);
+            areaSp2 &= InArea(10003, 1056402552);
+            areaSp3 &= InArea(10004, 1056402552);
+            areaSp4 &= InArea(10005, 1056402552);
+            areaSp5 &= InArea(10006, 1056402552);
+            areaSp6 &= InArea(10007, 1056402552);
+        }
+        // OR group for P1 effects
+        sp2 = CharacterHasSpEffect(10002, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10002, 98269, NotEqual, 0);
+        // AND with if they're in the area
+        areaSp &= sp2;
+        // OR group for P2 effects
+        sp3 = CharacterHasSpEffect(10003, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10003, 98269, NotEqual, 0);
+        // AND with if they're in the area
+        areaSp2 &= sp3;
+        // OR group for P3 effects
+        sp4 = CharacterHasSpEffect(10004, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10004, 98269, NotEqual, 0);
+        // AND with if they're in the area
+        areaSp3 &= sp4;
+        // OR group for P4 effects
+        sp5 = CharacterHasSpEffect(10005, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10005, 98269, NotEqual, 0);
+        // AND with if they're in the area
+        areaSp4 &= sp5;
+        // OR group for P5 effects
+        sp6 = CharacterHasSpEffect(10006, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10006, 98269, NotEqual, 0);
+        // AND with if they're in the area
+        areaSp5 &= sp6;
+        // OR group for P5 effects
+        sp7 = CharacterHasSpEffect(10007, 98260, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98261, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98262, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98263, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98264, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98265, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98266, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98267, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98268, NotEqual, 0)
+            || CharacterHasSpEffect(10007, 98269, NotEqual, 0);
+        // AND with if they're in the area
+        areaSp6 &= sp7;
+        // OR the groups together
+        areaSp7 = areaSp || areaSp2 || areaSp3 || areaSp4 || areaSp5 || areaSp6;
+        // WaitFor any above
+        WaitFor(areaSp7);
+        // was it not P1?
+        if (areaSp.Passed) {
+            // if it was P1, copy from P1
+            if (!CharacterHasSpEffect(10002, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10002, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10002, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10002, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10002, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10002, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10002, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10002, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10002, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10002, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+        // was it not P2?
+        } else if (areaSp2.Passed) {
+            // if it was P2, copy from P2
+            if (!CharacterHasSpEffect(10003, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10003, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10003, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10003, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10003, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10003, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10003, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10003, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10003, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10003, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+        // was it not P3?
+        } else if (areaSp3.Passed) {
+            // if it was P3, copy from P3
+            if (!CharacterHasSpEffect(10004, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10004, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10004, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10004, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10004, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10004, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10004, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10004, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10004, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10004, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+        // was it not P4?
+        } else if (areaSp4.Passed) {
+            // if it was P4, copy from P4
+            if (!CharacterHasSpEffect(10005, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10005, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10005, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10005, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10005, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10005, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10005, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10005, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10005, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10005, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+        // was it not P5?
+        } else if (areaSp5.Passed) {
+            // if it was P5, copy from P5
+            if (!CharacterHasSpEffect(10006, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10006, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10006, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10006, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10006, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10006, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10006, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10006, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10006, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10006, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+        // was it not P6?
+        } else if (areaSp6.Passed) {
+            // if it was P6, copy from P6
+            if (!CharacterHasSpEffect(10007, 98260, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98280);
+            }
+            if (!CharacterHasSpEffect(10007, 98261, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98281);
+            }
+            if (!CharacterHasSpEffect(10007, 98262, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98282);
+            }
+            if (!CharacterHasSpEffect(10007, 98263, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98283);
+            }
+            if (!CharacterHasSpEffect(10007, 98264, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98284);
+            }
+            if (!CharacterHasSpEffect(10007, 98265, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98285);
+            }
+            if (!CharacterHasSpEffect(10007, 98266, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98286);
+            }
+            if (!CharacterHasSpEffect(10007, 98267, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98287);
+            }
+            if (!CharacterHasSpEffect(10007, 98268, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98288);
+            }
+            if (!CharacterHasSpEffect(10007, 98269, Equal, 0)) {
+                SetSpEffect(bossEntityId, 98289);
+            }
+            Goto(L0);
+        }
+    }
+L0:
     WaitFixedTimeSeconds(0.5);
     // just recheck the old AND groups. no point to make an extra function call.
-    GotoIfConditionGroupStateUncompiled(Label.Label1, FAIL, AND_10);
-    // harvest 3 AND groups by ORing the results directly
-    // previously, this was using an AND group to store whether the player was inside the area
-    // then negating it
-    // then storing that in an OR group
-    // fromsoft why
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402570, 1); // switched to Outside
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402550, 1); // saves 3 AND groups
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1028402570, 1);
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1028402550, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1028402570, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1028402550, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1028402570, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1028402550, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1028402570, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1028402550, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1028402570, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1028402550, 1);
-    Label1();
-    GotoIfConditionGroupStateUncompiled(Label.Label2, FAIL, AND_11);
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402570, 1); // switched to Outside
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402551, 1); // saves 3 AND groups
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1028402570, 1);
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1028402551, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1028402570, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1028402551, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1028402570, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1028402551, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1028402570, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1028402551, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1028402570, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1028402551, 1);
-    Label2();
-    GotoIfConditionGroupStateUncompiled(Label.Label3, FAIL, AND_12);
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402570, 1); // switched to Outside
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1028402552, 1); // saves 3 AND groups
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1028402570, 1);
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1028402552, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1028402570, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1028402552, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1028402570, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1028402552, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1028402570, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1028402552, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1028402570, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1028402552, 1);
-    Label3();
-    GotoIfConditionGroupStateUncompiled(Label.Label4, FAIL, AND_13);
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1056402570, 1); // switched to Outside
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1056402550, 1); // saves 3 AND groups
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1056402570, 1);
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1056402550, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1056402570, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1056402550, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1056402570, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1056402550, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1056402570, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1056402550, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1056402570, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1056402550, 1);
-    Label4();
-    GotoIfConditionGroupStateUncompiled(Label.Label5, FAIL, AND_14);
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1056402570, 1); // switched to Outside
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1056402551, 1); // saves 3 AND groups
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1056402570, 1);
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1056402551, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1056402570, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1056402551, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1056402570, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1056402551, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1056402570, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1056402551, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1056402570, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1056402551, 1);
-    Label5();
-    GotoIfConditionGroupStateUncompiled(Label.Label6, FAIL, AND_15);
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1056402570, 1); // switched to Outside
-    IfInoutsideArea(OR_10, InsideOutsideState.Outside, 10002, 1056402552, 1); // saves 3 AND groups
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1056402570, 1);
-    IfInoutsideArea(OR_11, InsideOutsideState.Outside, 10003, 1056402552, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1056402570, 1);
-    IfInoutsideArea(OR_12, InsideOutsideState.Outside, 10004, 1056402552, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1056402570, 1);
-    IfInoutsideArea(OR_13, InsideOutsideState.Outside, 10005, 1056402552, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1056402570, 1);
-    IfInoutsideArea(OR_14, InsideOutsideState.Outside, 10006, 1056402552, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1056402570, 1);
-    IfInoutsideArea(OR_15, InsideOutsideState.Outside, 10007, 1056402552, 1);
-    Label6();
-    IfConditionGroup(AND_07, PASS, OR_10);
-    IfConditionGroup(AND_07, PASS, OR_11);
-    IfConditionGroup(AND_07, PASS, OR_12);
-    IfConditionGroup(AND_07, PASS, OR_13);
-    IfConditionGroup(AND_07, PASS, OR_14);
-    IfConditionGroup(AND_07, PASS, OR_15);
+    if (area) {
+        // harvest 3 AND groups by ORing the results directly
+        // previously, this was using an AND group to store whether the player was inside the area
+        // then negating it
+        // then storing that in an OR group
+        // fromsoft why
+        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402550); // saves 3 AND groups // switched to Outside
+        area8 |= !InArea(10003, 1028402570) || !InArea(10003, 1028402550);
+        area9 |= !InArea(10004, 1028402570) || !InArea(10004, 1028402550);
+        area10 |= !InArea(10005, 1028402570) || !InArea(10005, 1028402550);
+        area11 |= !InArea(10006, 1028402570) || !InArea(10006, 1028402550);
+        area12 |= !InArea(10007, 1028402570) || !InArea(10007, 1028402550);
+    }
+L1:
+    if (area2) {
+        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402551); // saves 3 AND groups // switched to Outside
+        area8 |= !InArea(10003, 1028402570) || !InArea(10003, 1028402551);
+        area9 |= !InArea(10004, 1028402570) || !InArea(10004, 1028402551);
+        area10 |= !InArea(10005, 1028402570) || !InArea(10005, 1028402551);
+        area11 |= !InArea(10006, 1028402570) || !InArea(10006, 1028402551);
+        area12 |= !InArea(10007, 1028402570) || !InArea(10007, 1028402551);
+    }
+L2:
+    if (area3) {
+        area7 |= !InArea(10002, 1028402570) || !InArea(10002, 1028402552); // saves 3 AND groups // switched to Outside
+        area8 |= !InArea(10003, 1028402570) || !InArea(10003, 1028402552);
+        area9 |= !InArea(10004, 1028402570) || !InArea(10004, 1028402552);
+        area10 |= !InArea(10005, 1028402570) || !InArea(10005, 1028402552);
+        area11 |= !InArea(10006, 1028402570) || !InArea(10006, 1028402552);
+        area12 |= !InArea(10007, 1028402570) || !InArea(10007, 1028402552);
+    }
+L3:
+    if (area4) {
+        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402550); // saves 3 AND groups // switched to Outside
+        area8 |= !InArea(10003, 1056402570) || !InArea(10003, 1056402550);
+        area9 |= !InArea(10004, 1056402570) || !InArea(10004, 1056402550);
+        area10 |= !InArea(10005, 1056402570) || !InArea(10005, 1056402550);
+        area11 |= !InArea(10006, 1056402570) || !InArea(10006, 1056402550);
+        area12 |= !InArea(10007, 1056402570) || !InArea(10007, 1056402550);
+    }
+L4:
+    if (area5) {
+        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402551); // saves 3 AND groups // switched to Outside
+        area8 |= !InArea(10003, 1056402570) || !InArea(10003, 1056402551);
+        area9 |= !InArea(10004, 1056402570) || !InArea(10004, 1056402551);
+        area10 |= !InArea(10005, 1056402570) || !InArea(10005, 1056402551);
+        area11 |= !InArea(10006, 1056402570) || !InArea(10006, 1056402551);
+        area12 |= !InArea(10007, 1056402570) || !InArea(10007, 1056402551);
+    }
+L5:
+    if (area6) {
+        area7 |= !InArea(10002, 1056402570) || !InArea(10002, 1056402552); // saves 3 AND groups // switched to Outside
+        area8 |= !InArea(10003, 1056402570) || !InArea(10003, 1056402552);
+        area9 |= !InArea(10004, 1056402570) || !InArea(10004, 1056402552);
+        area10 |= !InArea(10005, 1056402570) || !InArea(10005, 1056402552);
+        area11 |= !InArea(10006, 1056402570) || !InArea(10006, 1056402552);
+        area12 |= !InArea(10007, 1056402570) || !InArea(10007, 1056402552);
+    }
+L6:
+    area13 = area7 && area8 && area9 && area10 && area11 && area12;
     // I'm literally out of OR groups, but that's okay!
-    IfConditionGroup(OR_09, PASS, AND_07);
-    IfEventFlag(OR_09, ON, TargetEventFlagType.EventFlag, bossDeadFlag);
-    IfConditionGroup(MAIN, PASS, OR_09);
+    areaFlag = area13 || EventFlag(bossDeadFlag);
+    WaitFor(areaFlag);
     SetSpEffect(bossEntityId, 98279);
     WaitFixedTimeSeconds(0.5);
-    EndUnconditionally(EventEndType.Restart);
+    RestartEvent();
 });
 
 /*$Event(90015446, Restart, function(chrEntityId, eventFlagId, eventFlagId2, entityId) {
@@ -4396,12 +4418,12 @@ $Event(90015475, Default, function(entityId, chrEntityId) {
     EndIf(!EventFlag(7604));
     EndIf(chrEntityId == 0);
     WaitFor(
-        ((EntityInRadiusOfEntity(1028402600, entityId, 15, 1)
-            || EntityInRadiusOfEntity(1056402601, entityId, 15, 1))
-            || (EntityInRadiusOfEntity(1028402601, entityId, 15, 1)
-                || EntityInRadiusOfEntity(1056402602, entityId, 15, 1))
-            || (EntityInRadiusOfEntity(1028402602, entityId, 15, 1)
-                || EntityInRadiusOfEntity(1056402603, entityId, 15, 1)))
+        (EntityInRadiusOfEntity(1028402600, entityId, 15, 1)
+            || EntityInRadiusOfEntity(1056402601, entityId, 15, 1)
+            || EntityInRadiusOfEntity(1028402601, entityId, 15, 1)
+            || EntityInRadiusOfEntity(1056402602, entityId, 15, 1)
+            || EntityInRadiusOfEntity(1028402602, entityId, 15, 1)
+            || EntityInRadiusOfEntity(1056402603, entityId, 15, 1))
             && IsPlayMode(2));
     WaitFor(
         !CharacterHasSpEffect(chrEntityId, 98380)
@@ -5483,7 +5505,8 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
     // Morgott
     DisableNetworkSync();
     EndIf(!EventFlag(8075));
-    EndIf(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3 || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6))); // extra flags for players 3-6 are stashed in the Spirit Shelter range
+    EndIf(
+        AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3 || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6))); // extra flags for players 3-6 are stashed in the Spirit Shelter range
     WaitFor(EventFlag(eventFlagId2));
     if (IsPlayerNo(1)) {
         WaitFor(ElapsedSeconds(0));
@@ -5519,10 +5542,10 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
             || (EntityInRadiusOfEntity(10004, chrEntityId, targetDistance, 1)
                 && CharacterBackreadStatus(10004)
                 && CharacterBackreadStatus(chrEntityId))
-            // NR6PF: consider players 4-6
-            || EntityInRadiusOfEntity(10005, chrEntityId, targetDistance, 1)
-            && CharacterBackreadStatus(10005)
-            && CharacterBackreadStatus(chrEntityId))
+            || (EntityInRadiusOfEntity(10005, chrEntityId, targetDistance, 1)
+                // NR6PF: consider players 4-6
+                && CharacterBackreadStatus(10005)
+                && CharacterBackreadStatus(chrEntityId)))
             || (EntityInRadiusOfEntity(10006, chrEntityId, targetDistance, 1)
                 && CharacterBackreadStatus(10006)
                 && CharacterBackreadStatus(chrEntityId))
@@ -5559,7 +5582,9 @@ $Event(90035200, Default, function(chrEntityId, eventFlagId, eventFlagId2, targe
         Goto(L0);
     }
 L0:
-    WaitFor(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6)); // Once again, extra flags for players 3-6 in Spirit Shelter range
+    WaitFor(
+        AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) // Once again, extra flags for players 3-6 in Spirit Shelter range
+            || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
@@ -5568,7 +5593,9 @@ L0:
 $Event(90035201, Default, function(eventFlagId) {
     // Morgott
     EndIf(!EventFlag(8075));
-    EndIf(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6)); // extra flags for players 3-6 are stashed in the Spirit Shelter range
+    EndIf(
+        AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) // extra flags for players 3-6 are stashed in the Spirit Shelter range
+            || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6));
     WaitFor(EventFlag(8060));
     WaitFor(EventFlag(8089) || EventFlag(8061));
     WaitFor(ElapsedFrames(1));
@@ -5604,25 +5631,25 @@ $Event(90035201, Default, function(eventFlagId) {
             }
         }
         // NR6PF: add checks for players 4-6
-        nr6pf_chr4 = CharacterHasTeamType(10005, TeamType.Human)
+        nr6pf_chr = CharacterHasTeamType(10005, TeamType.Human)
             || CharacterHasTeamType(10005, TeamType.WhitePhantom);
-        if (nr6pf_chr4) {
+        if (nr6pf_chr) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
                 SetNetworkconnectedEventFlagID(morgottTargeted.P4, ON);
                 Goto(L0);
             }
         }
-        nr6pf_chr5 = CharacterHasTeamType(10006, TeamType.Human)
+        nr6pf_chr2 = CharacterHasTeamType(10006, TeamType.Human)
             || CharacterHasTeamType(10006, TeamType.WhitePhantom);
-        if (nr6pf_chr5) {
+        if (nr6pf_chr2) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
                 SetNetworkconnectedEventFlagID(morgottTargeted.P5, ON);
                 Goto(L0);
             }
         }
-        nr6pf_chr6 = CharacterHasTeamType(10007, TeamType.Human)
+        nr6pf_chr3 = CharacterHasTeamType(10007, TeamType.Human)
             || CharacterHasTeamType(10007, TeamType.WhitePhantom);
-        if (nr6pf_chr6) {
+        if (nr6pf_chr3) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
                 SetNetworkconnectedEventFlagID(morgottTargeted.P6, ON);
                 Goto(L0);
@@ -5635,17 +5662,19 @@ $Event(90035201, Default, function(eventFlagId) {
         } else if (chr3) {
             SetNetworkconnectedEventFlagID(morgottTargeted.P3, ON);
         // NR6PF: extra conditions for players 4-6
-        } else if (nr6pf_chr4) {
+        } else if (nr6pf_chr) {
             SetNetworkconnectedEventFlagID(morgottTargeted.P4, ON);
-        } else if (nr6pf_chr5) {
+        } else if (nr6pf_chr2) {
             SetNetworkconnectedEventFlagID(morgottTargeted.P5, ON);
-        } else if (nr6pf_chr6) {
+        } else if (nr6pf_chr3) {
             SetNetworkconnectedEventFlagID(morgottTargeted.P6, ON);
             Goto(L0);
         }
     }
 L0:
-    WaitFor(AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6)); // Once again, extra flags for players 3-6 in Spirit Shelter range
+    WaitFor(
+        AnyBatchEventFlags(morgottTargeted.P1, morgottTargeted.P3) // Once again, extra flags for players 3-6 in Spirit Shelter range
+            || AnyBatchEventFlags(morgottTargeted.P4, morgottTargeted.P6));
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     SetNetworkconnectedEventFlagID(8061, ON);
     SetNetworkconnectedEventFlagID(eventFlagId, ON);
@@ -6813,7 +6842,8 @@ L1:
     DisableAsset(assetEntityId);
 });
 
-$Event(90035214, Default, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, nr6pf_eventFlagId5, nr6pf_eventFlagId6, nr6pf_eventFlagId7, eventFlagId4) { // another horrible definition, thanks lily
+$Event(90035214, Default, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, nr6pf_eventFlagId5, nr6pf_eventFlagId6, nr6pf_eventFlagId7, eventFlagId4) {
+    // another horrible definition, thanks lily
     // Maris invasion
     EndIf(!EventFlag(8076));
     EndIf(EventFlag(8062));
@@ -6827,12 +6857,22 @@ $Event(90035214, Default, function(chrEntityId, eventFlagId, eventFlagId2, event
 L0:
     EnableCharacterAI(chrEntityId);
     WaitFor(
-        (EventFlag(eventFlagId) || EventFlag(eventFlagId2) || EventFlag(eventFlagId3)) || EventFlag(nr6pf_eventFlagId5) || EventFlag(nr6pf_eventFlagId6) || EventFlag(nr6pf_eventFlagId7) // NR6PF: Check new flags
+        EventFlag(eventFlagId) // NR6PF: Check new flags
+            || EventFlag(eventFlagId2)
+            || EventFlag(eventFlagId3)
+            || EventFlag(nr6pf_eventFlagId5)
+            || EventFlag(nr6pf_eventFlagId6)
+            || EventFlag(nr6pf_eventFlagId7)
             || EventFlag(8062));
     DisableCharacterAI(chrEntityId);
     EndIf(EventFlag(8062));
     WaitFor(
-        (!EventFlag(eventFlagId) && !EventFlag(eventFlagId2) && !EventFlag(eventFlagId3) && !EventFlag(nr6pf_eventFlagId5) && !EventFlag(nr6pf_eventFlagId6) && !EventFlag(nr6pf_eventFlagId7)) // NR6PF: Check new
+        (!EventFlag(eventFlagId) // NR6PF: Check new
+            && !EventFlag(eventFlagId2)
+            && !EventFlag(eventFlagId3)
+            && !EventFlag(nr6pf_eventFlagId5)
+            && !EventFlag(nr6pf_eventFlagId6)
+            && !EventFlag(nr6pf_eventFlagId7))
             || EventFlag(8062));
     EndIf(EventFlag(8062));
     RestartEvent();
@@ -7432,13 +7472,13 @@ $Event(90035230, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
         EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     }
     EndIf(
-        !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
+        !(!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
             // NR6PF: check extra players
             && !EntityInRadiusOfEntity(entityId, 10005, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10006, targetDistance, 1)
-            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1))
+            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1)
             && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1)
@@ -7651,7 +7691,7 @@ L0:
         // NR6PF: Extra entities functions
         ShootBullet(nr6pf_chrEntityId5, 10005, -1, 201200099, 0, 0, 0);
         ShootBullet(nr6pf_chrEntityId6, 10006, -1, 201200099, 0, 0, 0);
-        ShootBullet(nr6pf_chrEntityId7, 10007, -1, 201200099, 0, 0 ,0);
+        ShootBullet(nr6pf_chrEntityId7, 10007, -1, 201200099, 0, 0, 0);
     }
     EndIf(hp);
     if (IsPlayerNo(1)) {
@@ -7773,7 +7813,7 @@ $Event(90035236, Default, function(chrEntityId, chrEntityId2, eventFlagId, event
     if (CharacterHasSpEffect(10005, 16643)) {
         SetSpEffect(10005, 16644);
     }
-     if (CharacterHasSpEffect(10006, 16643)) {
+    if (CharacterHasSpEffect(10006, 16643)) {
         SetSpEffect(10006, 16644);
     }
     if (CharacterHasSpEffect(10007, 16643)) {
@@ -7877,13 +7917,13 @@ $Event(90035240, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
     EndIf(!time);
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     EndIf(
-        !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
+        !(!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
             // NR6PF: Check if extra players are not too close
             && !EntityInRadiusOfEntity(entityId, 10005, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10006, targetDistance, 1)
-            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1))
+            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1)
             && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1)
@@ -7983,7 +8023,12 @@ $Event(90035243, Default, function(eventFlagId, eventFlagId2, eventFlagId3, even
     EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     WaitFor(EventFlag(8061));
     EndIf(!EventFlag(eventFlagId));
-    flag = EventFlag(eventFlagId2) || EventFlag(eventFlagId3) || EventFlag(eventFlagId4) || EventFlag(nr6pf_eventFlagId5) || EventFlag(nr6pf_eventFlagId6) || EventFlag(nr6pf_eventFlagId7); // NR6PF: Check extra player flag IDs which were added
+    flag = EventFlag(eventFlagId2) // NR6PF: Check extra player flag IDs which were added
+        || EventFlag(eventFlagId3)
+        || EventFlag(eventFlagId4)
+        || EventFlag(nr6pf_eventFlagId5)
+        || EventFlag(nr6pf_eventFlagId6)
+        || EventFlag(nr6pf_eventFlagId7);
     WaitFor(flag || EventFlag(8106) || EventFlag(8062));
     if (flag.Passed) {
         SetNetworkconnectedEventFlagID(8106, ON);
@@ -8406,13 +8451,13 @@ $Event(90035260, Default, function(entityId, eventFlagId, eventFlagId2, targetDi
         EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     }
     EndIf(
-        !((!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
+        !(!EntityInRadiusOfEntity(entityId, 10002, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10003, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10004, targetDistance, 1)
             // NR6PF: Player distance checks for 6 players
             && !EntityInRadiusOfEntity(entityId, 10005, targetDistance, 1)
             && !EntityInRadiusOfEntity(entityId, 10006, targetDistance, 1)
-            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1))
+            && !EntityInRadiusOfEntity(entityId, 10007, targetDistance, 1)
             && (EntityInRadiusOfEntity(entityId, 10002, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10003, targetDistance2, 1)
                 || EntityInRadiusOfEntity(entityId, 10004, targetDistance2, 1)
@@ -8745,7 +8790,7 @@ L6:
     SetSpEffect(20000, 98797); // 36400
     Goto(L7);
 L7:
-/*
+    /*
     Old version of above.
     This wastes 6 condition groups for the sake of readability.
     The new version (above) uses 0.
@@ -10557,16 +10602,22 @@ L10:
         WaitFor(ElapsedSeconds(11));
         // NR6PF: Pairing
         if (EventFlag(eventFlagId)) {
-            areaFlagTime |= InArea(10002, areaEntityId) || !EventFlag(aliveFlags.P1);
-            areaFlagTime |= InArea(10005, areaEntityId) || !EventFlag(aliveFlags.P4);
+            areaFlagTime |= InArea(10002, areaEntityId)
+                || !EventFlag(aliveFlags.P1)
+                || InArea(10005, areaEntityId)
+                || !EventFlag(aliveFlags.P4);
         }
         if (EventFlag(eventFlagId2)) {
-            areaFlagTime |= InArea(10003, areaEntityId) || !EventFlag(aliveFlags.P2);
-            areaFlagTime |= InArea(10006, areaEntityId) || !EventFlag(aliveFlags.P5);
+            areaFlagTime |= InArea(10003, areaEntityId)
+                || !EventFlag(aliveFlags.P2)
+                || InArea(10006, areaEntityId)
+                || !EventFlag(aliveFlags.P5);
         }
         if (EventFlag(eventFlagId3)) {
-            areaFlagTime |= InArea(10004, areaEntityId) || !EventFlag(aliveFlags.P3);
-            areaFlagTime |= InArea(10007, areaEntityId) || !EventFlag(aliveFlags.P6);
+            areaFlagTime |= InArea(10004, areaEntityId)
+                || !EventFlag(aliveFlags.P3)
+                || InArea(10007, areaEntityId)
+                || !EventFlag(aliveFlags.P6);
         }
         areaFlagTime |= ElapsedSeconds(5);
         WaitFor(areaFlagTime);
@@ -15697,8 +15748,8 @@ $Event(90075405, Restart, function(eventFlagId, eventFlagId2, eventFlagId3, even
             && (!(CharacterHasTeamType(10004, TeamType.Human)
                 || CharacterHasTeamType(10004, TeamType.WhitePhantom))
                 || EventFlag(eventFlagId5))
-            // NR6PF: Check extra players for this
             && (!(CharacterHasTeamType(10005, TeamType.Human)
+                // NR6PF: Check extra players for this
                 || CharacterHasTeamType(10005, TeamType.WhitePhantom))
                 || EventFlag(nr6pf_eventFlagId6))
             && (!(CharacterHasTeamType(10006, TeamType.Human)
@@ -17021,7 +17072,7 @@ L0:
         flag |= !EventFlag(nr6pf_eventFlagId10);
     }
     if (EventFlag(nr6pf_eventFlagId11)) {
-        flag |= !EventFlag(nr6pf_eventFlagId12)
+        flag |= !EventFlag(nr6pf_eventFlagId12);
     }
     if (flag) {
         DisplayTextEffectId(8000);
@@ -17566,7 +17617,8 @@ $Event(90075702, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
     LinkToBossHealthBar(Enabled, 907580000, chrEntityId);
 });
 
-$Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, entityId, entityId2, entityId3,/* did this to myself lol*/ nr6pf_entityId5, nr6pf_entityId6, nr6pf_entityId7, entityId4, eventFlagId, eventFlagId2, eventFlagId3) {
+$Event(90075703, Restart, function(chrEntityId, chrEntityId2, chrEntityId3, entityId, entityId2, entityId3, nr6pf_entityId5, nr6pf_entityId6, nr6pf_entityId7, entityId4, eventFlagId, eventFlagId2, eventFlagId3) {
+    /* did this to myself lol*/
     // Heolstor the Nightlord
     if (EventFlag(eventFlagId3)) {
         ForceCharacterDeath(chrEntityId2, false);
@@ -18862,7 +18914,7 @@ L0:
     if (IsPlayerNo(6)) {
         IssueShortWarpRequest(20000, TargetEntityType.Area, nr6pf_entityId7, -1);
         SetCameraAngle(6.5, 19.5); // NR6PF: moved camera angles up here
-    }        
+    }
     // NR6PF: Camera angle changes are up top now
     WaitFor(ElapsedSeconds(3));
     FadeToBlack(0, 1, false, -1);
@@ -19736,7 +19788,8 @@ $Event(90085006, Default, function(missionId, hero, eventFlagId, eventFlagId2, c
     SetSpEffect(chrEntityId, 99840);
     SetSpEffect(chrEntityId2, 0);
     WaitFor(
-        (CharacterHasSpEffect(chrEntityId, 9770) || CharacterHasSpEffect(chrEntityId, 9771))
+        CharacterHasSpEffect(chrEntityId, 9770)
+            || CharacterHasSpEffect(chrEntityId, 9771)
             || EventFlag(eventFlagId));
     ClearSpEffect(chrEntityId, 99840);
     EndIf(EventFlag(eventFlagId));
@@ -21128,7 +21181,8 @@ $Event(90005210, Restart, function(chrEntityId, animationId, animationId2, areaE
         SetCharacterMaphit(chrEntityId, false);
     }
     ForceAnimationPlayback(chrEntityId, animationId, true, false, false);
-    areaChrSp &= (InArea(10000, areaEntityId) && EntityInRadiusOfEntity(10000, chrEntityId, targetDistance, 1))
+    areaChrSp &= InArea(10000, areaEntityId)
+        && EntityInRadiusOfEntity(10000, chrEntityId, targetDistance, 1)
         && CharacterBackreadStatus(chrEntityId)
         && (CharacterHasSpEffect(chrEntityId, 5080) || CharacterHasSpEffect(chrEntityId, 5450));
     if (!(value2 == 0 && value3 == 0 && value4 == 0)) {
@@ -22462,48 +22516,46 @@ S0:
         spFlagTimeArea |= EntityInRadiusOfEntity(10000, chrEntityId, targetDistance, 1);
     }
     WaitFor(spFlagTimeArea);
-    if (!sp.Passed) {
-        if (!flagTime.Passed) {
+    GotoIf(L20, sp.Passed);
+    GotoIf(L19, flagTime.Passed);
 L9:
-            SetEventFlagID(eventFlagId2, ON);
-            if (eventFlagId3 != 0) {
-                SetEventFlagID(eventFlagId3, ON);
-            }
-            if (Signed(dummypolyId) != 0) {
-                IssueShortWarpRequest(10000, TargetEntityType.Character, chrEntityId, dummypolyId);
-            }
-            if (Signed(spEffectId) != -1) {
-                RotateCharacter(10000, chrEntityId, animationId, false);
-            } else {
-                RotateCharacter(10000, chrEntityId, animationId, true);
-            }
-            Goto(L8);
+    SetEventFlagID(eventFlagId2, ON);
+    if (eventFlagId3 != 0) {
+        SetEventFlagID(eventFlagId3, ON);
+    }
+    if (Signed(dummypolyId) != 0) {
+        IssueShortWarpRequest(10000, TargetEntityType.Character, chrEntityId, dummypolyId);
+    }
+    if (Signed(spEffectId) != -1) {
+        RotateCharacter(10000, chrEntityId, animationId, false);
+    } else {
+        RotateCharacter(10000, chrEntityId, animationId, true);
+    }
+    Goto(L8);
 L8:
-            WaitFixedTimeFrames(1);
-            sp2 = !CharacterHasSpEffect(10000, 9900);
-            WaitFor(!EventFlag(eventFlagId) || sp2);
-            if (!sp2.Passed) {
-                if (Signed(animationId2) != -1) {
-                    if (Signed(spEffectId) != -1) {
-                        sp3 = !CharacterHasSpEffect(10000, 9900);
-                        WaitFor(CharacterHasSpEffect(10000, spEffectId) || sp3);
-                        GotoIf(L20, sp3.Passed);
-                    }
-L10:
-                    SetEventFlagID(eventFlagId2, OFF);
-                    ForceAnimationPlayback(10000, animationId2, false, true, false);
-                    RestartEvent();
-                }
-L18:
-                SetEventFlagID(eventFlagId2, OFF);
-                RestartEvent();
+    WaitFixedTimeFrames(1);
+    sp2 = !CharacterHasSpEffect(10000, 9900);
+    WaitFor(!EventFlag(eventFlagId) || sp2);
+    if (!sp2.Passed) {
+        if (Signed(animationId2) != -1) {
+            if (Signed(spEffectId) != -1) {
+                sp3 = !CharacterHasSpEffect(10000, 9900);
+                WaitFor(CharacterHasSpEffect(10000, spEffectId) || sp3);
+                GotoIf(L20, sp3.Passed);
             }
+L10:
+            SetEventFlagID(eventFlagId2, OFF);
+            ForceAnimationPlayback(10000, animationId2, false, true, false);
+            RestartEvent();
         }
-L19:
-        SetEventFlagID(eventFlagId, OFF);
-        ForceAnimationPlayback(10000, 0, false, false, false);
+L18:
+        SetEventFlagID(eventFlagId2, OFF);
         RestartEvent();
     }
+L19:
+    SetEventFlagID(eventFlagId, OFF);
+    ForceAnimationPlayback(10000, 0, false, false, false);
+    RestartEvent();
 L20:
     SetEventFlagID(eventFlagId, OFF);
     SetEventFlagID(eventFlagId2, OFF);
@@ -23315,3 +23367,4 @@ $Event(90005934, Default, function(eventFlagId, tutorialParamId) {
     WaitFor(flag);
     ShowTutorialPopup(tutorialParamId, false, true);
 });
+
