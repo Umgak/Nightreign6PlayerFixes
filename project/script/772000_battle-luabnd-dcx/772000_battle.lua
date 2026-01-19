@@ -1,3 +1,4 @@
+-- Artorias
 RegisterTableGoal(GOAL_Artorius772000_Battle, "Artorius772000_Battle")
 REGISTER_GOAL_NO_SUB_GOAL(GOAL_Artorius772000_Battle, true)
 
