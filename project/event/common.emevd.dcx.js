@@ -6,7 +6,8 @@
 // @linked    [0,82]
 // @version    3.6.2
 // ==/EMEVD==
-import { aliveFlags, ownsRevivalTicket, missionPlayer, balancersFlags } from "./globalFlags";
+
+import { NR6PF_INIT, aliveFlags, ownsRevivalTicket, missionPlayer, balancersFlags } from "./globalFlags";
 
 $Event(0, Default, function() {
     $InitializeEvent(0, 1600);
@@ -766,6 +767,7 @@ $Event(50, Default, function() {
     $InitializeEvent(0, 1903);
     SetEventFlagID(6000, OFF);
     SetEventFlagID(6001, ON);
+    SetEventFlagID(NR6PF_INIT, ON);
     $InitializeEvent(0, 1904);
     $InitializeEvent(0, 1905);
     $InitializeEvent(0, 1906, 550, Weather.Type01);
@@ -3585,4 +3587,3 @@ L2:
     WaitFixedTimeFrames(1);
     RestartEvent();
 });
-

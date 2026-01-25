@@ -1,3 +1,5 @@
+export const NR6PF_INIT = 11007000;
+
 export const aliveFlags = {
   P1: 7005,
   P2: 7006,
