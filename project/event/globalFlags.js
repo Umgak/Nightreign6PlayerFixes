@@ -1,5 +1,7 @@
-export const NR6PF_INIT = 11007000;
+// Flag for communication to Seamless that it can return raw player number/count instead of capping them
+export const NR6PF_NRSC_IPC = 11007000;
 
+// Flags for whether the players are alive
 export const aliveFlags = {
   P1: 7005,
   P2: 7006,
@@ -9,6 +11,7 @@ export const aliveFlags = {
   P6: 11007007
 };
 
+// Flags for whether the players are under the effect of a Wending Grace or the Favor of Nolkateo, the Shrouded City
 export const ownsRevivalTicket = {
   P1: 7010,
   P2: 7011,
@@ -18,6 +21,7 @@ export const ownsRevivalTicket = {
   P6: 11007012
 };
 
+// Flags to track whether players have a mission active
 export const missionPlayer = {
   P1: 7015,
   P2: 7016,
@@ -27,6 +31,7 @@ export const missionPlayer = {
   P6: 7020
 };
 
+// Flags to track which player is targeted by Fell Omen
 export const morgottTargeted = {
   P1: 8085,
   P2: 8086,
@@ -36,6 +41,8 @@ export const morgottTargeted = {
   P6: 11008087
 };
 
+// Flags for Balancers - mostly placeholder
+// I was going to make Balancers raid summon 6 balancers but it was too much work and also unfun
 export const balancersFlags = {
   start: {
     Ins1: 80012,

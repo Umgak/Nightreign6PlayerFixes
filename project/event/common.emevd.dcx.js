@@ -7,9 +7,12 @@
 // @version    3.6.2
 // ==/EMEVD==
 
-import { NR6PF_INIT, aliveFlags, ownsRevivalTicket, missionPlayer, balancersFlags } from "./globalFlags";
+import { NR6PF_NRSC_IPC, aliveFlags, ownsRevivalTicket, missionPlayer, balancersFlags } from "./globalFlags";
 
 $Event(0, Default, function() {
+    if (!MapLoaded(10, 0, 0, 0)) {
+        SetEventFlagID(NR6PF_NRSC_IPC, ON); // communicates to Seamless that I am here and that it is safe to use uncapped player count/numbers
+    }
     $InitializeEvent(0, 1600);
     $InitializeEvent(0, 1601);
     $InitializeEvent(0, 1610);
@@ -391,7 +394,7 @@ S29:
     // NR6PF: Wending Grace/Noklateo blessing
     // Only 2 valid flags in this block that aren't used, then it gets into P1 mission flag. Gotta stash 'em somewhere
 
-    //NR6PF: TEMP: Stashing these flags in 11_00
+    //NR6PF: Stashing these flags in 11_00
     if (IsPlayerNo(1)) {
         $InitializeEvent(0, 1310, ownsRevivalTicket.P1);
     }
@@ -767,7 +770,6 @@ $Event(50, Default, function() {
     $InitializeEvent(0, 1903);
     SetEventFlagID(6000, OFF);
     SetEventFlagID(6001, ON);
-    SetEventFlagID(NR6PF_INIT, ON);
     $InitializeEvent(0, 1904);
     $InitializeEvent(0, 1905);
     $InitializeEvent(0, 1906, 550, Weather.Type01);
@@ -1374,7 +1376,7 @@ $Event(1139, Default, function() {
             DisplayTextEffectId(6090);
         }
         if (EventFlag(8080)) {
-            DisplayTextEffectId(ownsRevivalTicket.P1);
+            DisplayTextEffectId(7010);
         }
         if (EventFlag(8081)) {
             DisplayTextEffectId(7000);
