@@ -9956,7 +9956,7 @@ L0:
 });
 
 $Event(90035284, Default, function(chrEntityId, chrEntityId2, eventFlagId, eventFlagId2, eventFlagId3, eventFlagId4) {
-    // Balancers raid: charm enemies (should only have to change init)
+    // Balancers raid: charm enemies
     EndIf(!EventFlag(8081));
     EndIf(EventFlag(eventFlagId3));
     EndIf(EventFlag(eventFlagId4));
