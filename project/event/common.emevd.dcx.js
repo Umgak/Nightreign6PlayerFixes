@@ -758,7 +758,7 @@ $Event(50, Default, function() {
         $InitializeEvent(0, 1184, 10002, aliveFlags.P1, ownsRevivalTicket.P1);
         $InitializeEvent(1, 1184, 10003, aliveFlags.P2, ownsRevivalTicket.P2);
         $InitializeEvent(2, 1184, 10004, aliveFlags.P3, ownsRevivalTicket.P3);
-        //NR6PF: Again!
+        //NR6PF: Ensures that the alive flags and revival ticket flags are synced.
         $InitializeEvent(3, 1184, 10005, aliveFlags.P4, ownsRevivalTicket.P4);
         $InitializeEvent(4, 1184, 10006, aliveFlags.P5, ownsRevivalTicket.P5);
         $InitializeEvent(5, 1184, 10007, aliveFlags.P6, ownsRevivalTicket.P6);
@@ -1829,7 +1829,7 @@ L2:
                 SetSpEffect(10004, 6999107);
             }
         }
-        // NR6PF: No point duplicating the labels here, they aren't used anywhere in the code atm
+L3:
         // NR6PF: Add Wending Grace and Favor of Noklateo functionality to extra players!
         if (IsPlayerNo(4)) {
             if (CharacterHasSpEffect(10005, 540155)) { // Wending grace held spEffect
@@ -1848,6 +1848,7 @@ L2:
                 SetSpEffect(10005, 6999107);    // 10s 3 ultimate art gauge/sec
             }
         }
+L4:
         if (IsPlayerNo(5)) {
             if (CharacterHasSpEffect(10006, 540155)) { // Wending grace held spEffect
                 cond &= CharacterHasSpEffect(10006, 540157) && InsidePlayArea(10006, 0);    // Dead
@@ -1865,6 +1866,7 @@ L2:
                 SetSpEffect(10006, 6999107);    // 10s 3 ultimate art gauge/sec
             }
         }
+L5:
         if (IsPlayerNo(6)) {
             if (CharacterHasSpEffect(10007, 540155)) { // Wending grace held spEffect
                 cond &= CharacterHasSpEffect(10007, 540157) && InsidePlayArea(10007, 0);    // Dead
@@ -1882,7 +1884,7 @@ L2:
                 SetSpEffect(10007, 6999107);    // 10s 3 ultimate art gauge/sec
             }
         }
-L3:
+L6:
         SaveRequest();
         WaitFor((AnyBatchEventFlags(aliveFlags.P1, aliveFlags.P3) || AnyBatchEventFlags(aliveFlags.P4, aliveFlags.P6)) || ElapsedSeconds(20)); // NR6PF: Check extra I am alive flags
         WaitFixedTimeSeconds(1);
