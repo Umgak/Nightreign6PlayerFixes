@@ -18,6 +18,7 @@ The vanilla scripts repeatedly explicitly reference players 1, 2, and 3, so when
 * Balancers raid event will pair the extra players up with the original players, instead of warping them a million times and black screening them.
 ### Bosses
 * Duke's Dear Freyja night boss applies its slow effect to everyone
+* Gaping Dragon night boss will correctly purge its acid effect when it dies from all players.
 * Divine Beast Dancing Lion can steal heals from anyone, not just players 1-3
 * Gnoster laser beam can target all players
 * Fulghor, Champion of Nightglow should target players 4-6 more consistently when interrupted by them

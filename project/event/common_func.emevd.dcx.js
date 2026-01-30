@@ -2899,20 +2899,19 @@ $Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffec
     WaitFor(EventFlag(eventFlagId));
     GotoIf(L1, IsPlayerCount(1));
     GotoIf(L2, IsPlayerCount(2));
-    GotoIf(L3, IsPlayerCount(3)); // safe to remove, since 3 is the default reward
+    GotoIf(L3, IsPlayerCount(3));
     GotoIf(L4, IsPlayerCount(4));
     GotoIf(L5, IsPlayerCount(5));
     GotoIf(L6, IsPlayerCount(6));
     // some shit went terribly wrong, player count is 0 or something
-    SetSpEffect(20000, spEffectId3); // 3 player reward
-    EndEvent();
+    Goto(L3);
 L1:
     SetSpEffect(20000, spEffectId);
     EndEvent();
 L2:
     SetSpEffect(20000, spEffectId2);
     EndEvent();
-L3: // safe to remove, since 3 is the default above
+L3:
     SetSpEffect(20000, spEffectId3);
     EndEvent();
 L4:
@@ -8076,7 +8075,7 @@ L0:
     // I don't know why
     GotoIf(L1, IsPlayerCount(1));
     GotoIf(L2, IsPlayerCount(2));
-    GotoIf(L3, IsPlayerCount(3)); // safe to remove, since 3 is default
+    GotoIf(L3, IsPlayerCount(3));
     GotoIf(L4, IsPlayerCount(4));
     GotoIf(L5, IsPlayerCount(5));
     GotoIf(L6, IsPlayerCount(6));
@@ -8088,7 +8087,7 @@ L1:
 L2:
     SetSpEffect(20000, 98801); // 67600
     Goto(L7);
-L3: // safe to remove, since 3 is default
+L3:
     SetSpEffect(20000, 98800); // 52000
     Goto(L7);
 L4:
