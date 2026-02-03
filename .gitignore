@@ -2,3 +2,4 @@ oo2core_9_win64.dll
 dist/
 *.luabnd.dcx
 regulation.bin
+regulation.bin.prev

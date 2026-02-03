@@ -628,10 +628,10 @@ $Event(0, Default, function() {
         // This is generators for them
         // P1
         $InitializeCommonEvent(0, 90015012, 19015842, 7511); // activate clone's MP dependent buffs
-        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260); // clone generator
-        $InitializeCommonEvent(0, 99075468, 19010840, 19010453, 113, 19011253, 19000250, 19000263); // Alt clone generator
-        $InitializeCommonEvent(0, 99075467, 19010840, 19010450, 19000260); // clone tracker
-        $InitializeCommonEvent(0, 99075467, 19010840, 19010453, 19000253); // alt clone tracker
+        $InitializeCommonEvent(0, 99075466, 19010840, 10002, 19010450, 110, 19011250, 19000250, 19000260); // generator for Condemned
+        $InitializeCommonEvent(0, 99075468, 19010840, 19010453, 113, 19011253, 19000250, 19000263); // generator for Rioter
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010450, 19000260); // Condemned post-fight disable [broken?]
+        $InitializeCommonEvent(0, 99075467, 19010840, 19010453, 19000253); // Rioter post-fight disable [broken?]
         // P2
         $InitializeCommonEvent(0, 90015012, 19015843, 7511);
         $InitializeCommonEvent(0, 99075466, 19010840, 10003, 19010451, 111, 19011251, 19000251, 19000261);
@@ -644,7 +644,7 @@ $Event(0, Default, function() {
         $InitializeCommonEvent(0, 99075468, 19010840, 19010455, 115, 19011255, 19000252, 19000265);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010452, 19000262);
         $InitializeCommonEvent(0, 99075467, 19010840, 19010455, 19000255);
-        // NR6PF: Clone spawners, with new flags & emitters
+        // NR6PF: Clone spawners, with new flags & generators
         // P4
         $InitializeCommonEvent(0, 90015012, 19015845, 7511);
         $InitializeCommonEvent(0, 99075466, 19010840, 10005, 19010460, 116, 19011350, 19000350, 19000360);

@@ -7,12 +7,35 @@
 // @version    3.6.2
 // ==/EMEVD==
 
-import { NR6PF_NRSC_IPC, aliveFlags, ownsRevivalTicket, missionPlayer, balancersFlags } from "./globalFlags";
+import { NR6PF_NRSC_IPC, NR6PF_INSTALL_CHECK, aliveFlags, ownsRevivalTicket, missionPlayer, balancersFlags } from "./globalFlags";
 
 $Event(0, Default, function() {
     if (!MapLoaded(10, 0, 0, 0)) {
         SetEventFlagID(NR6PF_NRSC_IPC, ON); // communicates to Seamless that I am here and that it is safe to use uncapped player count/numbers
+        // NR6PF: Check that all players have the mod installed. This will show an error message if a player lacks the mod.
+        if (IsPlayerNo(1)) {
+            $InitializeEvent(0, 2000, NR6PF_INSTALL_CHECK.P1);
+        }
+        if (IsPlayerNo(2)) {
+            $InitializeEvent(0, 2000, NR6PF_INSTALL_CHECK.P2);
+        }
+        if (IsPlayerNo(3)) {
+            $InitializeEvent(0, 2000, NR6PF_INSTALL_CHECK.P3);
+        }
+        if (IsPlayerNo(4)) {
+            $InitializeEvent(0, 2000, NR6PF_INSTALL_CHECK.P4);
+        }
+        if (IsPlayerNo(5)) {
+            $InitializeEvent(0, 2000, NR6PF_INSTALL_CHECK.P5);
+        }
+        if (IsPlayerNo(6)) {
+            $InitializeEvent(0, 2000, NR6PF_INSTALL_CHECK.P6);
+        }
     }
+    // NR6PF: Regulation check. This is safe to put in the RTH, it won't 'leak' into the base game
+    $InitializeEvent(0, 2001);
+
+    // vanilla stuff begins here
     $InitializeEvent(0, 1600);
     $InitializeEvent(0, 1601);
     $InitializeEvent(0, 1610);
@@ -378,11 +401,11 @@ S29:
     $InitializeCommonEvent(0, 99075462, 4, 70110, 70112);
     $InitializeCommonEvent(0, 99075462, 5, 70140, 70142);
     $InitializeCommonEvent(0, 99075462, 6, 70170, 70172);
-    // Vanilla: Final setup for clones spawning
+    // Vanilla: OverrideCharacterCreateData
     $InitializeCommonEvent(0, 99075465, 1, 19010450, 19010453, 0, 70000, 70001, 70002, 70003, 70004, 70005, 70006, 70007, 70008, 70009, 70010, 70011, 70012, 70013, 70014, 70015, 70020, 70021, 70022);
     $InitializeCommonEvent(0, 99075465, 2, 19010451, 19010454, 0, 70030, 70031, 70032, 70033, 70034, 70035, 70036, 70037, 70038, 70039, 70040, 70041, 70042, 70043, 70044, 70045, 70050, 70051, 70052);
     $InitializeCommonEvent(0, 99075465, 3, 19010452, 19010455, 0, 70060, 70061, 70062, 70063, 70064, 70065, 70066, 70067, 70068, 70069, 70070, 70071, 70072, 70073, 70074, 70075, 70080, 70081, 70082);
-    // NR6PF: Final setup for clones spawning
+    // NR6PF: OverrideCharacterCreateData
     $InitializeCommonEvent(0, 99075465, 4, 19010460, 19010463, 0, 70090, 70091, 70092, 70093, 70094, 70095, 70096, 70097, 70098, 70099, 70100, 70101, 70102, 70103, 70104, 70105, 70110, 70111, 70112);
     $InitializeCommonEvent(0, 99075465, 5, 19010461, 19010464, 0, 70120, 70121, 70122, 70123, 70124, 70125, 70126, 70127, 70128, 70129, 70130, 70131, 70132, 70133, 70134, 70135, 70140, 70141, 70142);
     $InitializeCommonEvent(0, 99075465, 6, 19010462, 19010465, 0, 70150, 70151, 70152, 70153, 70154, 70155, 70156, 70157, 70158, 70159, 70160, 70161, 70162, 70163, 70164, 70165, 70170, 70171, 70172);
@@ -3590,4 +3613,43 @@ L2:
     WaitFor(!EventFlag(1099002100));
     WaitFixedTimeFrames(1);
     RestartEvent();
+});
+
+// NR6PF: Install check
+// Shows an error message if any player is missing the mod
+$Event(2000, Default, function(eventFlag) {
+    EndIf(HasMultiplayerState(MultiplayerState.Singleplayer)); // we're in single player, pointless to check
+    SetNetworkconnectedEventFlagID(eventFlag, ON);
+    WaitFor(ElapsedSeconds(3));
+    GotoIf(L2, IsPlayerCount(2));
+    GotoIf(L3, IsPlayerCount(3));
+    GotoIf(L4, IsPlayerCount(4));
+    GotoIf(L5, IsPlayerCount(5));
+    GotoIf(L6, IsPlayerCount(6));
+L2:
+    EndIf(AllBatchEventFlags(NR6PF_INSTALL_CHECK.P1, NR6PF_INSTALL_CHECK.P2));
+    Goto(L7);
+L3:
+    EndIf(AllBatchEventFlags(NR6PF_INSTALL_CHECK.P1, NR6PF_INSTALL_CHECK.P3));
+    Goto(L7);
+L4:
+    EndIf(AllBatchEventFlags(NR6PF_INSTALL_CHECK.P1, NR6PF_INSTALL_CHECK.P4));
+    Goto(L7);
+L5:
+    EndIf(AllBatchEventFlags(NR6PF_INSTALL_CHECK.P1, NR6PF_INSTALL_CHECK.P5));
+    Goto(L7);
+L6:
+    EndIf(AllBatchEventFlags(NR6PF_INSTALL_CHECK.P1, NR6PF_INSTALL_CHECK.P6));
+    Goto(L7);
+L7:
+    DisplayFullScreenMessage(7000);
+});
+
+$Event(2001, Default, function() {
+    WaitFor(CharacterBackreadStatus(20000));
+    SetSpEffect(20000, 98400); // nr6pf effect that does nothing
+    if (!CharacterHasSpEffect(20000, 98400)) {
+        DisplayFullScreenMessage(7001);
+    }
+    ClearSpEffect(20000, 98400); // cleanup
 });
