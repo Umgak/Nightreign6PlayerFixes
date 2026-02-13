@@ -779,13 +779,16 @@ $Event(50, Default, function() {
             $InitializeEvent(0, 1182, aliveFlags.P6);
             $InitializeEvent(0, 1183, ownsRevivalTicket.P6, aliveFlags.P6);
         }
-        $InitializeEvent(0, 1184, 10002, aliveFlags.P1, ownsRevivalTicket.P1);
-        $InitializeEvent(1, 1184, 10003, aliveFlags.P2, ownsRevivalTicket.P2);
-        $InitializeEvent(2, 1184, 10004, aliveFlags.P3, ownsRevivalTicket.P3);
-        //NR6PF: Ensures that the alive flags and revival ticket flags are synced.
-        $InitializeEvent(3, 1184, 10005, aliveFlags.P4, ownsRevivalTicket.P4);
-        $InitializeEvent(4, 1184, 10006, aliveFlags.P5, ownsRevivalTicket.P5);
-        $InitializeEvent(5, 1184, 10007, aliveFlags.P6, ownsRevivalTicket.P6);
+        // NR6PF: Casually steal these flags for my own usage too :sip:
+        // Clear out player status when a player disconnects
+        $InitializeEvent(0, 1184, 10002, aliveFlags.P1, ownsRevivalTicket.P1, NR6PF_INSTALL_CHECK.P1);
+        $InitializeEvent(1, 1184, 10003, aliveFlags.P2, ownsRevivalTicket.P2, NR6PF_INSTALL_CHECK.P2);
+        $InitializeEvent(2, 1184, 10004, aliveFlags.P3, ownsRevivalTicket.P3, NR6PF_INSTALL_CHECK.P3);
+        //NR6PF: Clears revival ticket/death flags when a player disconnects
+        $InitializeEvent(3, 1184, 10005, aliveFlags.P4, ownsRevivalTicket.P4, NR6PF_INSTALL_CHECK.P4);
+        $InitializeEvent(4, 1184, 10006, aliveFlags.P5, ownsRevivalTicket.P5, NR6PF_INSTALL_CHECK.P5);
+        $InitializeEvent(5, 1184, 10007, aliveFlags.P6, ownsRevivalTicket.P6, NR6PF_INSTALL_CHECK.P6);
+        
     }
     $InitializeEvent(0, 1188);
     $InitializeEvent(0, 1900);
@@ -2055,7 +2058,8 @@ $Event(1183, Restart, function(eventFlagId, eventFlagId2) {
     RestartEvent();
 });
 
-$Event(1184, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
+// NR6PF: clear the install check flag when the player disconnects
+$Event(1184, Restart, function(chrEntityId, eventFlagId, eventFlagId2, nr6pf_installFlag) {
     WaitFor(
         !(CharacterHasTeamType(chrEntityId, TeamType.Human)
             || CharacterHasTeamType(chrEntityId, TeamType.WhitePhantom)
@@ -2068,6 +2072,7 @@ $Event(1184, Restart, function(chrEntityId, eventFlagId, eventFlagId2) {
     if (PlayerIsInOwnWorld()) {
         SetNetworkconnectedEventFlagID(eventFlagId, OFF);
         SetNetworkconnectedEventFlagID(eventFlagId2, OFF);
+        SetNetworkconnectedEventFlagID(nr6pf_installFlag, OFF);
     }
     RestartEvent();
 });
