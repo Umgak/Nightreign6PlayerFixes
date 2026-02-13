@@ -31,9 +31,10 @@ $Event(0, Default, function() {
         if (IsPlayerNo(6)) {
             $InitializeEvent(0, 2000, NR6PF_INSTALL_CHECK.P6);
         }
+        // NR6PF: Regulation checks
+        $InitializeEvent(0, 2001); // Check, set flag
+        $InitializeEvent(0, 2002); // Show error if flag set
     }
-    // NR6PF: Regulation check. This is safe to put in the RTH, it won't 'leak' into the base game
-    $InitializeEvent(0, 2001);
 
     // vanilla stuff begins here
     $InitializeEvent(0, 1600);
@@ -2436,10 +2437,17 @@ $Event(1308, Restart, function(nr6pf_playerCount, nr6pf_spEffectId) {
     // vanilla code isn't extensible at all
     DisableNetworkSync();
     EndIf(!IsGameMode(2));
-    WaitFor(IsPlayerCount(nr6pf_playerCount) || CharacterHasSpEffect(20000, nr6pf_spEffectId));
+    invalid &= (nr6pf_playerCount > 3) && EventFlag(NR6PF_INSTALL_CHECK.INVALID_REGULATION);
+    EndIf(invalid);
+    apply |= IsPlayerCount(nr6pf_playerCount) || CharacterHasSpEffect(20000, nr6pf_spEffectId) || invalid;
+    WaitFor(apply);
+    GotoIf(cleanup, invalid);
     SetSpEffect(20000, nr6pf_spEffectId);
-    WaitFor(!IsPlayerCount(nr6pf_playerCount) || !CharacterHasSpEffect(20000, nr6pf_spEffectId));
+    remove |= !IsPlayerCount(nr6pf_playerCount) || !CharacterHasSpEffect(20000, nr6pf_spEffectId) || invalid;
+    WaitFor(remove);
+cleanup:
     ClearSpEffect(20000, nr6pf_spEffectId);
+    EndIf(invalid);
     RestartEvent();
 });
 
@@ -3645,11 +3653,21 @@ L7:
     DisplayFullScreenMessage(7000);
 });
 
+// NR6PF: Regulation check
+// Sets an event flag if any player is missing the regulation.bin
 $Event(2001, Default, function() {
     WaitFor(CharacterBackreadStatus(20000));
     SetSpEffect(20000, 98400); // nr6pf effect that does nothing
     if (!CharacterHasSpEffect(20000, 98400)) {
-        DisplayFullScreenMessage(7001);
+        SetNetworkconnectedEventFlagID(NR6PF_INSTALL_CHECK.INVALID_REGULATION, ON);
     }
     ClearSpEffect(20000, 98400); // cleanup
+});
+
+// NR6PF: Regulation check warning message
+// Shows the warning message if regulation.bin is missing
+$Event(2002, Default, function() {
+    WaitFor(ElapsedSeconds(3));
+    EndIf(!EventFlag(NR6PF_INSTALL_CHECK.INVALID_REGULATION));
+    DisplayBlinkingMessage(7001);
 });

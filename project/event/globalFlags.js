@@ -1,14 +1,17 @@
 // Flag for communication to Seamless that it can return raw player number/count instead of capping them
 export const NR6PF_NRSC_IPC = 11007000;
 
-// Flags which check that all current players have the mod installed
+// Data for version check
 export const NR6PF_INSTALL_CHECK = {
-  P1: 11007100,
-  P2: 11007101,
-  P3: 11007102,
-  P4: 11007103,
-  P5: 11007104,
-  P6: 11007105,
+  // Flag which is set if a player fails the regulation.bin check
+  INVALID_REGULATION: 11008100,
+  // Flags which check that all current players have the mod installed
+  P1: 11008101,
+  P2: 11008102,
+  P3: 11008103,
+  P4: 11008104,
+  P5: 11008105,
+  P6: 11008106,
 };
 
 // Flags for whether the players are alive
