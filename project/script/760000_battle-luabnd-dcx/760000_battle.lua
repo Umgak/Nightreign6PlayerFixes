@@ -60,50 +60,50 @@ Goal.Activate = function (self, ai, goal)
     ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 46350)
     ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 46351)
     ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 46352)
-    ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 98450)
-    ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 98451)
-    ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 98452)
+    ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 42190)
+    ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 42191)
+    ai:AddObserveSpecialEffectAttribute(TARGET_SELF, 42192)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 46330)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 46331)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 46332)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 98430) -- NR6PF new param rows
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 98431)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 98432)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 42180) -- NR6PF sneakily reuse rows from Wormface
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 42181)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 42182)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_0, 100240)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 46330)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 46331)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 46332)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 98430) -- NR6PF new param rows
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 98431)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 98432)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 42180) -- NR6PF sneakily reuse rows from Wormface
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 42181)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 42182)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_1, 100240)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 46330)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 46331)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 46332)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 98430) -- NR6PF new param rows
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 98431)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 98432)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 42180) -- NR6PF sneakily reuse rows from Wormface
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 42181)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 42182)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_2, 100240)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 46330) -- NR6PF whole new fuckin characters
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 46331)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 46332)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 98430)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 98431)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 98432)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 42180)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 42181)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 42182)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_3, 100240)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 46330)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 46331)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 46332)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 98430)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 98431)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 98432)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 42180)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 42181)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 42182)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_4, 100240)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 46330)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 46331)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 46332)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 98430)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 98431)
-    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 98432)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 42180)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 42181)
+    ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 42182)
     ai:AddObserveSpecialEffectAttribute(TARGET_ENE_5, 100240)
     ai:SetNumber(NUMBER_ATK_CNT, ai:GetNumber(NUMBER_ATK_CNT) + 1)
     ai:SetNumber(NUMBER_INTRPT_CNT, 0)
@@ -2598,101 +2598,101 @@ Goal.Interrupt = function (self, ai, goal)
                     return true
                 end
             end
-            -- NR6PF: new speffects
-            if ai:HasSpecialEffectId(TARGET_SELF, 98452) and ai:HasSpecialEffectId(TARGET_SELF, 46310) then
-                if ai:HasSpecialEffectId(TARGET_ENE_0, 98432) and ai:HasSpecialEffectId(TARGET_ENE_0, 100240) == false then
+            -- NR6PF: stolen speffects from wormface
+            if ai:HasSpecialEffectId(TARGET_SELF, 42190) and ai:HasSpecialEffectId(TARGET_SELF, 46310) then
+                if ai:HasSpecialEffectId(TARGET_ENE_0, 42180) and ai:HasSpecialEffectId(TARGET_ENE_0, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_0, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_1, 98432) and ai:HasSpecialEffectId(TARGET_ENE_1, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_1, 42180) and ai:HasSpecialEffectId(TARGET_ENE_1, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_1, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_2, 98432) and ai:HasSpecialEffectId(TARGET_ENE_2, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_2, 42180) and ai:HasSpecialEffectId(TARGET_ENE_2, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_2, 999, 180, 180, 180, 180)
                     return true
                 end
                 -- damn you fulghor
-                if ai:HasSpecialEffectId(TARGET_ENE_3, 98432) and ai:HasSpecialEffectId(TARGET_ENE_3, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_3, 42180) and ai:HasSpecialEffectId(TARGET_ENE_3, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_3, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_4, 98432) and ai:HasSpecialEffectId(TARGET_ENE_4, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_4, 42180) and ai:HasSpecialEffectId(TARGET_ENE_4, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_4, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_5, 98432) and ai:HasSpecialEffectId(TARGET_ENE_5, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_5, 42180) and ai:HasSpecialEffectId(TARGET_ENE_5, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_5, 999, 180, 180, 180, 180)
                     return true
                 end
             end
-            if ai:HasSpecialEffectId(TARGET_SELF, 98453) and ai:HasSpecialEffectId(TARGET_SELF, 46310) then
-                if ai:HasSpecialEffectId(TARGET_ENE_0, 98433) and ai:HasSpecialEffectId(TARGET_ENE_0, 100240) == false then
+            if ai:HasSpecialEffectId(TARGET_SELF, 42191) and ai:HasSpecialEffectId(TARGET_SELF, 46310) then
+                if ai:HasSpecialEffectId(TARGET_ENE_0, 42181) and ai:HasSpecialEffectId(TARGET_ENE_0, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_0, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_1, 98433) and ai:HasSpecialEffectId(TARGET_ENE_1, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_1, 42181) and ai:HasSpecialEffectId(TARGET_ENE_1, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_1, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_2, 98433) and ai:HasSpecialEffectId(TARGET_ENE_2, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_2, 42181) and ai:HasSpecialEffectId(TARGET_ENE_2, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_2, 999, 180, 180, 180, 180)
                     return true
                 end
                 -- damn you fulghor
-                if ai:HasSpecialEffectId(TARGET_ENE_3, 98433) and ai:HasSpecialEffectId(TARGET_ENE_3, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_3, 42181) and ai:HasSpecialEffectId(TARGET_ENE_3, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_3, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_4, 98433) and ai:HasSpecialEffectId(TARGET_ENE_4, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_4, 42181) and ai:HasSpecialEffectId(TARGET_ENE_4, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_4, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_5, 98433) and ai:HasSpecialEffectId(TARGET_ENE_5, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_5, 42181) and ai:HasSpecialEffectId(TARGET_ENE_5, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_5, 999, 180, 180, 180, 180)
                     return true
                 end
             end
-            if ai:HasSpecialEffectId(TARGET_SELF, 98453) and ai:HasSpecialEffectId(TARGET_SELF, 46310) then
-                if ai:HasSpecialEffectId(TARGET_ENE_0, 98433) and ai:HasSpecialEffectId(TARGET_ENE_0, 100240) == false then
+            if ai:HasSpecialEffectId(TARGET_SELF, 42192) and ai:HasSpecialEffectId(TARGET_SELF, 46310) then
+                if ai:HasSpecialEffectId(TARGET_ENE_0, 42182) and ai:HasSpecialEffectId(TARGET_ENE_0, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_0, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_1, 98433) and ai:HasSpecialEffectId(TARGET_ENE_1, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_1, 42182) and ai:HasSpecialEffectId(TARGET_ENE_1, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_1, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_2, 98433) and ai:HasSpecialEffectId(TARGET_ENE_2, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_2, 42182) and ai:HasSpecialEffectId(TARGET_ENE_2, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_2, 999, 180, 180, 180, 180)
                     return true
                 end
                 -- damn you fulghor
-                if ai:HasSpecialEffectId(TARGET_ENE_3, 98433) and ai:HasSpecialEffectId(TARGET_ENE_3, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_3, 42182) and ai:HasSpecialEffectId(TARGET_ENE_3, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_3, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_4, 98433) and ai:HasSpecialEffectId(TARGET_ENE_4, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_4, 42182) and ai:HasSpecialEffectId(TARGET_ENE_4, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_4, 999, 180, 180, 180, 180)
                     return true
                 end
-                if ai:HasSpecialEffectId(TARGET_ENE_5, 98433) and ai:HasSpecialEffectId(TARGET_ENE_5, 100240) == false then
+                if ai:HasSpecialEffectId(TARGET_ENE_5, 42182) and ai:HasSpecialEffectId(TARGET_ENE_5, 100240) == false then
                     goal:ClearSubGoal()
                     goal:AddSubGoal(GOAL_COMMON_ComboRepeat, 10, 3020, TARGET_ENE_5, 999, 180, 180, 180, 180)
                     return true

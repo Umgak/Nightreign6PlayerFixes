@@ -7,6 +7,8 @@
 // @version    3.6.2
 // ==/EMEVD==
 
+import { NR6PF_INSTALL_CHECK } from "./globalFlags";
+
 $Event(0, Default, function() {
     $InitializeEvent(0, 19002590);
     if (IsMapVariation(0)) {
@@ -1395,17 +1397,17 @@ $Event(19002862, Restart, function() {
     if (IsPlayerNo(3)) {
         SetSpEffect(20000, 46332);
     }
-    // NR6PF: Appears to be related to AI script
-    // Used by Fulghor to target when he's "Interupted"
-    // New SpEffects are at +52100
+    // NR6PF: Fulghor AI scripts
+    // Wormface has very similar spEffect that are unused, so I just... stole them
+    // it's missing one step in the chain, but that step was unused anyway LOL
     if (IsPlayerNo(4)) {
-        SetSpEffect(20000, 98430);
+        SetSpEffect(20000, 42180);
     }
     if (IsPlayerNo(5)) {
-        SetSpEffect(20000, 98431);
+        SetSpEffect(20000, 42181);
     }
     if (IsPlayerNo(6)) {
-        SetSpEffect(20000, 98432);
+        SetSpEffect(20000, 42182);
     }
 });
 
