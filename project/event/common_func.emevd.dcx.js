@@ -9913,26 +9913,40 @@ L10:
         DisableCharacterAI(chrEntityId);
         WaitFor(ElapsedSeconds(11));
         // NR6PF: Pairing
+        // Check if either ONE of the players is already at their Balancer selected camp, OR BOTH players are dead, and start the raid immediately if so.
         if (EventFlag(eventFlagId)) {
-            areaFlagTime |= InArea(10002, areaEntityId)
-                || !EventFlag(aliveFlags.P1)
-                || InArea(10005, areaEntityId)
-                || !EventFlag(aliveFlags.P4);
+            inArea |= InArea(10002, areaEntityId);
+            isDead &= !EventFlag(aliveFlags.P1);
+            // Oh how I so very wish there was a comparison function for player count that let me check if player count was greater than a value.
+            if (IsPlayerCount(4) || IsPlayerCount(5) || IsPlayerCount(6)) {
+                inArea |= InArea(10005, areaEntityId);
+                isDead &= !EventFlag(aliveFlags.P4);
+            }
+            shouldContinue |= inArea || isDead;
         }
         if (EventFlag(eventFlagId2)) {
-            areaFlagTime |= InArea(10003, areaEntityId)
-                || !EventFlag(aliveFlags.P2)
-                || InArea(10006, areaEntityId)
-                || !EventFlag(aliveFlags.P5);
+            inArea |= InArea(10003, areaEntityId);
+            isDead &= !EventFlag(aliveFlags.P2);
+            // Seriously, I get the devs only used the player count funcs in like 3 places but you'd think this would be a useful feature.
+            if (IsPlayerCount(5) || IsPlayerCount(6)) {
+                inArea |= InArea(10006, areaEntityId);
+                isDead &= !EventFlag(aliveFlags.P5);
+            }
+            shouldContinue |= inArea || isDead;
         }
         if (EventFlag(eventFlagId3)) {
-            areaFlagTime |= InArea(10004, areaEntityId)
-                || !EventFlag(aliveFlags.P3)
-                || InArea(10007, areaEntityId)
-                || !EventFlag(aliveFlags.P6);
+            inArea |= InArea(10004, areaEntityId);
+            isDead &= !EventFlag(aliveFlags.P2);
+            // I could penny pinch condition groups here but I really do not care.
+            // This event barely uses any anyway.
+            if (IsPlayerCount(6)) {
+                inArea |= InArea(10007, areaEntityId);
+                isDead &= !EventFlag(aliveFlags.P6);
+            }
+                shouldContinue |= inArea || isDead;
         }
-        areaFlagTime |= ElapsedSeconds(5);
-        WaitFor(areaFlagTime);
+        shouldContinue |= ElapsedSeconds(5);
+        WaitFor(shouldContinue);
         SetCharacterBackreadState(chrEntityId, false);
         DisableCharacter(chrEntityId);
         DisableCharacterAI(chrEntityId);
