@@ -1,0 +1,43 @@
+{
+  "Name": "msg_kr",
+  "FmgWrappers": [
+    {
+      "Name": "EventTextForMap.fmg",
+      "ID": 34,
+      "Fmg": {
+        "Name": "EventTextForMap.fmg",
+        "Entries": [
+          {
+            "ID": 7000,
+            "Text": "-= NIGHTREIGN 6 PLAYER FIXES ERROR =-\n플레이어 중 한 명이 모드를 설치하지 않은 것으로 감지되었습니다.\n이로 인해 심각한 동기화 오류가 발생할 수 있습니다.\n지금 세션을 종료하는 것이 좋습니다.\n게임을 시작하기 전에 모든 플레이어가 모드를 설치했는지 확인하십시오."
+          },
+          {
+            "ID": 7001,
+            "Text": "NR6PF: 한 명 이상의 플레이어에게 호환되지 않는 regulation.bin 파일이 있습니다.\n사용자 지정 룬 크기 조정 기능이 비활성화되었습니다."
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    },
+    {
+      "Name": "CL_MenuText.fmg",
+      "ID": 200,
+      "Fmg": {
+        "Name": "CL_MenuText.fmg",
+        "Entries": [
+          {
+            "ID": 401320,
+            "Text": "Nightreign 6 Player Fixes v1.1.0 by Lily | App Ver."
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    }
+  ]
+}

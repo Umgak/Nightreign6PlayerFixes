@@ -1,0 +1,43 @@
+{
+  "Name": "msg_ja",
+  "FmgWrappers": [
+    {
+      "Name": "EventTextForMap.fmg",
+      "ID": 34,
+      "Fmg": {
+        "Name": "EventTextForMap.fmg",
+        "Entries": [
+          {
+            "ID": 7000,
+            "Text": "-= NIGHTREIGN 6 PLAYER FIXES ERROR =-\nプレイヤーがMODをインストールしていないことが検出されました。\nこれにより、大規模な同期ずれが発生します。\n今すぐセッションを終了することをお勧めします。\nプレイする前に、すべてのプレイヤーがMODをインストールしていることを確認してください。"
+          },
+          {
+            "ID": 7001,
+            "Text": "NR6PF: 1 人以上のプレイヤーが互換性のないregulation.bin を使用しています。\nカスタムルーンスケーリングは無効になっています。"
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    },
+    {
+      "Name": "CL_MenuText.fmg",
+      "ID": 200,
+      "Fmg": {
+        "Name": "CL_MenuText.fmg",
+        "Entries": [
+          {
+            "ID": 401320,
+            "Text": "Nightreign 6 Player Fixes v1.1.0 by Lily | App Ver."
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    }
+  ]
+}

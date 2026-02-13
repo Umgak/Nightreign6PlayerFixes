@@ -1,0 +1,43 @@
+{
+  "Name": "msg_ar",
+  "FmgWrappers": [
+    {
+      "Name": "EventTextForMap.fmg",
+      "ID": 34,
+      "Fmg": {
+        "Name": "EventTextForMap.fmg",
+        "Entries": [
+          {
+            "ID": 7000,
+            "Text": "-= NIGHTREIGN 6 PLAYER FIXES ERROR =-\nتم رصد لاعب لا يملك التعديل المثبت.\nسيؤدي هذا إلى خلل كبير في مزامنة البيانات.\nيُنصح بإنهاء الجلسة الآن.\nيرجى التأكد من تثبيت التعديل لدى جميع اللاعبين قبل بدء اللعب."
+          },
+          {
+            "ID": 7001,
+            "Text": "NR6PF: يوجد لدى لاعب واحد أو أكثر ملف regulation.bin غير متوافق.\nتم تعطيل خاصية تغيير حجم الرون المخصص."
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    },
+    {
+      "Name": "CL_MenuText.fmg",
+      "ID": 200,
+      "Fmg": {
+        "Name": "CL_MenuText.fmg",
+        "Entries": [
+          {
+            "ID": 401320,
+            "Text": "Nightreign 6 Player Fixes v1.1.0 by Lily | ﻧﺳﺧﺔ اﻟﺗﻁﺑﻳﻖ"
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    }
+  ]
+}

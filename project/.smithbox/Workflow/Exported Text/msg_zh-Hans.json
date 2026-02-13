@@ -1,0 +1,43 @@
+{
+  "Name": "msg_zh-Hans",
+  "FmgWrappers": [
+    {
+      "Name": "EventTextForMap.fmg",
+      "ID": 34,
+      "Fmg": {
+        "Name": "EventTextForMap.fmg",
+        "Entries": [
+          {
+            "ID": 7000,
+            "Text": "-= NIGHTREIGN 6 PLAYER FIXES ERROR =-\n检测到一名玩家未安装模组。\n这将导致严重的同步问题。\n建议立即结束游戏。\n请确保所有玩家在游戏前都已安装模组。"
+          },
+          {
+            "ID": 7001,
+            "Text": "NR6PF: 一个或多个玩家的 regulation.bin 文件不兼容。\n自定义符文缩放已禁用。"
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    },
+    {
+      "Name": "CL_MenuText.fmg",
+      "ID": 200,
+      "Fmg": {
+        "Name": "CL_MenuText.fmg",
+        "Entries": [
+          {
+            "ID": 401320,
+            "Text": "Nightreign 6 Player Fixes v1.1.0 by Lily | 应用版本"
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    }
+  ]
+}

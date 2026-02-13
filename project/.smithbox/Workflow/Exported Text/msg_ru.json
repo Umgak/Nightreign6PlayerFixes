@@ -1,0 +1,43 @@
+{
+  "Name": "msg_ru",
+  "FmgWrappers": [
+    {
+      "Name": "EventTextForMap.fmg",
+      "ID": 34,
+      "Fmg": {
+        "Name": "EventTextForMap.fmg",
+        "Entries": [
+          {
+            "ID": 7000,
+            "Text": "-= NIGHTREIGN 6 PLAYER FIXES ERROR =-\nОбнаружено, что у одного из игроков не установлен мод.\nЭто приведет к сильной рассинхронизации.\nРекомендуется завершить сессию сейчас.\nПожалуйста, убедитесь, что у всех игроков установлен мод, прежде чем начинать игру."
+          },
+          {
+            "ID": 7001,
+            "Text": "NR6PF: У одного или нескольких игроков обнаружен несовместимый файл regulation.bin.\nМасштабирование пользовательских рун отключено."
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    },
+    {
+      "Name": "CL_MenuText.fmg",
+      "ID": 200,
+      "Fmg": {
+        "Name": "CL_MenuText.fmg",
+        "Entries": [
+          {
+            "ID": 401320,
+            "Text": "Nightreign 6 Player Fixes v1.1.0 by Lily | Версия приложения"
+          }
+        ],
+        "Version": 2,
+        "BigEndian": false,
+        "Unicode": true,
+        "Compression": 1
+      }
+    }
+  ]
+}
