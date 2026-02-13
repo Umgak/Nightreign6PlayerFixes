@@ -7,7 +7,7 @@
 // @version    3.6.2
 // ==/EMEVD==
 
-import { aliveFlags, missionPlayer, morgottTargeted, balancersFlags } from "./globalFlags";
+import { NR6PF_INSTALL_CHECK, aliveFlags, missionPlayer, morgottTargeted, balancersFlags } from "./globalFlags";
 
 $Event(90015000, Default, function(eventFlagId, chrEntityId, nameId, targetDistance, bgmBossConvParamId, eventFlagId2) {
     DisableNetworkSync();
@@ -2900,10 +2900,11 @@ $Event(90015469, Restart, function(eventFlagId, spEffectId, spEffectId2, spEffec
     GotoIf(L1, IsPlayerCount(1));
     GotoIf(L2, IsPlayerCount(2));
     GotoIf(L3, IsPlayerCount(3));
+    GotoIf(L3, EventFlag(NR6PF_INSTALL_CHECK.INVALID_REGULATION));
     GotoIf(L4, IsPlayerCount(4));
     GotoIf(L5, IsPlayerCount(5));
     GotoIf(L6, IsPlayerCount(6));
-    // some shit went terribly wrong, player count is 0 or something
+    // player count is something invalid or regulation is disabled, just use 3 player
     Goto(L3);
 L1:
     SetSpEffect(20000, spEffectId);
@@ -8076,10 +8077,11 @@ L0:
     GotoIf(L1, IsPlayerCount(1));
     GotoIf(L2, IsPlayerCount(2));
     GotoIf(L3, IsPlayerCount(3));
+    GotoIf(L3, EventFlag(NR6PF_INSTALL_CHECK.INVALID_REGULATION));
     GotoIf(L4, IsPlayerCount(4));
     GotoIf(L5, IsPlayerCount(5));
     GotoIf(L6, IsPlayerCount(6));
-    // player count is something fucky, just use 3 player
+    // player count is something invalid, just use 3 player
     Goto(L3);
 L1:
     SetSpEffect(20000, 98802); // 78000
