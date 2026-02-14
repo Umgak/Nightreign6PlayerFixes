@@ -2067,7 +2067,7 @@ $Event(1184, Restart, function(chrEntityId, eventFlagId, eventFlagId2, nr6pf_ins
             || CharacterHasTeamType(chrEntityId, TeamType.Indiscriminate)
             || CharacterHasTeamType(chrEntityId, TeamType.Unknown77)
             || CharacterHasTeamType(chrEntityId, TeamType.Disabled))
-            && (EventFlag(eventFlagId) || EventFlag(eventFlagId2))
+            && (EventFlag(eventFlagId) || EventFlag(eventFlagId2) || EventFlag(nr6pf_installFlag))
             && PlayerIsInOwnWorld());
     if (PlayerIsInOwnWorld()) {
         SetNetworkconnectedEventFlagID(eventFlagId, OFF);
