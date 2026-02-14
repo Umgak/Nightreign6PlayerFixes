@@ -3633,7 +3633,7 @@ L2:
 $Event(2000, Default, function(eventFlag) {
     EndIf(HasMultiplayerState(MultiplayerState.Singleplayer)); // we're in single player, pointless to check
     SetNetworkconnectedEventFlagID(eventFlag, ON);
-    WaitFor(ElapsedSeconds(3));
+    WaitFor(ElapsedSeconds(1));
     GotoIf(L2, IsPlayerCount(2));
     GotoIf(L3, IsPlayerCount(3));
     GotoIf(L4, IsPlayerCount(4));
@@ -3662,7 +3662,7 @@ L7:
 // Sets an event flag if any player is missing the regulation.bin
 $Event(2001, Default, function() {
     EndIf(HasMultiplayerState(MultiplayerState.Singleplayer)); // there's no point trying to make sure all players have the same setup in singleplayer
-    WaitFor(CharacterBackreadStatus(20000));
+    WaitFor(ElapsedSeconds(1));
     SetSpEffect(20000, 98400); // nr6pf effect that does nothing
     if (!CharacterHasSpEffect(20000, 98400)) {
         SetNetworkconnectedEventFlagID(NR6PF_INSTALL_CHECK.INVALID_REGULATION, ON);
@@ -3674,7 +3674,7 @@ $Event(2001, Default, function() {
 // Shows the warning message if regulation.bin is missing
 $Event(2002, Default, function() {
     EndIf(HasMultiplayerState(MultiplayerState.Singleplayer)); // similarly no point in throwing a warning in singleplayer. assume user has the mod installed.
-    WaitFor(ElapsedSeconds(3));
+    WaitFor(ElapsedSeconds(2) || EventFlag(NR6PF_INSTALL_CHECK.INVALID_REGULATION));
     EndIf(!EventFlag(NR6PF_INSTALL_CHECK.INVALID_REGULATION));
     DisplayBlinkingMessage(7001);
 });
