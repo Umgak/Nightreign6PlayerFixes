@@ -6,12 +6,12 @@ export const NR6PF_INSTALL_CHECK = {
   // Flag which is set if a player fails the regulation.bin check
   INVALID_REGULATION: 11008100,
   // Flags which check that all current players have the mod installed
-  P1: 11008101,
-  P2: 11008102,
-  P3: 11008103,
-  P4: 11008104,
-  P5: 11008105,
-  P6: 11008106,
+  P1: 11008000,
+  P2: 11008001,
+  P3: 11008002,
+  P4: 11008003,
+  P5: 11008004,
+  P6: 11008005,
 };
 
 // Flags for whether the players are alive
