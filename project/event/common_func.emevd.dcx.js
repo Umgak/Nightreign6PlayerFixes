@@ -4917,7 +4917,7 @@ $Event(90035201, Default, function(eventFlagId) {
         EndIf(EventFlag(8061) && !EventFlag(eventFlagId));
     }
     if (PlayerIsInOwnWorld()) {
-        chr |= CharacterHasTeamType(10002, TeamType.Human) // why is this one a bitwise OR assignment instead of a regular assignment, weird game
+        chr |= CharacterHasTeamType(10002, TeamType.Human)
             || CharacterHasTeamType(10002, TeamType.WhitePhantom);
         if (chr) {
             if (EventFlagAndRandomCondition(6001, 0.3)) {
@@ -6543,7 +6543,7 @@ $Event(90035227, Default, function(chrEntityId, chrEntityId2, targetDistance, pl
             area |= EntityInRadiusOfEntity(10007, chrEntityId, targetDistance2, 1);
         }
         spFlagArea &= !area
-            && (CharacterHasSpEffect(51225, -1)
+            && (CharacterHasSpEffect(51225, -1) // lmao
                 || (CharacterHasSpEffect(chrEntityId, 51220)
                     && !EntityInRadiusOfEntity(chrEntityId2, chrEntityId, targetDistance, 1)));
         WaitFor(spFlagArea);
@@ -6555,7 +6555,7 @@ $Event(90035227, Default, function(chrEntityId, chrEntityId2, targetDistance, pl
     }
 L6:
     WaitFor(
-        !CharacterHasSpEffect(chrEntityId2, 32)
+        !CharacterHasSpEffect(chrEntityId2, 32) // Wait for player to not be on hawk
             && !CharacterHasSpEffect(chrEntityId2, 99200)
             && !CharacterHasSpEffect(chrEntityId2, 99201)
             && !CharacterHasSpEffect(chrEntityId2, 102610)
@@ -6611,10 +6611,10 @@ $Event(90035228, Default, function(eventFlagId, entityId, eventFlagId2, eventFla
     RestartEvent();
 });
 
-$Event(90035229, Default, function(eventFlagId, chrEntityId, eventFlagId2, generatorEntityId, chrEntityId2, eventFlagId3, eventFlagId4, eventFlagId5, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, eventFlagId10, eventFlagId11, value) {
-    // TODO: Hell (Gladius invasion)
-    // If I ever figure out how this precisely works, I'll maybe "fix" it.
-    // as-is, this event is a mess and nobody likes it anyway so I don't care.
+$Event(90035229, Default, function(eventFlagId, chrEntityId, eventFlagId2, generatorEntityId, chrEntityId2, eventFlagId3, eventFlagId4, eventFlagId5, nr6pf_eventFlagId1, nr6pf_eventFlagId2, nr6pf_eventFlagId3, eventFlagId6, eventFlagId7, eventFlagId8, eventFlagId9, nr6pf_eventFlagId4, nr6pf_eventFlagId5, nr6pf_eventFlagId6, eventFlagId10, eventFlagId11, value) {
+    // Gladius raid
+    // NR6PF: Had to add 6 extra parameters, since this event is written kinda sillily.
+    // I should probably rewrite this whole thing.
     EndIf(!EventFlag(8077));
     EndIf(EventFlag(8062));
     if (!EventFlag(eventFlagId11)) {
@@ -6625,20 +6625,27 @@ $Event(90035229, Default, function(eventFlagId, chrEntityId, eventFlagId2, gener
                 WaitFor(EventFlag(eventFlagId2));
                 WaitFor(CharacterDead(chrEntityId));
                 if (!EventFlag(eventFlagId6)) {
+                    // Why does each event flag get passed a unique set of event flag IDs if we're just going to
+                    // set only one of them based on which player we currently are?
+                    // That seems silly?
+                    WaitFor(!CharacterBackreadStatus(chrEntityId)); // Don't repeat yourself, fromsoft (previously this was inside each IsPlayerNo block)
                     if (IsPlayerNo(1)) {
-                        WaitFor(!CharacterBackreadStatus(chrEntityId));
                         SetNetworkconnectedEventFlagID(eventFlagId3, ON);
                     } else if (IsPlayerNo(2)) {
-                        WaitFor(!CharacterBackreadStatus(chrEntityId));
                         SetNetworkconnectedEventFlagID(eventFlagId4, ON);
                     } else if (IsPlayerNo(3)) {
-                        WaitFor(!CharacterBackreadStatus(chrEntityId));
                         SetNetworkconnectedEventFlagID(eventFlagId5, ON);
-                        Goto(L0);
+                    // NR6PF: send event flags for :dog:
+                    } else if (IsPlayerNo(4)) {
+                        SetNetworkconnectedEventFlagID(nr6pf_eventFlagId1, ON);
+                    } else if (IsPlayerNo(5)) {
+                        SetNetworkconnectedEventFlagID(nr6pf_eventFlagId2, ON);
+                    } else if (IsPlayerNo(6)) {
+                        SetNetworkconnectedEventFlagID(nr6pf_eventFlagId3, ON);
                     }
 L0:
-                    chrFlag &= (!(CharacterHasTeamType(10002, TeamType.Human)
-                        || CharacterHasTeamType(10002, TeamType.WhitePhantom)
+                    chrFlag &= (!(CharacterHasTeamType(10002, TeamType.Human)   // this is checking that this player slot is populated
+                        || CharacterHasTeamType(10002, TeamType.WhitePhantom)   // could swap this for the "install check" flag, but I don't really care
                         || CharacterHasTeamType(10002, TeamType.Indiscriminate)
                         || CharacterHasTeamType(10002, TeamType.Unknown77)
                         || CharacterHasTeamType(10002, TeamType.Disabled))
@@ -6654,23 +6661,47 @@ L0:
                             || CharacterHasTeamType(10004, TeamType.Indiscriminate)
                             || CharacterHasTeamType(10004, TeamType.Unknown77)
                             || CharacterHasTeamType(10004, TeamType.Disabled))
-                            || EventFlag(eventFlagId5));
+                            || EventFlag(eventFlagId5))
+                        // NR6PF: Check extra player slots active
+                        && (!(CharacterHasTeamType(10005, TeamType.Human)
+                            || CharacterHasTeamType(10005, TeamType.WhitePhantom)
+                            || CharacterHasTeamType(10005, TeamType.Indiscriminate)
+                            || CharacterHasTeamType(10005, TeamType.Unknown77)
+                            || CharacterHasTeamType(10005, TeamType.Disabled))
+                            || EventFlag(nr6pf_eventFlagId1))
+                        && (!(CharacterHasTeamType(10006, TeamType.Human)          
+                            || CharacterHasTeamType(10006, TeamType.WhitePhantom)  
+                            || CharacterHasTeamType(10006, TeamType.Indiscriminate)
+                            || CharacterHasTeamType(10006, TeamType.Unknown77)     
+                            || CharacterHasTeamType(10006, TeamType.Disabled))     
+                            || EventFlag(nr6pf_eventFlagId2))
+                        && (!(CharacterHasTeamType(10006, TeamType.Human)          
+                            || CharacterHasTeamType(10006, TeamType.WhitePhantom)  
+                            || CharacterHasTeamType(10006, TeamType.Indiscriminate)
+                            || CharacterHasTeamType(10006, TeamType.Unknown77)     
+                            || CharacterHasTeamType(10006, TeamType.Disabled))     
+                            || EventFlag(nr6pf_eventFlagId3));
                     WaitFor(chrFlag);
                     SetNetworkconnectedEventFlagID(eventFlagId6, ON);
                 }
             }
 L1:
             InvokeEnemyGenerator(generatorEntityId);
+            WaitFor(!CharacterDead(chrEntityId)); // Once again, don't repeat yourself
             if (IsPlayerNo(1)) {
-                WaitFor(!CharacterDead(chrEntityId));
+
                 SetNetworkconnectedEventFlagID(eventFlagId7, ON);
             } else if (IsPlayerNo(2)) {
-                WaitFor(!CharacterDead(chrEntityId));
                 SetNetworkconnectedEventFlagID(eventFlagId8, ON);
             } else if (IsPlayerNo(3)) {
-                WaitFor(!CharacterDead(chrEntityId));
                 SetNetworkconnectedEventFlagID(eventFlagId9, ON);
-                Goto(L2);
+            // NR6PF Set dog dead flag for extra player slots
+            } else if (IsPlayerNo(4)) {
+                SetNetworkconnectedEventFlagID(nr6pf_eventFlagId4, ON);
+            } else if (IsPlayerNo(5)) {
+                SetNetworkconnectedEventFlagID(nr6pf_eventFlagId5, ON);
+            } else if (IsPlayerNo(6)) {
+                SetNetworkconnectedEventFlagID(nr6pf_eventFlagId6, ON);
             }
 L2:
             DisableCharacter(chrEntityId);
@@ -6691,7 +6722,26 @@ L2:
                     || CharacterHasTeamType(10004, TeamType.Indiscriminate)
                     || CharacterHasTeamType(10004, TeamType.Unknown77)
                     || CharacterHasTeamType(10004, TeamType.Disabled))
-                    || EventFlag(eventFlagId9));
+                    || EventFlag(eventFlagId9))
+                // NR6PF: Check extra player slots active or dog dead
+                && (!(CharacterHasTeamType(10005, TeamType.Human)
+                    || CharacterHasTeamType(10005, TeamType.WhitePhantom)
+                    || CharacterHasTeamType(10005, TeamType.Indiscriminate)
+                    || CharacterHasTeamType(10005, TeamType.Unknown77)
+                    || CharacterHasTeamType(10005, TeamType.Disabled))
+                    || EventFlag(nr6pf_eventFlagId4))
+                && (!(CharacterHasTeamType(10006, TeamType.Human)
+                    || CharacterHasTeamType(10006, TeamType.WhitePhantom)
+                    || CharacterHasTeamType(10006, TeamType.Indiscriminate)
+                    || CharacterHasTeamType(10006, TeamType.Unknown77)
+                    || CharacterHasTeamType(10006, TeamType.Disabled))
+                    || EventFlag(nr6pf_eventFlagId5))
+                && (!(CharacterHasTeamType(10007, TeamType.Human)
+                    || CharacterHasTeamType(10007, TeamType.WhitePhantom)
+                    || CharacterHasTeamType(10007, TeamType.Indiscriminate)
+                    || CharacterHasTeamType(10007, TeamType.Unknown77)
+                    || CharacterHasTeamType(10007, TeamType.Disabled))
+                    || EventFlag(nr6pf_eventFlagId6));
             WaitFor(chrFlag || ElapsedSeconds(5));
             RestartIf(!chrFlag.Passed);
             SetNetworkconnectedEventFlagID(eventFlagId10, ON);
@@ -6738,10 +6788,18 @@ L6:
     SetNetworkconnectedEventFlagID(eventFlagId3, OFF);
     SetNetworkconnectedEventFlagID(eventFlagId4, OFF);
     SetNetworkconnectedEventFlagID(eventFlagId5, OFF);
+    // NR6PF: Clear extra pupper flags
+    SetNetworkconnectedEventFlagID(nr6pf_eventFlagId1, OFF);
+    SetNetworkconnectedEventFlagID(nr6pf_eventFlagId2, OFF);
+    SetNetworkconnectedEventFlagID(nr6pf_eventFlagId3, OFF);
     SetNetworkconnectedEventFlagID(eventFlagId6, OFF);
     SetNetworkconnectedEventFlagID(eventFlagId7, OFF);
     SetNetworkconnectedEventFlagID(eventFlagId8, OFF);
     SetNetworkconnectedEventFlagID(eventFlagId9, OFF);
+    // NR6PF: Clear extra dead dog flags
+    SetNetworkconnectedEventFlagID(nr6pf_eventFlagId4, OFF);
+    SetNetworkconnectedEventFlagID(nr6pf_eventFlagId5, OFF);
+    SetNetworkconnectedEventFlagID(nr6pf_eventFlagId6, OFF);
     SetNetworkconnectedEventFlagID(eventFlagId10, OFF);
     WaitFor(ElapsedSeconds(1));
     RestartEvent();
