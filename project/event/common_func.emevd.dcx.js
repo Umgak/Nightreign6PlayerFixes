@@ -6154,7 +6154,7 @@ L1:
 });
 
 $Event(90035214, Default, function(chrEntityId, eventFlagId, eventFlagId2, eventFlagId3, nr6pf_eventFlagId5, nr6pf_eventFlagId6, nr6pf_eventFlagId7, eventFlagId4) {
-    // another horrible definition, thanks lily
+    // another horrible definition, thanks sayu
     // Maris invasion
     EndIf(!EventFlag(8076));
     EndIf(EventFlag(8062));
