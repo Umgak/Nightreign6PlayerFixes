@@ -1,0 +1,647 @@
+{
+  "Name": "SmallBaseAndSpotDefine",
+  "Entries": [
+    {
+      "ID": 100,
+      "Entries": [
+        "Encounter Setup: Ruins"
+      ]
+    },
+    {
+      "ID": 101,
+      "Entries": [
+        "Encounter Setup: Ruins"
+      ]
+    },
+    {
+      "ID": 102,
+      "Entries": [
+        "Encounter Setup: Ruins"
+      ]
+    },
+    {
+      "ID": 103,
+      "Entries": [
+        "Encounter Setup: Basement"
+      ]
+    },
+    {
+      "ID": 104,
+      "Entries": [
+        "Encounter Setup: Field Boss"
+      ]
+    },
+    {
+      "ID": 105,
+      "Entries": [
+        "Encounter Setup: Field Boss"
+      ]
+    },
+    {
+      "ID": 106,
+      "Entries": [
+        "Encounter Setup: Field Boss"
+      ]
+    },
+    {
+      "ID": 107,
+      "Entries": [
+        "Encounter Setup: Night Horde"
+      ]
+    },
+    {
+      "ID": 108,
+      "Entries": [
+        "Encounter Setup: Night Boss - Day 1"
+      ]
+    },
+    {
+      "ID": 109,
+      "Entries": [
+        "Encounter Setup: Night Boss - Day 2"
+      ]
+    },
+    {
+      "ID": 110,
+      "Entries": [
+        "Encounter Setup: Great Church"
+      ]
+    },
+    {
+      "ID": 111,
+      "Entries": [
+        "Encounter Setup: Fort"
+      ]
+    },
+    {
+      "ID": 112,
+      "Entries": [
+        "Encounter Setup: Great Church"
+      ]
+    },
+    {
+      "ID": 113,
+      "Entries": [
+        "Encounter Setup: Castle"
+      ]
+    },
+    {
+      "ID": 114,
+      "Entries": [
+        "Encounter Setup: Field Boss"
+      ]
+    },
+    {
+      "ID": 200,
+      "Entries": [
+        "Encounter Setup: Sorcerer's Rise"
+      ]
+    },
+    {
+      "ID": 201,
+      "Entries": [
+        "Encounter Setup: Church"
+      ]
+    },
+    {
+      "ID": 202,
+      "Entries": [
+        "Encounter Setup: Maris"
+      ]
+    },
+    {
+      "ID": 203,
+      "Entries": [
+        "Encounter Setup: Small Camp"
+      ]
+    },
+    {
+      "ID": 204,
+      "Entries": [
+        "Encounter Setup: Township"
+      ]
+    },
+    {
+      "ID": 205,
+      "Entries": [
+        "Encounter Setup: Small Camp Caravans"
+      ]
+    },
+    {
+      "ID": 206,
+      "Entries": [
+        "Encounter Setup: Ruined Sorcerer's Rise"
+      ]
+    },
+    {
+      "ID": 207,
+      "Entries": [
+        "Encounter Setup: Fell Omen"
+      ]
+    },
+    {
+      "ID": 208,
+      "Entries": [
+        "Encounter Setup: Small Camp"
+      ]
+    },
+    {
+      "ID": 209,
+      "Entries": [
+        "Encounter Setup: Evergaol"
+      ]
+    },
+    {
+      "ID": 210,
+      "Entries": [
+        "Encounter Setup: Rotted Church"
+      ]
+    },
+    {
+      "ID": 211,
+      "Entries": [
+        "Encounter Setup: Rotted Samll Camp"
+      ]
+    },
+    {
+      "ID": 212,
+      "Entries": [
+        "Encounter Setup: Gnoster"
+      ]
+    },
+    {
+      "ID": 213,
+      "Entries": [
+        "Encounter Setup: Libra"
+      ]
+    },
+    {
+      "ID": 214,
+      "Entries": [
+        "Encounter Setup: Libra (Deal)"
+      ]
+    },
+    {
+      "ID": 215,
+      "Entries": [
+        "Encounter Setup: Evergaol"
+      ]
+    },
+    {
+      "ID": 216,
+      "Entries": [
+        "Encounter Setup: Church"
+      ]
+    },
+    {
+      "ID": 1100,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1101,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1102,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1103,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1104,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1105,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1106,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1107,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1110,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1111,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1112,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1113,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1114,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1115,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1116,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1117,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1118,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1119,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1200,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1201,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1202,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1203,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1204,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1205,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1206,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1207,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1208,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1209,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1210,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1211,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1212,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1213,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1214,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1215,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1216,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1217,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1218,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 1219,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2100,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2101,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2102,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2103,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2104,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2105,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2106,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2107,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2108,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2109,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2110,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2111,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2112,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2113,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2114,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2115,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2116,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2200,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2201,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2202,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2203,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2204,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2205,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2206,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2207,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2208,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2209,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2210,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2211,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2212,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2213,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2214,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2215,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2216,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2217,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2218,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 2219,
+      "Entries": [
+        ""
+      ]
+    }
+  ]
+}

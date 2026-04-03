@@ -1,0 +1,71 @@
+{
+  "Name": "SmallBaseEnemyLotMapCombinationParam",
+  "Entries": [
+    {
+      "ID": 0,
+      "Entries": [
+        "Blank"
+      ]
+    },
+    {
+      "ID": 20601,
+      "Entries": [
+        "Evergaol"
+      ]
+    },
+    {
+      "ID": 20602,
+      "Entries": [
+        "Evergaol"
+      ]
+    },
+    {
+      "ID": 20603,
+      "Entries": [
+        "Evergaol"
+      ]
+    },
+    {
+      "ID": 20604,
+      "Entries": [
+        "Evergaol"
+      ]
+    },
+    {
+      "ID": 20605,
+      "Entries": [
+        "Evergaol"
+      ]
+    },
+    {
+      "ID": 120601,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 120602,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 120603,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 120604,
+      "Entries": [
+        ""
+      ]
+    },
+    {
+      "ID": 120605,
+      "Entries": [
+        ""
+      ]
+    }
+  ]
+}
